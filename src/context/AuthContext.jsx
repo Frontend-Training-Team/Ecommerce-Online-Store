@@ -1,24 +1,27 @@
-/* eslint-disable react-refresh/only-export-components */
-import { createContext, useContext, useState, useEffect } from 'react'
+import { createContext, useEffect, useState } from "react"
 import { getCurrentUser } from '../api/auth.api'
 
 const AuthContext = createContext()
 
 export function AuthProvider({ children }) {
+  const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
-  // eslint-disable-next-line no-unused-vars
-  const [user, setUser] = useState(async () => {
-    let res = await getCurrentUser()
-    let user = res.data.user
-    return user
-  })
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setLoading(false)
+    const fetchUser = async () => {
+      try {
+        let res = await getCurrentUser()
+        setUser(res.data.user)
+      } catch (error) {
+        console.log(error)
+        setUser(null)
+      } finally {
+        setLoading(false)
+      }
+    }
 
+    fetchUser()
   }, [])
-
 
   const getToken = () => {
     return localStorage.getItem('token')
@@ -36,5 +39,3 @@ export function AuthProvider({ children }) {
     </AuthContext.Provider>
   )
 }
-
-export const useAuth = () => useContext(AuthContext)
