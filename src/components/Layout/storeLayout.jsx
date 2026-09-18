@@ -1,18 +1,17 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet } from "react-router-dom";
 
 function StoreLayout() {
-
-
+  
   return (
-    <div className="h-screen bg-surface-light font-Inter">
+    <div className="min-h-screen flex flex-col bg-[#080d1a] text-slate-100 font-sans 
+    selection:bg-blue-600 selection:text-white">
+      {/* <Navbar /> */}
 
-      <div className="">
+      <main className="flex-1 w-full">
+        <Outlet />
+      </main>
 
-        <main className="flex-1 p-8 overflow-y-scroll">
-          <Outlet />
-        </main>
-
-      </div>
+      {/* <Footer /> */}
     </div>
   );
 }

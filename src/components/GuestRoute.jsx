@@ -1,10 +1,9 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
-export default function ProtectedRoute() {
+export default function GuestRoute() {
   const { user, loading } = useAuth();
-  const token = localStorage.getItem("token");
-
+  
   if (loading) {
     return (
       <div className="flex h-screen items-center justify-center">
@@ -13,9 +12,9 @@ export default function ProtectedRoute() {
     );
   }
 
-  if (!user && !token) {
-    return <Navigate to="/login" replace />;
+  if (user) {
+    return <Navigate to="/" replace />;
   }
 
   return <Outlet />;
-} 
+}
