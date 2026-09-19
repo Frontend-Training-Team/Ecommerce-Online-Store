@@ -4,8 +4,8 @@ import Img from "../assets/images/pnf4.png";
 
 export default function PageNotFound() {
   return (
-    <div className="min-h-[70vh] w-full flex flex-col justify-center items-center p-6 md:p-12 bg-[#FAF7F2] dark:bg-[#141110] text-neutral-800  transition-colors relative overflow-hidden">
-      <main className=" relative w-full max-w-6xl grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-24 items-center">
+    <div className="min-h-[70vh] w-full flex flex-col justify-center items-center p-6 md:p-12 bg-[#FAF7F2] dark:bg-[#141110] relative overflow-hidden">
+      <main className=" relative w-full max-w-7xl grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-24 items-center">
         <div className="lg:col-span-6 flex flex-col items-center text-center lg:items-start lg:text-left lg:pr-4">
           <span className="font-numeric font-bold text-8xl md:text-9xl tracking-tight leading-none mb-4 bg-gradient-to-br from-[#FCE5B2] via-[#DE9E48] to-[#9A6218] bg-clip-text text-transparent">
             404
