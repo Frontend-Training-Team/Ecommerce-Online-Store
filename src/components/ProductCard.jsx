@@ -8,27 +8,34 @@ function ProductCard() {
   return (
     <div className="h-fit w-fit bg-white border-2 border-gray-200 rounded-2xl p-2.5">
       <div className="relative h-[380px] w-[380px]">
+        <div className="relative h-[380px] w-[380px] bg-amber-600" style={{ clipPath: customPath, backgroundImage: `url(${productImage})`, backgroundSize: "cover" }}>
+        </div>
+
+        <div className="w-28 h-7 grid place-items-center bg-amber-950 rounded-3xl uppercase text-sm text-white text-Inter font-semibold tracking-wider absolute top-4 left-4">
+          <span>Category</span>
+        </div>
+
+        <div className="w-20 h-7 grid place-items-center bg-gray-100 rounded-3xl uppercase text-sm text-black text-Inter font-semibold tracking-wider absolute top-4 right-4">
+          <span>BRAND</span>
+        </div>
+
         <div className="absolute bottom-0 right-0 grid h-[60px] w-[130px] grid-cols-2 gap-2.5">
-          <button className="flex h-[60px] w-[60px] items-center justify-center rounded-2xl bg-gray-300 text-black">
+          <button className="flex h-[60px] w-[60px] items-center justify-center rounded-2xl bg-gray-200 text-black">
             <Heart className="h-6 w-6" />
           </button>
 
-          <button className="flex h-[60px] w-[60px] items-center justify-center rounded-2xl bg-gray-300 text-black">
+          <button className="flex h-[60px] w-[60px] items-center justify-center rounded-2xl bg-gray-200 text-black">
             <ShoppingCartPlus className="h-6 w-6" />
           </button>
         </div>
-
-        <div className="relative h-[380px] w-[380px] bg-amber-600" style={{ clipPath: customPath, backgroundImage: `url(${productImage})`, backgroundSize: "cover" }}>
-        </div>
       </div>
 
-      <div className="text-center mt-5 mb-5">
-        <span className="font-[\'Instrument_Serif\',serif] text-2xl">Apple AirPods Pro 2 (USB-C)</span>
-        <p>$999.00</p>
+      <div className="text-center mt-5 mb-3">
+        <p className="font-Instrument text-2xl text-[1E1E1E] mb-2">Apple AirPods Pro 2 (USB-C)</p>
+        <span className="text-xl text-[#8E4726]  font-Inter font-semibold">$999.00</span>
+        <span className="text-md text-[#7B7B7B] font-Inter font-medium ml-2 line-through">$999.00</span>
       </div>
     </div>
-
-
   );
 }
 

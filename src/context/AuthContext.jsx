@@ -1,41 +1,90 @@
-import { createContext, useEffect, useState } from "react"
-import { getCurrentUser } from '../api/auth.api'
+/* eslint-disable react-refresh/only-export-components */
+/* eslint-disable react-hooks/set-state-in-effect */
+import { createContext, useContext, useEffect, useState, useMemo, useCallback } from "react";
+import { getCurrentUser, postLogout } from "../api/auth.api";
+import toast from "react-hot-toast";
 
-const AuthContext = createContext()
+const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        let res = await getCurrentUser()
-        setUser(res.data.user)
-      } catch (error) {
-        console.log(error)
-        setUser(null)
-      } finally {
-        setLoading(false)
-      }
+  const getToken = useCallback(() => {
+    return localStorage.getItem("token");
+  }, []);
+
+  const fetchUser = useCallback(async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setUser(null);
+      setLoading(false);
+      return;
     }
 
-    fetchUser()
-  }, [])
+    try {
+      setLoading(true);
+      const res = await getCurrentUser();
+      const userData = res.data?.user || null;
+      setUser(userData);
+    } catch (error) {
+      console.error("Failed to fetch current user:", error.message);
+      toast.error(error.response?.data?.message || "")
+      localStorage.removeItem("token");
+      setUser(null);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
-  const getToken = () => {
-    return localStorage.getItem('token')
-  }
+  useEffect(() => {
+    fetchUser();
+  }, [fetchUser]);
 
-  const logout = () => {
-    localStorage.removeItem('token')
-    setUser(null)
-    window.location.href = '/login'
-  }
+  const logout = useCallback(async () => {
+    try {
+      await postLogout();
+    } catch (err) {
+      console.warn("Logout request failed, clearing local session anyway.", err);
+    } finally {
+      localStorage.removeItem("token");
+      setUser(null);
+      window.location.href = "/login";
+    }
+  }, []);
+
+  const updateUser = useCallback((updatedFields) => {
+    setUser((prev) => {
+      if (typeof updatedFields === "function") {
+        return updatedFields(prev);
+      }
+      return prev ? { ...prev, ...updatedFields } : updatedFields;
+    });
+  }, []);
+
+  const value = useMemo(() => ({
+    user,
+    loading,
+    getToken,
+    logout,
+    updateUser,
+    fetchUser,
+    isAuthenticated: Boolean(user && getToken()),
+  }),
+    [user, loading, getToken, logout, updateUser, fetchUser]
+  );
 
   return (
-    <AuthContext.Provider value={{ user, getToken, logout, loading }}>
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
-  )
+  );
+}
+
+export function useAuth() {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+  return context;
 }

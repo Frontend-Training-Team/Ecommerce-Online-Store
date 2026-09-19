@@ -9,8 +9,9 @@ export default {
     theme: {
         extend: {
             fontFamily: {
+                Instrument: ['"Instrument"', 'Instrument Serif'],
                 Serif: ['"Playfair Display"', 'serif'],
-                Inter: ['"Inter"', 'sans-serif']
+                Inter: ['"Inter"', 'sans-serif'],
             },
             colors: {
                 brand: {
