@@ -1,1 +1,30 @@
 @import "tailwindcss";
+.order-items-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.order-items-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.order-items-scroll::-webkit-scrollbar-thumb {
+  background-color: #d6d3d1;
+  border-radius: 9999px;
+}
+.order-items-scroll:hover::-webkit-scrollbar-thumb {
+  background-color: #a8a29e;
+}
+
+.dark .order-items-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+.dark .order-items-scroll:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Firefox */
+.order-items-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #d6d3d1 transparent;
+}
+.dark .order-items-scroll {
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+}
