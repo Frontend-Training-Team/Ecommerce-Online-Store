@@ -2,6 +2,7 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 import { createContext, useContext, useEffect, useState, useMemo, useCallback } from "react";
 import { getCurrentUser, postLogout } from "../api/auth.api";
+import toast from "react-hot-toast";
 
 const AuthContext = createContext(null);
 
@@ -27,7 +28,8 @@ export function AuthProvider({ children }) {
       const userData = res.data?.user || null;
       setUser(userData);
     } catch (error) {
-      console.error("Failed to fetch current user:", error);
+      console.error("Failed to fetch current user:", error.message);
+      toast.error(error.response?.data?.message || "")
       localStorage.removeItem("token");
       setUser(null);
     } finally {
@@ -37,16 +39,6 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     fetchUser();
-  }, [fetchUser]);
-
-  const login = useCallback((token, userData = null) => {
-    localStorage.setItem("token", token);
-    if (userData) {
-      setUser(userData);
-      setLoading(false);
-    } else {
-      fetchUser();
-    }
   }, [fetchUser]);
 
   const logout = useCallback(async () => {
@@ -74,13 +66,12 @@ export function AuthProvider({ children }) {
     user,
     loading,
     getToken,
-    login,
     logout,
     updateUser,
     fetchUser,
     isAuthenticated: Boolean(user && getToken()),
   }),
-    [user, loading, getToken, login, logout, updateUser, fetchUser]
+    [user, loading, getToken, logout, updateUser, fetchUser]
   );
 
   return (
