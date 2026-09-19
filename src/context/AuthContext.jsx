@@ -1,3 +1,5 @@
+/* eslint-disable react-refresh/only-export-components */
+/* eslint-disable react-hooks/set-state-in-effect */
 import { createContext, useContext, useEffect, useState, useMemo, useCallback } from "react";
 import { getCurrentUser, postLogout } from "../api/auth.api";
 

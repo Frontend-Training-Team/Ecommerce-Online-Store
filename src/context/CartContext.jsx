@@ -1,3 +1,5 @@
+/* eslint-disable react-refresh/only-export-components */
+/* eslint-disable react-hooks/set-state-in-effect */
 import { createContext, useContext, useEffect, useState, useMemo, useCallback } from "react";
 import { getMyCart, postAddItemToCart, patchUpdateItemQuantity, deleteItemFromCart, deleteClearCart } from "../api/cart.api";
 import { useAuth } from "./AuthContext";
@@ -20,7 +22,6 @@ export function CartProvider({ children }) {
             setCart(null);
             return;
         }
-
         try {
             setLoading(true);
             const res = await getMyCart();
