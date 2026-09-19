@@ -1,7 +1,9 @@
+import ProductCard from "../components/ProductCard";
+
 function ProductPage() {
-    return (<>
-        <h1 className="text-2xl">ProductPage</h1>
-    </>);
+  return (
+      <ProductCard />
+  );
 }
 
 export default ProductPage;
