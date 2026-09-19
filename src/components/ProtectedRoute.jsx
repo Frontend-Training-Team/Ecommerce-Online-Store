@@ -1,5 +1,6 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { LoaderCircle } from "lucide-react";
 
 export default function ProtectedRoute() {
   const { user, loading } = useAuth();
@@ -8,7 +9,7 @@ export default function ProtectedRoute() {
   if (loading) {
     return (
       <div className="flex h-screen items-center justify-center">
-        <div className="h-10 w-10 animate-spin rounded-full border-4 border-gray-200 border-t-primary"></div>
+        <LoaderCircle className="h-16 w-16 animate-spin" />
       </div>
     );
   }

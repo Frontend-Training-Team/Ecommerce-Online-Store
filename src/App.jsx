@@ -1,29 +1,25 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
-// import { ToastContainer } from "react-hot-toast";
 import ProductPage from "./pages/Products";
 import ProductDetails from "./pages/ProductDetails";
-import StoreLayout from "./components/Layout/storeLayout";
+import StoreLayout from "./components/Layout/StoreLayout";
 import RegisterPage from "./pages/Register";
 import LoginPage from "./pages/Login";
 import PageNotFound from "./pages/PageNotFound";
 import OrderDetailPage from "./pages/OrderDetail";
 import MyOrdersPage from "./pages/MyOrders";
 import ForgotPasswordPage from "./pages/ForgetPassword";
-import CartPage from "./pages/cart";
+import CartPage from "./pages/Cart";
 import WishlistPage from "./pages/Wishlist";
 import CheckoutPage from "./pages/Checkout";
 import OrderSuccessPage from "./pages/OrderSuccess";
 import ProfilePage from "./pages/Profile";
 import VerifyOtpDetailsPage from "./pages/VerifyOtpDetails";
-
 import ProtectedRoute from "./components/ProtectedRoute";
 import GuestRoute from "./components/GuestRoute";
 import { Toaster } from "react-hot-toast";
 
-
 function App() {
-
   return (
     <>
       <Routes>
@@ -63,7 +59,6 @@ function App() {
           style: {
             background: '#ffffff',
             color: '#000',
-            padding: "10px 22px",
           },
         }}
       />
