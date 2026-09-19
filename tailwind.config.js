@@ -10,6 +10,7 @@ export default {
         extend: {
             fontFamily: {
                 Serif: ['"Playfair Display"', 'serif'],
+                numeric: ['"JetBrains Mono"', 'monospace'],
                 Inter: ['"Inter"', 'sans-serif']
             },
             colors: {

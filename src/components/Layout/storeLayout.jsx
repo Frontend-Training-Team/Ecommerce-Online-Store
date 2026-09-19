@@ -4,7 +4,7 @@ function StoreLayout() {
 
 
   return (
-    <div className="h-screen bg-surface-light font-Inter">
+    <div className="h-screen overflow-hidden bg-surface-light font-Inter">
 
       <div className="">
 
