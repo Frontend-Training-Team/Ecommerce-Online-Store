@@ -29,7 +29,6 @@ export default function ProductGrid({
 
   return (
     <div className="w-full space-y-8">
-      {/* تم الضبط هنا إلى 3 أعمدة كأقصى حد (xl:grid-cols-3) ليعطي مساحة كافية للشكل المائل */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 justify-items-center">
         {products.map((product, index) => (
           <ProductCard
