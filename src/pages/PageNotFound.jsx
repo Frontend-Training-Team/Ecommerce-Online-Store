@@ -1,53 +1,54 @@
 import { Link } from "react-router-dom";
 import { Compass, Home } from "lucide-react";
-import Img from "../assets/images/pnf4.png";
+import bgVideo from "../assets/videos/404BG.mp4"; 
 
 export default function PageNotFound() {
   return (
-    <div className="min-h-[70vh] w-full flex flex-col justify-center items-center p-6 md:p-12 bg-[#FAF7F2] dark:bg-[#141110] relative overflow-hidden">
-      <main className=" relative w-full max-w-7xl grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-24 items-center">
-        <div className="lg:col-span-6 flex flex-col items-center text-center lg:items-start lg:text-left lg:pr-4">
-          <span className="font-numeric font-bold text-8xl md:text-9xl tracking-tight leading-none mb-4 bg-gradient-to-br from-[#FCE5B2] via-[#DE9E48] to-[#9A6218] bg-clip-text text-transparent">
-            404
-          </span>
+    <div className="relative min-h-[75vh] w-full overflow-hidden">
+      <video
+        className="absolute inset-0 h-full w-full object-cover"
+        autoPlay
+        loop
+        muted
+        playsInline
+        aria-hidden="true"
+      >
+        <source src={bgVideo} type="video/mp4" />
+      </video>
 
-          <h1 className="font-serif text-3xl md:text-4xl lg:text-[42px] text-[#20140d] dark:text-[#F5F1EA] font-normal leading-tight tracking-tight max-w-xl">
-            Page Not Found
-          </h1>
+      <div className="absolute inset-0 bg-black/55" aria-hidden="true" />
 
-          <span className="text-base md:text-lg text-stone-500 dark:text-neutral-400 mb-6 max-w-md">
-            Sorry, the page you're looking for doesn't exist or has been moved.
-          </span>
+      <div className="relative z-10 flex min-h-[75vh] w-full flex-col items-center justify-center px-6 py-16 text-center">
+        <span className="font-Instrument Serif text-8xl md:text-[200px] leading-none tracking-tight text-white">
+          404
+        </span>
 
-          <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4">
-            <Link
-              to="/products"
-              className="inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-3xl bg-[#20140d] hover:bg-[#2b1b11] dark:bg-[#DE9E48] dark:hover:bg-[#c98a37] border border-[#DE9E48]/50 dark:border-transparent text-amber-50 dark:text-[#20140d] text-l font-semibold tracking-wide transition-all shadow-md shadow-stone-900/15 hover:shadow-stone-900/25 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#DE9E48] focus-visible:ring-offset-2 focus-visible:ring-offset-[#FAF7F2] dark:focus-visible:ring-offset-[#15110C]"
-            >
-              <Compass className="w-6 h-6 text-[#FCE5B2] dark:text-[#20140d]" aria-hidden="true" />
-              Explore Products
-            </Link>
+        <h1 className="mt-4 text-3xl md:text-4xl font-semibold tracking-tight text-white">
+          Page Not Found
+        </h1>
 
-            <Link
-              to="/"
-              className="inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-3xl bg-white/95 hover:bg-white dark:bg-white/5 dark:hover:bg-white/10 border border-stone-300 dark:border-white/10 hover:border-[#DE9E48] text-[#20140d] dark:text-neutral-100 text-l font-semibold tracking-wide transition-all shadow-xs hover:shadow-sm active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#DE9E48] focus-visible:ring-offset-2 focus-visible:ring-offset-[#FAF7F2] dark:focus-visible:ring-offset-[#15110C]"
-            >
-              <Home className="w-6 h-6 text-stone-500 dark:text-neutral-400" aria-hidden="true" />
-              Return to Home
-            </Link>
-          </div>
+        <p className="mt-3 max-w-md text-base md:text-lg text-white/70">
+          Sorry, the page you're looking for doesn't exist or has been moved.
+        </p>
+
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <Link
+            to="/products"
+            className="inline-flex items-center justify-center gap-2.5 rounded-3xl bg-[#7E4A2D] px-6 py-3 text-m md:text-base font-semibold tracking-wide text-white shadow-md transition-all hover:opacity-90 hover:shadow-lg active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#DE9E48] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+          >
+            <Compass className="h-6 w-6" aria-hidden="true" />
+            Browse Products
+          </Link>
+
+          <Link
+            to="/"
+            className="inline-flex items-center justify-center gap-2.5 rounded-3xl bg-white/95 px-6 py-3 text-sm md:text-base font-semibold tracking-wide text-[#20140d] shadow-sm transition-all hover:bg-white active:scale-95 border border-transparent hover:border-[#DE9E48] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#DE9E48] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+          >
+            <Home className="h-6 w-6 text-stone-500" aria-hidden="true" />
+            Return to Home
+          </Link>
         </div>
-
-        <div className="lg:col-span-6 flex items-center justify-center ">
-          <div className="w-full max-w-[800px] aspect-[4/3] overflow-hidden">
-            <img
-              src={Img}
-              alt="Illustration of someone lost in a furniture showroom"
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </div>
-      </main>
+      </div>
     </div>
   );
 }
