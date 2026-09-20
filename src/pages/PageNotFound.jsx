@@ -34,7 +34,7 @@ export default function PageNotFound() {
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
           <Link
             to="/products"
-            className="inline-flex items-center justify-center gap-2.5 rounded-3xl bg-[#7E4A2D] px-6 py-3 text-m md:text-base font-semibold tracking-wide text-white shadow-md transition-all hover:opacity-90 hover:shadow-lg active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#DE9E48] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+            className="inline-flex items-center justify-center gap-2.5 rounded-3xl bg-[#7E4A2D] px-6 py-3 text-md md:text-base font-semibold tracking-wide text-white shadow-md transition-all hover:opacity-90 hover:shadow-lg active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#DE9E48] focus-visible:ring-offset-2 focus-visible:ring-offset-black border border-[#7E4A2D]"
           >
             <Compass className="h-6 w-6" aria-hidden="true" />
             Browse Products
@@ -42,7 +42,7 @@ export default function PageNotFound() {
 
           <Link
             to="/"
-            className="inline-flex items-center justify-center gap-2.5 rounded-3xl bg-white/95 px-6 py-3 text-sm md:text-base font-semibold tracking-wide text-[#20140d] shadow-sm transition-all hover:bg-white active:scale-95 border border-transparent hover:border-[#DE9E48] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#DE9E48] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+            className="inline-flex items-center justify-center gap-2.5 rounded-3xl bg-white/95 px-6 py-3 text-md md:text-base font-semibold tracking-wide text-[#20140d] shadow-md transition-all hover:bg-white active:scale-95 border border-transparent hover:border-[#DE9E48] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#DE9E48] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
           >
             <Home className="h-6 w-6 text-stone-500" aria-hidden="true" />
             Return to Home
