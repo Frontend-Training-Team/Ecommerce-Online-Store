@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
 import { User, MapPin, Lock, LogOut, ShoppingBag, Heart } from "lucide-react";
@@ -6,20 +6,19 @@ import { User, MapPin, Lock, LogOut, ShoppingBag, Heart } from "lucide-react";
 export default function ProfileSidebar({ activeTab, setActiveTab, ordersCount = 0, wishlistCount = 0 }) {
   const { user, logout } = useAuth();
   const [imgError, setImgError] = useState(false);
+  const [prevAvatar, setPrevAvatar] = useState(user?.avatar);
 
-  // إعادة ضبط حالة الخطأ فوراً عند تعديل أو تغيير رابط الـ avatar
-  useEffect(() => {
+  if (user?.avatar !== prevAvatar) {
+    setPrevAvatar(user?.avatar);
     setImgError(false);
-  }, [user?.avatar]);
+  }
 
-  // تنسيق تاريخ الانضمام
-  const memberSince = user?.createdAt 
+  const memberSince = user?.createdAt
     ? new Date(user.createdAt).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
     : "Member";
 
-  // الحروف الأولى للاسم (تظهر كـ Fallback في حالة عدم وجود صورة أو تلف الرابط)
-  const initials = user?.username 
-    ? user.username.split(" ").map(n => n[0]).join("").slice(0, 2).toUpperCase() 
+  const initials = user?.username
+    ? user.username.split(" ").map(n => n[0]).join("").slice(0, 2).toUpperCase()
     : "U";
 
   const navItems = [
@@ -30,16 +29,16 @@ export default function ProfileSidebar({ activeTab, setActiveTab, ordersCount = 
 
   return (
     <aside className="w-full md:w-[280px] lg:w-[310px] flex-shrink-0 flex flex-col gap-5">
-      {/* كارت المستخدم الشخصي */}
+
       <div className="bg-white border border-[#E3DEDA] rounded-2xl p-6 flex flex-col items-center text-center shadow-sm">
-        
-        {/* الصورة الشخصية */}
-        <div className="w-24 h-24 rounded-full bg-[#F2EBE5] border border-[#E0D3C6] text-[#8A4526] font-Serif text-3xl flex items-center justify-center overflow-hidden mb-3">
+
+        <div className="w-24 h-24 rounded-full bg-[#F2EBE5] border border-[#E0D3C6] text-[#8A4526] font-Serif 
+        text-3xl flex items-center justify-center overflow-hidden mb-3">
           {user?.avatar && !imgError ? (
-            <img 
+            <img
               key={user.avatar}
-              src={user.avatar} 
-              alt={user?.username || "User avatar"} 
+              src={user.avatar}
+              alt={user?.username || "User avatar"}
               className="w-full h-full object-cover"
               onError={() => setImgError(true)}
             />
@@ -54,30 +53,30 @@ export default function ProfileSidebar({ activeTab, setActiveTab, ordersCount = 
         <p className="text-sm text-[#6F655D] mb-3 break-all">
           {user?.email}
         </p>
-        
-        <span className="px-3.5 py-1 rounded-full bg-[#F2EBE5] text-[#8A4526] text-xs font-semibold tracking-wider uppercase mb-2">
+
+        <span className="px-3.5 py-1 rounded-full bg-[#F2EBE5] text-[#8A4526] text-xs font-semibold 
+        tracking-wider uppercase mb-2">
           {user?.role || "CUSTOMER"}
         </span>
-        
+
         <span className="text-xs text-[#8C837B]">
           Member since {memberSince}
         </span>
       </div>
 
-      {/* قائمة التنقل */}
       <nav className="bg-white border border-[#E3DEDA] rounded-2xl p-2.5 flex flex-col gap-1 shadow-sm">
         {navItems.map((item) => {
           const Icon = item.icon;
-          const isActive = activeTab === item.id || (item.id === "overview" && activeTab === "edit-profile");
+          const isActive = item.id === (activeTab === "edit-profile" ? "overview" : activeTab);
           return (
             <button
               key={item.id}
               onClick={() => setActiveTab(item.id)}
-              className={`w-full h-12 px-4 rounded-xl flex items-center gap-3 text-[14px] font-medium transition-colors cursor-pointer text-left ${
-                isActive
+              className={`w-full h-12 px-4 rounded-xl flex items-center gap-3 text-[14px] font-medium 
+                transition-colors cursor-pointer text-left ${isActive
                   ? "bg-[#8A4526] text-white shadow-sm"
                   : "text-[#3A332D] hover:bg-[#FAF8F6] hover:text-[#8A4526]"
-              }`}
+                }`}
             >
               <Icon className={`w-4 h-4 ${isActive ? "text-white" : "text-[#6F655D]"}`} strokeWidth={1.8} />
               <span>{item.label}</span>
@@ -85,10 +84,10 @@ export default function ProfileSidebar({ activeTab, setActiveTab, ordersCount = 
           );
         })}
 
-        {/* روابط لصفحات الطلبات والمفضلة */}
         <Link
           to="/orders"
-          className="w-full h-12 px-4 rounded-xl flex items-center justify-between text-[14px] font-medium text-[#3A332D] hover:bg-[#FAF8F6] hover:text-[#8A4526] transition-colors"
+          className="w-full h-12 px-4 rounded-xl flex items-center justify-between text-[14px] font-medium text-[#3A332D] 
+          hover:bg-[#FAF8F6] hover:text-[#8A4526] transition-colors"
         >
           <div className="flex items-center gap-3">
             <ShoppingBag className="w-4 h-4 text-[#6F655D]" strokeWidth={1.8} />
@@ -103,7 +102,8 @@ export default function ProfileSidebar({ activeTab, setActiveTab, ordersCount = 
 
         <Link
           to="/wishlist"
-          className="w-full h-12 px-4 rounded-xl flex items-center justify-between text-[14px] font-medium text-[#3A332D] hover:bg-[#FAF8F6] hover:text-[#8A4526] transition-colors"
+          className="w-full h-12 px-4 rounded-xl flex items-center justify-between text-[14px] font-medium text-[#3A332D] 
+          hover:bg-[#FAF8F6] hover:text-[#8A4526] transition-colors"
         >
           <div className="flex items-center gap-3">
             <Heart className="w-4 h-4 text-[#6F655D]" strokeWidth={1.8} />
@@ -118,7 +118,6 @@ export default function ProfileSidebar({ activeTab, setActiveTab, ordersCount = 
 
         <div className="h-[1px] bg-[#EDE8E3] my-1.5 mx-2"></div>
 
-        {/* تسجيل الخروج */}
         <button
           onClick={logout}
           className="w-full h-12 px-4 rounded-xl flex items-center gap-3 text-[14px] font-medium 

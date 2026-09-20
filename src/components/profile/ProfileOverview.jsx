@@ -8,9 +8,8 @@ export default function ProfileOverview({ user, setActiveTab, orders = [], wishl
   return (
     <div className="flex-1 flex flex-col gap-6">
       
-      {/* 1. كروت الإحصائيات العلوية */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        {/* إجمالي الطلبات */}
+
         <div className="p-5 border border-[#E3DEDA] rounded-2xl bg-[#FAF8F6] flex flex-col gap-1">
           <span className="text-xs font-semibold text-[#6F655D] tracking-wider uppercase">Total Orders</span>
           <span className="font-Serif text-3xl text-[#211C18]">{orders.length}</span>
@@ -19,14 +18,12 @@ export default function ProfileOverview({ user, setActiveTab, orders = [], wishl
           </span>
         </div>
 
-        {/* المفضلة */}
         <div className="p-5 border border-[#E3DEDA] rounded-2xl bg-[#FAF8F6] flex flex-col gap-1">
           <span className="text-xs font-semibold text-[#6F655D] tracking-wider uppercase">Wishlist</span>
           <span className="font-Serif text-3xl text-[#211C18]">{wishlistCount}</span>
           <span className="text-xs text-[#6F655D]">Saved items for later</span>
         </div>
 
-        {/* العناوين المحفوظة */}
         <div className="p-5 border border-[#E3DEDA] rounded-2xl bg-[#FAF8F6] flex flex-col gap-1">
           <span className="text-xs font-semibold text-[#6F655D] tracking-wider uppercase">Saved Addresses</span>
           <span className="font-Serif text-3xl text-[#211C18]">{addresses.length}</span>
@@ -36,13 +33,13 @@ export default function ProfileOverview({ user, setActiveTab, orders = [], wishl
         </div>
       </div>
 
-      {/* 2. قسم البيانات الشخصية (Personal Information) */}
       <section className="bg-white border border-[#E3DEDA] rounded-2xl p-6 sm:p-7 flex flex-col gap-5 shadow-sm">
         <div className="flex items-center justify-between">
           <h2 className="font-Serif text-2xl font-medium text-[#211C18]">Personal information</h2>
           <button
             onClick={() => setActiveTab("edit-profile")}
-            className="h-10 px-4 rounded-lg border border-[#D6D0CA] bg-white text-sm font-medium text-[#3A332D] hover:border-[#8A4526] hover:text-[#8A4526] flex items-center gap-2 transition-colors cursor-pointer"
+            className="h-10 px-4 rounded-lg border border-[#D6D0CA] bg-white text-sm font-medium text-[#3A332D] 
+            hover:border-[#8A4526] hover:text-[#8A4526] flex items-center gap-2 transition-colors cursor-pointer"
           >
             <Edit3 className="w-4 h-4" />
             <span>Edit</span>
@@ -59,7 +56,8 @@ export default function ProfileOverview({ user, setActiveTab, orders = [], wishl
             <span className="text-xs font-semibold text-[#6F655D] tracking-wider uppercase">Email address</span>
             <div className="flex items-center gap-2">
               <span className="text-[15px] font-medium text-[#211C18]">{user?.email}</span>
-              <span className="px-2 py-0.5 rounded-full bg-[#E8F0EA] text-[#2F6B4F] text-[11px] font-medium flex items-center gap-1">
+              <span className="px-2 py-0.5 rounded-full bg-[#E8F0EA] text-[#2F6B4F] text-[11px] font-medium flex 
+              items-center gap-1">
                 <Check className="w-3 h-3" /> Verified
               </span>
             </div>
@@ -77,13 +75,13 @@ export default function ProfileOverview({ user, setActiveTab, orders = [], wishl
         </div>
       </section>
 
-      {/* 3. قسم العناوين المحفوظة (Delivery addresses) */}
       <section className="bg-white border border-[#E3DEDA] rounded-2xl p-6 sm:p-7 flex flex-col gap-5 shadow-sm">
         <div className="flex items-center justify-between">
           <h2 className="font-Serif text-2xl font-medium text-[#211C18]">Delivery addresses</h2>
           <button
             onClick={() => setActiveTab("addresses")}
-            className="h-10 px-4 rounded-lg border border-[#D6D0CA] bg-white text-sm font-medium text-[#3A332D] hover:border-[#8A4526] hover:text-[#8A4526] flex items-center gap-2 transition-colors cursor-pointer"
+            className="h-10 px-4 rounded-lg border border-[#D6D0CA] bg-white text-sm font-medium text-[#3A332D] 
+            hover:border-[#8A4526] hover:text-[#8A4526] flex items-center gap-2 transition-colors cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             <span>Manage addresses</span>
@@ -124,9 +122,8 @@ export default function ProfileOverview({ user, setActiveTab, orders = [], wishl
         )}
       </section>
 
-      {/* 4. كارت الأمان وآخر الطلبات */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        {/* كارت الأمان */}
+
         <section className="bg-white border border-[#E3DEDA] rounded-2xl p-6 flex flex-col justify-between gap-4 shadow-sm">
           <div className="space-y-2">
             <h3 className="font-Serif text-xl font-medium text-[#211C18]">Security</h3>
@@ -136,14 +133,14 @@ export default function ProfileOverview({ user, setActiveTab, orders = [], wishl
           </div>
           <button
             onClick={() => setActiveTab("security")}
-            className="self-start h-10 px-5 rounded-lg border border-[#8A4526] text-[#8A4526] hover:bg-[#FAF8F6] text-sm font-medium flex items-center gap-2 transition-colors cursor-pointer"
+            className="self-start h-10 px-5 rounded-lg border border-[#8A4526] text-[#8A4526] hover:bg-[#FAF8F6] text-sm 
+            font-medium flex items-center gap-2 transition-colors cursor-pointer"
           >
             <Lock className="w-3.5 h-3.5" />
             <span>Change password</span>
           </button>
         </section>
 
-        {/* كارت آخر الطلبات */}
         <section className="bg-white border border-[#E3DEDA] rounded-2xl p-6 flex flex-col justify-between gap-4 shadow-sm">
           <div className="space-y-3">
             <div className="flex items-center justify-between">
@@ -157,12 +154,12 @@ export default function ProfileOverview({ user, setActiveTab, orders = [], wishl
               <div className="space-y-2.5">
                 {recentOrders.map((order, idx) => (
                   <div key={order._id || idx} className="flex items-center justify-between pb-2 border-b border-[#EDE8E3] last:border-b-0">
-                    <div className="flex items  -center gap-2.5">
+                    <div className="flex items-center gap-2.5">
                       <div className="w-8 h-8 rounded-lg bg-[#F2F0EE] flex items-center justify-center text-[#8A4526]">
                         <Package className="w-4 h-4" />
                       </div>
                       <div>
-                        <p className="text-xs font-medium text-[#211C18]">Order #{order._id?.slice(-5) || idx + 1}</p>
+                        <p className="text-xs font-medium text-[#211C18]">Order #{order._id?.slice(-8) || idx + 1}</p>
                         <p className="text-[11px] text-[#6F655D]">{order.items?.length || 1} items</p>
                       </div>
                     </div>

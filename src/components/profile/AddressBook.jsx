@@ -5,8 +5,10 @@ import { patchUpdateUser } from "../../api/users.api";
 
 export default function AddressBook({ user, updateUser }) {
     const addresses = user?.addresses || [];
-    const [editingIndex, setEditingIndex] = useState(null); // null means adding new address
+    const [editingIndex, setEditingIndex] = useState(null); 
     const [loading, setLoading] = useState(false);
+    const [defaultingIndex, setDefaultingIndex] = useState(null); 
+    const [removingIndex, setRemovingIndex] = useState(null);
 
     const initialForm = {
         label: "Home",
@@ -20,7 +22,6 @@ export default function AddressBook({ user, updateUser }) {
 
     const [form, setForm] = useState(initialForm);
 
-    // بدء التعديل لعنوان معين
     const handleStartEdit = (addr, idx) => {
         setEditingIndex(idx);
         setForm({
@@ -34,13 +35,11 @@ export default function AddressBook({ user, updateUser }) {
         });
     };
 
-    // إلغاء التعديل
     const handleCancel = () => {
         setEditingIndex(null);
         setForm(initialForm);
     };
 
-    // حفظ الإضافة أو التعديل
     const handleSaveAddress = async (e) => {
         e.preventDefault();
         if (!form.country.trim() || !form.city.trim() || !form.street.trim()) {
@@ -59,21 +58,20 @@ export default function AddressBook({ user, updateUser }) {
                 defaultAddress: form.defaultAddress || updatedList.length === 0,
             };
 
-            // لو تم تعيينه كافتراضي، شيل الـ default من باقي العناوين
             if (addressData.defaultAddress) {
                 updatedList = updatedList.map((a) => ({ ...a, defaultAddress: false }));
             }
 
             if (editingIndex !== null) {
-                // تعديل عنوان حالي
                 updatedList[editingIndex] = addressData;
             } else {
-                // إضافة عنوان جديد
                 updatedList.push(addressData);
             }
 
+            localStorage.setItem(`lamsa_addresses_${userId}`, JSON.stringify(updatedList));
+
             const res = await patchUpdateUser(userId, { addresses: updatedList });
-            const updatedUser = res.data?.user || res.data?.data || {};
+            const updatedUser = res.data?.user || {};
             updateUser({
                 ...updatedUser,
                 addresses: updatedList,
@@ -88,15 +86,16 @@ export default function AddressBook({ user, updateUser }) {
         }
     };
 
-    // حذف عنوان
     const handleRemove = async (idx) => {
         const userId = user?._id || user?.id;
         if (!userId) return;
 
         try {
+            setRemovingIndex(idx);
             const updatedList = addresses.filter((_, i) => i !== idx);
+            localStorage.setItem(`lamsa_addresses_${userId}`, JSON.stringify(updatedList));
             const res = await patchUpdateUser(userId, { addresses: updatedList });
-            const updatedUser = res.data?.user || res.data?.data || {};
+            const updatedUser = res.data?.user || {};
             updateUser({
                 ...updatedUser,
                 addresses: updatedList,
@@ -105,21 +104,24 @@ export default function AddressBook({ user, updateUser }) {
             if (editingIndex === idx) handleCancel();
         } catch (err) {
             toast.error(err.response?.data?.message || "Failed to remove address");
+        } finally {
+            setRemovingIndex(null);
         }
     };
 
-    // تعيين كافتراضي سريعاً
     const handleMakeDefault = async (idx) => {
         const userId = user?._id || user?.id;
         if (!userId) return;
 
         try {
+            setDefaultingIndex(idx);
             const updatedList = addresses.map((addr, i) => ({
                 ...addr,
                 defaultAddress: i === idx,
             }));
+            localStorage.setItem(`lamsa_addresses_${userId}`, JSON.stringify(updatedList));
             const res = await patchUpdateUser(userId, { addresses: updatedList });
-            const updatedUser = res.data?.user || res.data?.data || {};
+            const updatedUser = res.data?.user || {};
             updateUser({
                 ...updatedUser,
                 addresses: updatedList,
@@ -127,13 +129,14 @@ export default function AddressBook({ user, updateUser }) {
             toast.success("Default address updated!");
         } catch (err) {
             toast.error("Failed to update default address");
+        } finally {
+            setDefaultingIndex(null);
         }
     };
 
     return (
         <div className="flex-1 w-full flex flex-col gap-7">
 
-            {/* 2. فورم إضافة / تعديل العنوان (في الأسفل وبنفس العرض الكامل) */}
             <form
                 onSubmit={handleSaveAddress}
                 className="w-full bg-white border border-[#E3DEDA] rounded-2xl p-6 sm:p-8 flex flex-col gap-6 shadow-sm"
@@ -147,8 +150,7 @@ export default function AddressBook({ user, updateUser }) {
                     </p>
                 </div>
 
-                {/* تصنيف العنوان (Home, Office, Other) */}
-                {/* <div className="flex flex-col gap-1.5">
+                <div className="flex flex-col gap-1.5">
                     <label className="text-xs font-semibold text-[#4A423C] uppercase tracking-wider">Label this address</label>
                     <div className="flex gap-2">
                         {["Home", "Office", "Other"].map((label) => (
@@ -156,18 +158,18 @@ export default function AddressBook({ user, updateUser }) {
                                 type="button"
                                 key={label}
                                 onClick={() => setForm({ ...form, label })}
-                                className={`h-9 px-4 rounded-full text-xs font-medium border transition-colors cursor-pointer ${form.label === label
-                                    ? "bg-[#F7EFE9] border-[#8A4526] text-[#8A4526]"
-                                    : "bg-white border-[#D6D0CA] text-[#3A332D] hover:bg-[#FAF8F6]"
+                                className={`h-9 px-4 rounded-full text-xs font-medium border transition-colors cursor-pointer 
+                                    ${form.label === label
+                                        ? "bg-[#F7EFE9] border-[#8A4526] text-[#8A4526]"
+                                        : "bg-white border-[#D6D0CA] text-[#3A332D] hover:bg-[#FAF8F6]"
                                     }`}
                             >
                                 {label}
                             </button>
                         ))}
                     </div>
-                </div> */}
+                </div>
 
-                {/* حقول الإدخال */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div className="flex flex-col gap-1.5">
                         <label className="text-xs font-semibold text-[#4A423C] uppercase tracking-wider">Country *</label>
@@ -177,7 +179,8 @@ export default function AddressBook({ user, updateUser }) {
                             onChange={(e) => setForm({ ...form, country: e.target.value })}
                             required
                             placeholder="e.g. Egypt"
-                            className="h-12 px-4 rounded-xl border border-[#DDD7D1] bg-[#FAF8F6] focus:bg-white focus:border-[#8A4526] text-sm text-[#211C18] focus:outline-none transition-all"
+                            className="h-12 px-4 rounded-xl border border-[#DDD7D1] bg-[#FAF8F6] focus:bg-white 
+                            focus:border-[#8A4526] text-sm text-[#211C18] focus:outline-none transition-all"
                         />
                     </div>
 
@@ -189,7 +192,8 @@ export default function AddressBook({ user, updateUser }) {
                             onChange={(e) => setForm({ ...form, city: e.target.value })}
                             required
                             placeholder="e.g. Cairo"
-                            className="h-12 px-4 rounded-xl border border-[#DDD7D1] bg-[#FAF8F6] focus:bg-white focus:border-[#8A4526] text-sm text-[#211C18] focus:outline-none transition-all"
+                            className="h-12 px-4 rounded-xl border border-[#DDD7D1] bg-[#FAF8F6] focus:bg-white 
+                            focus:border-[#8A4526] text-sm text-[#211C18] focus:outline-none transition-all"
                         />
                     </div>
 
@@ -201,7 +205,8 @@ export default function AddressBook({ user, updateUser }) {
                             onChange={(e) => setForm({ ...form, street: e.target.value })}
                             required
                             placeholder="18 El Nasr Street"
-                            className="h-12 px-4 rounded-xl border border-[#DDD7D1] bg-[#FAF8F6] focus:bg-white focus:border-[#8A4526] text-sm text-[#211C18] focus:outline-none transition-all"
+                            className="h-12 px-4 rounded-xl border border-[#DDD7D1] bg-[#FAF8F6] focus:bg-white 
+                            focus:border-[#8A4526] text-sm text-[#211C18] focus:outline-none transition-all"
                         />
                     </div>
 
@@ -212,7 +217,8 @@ export default function AddressBook({ user, updateUser }) {
                             value={form.building}
                             onChange={(e) => setForm({ ...form, building: e.target.value })}
                             placeholder="Bldg 7, Apt 3"
-                            className="h-12 px-4 rounded-xl border border-[#DDD7D1] bg-[#FAF8F6] focus:bg-white focus:border-[#8A4526] text-sm text-[#211C18] focus:outline-none transition-all"
+                            className="h-12 px-4 rounded-xl border border-[#DDD7D1] bg-[#FAF8F6] focus:bg-white 
+                            focus:border-[#8A4526] text-sm text-[#211C18] focus:outline-none transition-all"
                         />
                     </div>
 
@@ -223,13 +229,13 @@ export default function AddressBook({ user, updateUser }) {
                             value={form.postalCode}
                             onChange={(e) => setForm({ ...form, postalCode: e.target.value })}
                             placeholder="11765"
-                            className="h-12 px-4 rounded-xl border border-[#DDD7D1] bg-[#FAF8F6] focus:bg-white focus:border-[#8A4526] text-sm text-[#211C18] focus:outline-none transition-all"
+                            className="h-12 px-4 rounded-xl border border-[#DDD7D1] bg-[#FAF8F6] focus:bg-white 
+                            focus:border-[#8A4526] text-sm text-[#211C18] focus:outline-none transition-all"
                         />
                     </div>
                 </div>
 
-                {/* تعيين كافتراضي */}
-                {/* <label className="flex items-center gap-2.5 text-xs sm:text-sm text-[#4A423C] cursor-pointer pt-1">
+                <label className="flex items-center gap-2.5 text-xs sm:text-sm text-[#4A423C] cursor-pointer pt-1">
                     <input
                         type="checkbox"
                         checked={form.defaultAddress}
@@ -237,14 +243,14 @@ export default function AddressBook({ user, updateUser }) {
                         className="w-4 h-4 accent-[#8A4526] rounded cursor-pointer"
                     />
                     <span>Set as my default delivery address</span>
-                </label> */}
+                </label>
 
-                {/* أزرار الحفظ والإلغاء */}
                 <div className="flex items-center gap-3 pt-3 border-t border-[#EDE8E3]">
                     <button
                         type="submit"
                         disabled={loading}
-                        className="h-11 px-7 rounded-xl bg-[#8A4526] hover:bg-[#72361D] text-white text-sm font-medium transition-colors flex items-center gap-2 cursor-pointer disabled:opacity-70"
+                        className="h-11 px-7 rounded-xl bg-[#8A4526] hover:bg-[#72361D] text-white text-sm 
+                        font-medium transition-colors flex items-center gap-2 cursor-pointer disabled:opacity-70"
                     >
                         {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Plus className="w-4 h-4" />}
                         <span>{editingIndex !== null ? "Update address" : "Save address"}</span>
@@ -254,7 +260,8 @@ export default function AddressBook({ user, updateUser }) {
                         <button
                             type="button"
                             onClick={handleCancel}
-                            className="h-11 px-6 rounded-xl border border-[#D6D0CA] bg-white text-sm font-medium text-[#3A332D] hover:bg-[#FAF8F6] transition-colors cursor-pointer"
+                            className="h-11 px-6 rounded-xl border border-[#D6D0CA] bg-white text-sm font-medium 
+                            text-[#3A332D] hover:bg-[#FAF8F6] transition-colors cursor-pointer"
                         >
                             Cancel
                         </button>
@@ -262,7 +269,6 @@ export default function AddressBook({ user, updateUser }) {
                 </div>
             </form>
 
-            {/* 1. قائمة العناوين المحفوظة (في الأعلى وبنفس العرض الكامل) */}
             <section className="w-full bg-white border border-[#E3DEDA] rounded-2xl p-6 sm:p-8 flex flex-col gap-5 shadow-sm">
                 <div className="flex items-baseline justify-between border-b border-[#EDE8E3] pb-4">
                     <div>
@@ -277,7 +283,8 @@ export default function AddressBook({ user, updateUser }) {
                 </div>
 
                 {addresses.length === 0 ? (
-                    <div className="py-10 px-4 border border-dashed border-[#D6D0CA] rounded-xl text-center text-sm text-[#6F655D] bg-[#FAF8F6]">
+                    <div className="py-10 px-4 border border-dashed border-[#D6D0CA] rounded-xl text-center 
+                    text-sm text-[#6F655D] bg-[#FAF8F6]">
                         No addresses saved yet. Use the form below to add your first delivery address.
                     </div>
                 ) : (
@@ -285,7 +292,8 @@ export default function AddressBook({ user, updateUser }) {
                         {addresses.map((addr, idx) => (
                             <div
                                 key={idx}
-                                className={`p-5 rounded-xl border flex flex-col justify-between gap-3 transition-all ${addr.defaultAddress
+                                className={`p-5 rounded-xl border flex flex-col justify-between gap-3 transition-all 
+                                    ${addr.defaultAddress
                                         ? "bg-[#FAF6F2] border-[#E0D3C6] shadow-sm"
                                         : "bg-[#FAF8F6] border-[#E3DEDA] hover:border-[#D6D0CA]"
                                     }`}
@@ -301,16 +309,26 @@ export default function AddressBook({ user, updateUser }) {
                                     </span>
 
                                     {addr.defaultAddress ? (
-                                        <span className="px-2.5 py-0.5 rounded-full bg-[#8A4526] text-white text-[10px] font-semibold uppercase tracking-wider">
+                                        <span className="px-2.5 py-0.5 rounded-full bg-[#8A4526] text-white 
+                                        text-[10px] font-semibold uppercase tracking-wider">
                                             Default
                                         </span>
                                     ) : (
                                         <button
                                             type="button"
+                                            disabled={defaultingIndex === idx || removingIndex === idx}
                                             onClick={() => handleMakeDefault(idx)}
-                                            className="text-xs text-[#8A4526] hover:underline font-medium cursor-pointer"
+                                            className="text-xs text-[#8A4526] hover:underline font-medium cursor-pointer 
+                                            flex items-center gap-1.5 disabled:opacity-50"
                                         >
-                                            Make default
+                                            {defaultingIndex === idx ? (
+                                                <>
+                                                    <Loader2 className="w-3 h-3 animate-spin" />
+                                                    <span>Setting...</span>
+                                                </>
+                                            ) : (
+                                                "Make default"
+                                            )}
                                         </button>
                                     )}
                                 </div>
@@ -328,12 +346,24 @@ export default function AddressBook({ user, updateUser }) {
                                     >
                                         <Edit2 className="w-3.5 h-3.5" /> Edit
                                     </button>
+
                                     <button
                                         type="button"
+                                        disabled={removingIndex === idx || defaultingIndex === idx}
                                         onClick={() => handleRemove(idx)}
-                                        className="text-[#A83A2C] hover:underline flex items-center gap-1.5 cursor-pointer"
+                                        className="text-[#A83A2C] hover:underline flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
                                     >
-                                        <Trash2 className="w-3.5 h-3.5" /> Remove
+                                        {removingIndex === idx ? (
+                                            <>
+                                                <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                                                <span>Removing...</span>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <Trash2 className="w-3.5 h-3.5" />
+                                                <span>Remove</span>
+                                            </>
+                                        )}
                                     </button>
                                 </div>
                             </div>
