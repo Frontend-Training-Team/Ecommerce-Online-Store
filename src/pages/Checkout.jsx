@@ -85,7 +85,6 @@ export default function Checkout() {
       navigate('/order-success', { state: { orderId } });
 
     } catch (error) {
-      // التوجه المباشر لصفحة النجاح وتفادي تحويل الـ Interceptor عند وجود خطأ 401
       console.warn('Order API bypassed for testing/demo:', error);
       const fallbackOrderId = '3EDFB2A1';
       navigate('/order-success', { state: { orderId: fallbackOrderId } });
@@ -108,10 +107,10 @@ export default function Checkout() {
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center gap-2 mb-1">
             <span className="text-[#c07a50] text-2xl">⚡</span>
-            <span className="text-2xl font-bold text-[#2d2421]">Lamsa Store</span>
+            <span className="text-[24px] font-bold text-[#2d2421]">Lamsa Store</span>
           </div>
-          <h1 className="text-xl font-bold text-[#2d2421]">Complete Your Purchase</h1>
-          <p className="text-xs text-[#8c7b70] mt-0.5">Please enter your shipping and delivery details</p>
+          <h1 className="text-[20px] font-bold text-[#2d2421]">Complete Your Purchase</h1>
+          <p className="text-[12px] text-[#8c7b70] mt-0.5">Please enter your shipping and delivery details</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
