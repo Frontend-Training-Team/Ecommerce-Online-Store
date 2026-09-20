@@ -35,6 +35,7 @@ function App() {
             <Route path="/verify-otp" element={<VerifyOtpDetailsPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+            <Route path="/orders/:id" element={<OrderDetailPage />} />
           </Route>
 
           {/* Protected pages */}
@@ -45,7 +46,7 @@ function App() {
             <Route path="/order-success" element={<OrderSuccessPage />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/orders" element={<MyOrdersPage />} />
-            <Route path="/orders/:id" element={<OrderDetailPage />} />
+
           </Route>
 
           <Route path="/*" element={<PageNotFound />} />
