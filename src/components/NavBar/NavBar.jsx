@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom'; 
 import { 
   HiOutlineMagnifyingGlass, 
@@ -9,6 +9,23 @@ import {
 
 export default function Navbar({ cartCount = 0 }) {
   const navigate = useNavigate();
+  const [wishlistCount, setWishlistCount] = useState(0);
+
+  const updateWishlistCount = () => {
+    const wishlist = JSON.parse(localStorage.getItem('guestWishlist') || '[]');
+    setWishlistCount(wishlist.length);
+  };
+
+  useEffect(() => {
+    updateWishlistCount();
+    window.addEventListener('wishlistUpdated', updateWishlistCount);
+    window.addEventListener('storage', updateWishlistCount);
+
+    return () => {
+      window.removeEventListener('wishlistUpdated', updateWishlistCount);
+      window.removeEventListener('storage', updateWishlistCount);
+    };
+  }, []);
 
   return (
     <header className="bg-white border-b border-gray-100 sticky top-0 z-50">
@@ -45,13 +62,21 @@ export default function Navbar({ cartCount = 0 }) {
             <HiOutlineMoon className="w-5 h-5" />
           </button>
           
-          <button className="p-2 hover:bg-gray-100 rounded-full relative transition text-gray-600 hover:text-gray-900">
+          <button 
+            onClick={() => navigate('/wishlist')}
+            className="p-2 hover:bg-gray-100 rounded-full relative transition text-gray-600 hover:text-gray-900 cursor-pointer"
+          >
+            {wishlistCount > 0 && (
+              <span className="absolute -top-1 -right-1 bg-indigo-600 text-white text-[11px] min-w-[20px] h-5 px-1 rounded-full flex items-center justify-center font-bold shadow-sm">
+                {wishlistCount}
+              </span>
+            )}
             <HiOutlineHeart className="w-5 h-5" />
           </button>
           
           <button 
             onClick={() => navigate('/cart')} 
-            className="p-2 hover:bg-gray-100 rounded-full relative transition text-gray-600 hover:text-gray-900"
+            className="p-2 hover:bg-gray-100 rounded-full relative transition text-gray-600 hover:text-gray-900 cursor-pointer"
           >
             {cartCount > 0 && (
               <span className="absolute -top-1 -right-1 bg-indigo-600 text-white text-[11px] min-w-[20px] h-5 px-1 rounded-full flex items-center justify-center font-bold shadow-sm">

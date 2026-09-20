@@ -141,7 +141,7 @@ export default function ShopPage() {
   const hasMore = visibleCount < filteredProducts.length;
 
   return (
-    <div className="!bg-white min-h-screen bg-gray-50/60 relative">
+    <div className="min-h-screen bg-gray-50/60 relative">
       {showToast && (
         <div className="fixed top-6 left-1/2 -translate-x-1/2 z-[9999] flex items-center gap-3 bg-[#7A6E67] backdrop-blur-xl 
         text-white text-sm font-medium px-5 py-3 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-white/10 pointer-events-none transition-all 

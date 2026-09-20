@@ -1,60 +1,89 @@
 import React, { useState } from 'react';
-import { HiShoppingCart } from 'react-icons/hi2';
-import { LuPackage } from 'react-icons/lu';
+import { ShoppingCart } from 'lucide-react';
 
-export default function AddToCartButton({ onSuccess }) {
-  const [status, setStatus] = useState('idle');
+export default function AddToCartButton({ productId, onSuccess, disabled = false }) {
+  const [isAnimating, setIsAnimating] = useState(false);
 
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
     e.stopPropagation();
-    if (status !== 'idle') return;
-    setStatus('animating');
+    if (isAnimating || disabled) return;
+
+    setIsAnimating(true);
+
+    if (onSuccess) {
+      try {
+        await onSuccess(productId);
+      } catch (error) {
+        console.error('Error adding to cart:', error);
+      }
+    }
+
     setTimeout(() => {
-      if (onSuccess) onSuccess();
-      setStatus('idle');
-    }, 1500);
+      setIsAnimating(false);
+    }, 1800);
   };
 
   return (
     <button
       onClick={handleClick}
-      disabled={status !== 'idle'}
-      className="relative w-full h-11 px-4 rounded-xl text-sm font-medium flex items-center justify-center gap-2 bg-[#A8653F] hover:bg-[#8F5332] text-white transition-all duration-300 shadow-sm overflow-hidden shrink-0 active:scale-95"
+      disabled={disabled || isAnimating}
+      aria-label="Add to cart"
+      className="relative w-full h-full flex items-center justify-center rounded-xl bg-[#8E4726] hover:bg-[#72381e] dark:bg-amber-700 dark:hover:bg-amber-800 text-white transition-all active:scale-95 cursor-pointer overflow-hidden shadow-sm"
     >
-      {status === 'idle' && (
-        <>
-          <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" />
-          </svg>
-          <span className="whitespace-nowrap">Add to Cart</span>
-        </>
+      {!isAnimating && (
+        <ShoppingCart className="w-5 h-5 transition-transform duration-200 hover:scale-110" />
       )}
 
-      {status === 'animating' && (
-        <div className="absolute inset-0 flex items-center justify-center w-full h-full">
-          <div className="absolute top-0.5 animate-[dropItem_1.5s_infinite] z-10 text-amber-200">
-            <LuPackage className="w-4 h-4 drop-shadow" />
+      {isAnimating && (
+        <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+          <div className="absolute top-1 left-1/2 -translate-x-1/2 w-3 h-3 bg-[#d4a373] dark:bg-amber-200 border border-[#8e5229] dark:border-amber-900 rounded-[2px] animate-[dropAndDisappear_0.6s_cubic-bezier(0.45,0,0.55,1)_forwards] z-10 flex items-center justify-center">
+            <div className="w-full h-[2px] bg-[#8e5229]/40 dark:bg-amber-900/40" />
           </div>
-          <div className="absolute left-0 animate-[driveCart_1.5s_linear_infinite]">
-            <HiShoppingCart className="w-5 h-5 text-white" />
+
+          <div className="animate-[driveCart_1.6s_ease-in-out_forwards]">
+            <ShoppingCart className="w-5 h-5 text-white" />
           </div>
-          <span className="text-xs opacity-75 font-medium">Adding...</span>
         </div>
       )}
-      <style>{`
-       @keyframes driveCart {
-  0% { transform: translateX(-20px); }
-  100% { transform: translateX(260px); }
-}
 
-@keyframes dropItem {
-  0% { transform: translateY(-16px) scale(0.6); opacity: 0; }
-  35% { opacity: 1; transform: translateY(2px) scale(1); }
-  70% { opacity: 0; transform: translateY(12px) scale(0.7); }
-  100% { opacity: 0; }
-}
+      <style>{`
+        @keyframes dropAndDisappear {
+          0% {
+            transform: translate(-50%, -16px) scale(0.7) rotate(-10deg);
+            opacity: 0;
+          }
+          40% {
+            opacity: 1;
+          }
+          85% {
+            transform: translate(-50%, 4px) scale(0.85) rotate(0deg);
+            opacity: 1;
+          }
+          100% {
+            transform: translate(-50%, 8px) scale(0);
+            opacity: 0;
+          }
+        }
+
+        @keyframes driveCart {
+          0% {
+            transform: translateX(-28px);
+            opacity: 0;
+          }
+          25% {
+            transform: translateX(0px);
+            opacity: 1;
+          }
+          65% {
+            transform: translateX(0px);
+            opacity: 1;
+          }
+          100% {
+            transform: translateX(32px);
+            opacity: 0;
+          }
+        }
       `}</style>
     </button>
-    
   );
 }

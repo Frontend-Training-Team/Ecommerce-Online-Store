@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import {
   HiOutlineTrash,
   HiCheckCircle,
-  HiExclamationTriangle,
+  HiXCircle,
   HiOutlineShoppingBag,
   HiOutlineTag,
   HiOutlineArrowLeft
@@ -154,21 +154,19 @@ export default function CartPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50/70 dark:bg-slate-900 py-10 px-4 sm:px-6 lg:px-8 font-sans transition-colors">
+    <div className=" min-h-screen bg-slate-50/70 dark:bg-slate-900 py-10 px-4 sm:px-6 lg:px-8 font-sans transition-colors">
       {/* Toast Notification */}
       {toast.show && (
         <div
-          className={`fixed top-6 left-1/2 -translate-x-1/2 z-[9999] flex items-center gap-3 backdrop-blur-xl 
-  text-white text-sm font-medium px-5 py-3 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] border pointer-events-none transition-all 
-  animate-in slide-in-from-top-3 ease-out ${toast.type === 'success'
-              ? 'bg-gray-900/90 dark:bg-slate-800/90 text-white border-white/10'
-              : toast.type === 'warning'
-                ? 'bg-amber-900/90 dark:bg-amber-950/90 text-amber-100 border-amber-500/30'
-                : 'bg-red-900/90 dark:bg-red-950/90 text-red-100 border-red-500/30'
-            }`}
+          style={{
+            backgroundColor: toast.type === 'success' ? '#7A6E67' : '#7E4A2D'
+          }}
+          className="fixed top-6 left-1/2 -translate-x-1/2 z-[9999] flex items-center gap-3 backdrop-blur-xl 
+  text-white text-sm font-medium px-5 py-3 rounded-2xl  pointer-events-none transition-all 
+  animate-in slide-in-from-top-3 ease-out"
         >
-          {toast.type === 'success' && <HiCheckCircle className="w-5 h-5 text-emerald-400 shrink-0" />}
-          {toast.type !== 'success' && <HiExclamationTriangle className="w-5 h-5 text-amber-400 shrink-0" />}
+          {toast.type === 'success' && <HiCheckCircle className="w-5 h-5 text-emerald-300 shrink-0" />}
+          {toast.type !== 'success' && <HiXCircle className="w-6 h-6 text-brand-200 shrink-0" />}
           <span className="text-sm font-medium">{toast.message}</span>
         </div>
       )}
@@ -184,7 +182,7 @@ export default function CartPage() {
               Looks like you haven't added anything to your cart yet. Start shopping and find something you love!
             </p>
             <button
-              onClick={() => navigate('/Products')}
+              onClick={() => navigate('/shop')}
               className="bg-[#A8653F] hover:bg-copper-700 text-white font-semibold px-8 py-3.5 rounded-2xl transition duration-200 shadow-md active:scale-95"
             >
               Start Shopping
@@ -192,7 +190,7 @@ export default function CartPage() {
           </div>
         ) : (
           <div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-slate-100 mb-8 mt-10">Shopping Cart</h1>
+            <h1 className="text-2xl sm:text-3xl font-bold text-copper-900 dark:text-slate-100 mb-8 mt-10">Shopping Cart</h1>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
               <div className="lg:col-span-7 space-y-6">
@@ -295,8 +293,8 @@ export default function CartPage() {
                 </div>
 
                 <button
-                  onClick={() => navigate('/Products')}
-                  className="inline-flex items-center gap-2 text-copper-700 dark:text-copper-400 font-medium text-sm hover:underline pt-2"
+                  onClick={() => navigate('/shop')}
+                  className="inline-flex items-center gap-2 text-copper-700 dark:text-copper-400 font-medium text-sm hover:underline pt-2 cursor-pointer"
                 >
                   <HiOutlineArrowLeft className="w-4 h-4" />
                   <span>Continue Shopping</span>
@@ -341,8 +339,8 @@ export default function CartPage() {
 
                   <div className="text-center">
                     <button
-                      onClick={() => navigate('/Products')}
-                      className="inline-flex items-center gap-2 text-copper-700 dark:text-copper-400 font-medium text-sm hover:underline pt-2"
+                      onClick={() => navigate('/shop')}
+                      className="inline-flex items-center gap-2 text-copper-700 dark:text-copper-400 font-medium text-sm hover:underline pt-2 cursor-pointer"
                     >
                       <span>Continue Shopping</span>
                     </button>

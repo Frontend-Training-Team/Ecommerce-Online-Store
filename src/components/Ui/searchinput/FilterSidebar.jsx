@@ -70,8 +70,8 @@ export default function ProductFilterSidebar({
       )}
 
       <div
-        className={`fixed inset-y-0 left-0 z-50 w-80 bg-white p-4 overflow-y-auto transition-transform 
-          duration-300 ease-in-out lg:static lg:w-full lg:p-0 lg:bg-transparent lg:overflow-visible lg:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-50 w-80 bg-white dark:bg-slate-900 p-4 overflow-y-auto transition-transform 
+          duration-300 ease-in-out lg:static lg:w-full lg:p-0 lg:bg-transparent dark:lg:bg-transparent lg:overflow-visible lg:translate-x-0 ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -80,11 +80,11 @@ export default function ProductFilterSidebar({
           {hasActiveFilters && (
             <div className="flex flex-wrap items-center gap-2 mb-2">
               {selectedCategory !== 'All' && (
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#F7F4EF] text-copper-600 rounded-full text-sm font-medium capitalize">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#F7F4EF] dark:bg-slate-800 text-copper-600 dark:text-amber-500 rounded-full text-sm font-medium capitalize">
                   {selectedCategory}
                   <button
                     onClick={() => setSelectedCategory('All')}
-                    className="hover:text-copper-800 transition"
+                    className="hover:text-copper-800 dark:hover:text-amber-400 transition"
                   >
                     <LuX className="w-3 h-3" />
                   </button>
@@ -92,12 +92,12 @@ export default function ProductFilterSidebar({
               )}
 
               {sortBy !== 'default' && sortBadges[sortBy] && (
-                <span className="inline-flex items-center gap-1 px-3 py-1 bg-[#F7F4EF] text-copper-600 rounded-full text-sm font-semibold">
+                <span className="inline-flex items-center gap-1 px-3 py-1 bg-[#F7F4EF] dark:bg-slate-800 text-copper-600 dark:text-amber-500 rounded-full text-sm font-semibold">
                   {sortBadges[sortBy].icon}
                   <span>{sortBadges[sortBy].label}</span>
                   <button
                     onClick={() => setSortBy('default')}
-                    className="hover:text-amber-900 transition ml-0.5"
+                    className="hover:text-amber-900 dark:hover:text-amber-400 transition ml-0.5"
                   >
                     <LuX className="w-3 h-3" />
                   </button>
@@ -106,38 +106,36 @@ export default function ProductFilterSidebar({
 
               <button
                 onClick={onClearFilters}
-                className="text-red-500 text-sm font-medium hover:underline cursor-pointer ml-auto"
+                className="text-red-500 dark:text-red-400 text-sm font-medium hover:underline cursor-pointer ml-auto"
               >
                 Clear all
               </button>
             </div>
           )}
 
-          {/* Main Sidebar Box */}
-          <div className="w-full bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-6 relative">
+          <div className="w-full bg-white dark:bg-slate-900 p-6 rounded-2xl border border-gray-100 dark:border-slate-800 shadow-sm space-y-6 relative">
             
             {onClose && (
               <button
                 onClick={onClose}
-                className="lg:hidden absolute top-4 right-4 p-1 text-gray-500 hover:text-gray-800 transition rounded-lg"
+                className="lg:hidden absolute top-4 right-4 p-1 text-gray-500 dark:text-slate-400 hover:text-gray-800 dark:hover:text-slate-200 transition rounded-lg"
                 aria-label="Close filters"
               >
                 <LuX className="w-5 h-5" />
               </button>
             )}
 
-            {/* Category */}
             <div>
-              <h3 className="font-bold text-gray-800 mb-3 text-sm">Category</h3>
+              <h3 className="text-gray-800 dark:text-slate-100 mb-3 text-md">Category</h3>
 
               {isLoadingCategories ? (
                 <div className="space-y-3 animate-pulse">
-                  <div className="h-4 bg-gray-100 rounded w-2/3"></div>
-                  <div className="h-4 bg-gray-100 rounded w-1/2"></div>
-                  <div className="h-4 bg-gray-100 rounded w-3/4"></div>
+                  <div className="h-4 bg-gray-100 dark:bg-slate-800 rounded w-2/3"></div>
+                  <div className="h-4 bg-gray-100 dark:bg-slate-800 rounded w-1/2"></div>
+                  <div className="h-4 bg-gray-100 dark:bg-slate-800 rounded w-3/4"></div>
                 </div>
               ) : (
-                <div className="space-y-2.5 text-sm text-gray-600">
+                <div className="space-y-2.5 text-sm text-gray-600 dark:text-slate-300">
                   {categories.map((cat) => (
                     <label
                       key={cat.value}
@@ -149,7 +147,7 @@ export default function ProductFilterSidebar({
                         value={cat.value}
                         checked={selectedCategory === cat.value}
                         onChange={(e) => setSelectedCategory(e.target.value)}
-                        className="text-indigo-600 focus:ring-copper-400 w-4 h-4"
+                        className="text-indigo-600 focus:ring-copper-400 dark:accent-amber-500 w-4 h-4"
                       />
                       <span className="capitalize">{cat.label}</span>
                     </label>
@@ -158,50 +156,47 @@ export default function ProductFilterSidebar({
               )}
             </div>
 
-            {/* Price Range */}
             <div>
-              <h3 className="font-bold text-gray-800 mb-3 text-sm">Price Range</h3>
+              <h3 className="font-bold text-gray-800 dark:text-slate-100 mb-3 text-sm">Price Range</h3>
               <div className="flex items-center gap-2">
                 <input
                   type="number"
                   placeholder="Min"
                   value={minPrice}
                   onChange={(e) => setMinPrice(e.target.value)}
-                  className="w-full p-2.5 bg-gray-50/50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-copper-400 min-w-0"
+                  className="w-full p-2.5 bg-gray-50/50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-500 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-copper-400 dark:focus:ring-amber-500 min-w-0"
                 />
-                <span className="text-gray-400 text-xs">-</span>
+                <span className="text-gray-400 dark:text-slate-500 text-xs">-</span>
                 <input
                   type="number"
                   placeholder="Max"
                   value={maxPrice}
                   onChange={(e) => setMaxPrice(e.target.value)}
-                  className="w-full p-2.5 bg-gray-50/50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-copper-400 min-w-0"
+                  className="w-full p-2.5 bg-gray-50/50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-500 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-copper-400 dark:focus:ring-amber-500 min-w-0"
                 />
               </div>
             </div>
 
-            {/* Sort By */}
             <div>
-              <h3 className="font-bold text-gray-800 mb-3 text-sm">Sort By</h3>
+              <h3 className="font-bold text-gray-800 dark:text-slate-100 mb-3 text-sm">Sort By</h3>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="w-full p-2.5 border border-gray-200 rounded-xl text-sm 
-                focus:outline-none focus:ring-2 focus:ring-copper-400 bg-white text-gray-700 cursor-pointer"
+                className="w-full p-2.5 border border-gray-200 dark:border-slate-700 rounded-xl text-sm 
+                focus:outline-none focus:ring-2 focus:ring-copper-400 dark:focus:ring-amber-500 bg-white dark:bg-slate-800 text-gray-700 dark:text-slate-200 cursor-pointer"
               >
-                <option value="default">Default</option>
-                <option value="newest">Newest</option>
-                <option value="lowToHigh">Price: Low to High</option>
-                <option value="highToLow">Price: High to Low</option>
-                <option value="topRated">Top Rated</option>
+                <option value="default" className="bg-white dark:bg-slate-800">Default</option>
+                <option value="newest" className="bg-white dark:bg-slate-800">Newest</option>
+                <option value="lowToHigh" className="bg-white dark:bg-slate-800">Price: Low to High</option>
+                <option value="highToLow" className="bg-white dark:bg-slate-800">Price: High to Low</option>
+                <option value="topRated" className="bg-white dark:bg-slate-800">Top Rated</option>
               </select>
             </div>
 
-            {/* Clear All Filters Button */}
             <button
               onClick={onClearFilters}
-              className="w-full py-2.5 border border-[#D99B70] text-copper-700 rounded-xl text-sm
-               font-medium hover:bg-indigo-50 transition active:scale-95 cursor-pointer"
+              className="w-full py-2.5 border border-[#D99B70] dark:border-amber-600/60 text-copper-700 dark:text-amber-500 rounded-xl text-sm
+               font-medium hover:bg-indigo-50 dark:hover:bg-slate-800 transition active:scale-95 cursor-pointer"
             >
               Clear All Filters
             </button>
