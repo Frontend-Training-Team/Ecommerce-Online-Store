@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 function StoreLayout() {
   
   return (
-    <div className="min-h-screen flex flex-col bg-[#080d1a] text-slate-100 font-sans 
+    <div className="min-h-screen flex flex-col bg-[#080d1a]  font-sans 
     selection:bg-blue-600 selection:text-white">
       {/* <Navbar /> */}
 

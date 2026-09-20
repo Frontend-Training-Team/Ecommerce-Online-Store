@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
-import ProductPage from "./pages/Products";
+import ProductPage from "./pages/Shop";
 import ProductDetails from "./pages/ProductDetails";
 import StoreLayout from "./components/Layout/StoreLayout";
 import RegisterPage from "./pages/Register";
@@ -36,10 +36,10 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           </Route>
-
+  <Route path="/cart" element={<CartPage />} />
           {/* Protected pages */}
           <Route element={<ProtectedRoute />}>
-            <Route path="/cart" element={<CartPage />} />
+            {/* <Route path="/cart" element={<CartPage />} /> */}
             <Route path="/wishlist" element={<WishlistPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/order-success" element={<OrderSuccessPage />} />
