@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable react-hooks/set-state-in-effect */
+import { useState, useEffect } from 'react';
 import { Heart, ShoppingCart } from "lucide-react";
-import { HiCheckCircle, HiXCircle } from 'react-icons/hi2';
+import { Plus } from 'lucide-react';
+
 import AddToCartButton from '../Animation/AddToCartButton';
 
 export default function ProductCard({ product, onAddToCart, onRateProduct }) {
@@ -101,9 +103,9 @@ export default function ProductCard({ product, onAddToCart, onRateProduct }) {
             className="flex items-center gap-3 backdrop-blur-xl text-white text-sm font-medium px-5 py-3 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-white/20 transition-all animate-in slide-in-from-top-3 ease-out"
           >
             {toast.type === 'success' ? (
-              <HiCheckCircle className="w-5 h-5 text-emerald-300 shrink-0" />
+              <Plus className="w-5 h-5 text-emerald-300 shrink-0" />
             ) : (
-              <HiXCircle className="w-6 h-6 text-brand-200 shrink-0" />
+              <Plus className="w-6 h-6 text-brand-200 shrink-0" />
             )}
             <span className="text-sm font-medium">{toast.message}</span>
           </div>

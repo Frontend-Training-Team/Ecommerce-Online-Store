@@ -1,4 +1,3 @@
-import React from 'react';
 import ProductCard from './ProductCard';
 import { ProductGridSkeleton } from '../skeletons/ProductSkeleton';
 
@@ -8,8 +7,8 @@ export default function ProductGrid({
   isLoadingMore = false,
   hasMore = false,
   onLoadMore,
-  onAddToCart, 
-  onAddToCartSuccess, 
+  onAddToCart,
+  onAddToCartSuccess,
 }) {
   if (isLoading && products.length === 0) {
     return <ProductGridSkeleton count={6} />;
@@ -34,7 +33,7 @@ export default function ProductGrid({
           <ProductCard
             key={product._id || product.id || index}
             product={product}
-            onAddToCart={onAddToCart ? () => onAddToCart(product) : onAddToCartSuccess} 
+            onAddToCart={onAddToCart ? () => onAddToCart(product) : onAddToCartSuccess}
           />
         ))}
       </div>

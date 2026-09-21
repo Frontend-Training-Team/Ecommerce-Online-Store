@@ -1,14 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import {
-  HiOutlineTrash,
-  HiCheckCircle,
-  HiXCircle,
-  HiOutlineShoppingBag,
-  HiOutlineTag,
-  HiOutlineArrowLeft
-} from 'react-icons/hi2';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import SweepingCleaner from '../components/Ui/Animation/SweepingCleaner';
+import { Plus } from 'lucide-react';
 
 export default function CartPage() {
   const [cartItems, setCartItems] = useState([]);
@@ -67,7 +60,7 @@ export default function CartPage() {
 
         setCartItems(detailedCart);
       } catch (error) {
-        showNotification('Failed to load cart items', 'error');
+        showNotification('Failed to load cart items', error);
       } finally {
         setIsLoading(false);
       }
@@ -161,12 +154,12 @@ export default function CartPage() {
           style={{
             backgroundColor: toast.type === 'success' ? '#7A6E67' : '#7E4A2D'
           }}
-          className="fixed top-6 left-1/2 -translate-x-1/2 z-[9999] flex items-center gap-3 backdrop-blur-xl 
-  text-white text-sm font-medium px-5 py-3 rounded-2xl  pointer-events-none transition-all 
-  animate-in slide-in-from-top-3 ease-out"
+          className="fixed top-6 left-1/2 -translate-x-1/2 z-[9999] flex items-center gap-3 backdrop-blur-xl
+          text-white text-sm font-medium px-5 py-3 rounded-2xl  pointer-events-none transition-all 
+          animate-in slide-in-from-top-3 ease-out"
         >
-          {toast.type === 'success' && <HiCheckCircle className="w-5 h-5 text-emerald-300 shrink-0" />}
-          {toast.type !== 'success' && <HiXCircle className="w-6 h-6 text-brand-200 shrink-0" />}
+          {toast.type === 'success' && <Plus className="w-5 h-5 text-emerald-300 shrink-0" />}
+          {toast.type !== 'success' && <Plus className="w-6 h-6 text-brand-200 shrink-0" />}
           <span className="text-sm font-medium">{toast.message}</span>
         </div>
       )}
@@ -175,7 +168,7 @@ export default function CartPage() {
         {cartItems.length === 0 ? (
           <div className="min-h-[70vh] flex flex-col items-center justify-center text-center">
             <div className="w-24 h-24 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mb-6 transition-colors">
-              <HiOutlineShoppingBag className="w-12 h-12 text-slate-400 dark:text-slate-500" />
+              <Plus className="w-12 h-12 text-slate-400 dark:text-slate-500" />
             </div>
             <h2 className="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-2">Your cart is empty</h2>
             <p className="text-slate-500 dark:text-slate-400 text-sm max-w-sm mb-8">
@@ -238,7 +231,7 @@ export default function CartPage() {
                                   <SweepingCleaner className="w-9 h-9 sm:w-10 sm:h-10 text-copper-700 dark:text-copper-400 scale-110" />
                                 </div>
                               ) : (
-                                <HiOutlineTrash className="w-5 h-5" />
+                                <Plus className="w-5 h-5" />
                               )}
                             </button>
                           </div>
@@ -275,7 +268,7 @@ export default function CartPage() {
 
                 <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200/80 dark:border-slate-700 p-4 sm:p-6 shadow-sm transition-colors w-full">
                   <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300 font-semibold text-sm mb-3">
-                    <HiOutlineTag className="w-5 h-5 text-copper-700 dark:text-copper-400 shrink-0" />
+                    <Plus className="w-5 h-5 text-copper-700 dark:text-copper-400 shrink-0" />
                     <span>Coupon Code</span>
                   </div>
                   <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 w-full">
@@ -296,7 +289,7 @@ export default function CartPage() {
                   onClick={() => navigate('/shop')}
                   className="inline-flex items-center gap-2 text-copper-700 dark:text-copper-400 font-medium text-sm hover:underline pt-2 cursor-pointer"
                 >
-                  <HiOutlineArrowLeft className="w-4 h-4" />
+                  <Plus className="w-4 h-4" />
                   <span>Continue Shopping</span>
                 </button>
               </div>

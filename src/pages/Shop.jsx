@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from '../components/NavBar/NavBar';
 import ProductFilterSidebar from '../components/Ui/searchinput/FilterSidebar';
 import ProductGrid from '../components/Ui/Products/ProductGrid';
 import { useDebounce } from '../hooks/useDebounce';
-import { HiCheckCircle, HiAdjustmentsHorizontal } from 'react-icons/hi2';
+import { Plus } from 'lucide-react';
 
 export default function ShopPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -147,7 +147,7 @@ export default function ShopPage() {
         text-white text-sm font-medium px-5 py-3 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-white/10 pointer-events-none transition-all 
         animate-in slide-in-from-top-3 ease-out">
           <div className="w-6 h-6 rounded-full bg-emerald-500/15 flex items-center justify-center shrink-0">
-            <HiCheckCircle className="w-5 h-5 text-emerald-400" />
+            <Plus className="w-5 h-5 text-emerald-400" />
           </div>
           <span className="text-gray-100 font-sans tracking-wide">
             Success Adding to Cart
@@ -180,7 +180,7 @@ export default function ShopPage() {
             className="lg:hidden p-3 bg-white border border-gray-200 rounded-2xl text-gray-600 hover:bg-gray-50 shadow-sm transition shrink-0 active:scale-95 flex items-center justify-center"
             aria-label="Open Filters"
           >
-            <HiAdjustmentsHorizontal className="w-6 h-6" />
+            <Plus className="w-6 h-6" />
           </button>
         </div>
 

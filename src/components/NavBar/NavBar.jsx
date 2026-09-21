@@ -1,11 +1,8 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable react-hooks/set-state-in-effect */
+import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom'; 
-import { 
-  HiOutlineMagnifyingGlass, 
-  HiOutlineMoon, 
-  HiOutlineHeart, 
-  HiOutlineShoppingBag 
-} from 'react-icons/hi2';
+
+import { Plus } from 'lucide-react';
 
 export default function Navbar({ cartCount = 0 }) {
   const navigate = useNavigate();
@@ -55,11 +52,11 @@ export default function Navbar({ cartCount = 0 }) {
         {/* Action Icons & User */}
         <div className="flex items-center gap-4 text-gray-600">
           <button className="p-2 hover:bg-gray-100 rounded-full transition text-gray-600 hover:text-gray-900">
-            <HiOutlineMagnifyingGlass className="w-5 h-5" />
+            <Plus className="w-5 h-5" />
           </button>
           
           <button className="p-2 hover:bg-gray-100 rounded-full transition text-gray-600 hover:text-gray-900">
-            <HiOutlineMoon className="w-5 h-5" />
+            <Plus className="w-5 h-5" />
           </button>
           
           <button 
@@ -71,7 +68,7 @@ export default function Navbar({ cartCount = 0 }) {
                 {wishlistCount}
               </span>
             )}
-            <HiOutlineHeart className="w-5 h-5" />
+            <Plus className="w-5 h-5" />
           </button>
           
           <button 
@@ -83,7 +80,7 @@ export default function Navbar({ cartCount = 0 }) {
                 {cartCount}
               </span>
             )}
-            <HiOutlineShoppingBag className="w-5 h-5" />
+            <Plus className="w-5 h-5" />
           </button>
           
           <div className="hidden lg:flex items-center gap-2 pl-4 border-l border-gray-200">

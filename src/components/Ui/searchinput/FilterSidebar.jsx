@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { LuArrowUp, LuArrowDown, LuSparkles, LuStar, LuX } from 'react-icons/lu';
+import { useState, useEffect } from 'react';
+import { Plus } from 'lucide-react';
 
 export default function ProductFilterSidebar({
   selectedCategory,
@@ -18,10 +18,10 @@ export default function ProductFilterSidebar({
   const [isLoadingCategories, setIsLoadingCategories] = useState(false);
 
   const sortBadges = {
-    lowToHigh: { label: 'Price', icon: <LuArrowUp className="w-3.5 h-3.5" /> },
-    highToLow: { label: 'Price', icon: <LuArrowDown className="w-3.5 h-3.5" /> },
-    newest: { label: 'Newest', icon: <LuSparkles className="w-3.5 h-3.5" /> },
-    topRated: { label: 'Top Rated', icon: <LuStar className="w-3.5 h-3.5" /> },
+    lowToHigh: { label: 'Price', icon: <Plus className="w-3.5 h-3.5" /> },
+    highToLow: { label: 'Price', icon: <Plus className="w-3.5 h-3.5" /> },
+    newest: { label: 'Newest', icon: <Plus className="w-3.5 h-3.5" /> },
+    topRated: { label: 'Top Rated', icon: <Plus className="w-3.5 h-3.5" /> },
   };
 
   useEffect(() => {
@@ -86,7 +86,7 @@ export default function ProductFilterSidebar({
                     onClick={() => setSelectedCategory('All')}
                     className="hover:text-copper-800 dark:hover:text-amber-400 transition"
                   >
-                    <LuX className="w-3 h-3" />
+                    <Plus className="w-3 h-3" />
                   </button>
                 </span>
               )}
@@ -99,7 +99,7 @@ export default function ProductFilterSidebar({
                     onClick={() => setSortBy('default')}
                     className="hover:text-amber-900 dark:hover:text-amber-400 transition ml-0.5"
                   >
-                    <LuX className="w-3 h-3" />
+                    <Plus className="w-3 h-3" />
                   </button>
                 </span>
               )}
@@ -121,7 +121,7 @@ export default function ProductFilterSidebar({
                 className="lg:hidden absolute top-4 right-4 p-1 text-gray-500 dark:text-slate-400 hover:text-gray-800 dark:hover:text-slate-200 transition rounded-lg"
                 aria-label="Close filters"
               >
-                <LuX className="w-5 h-5" />
+                <Plus className="w-5 h-5" />
               </button>
             )}
 
