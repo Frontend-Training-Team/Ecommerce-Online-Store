@@ -18,6 +18,7 @@ import VerifyOtpDetailsPage from "./pages/VerifyOtpDetails";
 import ProtectedRoute from "./components/ProtectedRoute";
 import GuestRoute from "./components/GuestRoute";
 import { Toaster } from "react-hot-toast";
+import ResetPasswordOtp from "./pages/ResetPasswordOtp"
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
             <Route path="/verify-otp" element={<VerifyOtpDetailsPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+            <Route path="/resetpasswordOtp" element={<ResetPasswordOtp/>}/>
           </Route>
 
           {/* Protected pages */}
