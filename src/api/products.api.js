@@ -1,11 +1,11 @@
 import api from "./axios"
 
 // Get all products
-export const getAllProducts = (payload) => { return api.get('/products', payload) }
+export const getAllProducts = (payload) => { return api.get('/products', { params: payload }) }
 // Create product (Admin)
 export const postCreateProductAdmin = (payload) => { return api.post('/products', payload) }
 // search products
-export const getSearchProducts = (payload) => { return api.get('/products/search', payload) }
+export const getSearchProducts = (payload) => { return api.get('/products/search', { params: payload }) }
 // get single product
 export const getSingleproduct = (productid) => { return api.get(`/products/${productid}`) }
 // Delete product (Admin)
