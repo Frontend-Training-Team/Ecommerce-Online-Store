@@ -1,7 +1,7 @@
 import React from 'react';
 import ProductCard from './ProductCard';
 import { ProductGridSkeleton } from '../skeletons/ProductSkeleton';
-
+import {Search} from 'lucide-react';
 export default function ProductGrid({
   products = [],
   isLoading = false,
@@ -18,7 +18,7 @@ export default function ProductGrid({
   if (!isLoading && products.length === 0) {
     return (
       <div className="w-full flex flex-col items-center justify-center py-16 px-4 bg-white/40 dark:bg-slate-800/40 backdrop-blur-md rounded-3xl border border-gray-200 dark:border-slate-700 text-center shadow-none">
-        <div className="text-3xl mb-3 opacity-80">🔍</div>
+        <div className="text-3xl mb-3 opacity-80"><Search className="w-[20px] h-[20px]" /></div>
         <h3 className="text-lg font-bold text-gray-700 dark:text-gray-300 mb-1">No products found</h3>
         <p className="text-sm text-gray-500 dark:text-gray-400 max-w-sm">
           Try adjusting your search or filter keywords.
@@ -29,7 +29,7 @@ export default function ProductGrid({
 
   return (
     <div className="w-full space-y-8">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 justify-items-center">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 justify-items-center">
         {products.map((product, index) => (
           <ProductCard
             key={product._id || product.id || index}

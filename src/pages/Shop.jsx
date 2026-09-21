@@ -3,7 +3,7 @@ import Navbar from '../components/NavBar/NavBar';
 import ProductFilterSidebar from '../components/Ui/searchinput/FilterSidebar';
 import ProductGrid from '../components/Ui/Products/ProductGrid';
 import { useDebounce } from '../hooks/useDebounce';
-import { HiCheckCircle, HiAdjustmentsHorizontal } from 'react-icons/hi2';
+import { Search, X, CheckCircle, SlidersHorizontal } from 'lucide-react';
 
 export default function ShopPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -11,7 +11,7 @@ export default function ShopPage() {
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
   const [sortBy, setSortBy] = useState('default');
-  const [isFilterOpen, setIsFilterOpen] = useState(false); // حالة فتح وإغلاق الفلتر للشاشات الصغيرة
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const [cartCount, setCartCount] = useState(() => {
     const savedCart = JSON.parse(localStorage.getItem('guestCart') || '[]');
@@ -55,6 +55,11 @@ export default function ShopPage() {
     setMinPrice('');
     setMaxPrice('');
     setSortBy('default');
+  };
+
+  const handleClearSearch = () => {
+    setIsLoading(true);
+    setSearchTerm('');
   };
 
   const handleLoadMore = () => {
@@ -141,13 +146,13 @@ export default function ShopPage() {
   const hasMore = visibleCount < filteredProducts.length;
 
   return (
-    <div className="min-h-screen bg-gray-50/60 relative">
+    <div className="min-h-screen bg-white dark:bg-slate-950 transition-colors duration-200 relative">
       {showToast && (
         <div className="fixed top-6 left-1/2 -translate-x-1/2 z-[9999] flex items-center gap-3 bg-[#7A6E67] backdrop-blur-xl 
         text-white text-sm font-medium px-5 py-3 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-white/10 pointer-events-none transition-all 
         animate-in slide-in-from-top-3 ease-out">
           <div className="w-6 h-6 rounded-full bg-emerald-500/15 flex items-center justify-center shrink-0">
-            <HiCheckCircle className="w-5 h-5 text-emerald-400" />
+            <CheckCircle className="w-[16px] h-[16px] text-emerald-400" />
           </div>
           <span className="text-gray-100 font-sans tracking-wide">
             Success Adding to Cart
@@ -157,71 +162,91 @@ export default function ShopPage() {
 
       <Navbar cartCount={cartCount} />
 
-      <main className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-8 flex items-center gap-3">
-          <div className="relative w-full">
-            <span className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-gray-400">
-              🔍
-            </span>
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={(e) => {
-                setIsLoading(true);
-                setSearchTerm(e.target.value);
-              }}
-              placeholder="Search products..."
-              className="w-full pl-11 pr-4 py-3 bg-white border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-copper-400 text-sm shadow-sm transition"
-            />
-          </div>
-
-          <button
-            onClick={() => setIsFilterOpen(true)}
-            className="lg:hidden p-3 bg-white border border-gray-200 rounded-2xl text-gray-600 hover:bg-gray-50 shadow-sm transition shrink-0 active:scale-95 flex items-center justify-center"
-            aria-label="Open Filters"
-          >
-            <HiAdjustmentsHorizontal className="w-6 h-6" />
-          </button>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] xl:grid-cols-[300px_1fr] gap-8 items-start">
-          <aside className="w-full lg:sticky lg:top-24">
-            <ProductFilterSidebar
-              selectedCategory={selectedCategory}
-              setSelectedCategory={(cat) => {
-                setIsLoading(true);
-                setSelectedCategory(cat);
-              }}
-              minPrice={minPrice}
-              setMinPrice={(val) => {
-                setIsLoading(true);
-                setMinPrice(val);
-              }}
-              maxPrice={maxPrice}
-              setMaxPrice={(val) => {
-                setIsLoading(true);
-                setMaxPrice(val);
-              }}
-              sortBy={sortBy}
-              setSortBy={(sort) => {
-                setIsLoading(true);
-                setSortBy(sort);
-              }}
-              onClearFilters={handleClearFilters}
-              isOpen={isFilterOpen}
-              onClose={() => setIsFilterOpen(false)}
-            />
+      <main className="max-w-[1400px] mx-auto px-4 mt-3 sm:px-6 lg:px-8 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] xl:grid-cols-[300px_1fr] gap-8 items-stretch">
+          <aside className="w-full lg:border-r lg:border-gray-200 dark:lg:border-slate-800 lg:pr-8">
+            <div>
+              <ProductFilterSidebar
+                selectedCategory={selectedCategory}
+                setSelectedCategory={(cat) => {
+                  setIsLoading(true);
+                  setSelectedCategory(cat);
+                }}
+                minPrice={minPrice}
+                setMinPrice={(val) => {
+                  setIsLoading(true);
+                  setMinPrice(val);
+                }}
+                maxPrice={maxPrice}
+                setMaxPrice={(val) => {
+                  setIsLoading(true);
+                  setMaxPrice(val);
+                }}
+                sortBy={sortBy}
+                setSortBy={(sort) => {
+                  setIsLoading(true);
+                  setSortBy(sort);
+                }}
+                onClearFilters={handleClearFilters}
+                isOpen={isFilterOpen}
+                onClose={() => setIsFilterOpen(false)}
+              />
+            </div>
           </aside>
 
-          <section className="w-full">
-            <ProductGrid
-              products={displayedProducts}
-              isLoading={isLoading}
-              isLoadingMore={isLoadingMore}
-              hasMore={hasMore}
-              onLoadMore={handleLoadMore}
-              onAddToCart={handleAddToCart}
-            />
+          <section className="w-full min-w-0 flex flex-col items-center">
+            <div className="w-full max-w-[1244px] mx-auto">
+              {/* Search Bar Container */}
+              <div className="w-full mb-10">
+                <div className="flex items-center gap-3 w-full">
+                  <div className="relative flex-1 w-full flex items-center">
+                    <span className="absolute left-4 z-10 pointer-events-none text-slate-400 dark:text-slate-500 flex items-center justify-center">
+                      <Search className="w-[16px] h-[16px]" />
+                    </span>
+                    <input
+                      type="text"
+                      value={searchTerm}
+                      onChange={(e) => {
+                        setIsLoading(true);
+                        setSearchTerm(e.target.value);
+                      }}
+                      placeholder="Search products..."
+                      className="w-full pl-11 pr-10 py-3 bg-[#ECEFF1] dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg font-inter
+        focus:outline-none focus:ring-2 focus:ring-slate-400 text-sm shadow-xs transition text-slate-900 dark:text-slate-100
+        placeholder:text-[#5B5B5B] font-medium leading-none"
+                    />
+                    {searchTerm && (
+                      <button
+                        onClick={handleClearSearch}
+                        className="absolute right-3.5 z-10 flex items-center justify-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition"
+                        aria-label="Clear search"
+                      > <X className="w-[14px] h-[14px]" />
+                      </button>
+                    )}
+                  </div>
+
+                  <button
+                    onClick={() => setIsFilterOpen(true)}
+                    className="lg:hidden p-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 shadow-xs transition shrink-0 active:scale-95 flex items-center justify-center"
+                    aria-label="Open Filters"
+                  >
+                    <SlidersHorizontal className="w-[16px] h-[16px]" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Product Grid */}
+              <div className="w-full">
+                <ProductGrid
+                  products={displayedProducts}
+                  isLoading={isLoading}
+                  isLoadingMore={isLoadingMore}
+                  hasMore={hasMore}
+                  onLoadMore={handleLoadMore}
+                  onAddToCart={handleAddToCart}
+                />
+              </div>
+            </div>
           </section>
         </div>
       </main>
