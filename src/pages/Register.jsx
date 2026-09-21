@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { User, Mail, Lock, ChevronRight } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
@@ -136,7 +136,7 @@ const Register = () => {
 
               <input
                 type="password"
-                placeholder="••••••••"
+                placeholder="•••••••••••••"
                 {...register('password', {
                   required: 'Password is required',
                   minLength: {

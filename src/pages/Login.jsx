@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Mail, Lock, ChevronRight } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import { postLogin } from '../api/auth.api'
 
-const Login = () => {
+const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
 
@@ -26,13 +26,10 @@ const Login = () => {
     try {
       const response = await postLogin(formData)
       const data = response.data
-
       if (data?.token) {
         localStorage.setItem('token', data.token)
       }
-
       toast.success('Logged in successfully!')
-      //home
       navigate('/')
     } catch (error) {
       const message =
@@ -48,7 +45,7 @@ const Login = () => {
 
       <div className="text-center mb-8">
         <h1 className="text-3xl font-bold text-[#1F2937] dark:text-white mb-2">
-          Login
+          LoginPage
         </h1>
         <p className="text-sm text-[#828282] dark:text-[#9CA3AF]">
           Please fill your information below
@@ -92,7 +89,7 @@ const Login = () => {
               Password
             </label>
             <div className="relative flex items-center">
-              <Lock className="absolute left-4 h-[#828282] h-5 w-5 text-[#828282] dark:text-[#9CA3AF]" />
+              <Lock className="absolute left-4 h-5 w-5 text-[#828282] dark:text-[#9CA3AF]" />
               <input
                 type="password"
                 placeholder="••••••••"
@@ -115,8 +112,7 @@ const Login = () => {
             <div className="flex justify-end mt-2">
               <Link
                 to="/forgot-password"
-                className="text-xs text-[#8E4726] dark:text-[#C86D43] hover:underline transition-colors"
-              >
+                className="text-xs text-[#8E4726] dark:text-[#C86D43] hover:underline transition-colors">
                 Forgot password?
               </Link>
             </div>
@@ -150,4 +146,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default LoginPage

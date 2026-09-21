@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Mail, ChevronRight } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import { postForgotPasswordSendOtp } from '../api/auth.api'
 
-const ForgotPassword = () => {
+const ForgotPasswordPage = () => {
   const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
 
@@ -106,4 +106,4 @@ const ForgotPassword = () => {
   )
 }
 
-export default ForgotPassword
+export default ForgotPasswordPage

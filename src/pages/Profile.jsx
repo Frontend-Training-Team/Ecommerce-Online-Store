@@ -1,182 +1,161 @@
-import { useState, useEffect } from "react";
-import { toast } from "react-hot-toast";
-import {
-  Check,
-  Mail,
-  Phone,
-  MapPin,
-  Lock,
-  LogOut,
-  Plus,
-  Loader2,
-  Trash2
-} from "lucide-react";
-import { useAuth } from "../context/AuthContext";
-import { patchUpdateUser } from "../api/users.api";
-import { postForgotPasswordSendOtp, postForgotPasswordVerifyOtp } from "../api/auth.api";
+/* eslint-disable react-hooks/set-state-in-effect */
+import { useState, useEffect } from "react"
+import { toast } from "react-hot-toast"
+import { Check, Mail, Phone, MapPin, Lock, LogOut, Plus, Loader2, Trash2 } from "lucide-react"
+import { useAuth } from "../context/AuthContext"
+import { patchUpdateUser } from "../api/users.api"
+import { postForgotPasswordSendOtp, postForgotPasswordVerifyOtp } from "../api/auth.api"
 
 export default function ProfilePage() {
-  const { user, loading: authLoading, updateUser, logout } = useAuth();
+  const { user, loading: authLoading, updateUser, logout } = useAuth()
 
-  // 1. حالات تعديل البيانات الأساسية (Username, Phone, Avatar)
-  const [isEditing, setIsEditing] = useState(false);
-  const [editForm, setEditForm] = useState({ username: "", phone: "", avatar: "" });
-  const [updating, setUpdating] = useState(false);
+  const [isEditing, setIsEditing] = useState(false)
+  const [editForm, setEditForm] = useState({ username: "", phone: "", avatar: "" })
+  const [updating, setUpdating] = useState(false)
 
-  // 2. حالات العناوين (Addresses)
-  const [addresses, setAddresses] = useState([]);
+  const [addresses, setAddresses] = useState([])
   const [addressForm, setAddressForm] = useState({
     country: "",
     city: "",
     street: "",
     building: "",
     postalCode: ""
-  });
-  const [addingAddress, setAddingAddress] = useState(false);
+  })
+  const [addingAddress, setAddingAddress] = useState(false)
 
-  // 3. حالات تغيير كلمة المرور (Change Password)
-  const [otpSent, setOtpSent] = useState(false);
-  const [otpSending, setOtpSending] = useState(false);
-  const [otpCode, setOtpCode] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [verifyingOtp, setVerifyingOtp] = useState(false);
+  const [otpSent, setOtpSent] = useState(false)
+  const [otpSending, setOtpSending] = useState(false)
+  const [otpCode, setOtpCode] = useState("")
+  const [newPassword, setNewPassword] = useState("")
+  const [verifyingOtp, setVerifyingOtp] = useState(false)
 
-  // مزامنة البيانات عند وصول المستخدم من الـ Context
   useEffect(() => {
     if (user) {
       setEditForm({
         username: user.username || "",
         phone: user.phone || "",
         avatar: user.avatar || "",
-      });
-      setAddresses(user.addresses || []);
+      })
+      setAddresses(user.addresses || [])
     }
-  }, [user]);
+  }, [user])
 
-  // حفظ تعديل البيانات الأساسية
   const handleSaveProfile = async (e) => {
-    e.preventDefault();
-    const userId = user?._id || user?.id;
-    if (!userId) return;
+    e.preventDefault()
+    const userId = user?._id || user?.id
+    if (!userId) return
 
     try {
-      setUpdating(true);
+      setUpdating(true)
       const res = await patchUpdateUser(userId, {
         username: editForm.username.trim(),
         phone: editForm.phone.trim(),
         avatar: editForm.avatar.trim(),
-      });
+      })
 
-      const updatedUser = res.data?.user || res.data;
-      updateUser(updatedUser);
-      setIsEditing(false);
-      toast.success("Profile updated successfully!");
+      const updatedUser = res.data?.user || res.data
+      updateUser(updatedUser)
+      setIsEditing(false)
+      toast.success("Profile updated successfully!")
     } catch (error) {
-      toast.error(error.response?.data?.message || "Failed to update profile");
+      toast.error(error.response?.data?.message || "Failed to update profile")
     } finally {
-      setUpdating(false);
+      setUpdating(false)
     }
-  };
+  }
 
-  // إضافة عنوان جديد (Add Address)
   const handleAddAddress = async () => {
     if (!addressForm.country.trim() || !addressForm.city.trim() || !addressForm.street.trim()) {
-      toast.error("Please fill country, city and street");
-      return;
+      toast.error("Please fill country, city and street")
+      return
     }
 
-    const userId = user?._id || user?.id;
-    if (!userId) return;
+    const userId = user?._id || user?.id
+    if (!userId) return
 
     try {
-      setAddingAddress(true);
+      setAddingAddress(true)
 
-      // تجهيز كائن العنوان الجديد
       const newAddressItem = {
         country: addressForm.country.trim(),
         city: addressForm.city.trim(),
         street: addressForm.street.trim(),
         building: addressForm.building.trim(),
         postalCode: addressForm.postalCode.trim(),
-        defaultAddress: addresses.length === 0, // لو أول عنوان يخليه افتراضي
-      };
+      }
 
-      const newAddresses = [...addresses, newAddressItem];
+      const newAddresses = [...addresses, newAddressItem]
 
-      // إرسال المصفوفة المحدثة للسيرفر
-      const res = await patchUpdateUser(userId, { addresses: newAddresses });
-      const updatedUser = res.data?.user || res.data?.data || { ...user, addresses: newAddresses };
+      const res = await patchUpdateUser(userId, { addresses: newAddresses })
+      const updatedUser = res.data?.user || res.data?.data || { ...user, addresses: newAddresses }
 
-      updateUser(updatedUser);
-      setAddresses(newAddresses);
-      setAddressForm({ country: "", city: "", street: "", building: "", postalCode: "" });
-      toast.success("Address added successfully!");
+      updateUser(updatedUser)
+      setAddresses(newAddresses)
+      setAddressForm({ country: "", city: "", street: "", building: "", postalCode: "" })
+      toast.success("Address added successfully!")
     } catch (error) {
-      toast.error(error.response?.data?.message || "Failed to add address");
+      toast.error(error.response?.data?.message || "Failed to add address")
     } finally {
-      setAddingAddress(false);
+      setAddingAddress(false)
     }
-  };
+  }
 
-  // حذف عنوان (Remove Address)
   const handleRemoveAddress = async (indexToRemove) => {
-    const userId = user?._id || user?.id;
-    if (!userId) return;
+    const userId = user?._id || user?.id
+    if (!userId) return
 
     try {
-      const newAddresses = addresses.filter((_, idx) => idx !== indexToRemove);
-      const res = await patchUpdateUser(userId, { addresses: newAddresses });
-      const updatedUser = res.data?.user || res.data?.data || { ...user, addresses: newAddresses };
+      const newAddresses = addresses.filter((_, idx) => idx !== indexToRemove)
+      const res = await patchUpdateUser(userId, { addresses: newAddresses })
+      const updatedUser = res.data?.user || res.data?.data || { ...user, addresses: newAddresses }
 
-      updateUser(updatedUser);
-      setAddresses(newAddresses);
-      toast.success("Address removed successfully!");
+      updateUser(updatedUser)
+      setAddresses(newAddresses)
+      toast.success("Address removed successfully!")
     } catch (error) {
-      toast.error(error.response?.data?.message || "Failed to remove address");
+      toast.error(error.response?.data?.message || "Failed to remove address")
     }
-  };
+  }
 
-  // إرسال كود OTP لتغيير كلمة المرور
   const handleSendOtp = async () => {
-    if (!user?.email) return;
+    if (!user?.email) return
     try {
-      setOtpSending(true);
-      await postForgotPasswordSendOtp({ email: user.email });
-      setOtpSent(true);
-      toast.success("OTP sent to your email successfully!");
+      setOtpSending(true)
+      await postForgotPasswordSendOtp({ email: user.email })
+      setOtpSent(true)
+      toast.success("OTP sent to your email successfully!")
     } catch (error) {
-      toast.error(error.response?.data?.message || "Failed to send OTP");
+      toast.error(error.response?.data?.message || "Failed to send OTP")
     } finally {
-      setOtpSending(false);
+      setOtpSending(false)
     }
-  };
+  }
 
-  // تأكيد الـ OTP وتغيير كلمة المرور
   const handleVerifyOtpAndChangePass = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     if (!otpCode || !newPassword) {
-      toast.error("Please fill all fields");
-      return;
+      toast.error("Please fill all fields")
+      return
     }
 
     try {
-      setVerifyingOtp(true);
+      setVerifyingOtp(true)
       await postForgotPasswordVerifyOtp({
         email: user.email,
         otp: otpCode.trim(),
         newPassword: newPassword,
-      });
-      toast.success("Password changed successfully! Please log in again.");
-      setOtpSent(false);
-      setOtpCode("");
-      setNewPassword("");
-      logout();
+      })
+      toast.success("Password changed successfully! Please log in again.")
+      setOtpSent(false)
+      setOtpCode("")
+      setNewPassword("")
+      logout()
     } catch (error) {
-      toast.error(error.response?.data?.message || "Failed to reset password");
+      toast.error(error.response?.data?.message || "Failed to reset password")
     } finally {
-      setVerifyingOtp(false);
+      setVerifyingOtp(false)
     }
-  };
+  }
 
   if (authLoading) {
     return (
@@ -185,28 +164,27 @@ export default function ProfilePage() {
         <div className="h-56 bg-slate-900 border border-slate-800 rounded-2xl"></div>
         <div className="h-64 bg-slate-900 border border-slate-800 rounded-2xl"></div>
       </div>
-    );
+    )
   }
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8 md:py-12 space-y-6">
 
-      {/* عنوان الصفحة */}
       <h1 className="text-2xl md:text-3xl font-bold text-white tracking-wide">
         My Profile
       </h1>
 
-      {/* 1. البطاقة الأولى: بيانات المستخدم */}
+      {/* User Data */}
       <div className="bg-[#101726] border border-slate-800/80 rounded-2xl p-6 md:p-8 relative shadow-lg">
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
 
-          <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden border-2 border-slate-700 bg-slate-800 flex-shrink-0">
+          <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden border-2 border-slate-700 bg-slate-800 shrink-0">
             <img
               src={user?.avatar || "https://images.unsplash.com/photo-1635805737707-575885ab0820?w=300&auto=format&fit=crop&q=80"}
               alt={user?.username || "Avatar"}
               className="w-full h-full object-cover"
               onError={(e) => {
-                e.target.src = "https://ui-avatars.com/api/?name=" + encodeURIComponent(user?.username || "Admin");
+                e.target.src = "https://ui-avatars.com/api/?name=" + encodeURIComponent(user?.username || "Admin")
               }}
             />
           </div>
@@ -216,8 +194,8 @@ export default function ProfilePage() {
               <h2 className="text-xl sm:text-2xl font-bold text-white uppercase tracking-wider">
                 {user?.username || "ADMIN"}
               </h2>
-              <span className="w-4 h-4 rounded bg-emerald-500 text-white flex items-center justify-center text-[10px] font-bold">
-                <Check className="w-3 h-3 stroke-[3]" />
+              <span className="w-4 h-4 rounded bg-emerald-500 text-white flex items-center justify-center text-xs font-bold">
+                <Check className="w-3 h-3 stroke-3" />
               </span>
             </div>
             <p className="text-xs text-slate-400">{user?.email || "admin@koda.com"}</p>
@@ -225,7 +203,6 @@ export default function ProfilePage() {
           </div>
         </div>
 
-        {/* تفاصيل الاتصال */}
         <div className="mt-6 space-y-2.5 text-xs text-slate-300">
           <div className="flex items-center gap-2.5">
             <Mail className="w-4 h-4 text-slate-500" />
@@ -237,7 +214,7 @@ export default function ProfilePage() {
           </div>
         </div>
 
-        {/* زر تعديل الملف الشخصي */}
+        {/* Button Edit */}
         <div className="mt-6">
           <button
             onClick={() => setIsEditing(!isEditing)}
@@ -247,7 +224,7 @@ export default function ProfilePage() {
           </button>
         </div>
 
-        {/* نموذج التعديل */}
+        {/* Model Edit */}
         {isEditing && (
           <form onSubmit={handleSaveProfile} className="mt-6 pt-6 border-t border-slate-800 space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -302,14 +279,14 @@ export default function ProfilePage() {
         )}
       </div>
 
-      {/* 2. البطاقة الثانية: العناوين (Addresses Card) */}
+      {/* Addresses Card */}
       <div className="bg-[#101726] border border-slate-800/80 rounded-2xl p-6 md:p-8 space-y-6 shadow-lg">
         <div className="flex items-center gap-2">
           <MapPin className="w-5 h-5 text-indigo-400" />
           <h3 className="text-base font-bold text-white">Addresses</h3>
         </div>
 
-        {/* عرض قائمة العناوين المحفوظة إن وجدت */}
+        {/* Saved Addresses */}
         {addresses.length > 0 ? (
           <div className="space-y-3 mb-4">
             {addresses.map((addr, idx) => (
@@ -348,7 +325,6 @@ export default function ProfilePage() {
           <p className="text-xs text-slate-500">No addresses yet.</p>
         )}
 
-        {/* شبكة مدخلات العنوان مربوطة بالـ State بالكامل */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <input
             type="text"
@@ -387,7 +363,7 @@ export default function ProfilePage() {
           />
         </div>
 
-        {/* زر حفظ العنوان */}
+        {/* Save Button */}
         <div>
           <button
             type="button"
@@ -405,7 +381,7 @@ export default function ProfilePage() {
         </div>
       </div>
 
-      {/* 3. البطاقة الثالثة: تغيير كلمة المرور */}
+      {/* Change Password */}
       <div className="bg-[#101726] border border-slate-800/80 rounded-2xl p-6 md:p-8 space-y-5 shadow-lg">
         <div className="flex items-center gap-2">
           <Lock className="w-5 h-5 text-indigo-400" />
@@ -413,7 +389,7 @@ export default function ProfilePage() {
         </div>
 
         <p className="text-xs text-slate-400">
-          We&apos;ll send an OTP to your email to verify your identity.
+          We&aposll send an OTP to your email to verify your identity.
         </p>
 
         <div className="space-y-4">
@@ -490,7 +466,7 @@ export default function ProfilePage() {
         </div>
       </div>
 
-      {/* 4. زر تسجيل الخروج (Logout) */}
+      {/* Logout Button */}
       <div className="pt-2">
         <button
           onClick={logout}
@@ -502,5 +478,5 @@ export default function ProfilePage() {
       </div>
 
     </div>
-  );
+  )
 }

@@ -36,7 +36,7 @@ function App() {
             <Route path="/verify-otp" element={<VerifyOtpDetailsPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-            <Route path="/resetpasswordOtp" element={<ResetPasswordOtp/>}/>
+            <Route path="/resetpasswordOtp" element={<ResetPasswordOtp />} />
           </Route>
 
           {/* Protected pages */}
