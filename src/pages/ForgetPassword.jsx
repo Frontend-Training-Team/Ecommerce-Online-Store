@@ -1,153 +1,109 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { Mail, ChevronRight } from 'lucide-react'
+import { Link, useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
+import { postForgotPasswordSendOtp } from '../api/auth.api'
 
-export default function ForgotPassword() {
-  const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
-  const [notification, setNotification] = useState(null); // حالة التنبيه المنبثق
+const ForgotPassword = () => {
+  const [isLoading, setIsLoading] = useState(false)
+  const navigate = useNavigate()
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (email || !email.includes('@')) {
-      setErrorMsg('Please enter a valid email address.');
-      return;
-    }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      email: '',
+    },
+  })
 
-    setErrorMsg('');
-    setIsLoading(true);
+  const handleForgotPasswordSubmit = async (formData) => {
+    setIsLoading(true)
 
     try {
-      // محاكاة الاتصال بالخلفية (API Call)
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      
-      // إظهار نافذة التنبيه عند النجاح
-      setNotification({
-        message: `Reset code has been successfully sent to ${email}`,
-        type: 'success'
-      });
+      await postForgotPasswordSendOtp(formData)
+      toast.success('Reset code sent to your email!')
+
+      navigate('/forgot-password-verify-otp', { state: { email: formData.email } })
     } catch (error) {
-      setErrorMsg('Something went wrong. Please try again.');
+      const message =
+        error.response?.data?.message || 'Failed to send reset code. Please try again.'
+      toast.error(message)
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
   return (
-    <div className="w-full min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 p-4 transition-colors duration-300 relative">
-      <style>{`
-        @keyframes spinnerRotate {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-        @keyframes fadeInPopup {
-          0% { opacity: 0; transform: scale(0.9); }
-          100% { opacity: 1; transform: scale(1); }
-        }
-        .form-spinning-border {
-          position: relative;
-          overflow: hidden;
-          border-radius: 1.50rem;
-        }
-        .form-spinning-border::before {
-          content: '';
-          position: absolute;
-          top: -50%;
-          left: -50%;
-          width: 200%;
-          height: 200%;
-          background: conic-gradient(transparent, transparent, transparent, #D88D68);
-          animation: spinnerRotate 5s linear infinite;
-          z-index: 0;
-        }
-        .popup-overlay {
-          animation: fadeInPopup 0.3s ease-out forwards;
-        }
-      `}</style>
+    <div className="min-h-screen bg-white dark:bg-[#12141A] flex flex-col justify-center items-center px-4 py-12 transition-colors duration-200 font-sans">
 
-      {/* نافذة التنبيه المنبثقة (Custom Toast Notification Popup) */}
-      {notification && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-          <div className="popup-overlay bg-gray-900 border border-[#D88D68] p-6 rounded-2xl shadow-[0_0_30px_rgba(216,141,104,0.3)] max-w-sm w-full text-center flex flex-col items-center">
-            <div className="w-12 h-12 rounded-full bg-[#D88D68]/20 border border-[#D88D68] flex items-center justify-center text-[#D88D68] mb-3 text-2xl shadow-inner">
-              ✓
-            </div>
-            <h3 className="text-lg font-bold text-white mb-2">Success</h3>
-            <p className="text-gray-300 text-sm mb-6 leading-relaxed">{notification.message}</p>
-            <button
-              onClick={() => {
-                setNotification(null);
-                // الانتقال لصفحة إدخال الرمز Verify OTP مع تمرير الإيميل
-                navigate('/verify-otp', { state: { email } });
-              }}
-              className="w-full py-3 bg-[#D88D68] hover:bg-[#B67352] text-white font-bold rounded-xl transition-all duration-300 shadow-lg shadow-[#D88D68]/30 cursor-pointer"
-            >
-              OK
-            </button>
-          </div>
-        </div>
-      )}
+      <div className="text-center mb-8">
+        <h1 className="text-3xl font-bold text-[#1F2937] dark:text-white mb-2">
+          Forgot Password?
+        </h1>
+        <p className="text-sm text-[#828282] dark:text-[#9CA3AF]">
+          Please enter your email to receive a reset code
+        </p>
+      </div>
 
-      <div className="form-spinning-border p-[2px] shadow-2xl max-w-md w-full">
-        <div className="relative bg-white dark:bg-gray-800/90 backdrop-blur-md p-6 sm:p-8 rounded-[calc(1.5rem-2px)] w-full flex flex-col items-center text-center z-10 transition-colors duration-300">
-          
-          <div className="w-12 h-12 bg-[#D88D68]/15 text-[#D88D68] rounded-2xl flex items-center justify-center mb-3 text-xl shadow-sm border border-[#D88D68]/20">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-            </svg>
-          </div>
 
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-1">Forgot Password?</h2>
-          <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mb-6 leading-relaxed">
-            No worries, enter your registered email address and we will send you reset code.
-          </p>
+      <div className="w-full max-w-md">
+        <form onSubmit={handleSubmit(handleForgotPasswordSubmit)} className="space-y-5">
 
-          <form onSubmit={handleSubmit} className="w-full space-y-4 text-start">
-            <div>
-              <label className="block text-[11px] font-bold tracking-wider text-gray-500 dark:text-gray-400 uppercase mb-1.5">
-                Email Address
-              </label>
+          {/* Email Field */}
+          <div>
+            <label className="block mb-1.5 text-sm font-medium text-[#1F2937] dark:text-[#E5E7EB]">
+              Email
+            </label>
+            <div className="relative flex items-center">
+              <Mail className="absolute left-4 h-5 w-5 text-[#828282] dark:text-[#9CA3AF]" />
               <input
                 type="email"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  setErrorMsg('');
-                }}
-                placeholder="name@example.com"
-                className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-800 dark:text-gray-100 focus:outline-none focus:border-[#D88D68] focus:ring-2 focus:ring-[#D88D68]/20 transition-all text-sm"
+                placeholder="username@mail.com"
+                {...register('email', {
+                  required: 'Email is required',
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: 'Invalid email address',
+                  },
+                })}
+                className="w-full pl-12 pr-4 py-3.5 bg-transparent rounded-xl border border-[#8E4726] dark:border-[#B25B32] text-[#1F2937] dark:text-white placeholder-[#828282] dark:placeholder-[#6B7280] font-semibold focus:outline-none focus:ring-1 focus:ring-[#8E4726] dark:focus:ring-[#B25B32] transition-all text-sm"
               />
             </div>
-
-            {errorMsg && (
-              <p className="text-red-500 text-xs font-medium">{errorMsg}</p>
+            {errors.email && (
+              <span className="text-xs text-[#8E4726] dark:text-[#E57373] mt-1 block px-1 font-medium">
+                {errors.email.message}
+              </span>
             )}
-
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full py-3.5 px-6 bg-[#D88D68] hover:bg-[#B67352] text-white font-bold text-sm tracking-wide rounded-xl transition-all duration-300 shadow-xl shadow-[#D88D68]/30 cursor-pointer disabled:opacity-50 mt-2"
-            >
-              {isLoading ? 'Sending...' : 'SEND RESET CODE'}
-            </button>
-          </form>
-
-          <div className="text-center mt-6 pt-4 border-t border-gray-100 dark:border-gray-700/50 w-full">
-            <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
-              Remember your password?{' '}
-              <button
-                type="button"
-                onClick={() => navigate('/login')}
-                className="font-medium text-[#D88D68] hover:underline cursor-pointer"
-              >
-                Sign In
-              </button>
-            </p>
           </div>
 
+          {/* Submit Button */}
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="w-full py-3.5 px-4 bg-[#8E4726] hover:bg-[#75391E] dark:bg-[#A3522C] dark:hover:bg-[#8E4726] text-white font-medium rounded-xl transition-all duration-200 flex items-center justify-center space-x-2 text-sm disabled:opacity-50 shadow-sm cursor-pointer mt-2"
+          >
+            <span>Send Reset Code</span>
+            <ChevronRight className="h-4 w-4" />
+          </button>
+        </form>
+
+        <div className="mt-8 pt-6 border-t border-[#EAECF0] dark:border-[#282D37] flex items-center justify-between text-sm">
+          <span className="text-[#475467] dark:text-[#9CA3AF]">
+            Remembered your password?
+          </span>
+          <Link
+            to="/login"
+            className="font-semibold text-[#8E4726] dark:text-[#C86D43] hover:underline transition-colors"
+          >
+            Login
+          </Link>
         </div>
       </div>
     </div>
-  );
+  )
 }
+
+export default ForgotPassword
