@@ -26,7 +26,7 @@ const ForgotPasswordPage = () => {
       await postForgotPasswordSendOtp(formData)
       toast.success('Reset code sent to your email!')
 
-      navigate('/resetpasswordOtp', { state: { email: formData.email } })
+      navigate('/forgot-password-verify-otp', { state: { email: formData.email } })
     } catch (error) {
       const message =
         error.response?.data?.message || 'Failed to send reset code. Please try again.'
