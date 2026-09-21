@@ -10,7 +10,7 @@ export default function ForgotPassword() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!email || !email.includes('@')) {
+    if (email || !email.includes('@')) {
       setErrorMsg('Please enter a valid email address.');
       return;
     }

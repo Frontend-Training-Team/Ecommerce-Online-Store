@@ -9,6 +9,7 @@ import PageNotFound from "./pages/PageNotFound";
 import OrderDetailPage from "./pages/OrderDetail";
 import MyOrdersPage from "./pages/MyOrders";
 import ForgotPasswordPage from "./pages/ForgetPassword";
+import ForgotPasswordVerifyOtp from "./pages/ForgotPasswordVerifyOtp";
 import CartPage from "./pages/Cart";
 import WishlistPage from "./pages/Wishlist";
 import CheckoutPage from "./pages/Checkout";
@@ -35,6 +36,7 @@ function App() {
             <Route path="/verify-otp" element={<VerifyOtpDetailsPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+            <Route path="/forgot-password-verify-otp" element={<ForgotPasswordVerifyOtp />}/>
           </Route>
 
           {/* Protected pages */}
