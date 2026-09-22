@@ -102,7 +102,7 @@ export default function Checkout() {
   }
 
   return (
-    <div className="min-h-screen bg-[#faf8f5] py-10 px-4 sm:px-6 lg:px-8 font-sans">
+    <div className="mt-16 xl:mt-17 min-h-screen bg-[#faf8f5] py-10 px-4 sm:px-6 lg:px-8 font-sans">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center gap-2 mb-1">

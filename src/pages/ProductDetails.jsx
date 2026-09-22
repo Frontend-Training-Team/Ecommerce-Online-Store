@@ -125,7 +125,7 @@ export default function ProductDetails() {
 
   if (error || !product) {
     return (
-      <div className="w-full bg-white min-h-[60vh] flex flex-col items-center justify-center p-6 text-center">
+      <div className="mt-16 xl:mt-17 w-full bg-white min-h-[60vh] flex flex-col items-center justify-center p-6 text-center">
         <div className="w-16 h-16 rounded-full bg-[#FAF5F0] text-[#7E4A2D] flex items-center justify-center mb-4">
           <AlertCircle className="w-8 h-8" />
         </div>

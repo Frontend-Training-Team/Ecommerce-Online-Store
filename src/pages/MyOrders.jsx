@@ -30,7 +30,7 @@ function MyOrdersPage() {
     }, []);
 
     return (
-        <div className="max-w-7xl mx-auto  py-8 text-2xl">
+        <div className="mt-16 xl:mt-17 max-w-7xl mx-auto  py-8 text-2xl">
             <h2 className="text-3xl font-medium font-Instrument text-[#2D241E] dark:text-[#f3ede6] lg:text-5xl mb-9">My Orders</h2>
             {loading ? (
                 <OrderItemSkeleton />

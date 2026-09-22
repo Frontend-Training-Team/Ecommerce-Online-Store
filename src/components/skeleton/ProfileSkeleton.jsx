@@ -1,6 +1,6 @@
 export default function ProfileSkeleton() {
   return (
-    <div className="w-full bg-white min-h-screen py-10 sm:py-12">
+    <div className="mt-16 xl:mt-17 w-full bg-white min-h-screen py-10 sm:py-12">
       <div className="w-full max-w-310 mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-7">
 
         <div className="flex flex-col gap-2.5">

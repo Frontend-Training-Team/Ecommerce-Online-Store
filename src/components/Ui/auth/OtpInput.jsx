@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 
 export default function VerifyOtp({
   otp,
@@ -83,7 +83,7 @@ export default function VerifyOtp({
 
       <div className="form-spinning-border p-[2px] shadow-2xl max-w-lg w-full">
         <div className="relative bg-white dark:bg-gray-900 p-6 sm:p-8 rounded-[calc(1.5rem-2px)] w-full flex flex-col items-center text-center z-10 transition-colors duration-300">
-          
+
           <div className="w-12 h-12 bg-[#D88D68]/15 text-[#D88D68] rounded-2xl flex items-center justify-center mb-3 text-xl shadow-sm border border-[#D88D68]/20 lock-float">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
@@ -96,19 +96,18 @@ export default function VerifyOtp({
           </p>
 
           <form onSubmit={onSubmit} className="w-full space-y-4 text-start">
-            
+
             <div className="relative w-full flex items-center justify-center gap-2 sm:gap-3 my-2" onPaste={handlePaste}>
               {otp.map((digit, index) => {
                 const isFilled = digit !== '' && digit !== null && digit !== undefined;
-                
+
                 return (
-                  <div 
-                    key={index} 
-                    className={`relative w-11 h-12 sm:w-12 sm:h-14 rounded-xl transition-all duration-300 border-2 ${
-                      isFilled 
-                        ? 'border-[#D88D68] bg-gray-900 shadow-md' 
-                        : 'border-gray-700 bg-gray-900/50 hover:border-[#D88D68]/50 focus-within:border-[#D88D68]'
-                    }`}
+                  <div
+                    key={index}
+                    className={`relative w-11 h-12 sm:w-12 sm:h-14 rounded-xl transition-all duration-300 border-2 ${isFilled
+                      ? 'border-[#D88D68] bg-gray-900 shadow-md'
+                      : 'border-gray-700 bg-gray-900/50 hover:border-[#D88D68]/50 focus-within:border-[#D88D68]'
+                      }`}
                   >
                     <input
                       ref={(el) => (inputRefs.current[index] = el)}

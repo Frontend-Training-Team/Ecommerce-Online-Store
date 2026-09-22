@@ -48,7 +48,7 @@ export default function Cart() {
   const isEmpty = cartItems?.length;
 
   return (
-    <div className="flex flex-col min-h-screen w-full bg-[#FAFAF8] px-4 py-10 dark:bg-[#141110] md:px-8 lg:px-12">
+    <div className="mt-16 xl:mt-17 flex flex-col min-h-screen w-full bg-[#FAFAF8] px-4 py-10 dark:bg-[#141110] md:px-8 lg:px-12">
       <div className="mx-auto flex w-full max-w-6xl flex-col">
         <div className="mb-8 flex flex-wrap items-center justify-between gap-4 border-b border-[#EAE1DB] pb-5 dark:border-[#2e2724]">
           <div className="flex items-center gap-3.5">
