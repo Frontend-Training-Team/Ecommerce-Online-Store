@@ -46,7 +46,7 @@ const Register = () => {
     <div className="min-h-screen bg-white dark:bg-[#12141A] flex flex-col justify-center items-center px-4 py-12 transition-colors duration-200 font-sans">
 
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-[#1F2937] dark:text-white mb-2">
+        <h1 className="text-4xl font-bold text-[#1F2937] dark:text-white mb-2">
           Sign Up
         </h1>
 

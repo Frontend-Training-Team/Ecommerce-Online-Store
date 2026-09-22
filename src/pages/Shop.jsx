@@ -133,7 +133,7 @@ export default function ShopPage() {
   const hasMore = visibleCount < filteredProducts.length
 
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-950 transition-colors duration-200 relative">
+    <div className="mt-16 xl:mt-17 min-h-screen bg-white dark:bg-slate-950 transition-colors duration-200 relative">
       <main className="max-w-fit mx-auto px-4 mt-3 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] xl:grid-cols-[300px_1fr] gap-8 items-stretch">
           <aside className="w-full lg:border-r lg:border-gray-200 dark:lg:border-slate-800 lg:pr-8">

@@ -63,7 +63,7 @@ export default function OrderDetail() {
 
   if (loading || !order) {
     return (
-      <div className="flex min-h-[60vh] w-full items-center justify-center bg-[#FAFAF8] dark:bg-[#141110]">
+      <div className="mt-16 xl:mt-17 flex min-h-[60vh] w-full items-center justify-center bg-[#FAFAF8] dark:bg-[#141110]">
         <OrderSkeleton />
       </div>
     );
@@ -73,7 +73,7 @@ export default function OrderDetail() {
   const isCancelled = order.status === "cancelled";
 
   return (
-    <div className="min-h-screen w-full bg-[#FAFAF8] px-4 py-15 dark:bg-[#141110] md:px-8 lg:px-12">
+    <div className="mt-16 xl:mt-17 min-h-screen w-full bg-[#FAFAF8] px-4 py-15 dark:bg-[#141110] md:px-8 lg:px-12">
       <div className="mx-auto flex w-full max-w-6xl flex-col">
         <div className="mb-12 flex flex-wrap items-center justify-between gap-4 border-b border-[#EAE1DB] pb-5 dark:border-[#2e2724]">
           <div className="flex items-center gap-6">
@@ -86,6 +86,7 @@ export default function OrderDetail() {
               <ArrowLeft className="h-5 w-5" />
             </button>
             <div>
+              <h2 className="text-3xl font-medium font-Instrument text-[#2D241E] dark:text-[#f3ede6] lg:text-5xl mb-2">Order Detail</h2>
               <p className="text-xs font-medium text-[#8C7A6E] dark:text-[#a38f7d]">
                 Order #{order._id?.slice(-8).toUpperCase()}
               </p>

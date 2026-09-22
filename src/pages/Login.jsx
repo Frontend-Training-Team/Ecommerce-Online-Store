@@ -44,8 +44,8 @@ const LoginPage = () => {
     <div className="h-screen overflow-hidden bg-white dark:bg-[#12141A] flex flex-col justify-center items-center px-4 transition-colors duration-200 font-sans">
 
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-[#1F2937] dark:text-white mb-2">
-          LoginPage
+        <h1 className="text-4xl font-bold text-[#1F2937] dark:text-white mb-2">
+          Login
         </h1>
         <p className="text-sm text-[#828282] dark:text-[#9CA3AF]">
           Please fill your information below
