@@ -11,7 +11,9 @@ export default {
             fontFamily: {
                 Instrument: ['"Instrument"', 'Instrument Serif'],
                 Serif: ['"Playfair Display"', 'serif'],
+                numeric: ['"JetBrains Mono"', 'monospace'],
                 Inter: ['"Inter"', 'sans-serif'],
+                numeric: ['"Instrumental Serif"', "serif"]
             },
             colors: {
                 brand: {
