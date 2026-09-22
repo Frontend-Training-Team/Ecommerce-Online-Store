@@ -1,3 +1,5 @@
+/* eslint-disable react-refresh/only-export-components */
+/* eslint-disable react-hooks/set-state-in-effect */
 import { createContext, useContext, useEffect, useState, useMemo, useCallback } from "react";
 import { getCurrentUser, postLogout } from "../api/auth.api";
 import toast from "react-hot-toast";
@@ -24,32 +26,12 @@ export function AuthProvider({ children }) {
       setLoading(true);
       const res = await getCurrentUser();
       const userData = res.data?.user || null;
-
-      if (userData) {
-        const userId = userData._id || userData.id;
-        try {
-          const localAddrs = localStorage.getItem(`lamsa_addresses_${userId}`);
-          if (localAddrs) {
-            const parsed = JSON.parse(localAddrs);
-            if (Array.isArray(parsed) && parsed.length > 0) {
-              userData.addresses = parsed;
-            }
-          }
-        } catch (err) {
-          console.error("Failed to parse local addresses:", err);
-        }
-      }
-
       setUser(userData);
     } catch (error) {
       console.error("Failed to fetch current user:", error.message);
-      if (error.response?.status === 401) {
-        localStorage.removeItem("token");
-        setUser(null);
-        if (error.response?.data?.message) {
-          toast.error(error.response.data.message, { id: "auth-error" });
-        }
-      }
+      toast.error(error.response?.data?.message || "")
+      localStorage.removeItem("token");
+      setUser(null);
     } finally {
       setLoading(false);
     }
