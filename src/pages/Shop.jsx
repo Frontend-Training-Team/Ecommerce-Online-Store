@@ -64,7 +64,6 @@ export default function ShopPage() {
       try {
         const response = await getAllProducts()
         const data = response.data
-        console.log(data)
         const list = data.products || []
         setAllProducts(list)
         setFilteredProducts(list)
