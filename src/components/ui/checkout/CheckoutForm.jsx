@@ -1,4 +1,3 @@
-import React from 'react';
 import { MapPin, CreditCard, FileText } from 'lucide-react';
 
 export default function CheckoutForm({ register, errors, handleSubmit, onSubmit }) {
