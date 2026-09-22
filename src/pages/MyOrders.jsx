@@ -31,7 +31,7 @@ function MyOrdersPage() {
 
     return (
         <div className="max-w-7xl mx-auto  py-8 text-2xl">
-            <h2 className="font-Instrument text-5xl text-black mb-9">My Orders</h2>
+            <h2 className="text-3xl font-medium font-Instrument text-[#2D241E] dark:text-[#f3ede6] lg:text-5xl mb-9">My Orders</h2>
             {loading ? (
                 <OrderItemSkeleton />
             ) : orders.orders.length === 0 ? (
