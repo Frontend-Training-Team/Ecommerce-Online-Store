@@ -6,33 +6,14 @@ export default function ResetPasswordCard({
   password,
   setPassword,
   setErrorMsg,
-  isOtpVerified,
-  onVerifyOtp,
   onResetPassword,
   isLoading,
-  isVerifying,
   email,
   timer,
   onResend,
   isResending,
 }) {
   const inputRefs = useRef([]);
-const lastAttemptedOtpRef = useRef('');
-  const isComplete = otpArray.every((digit) => digit !== '' && digit !== null && digit !== undefined);
-
-  useEffect(() => {
-    const currentOtp = otpArray.join('');
-    if (
-      isComplete &&
-      !isOtpVerified &&
-      !isVerifying &&
-      currentOtp !== lastAttemptedOtpRef.current
-    ) {
-      lastAttemptedOtpRef.current = currentOtp;
-      onVerifyOtp(currentOtp);
-    }
-  }, [isComplete, isOtpVerified, isVerifying, otpArray, onVerifyOtp]);
-
   const handleChange = (value, index) => {
     if (isNaN(value)) return;
 
@@ -67,7 +48,7 @@ const lastAttemptedOtpRef = useRef('');
       inputRefs.current[5]?.focus();
     }
   };
-
+const isOtpComplete = otpArray.every((digit) => digit !== '' && digit !== null && digit !== undefined);
   return (
     <div className="w-full min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-950 p-4 transition-colors duration-300">
       
@@ -142,7 +123,7 @@ const lastAttemptedOtpRef = useRef('');
             
             <div>
               <label className="text-xs font-semibold text-gray-600 dark:text-gray-400 block mb-2">
-                Verification Code {isVerifying && <span className="text-[#D88D68] text-xl font-lg ms-2">(Verifying...)</span>}
+                Verification Code 
               </label>
               
               <div className="flex justify-center gap-2 sm:gap-3 my-2" onPaste={handlePaste}>
@@ -150,7 +131,7 @@ const lastAttemptedOtpRef = useRef('');
                   <div 
                     key={index} 
                     className={`input-spinning-border p-[2px] shadow-sm border ${
-                      isComplete ? 'completed border-[#D88D68]' : 'border-[#D88D68]/60'
+                      isOtpComplete ? 'completed border-[#D88D68]' : 'border-[#D88D68]/60'
                     }`}
                   >
                     <input
@@ -159,7 +140,6 @@ const lastAttemptedOtpRef = useRef('');
                       inputMode="numeric"
                       maxLength={1}
                       value={digit}
-                      disabled={isVerifying || isOtpVerified}
                       onChange={(e) => handleChange(e.target.value, index)}
                       onKeyDown={(e) => handleKeyDown(e, index)}
                       className="relative w-10 h-11 sm:w-11 sm:h-12 text-center text-xl font-bold bg-gray-50 dark:bg-gray-900 rounded-[calc(0.75rem-2px)] text-gray-800 dark:text-gray-100 focus:outline-none z-10 block transition-colors duration-200 disabled:opacity-60"
@@ -169,24 +149,21 @@ const lastAttemptedOtpRef = useRef('');
               </div>
             </div>
             <div className="space-y-1.5 text-start pt-2">
-              <label className="text-xs font-semibold text-gray-600 dark:text-gray-400">
+              <label className="text-xl font-semibold text-gray-600 dark:text-gray-400">
                 New Password
               </label>
               <input
                 type="password"
-                placeholder={isOtpVerified ? "Enter new password" : "Complete code above to unlock"}
+                placeholder="Enter new password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                disabled={!isOtpVerified}
-                className={`w-full px-4 py-3.5 text-sm rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:border-[#D88D68] shadow-sm transition-all ${
-                  !isOtpVerified ? 'opacity-50 cursor-not-allowed bg-gray-100 dark:bg-gray-800/50' : 'opacity-100'
-                }`}
+                className="w-full px-4 py-3.5 text-sm rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:border-[#D88D68] shadow-sm transition-all"
               />
             </div>
 
             <button
               type="submit"
-              disabled={!isOtpVerified || !password || isLoading}
+              disabled={!isOtpComplete|| !password || isLoading}
               className="w-full py-3.5 px-6 bg-[#D88D68] hover:bg-[#B67352] text-white font-semibold text-base rounded-xl transition-all duration-200 shadow-lg shadow-[#D88D68]/25 cursor-pointer disabled:opacity-50 mt-2"
             >
               {isLoading ? 'Resetting...' : 'Reset Password'}

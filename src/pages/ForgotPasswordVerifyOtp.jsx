@@ -7,16 +7,15 @@ import ResetPasswordCard from '../components/Ui/auth/ResetPasswordCard';
 export default function ForgotPasswordVerifyOtp() {
   const navigate = useNavigate();
   const location = useLocation();
-  const email = location.state?.email || 'your email';
+  const email = location.state?.email || '';
 
   const [otpArray, setOtpArray] = useState(['', '', '', '', '', '']);
   const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
-  const [isOtpVerified, setIsOtpVerified] = useState(false);
-  const [isVerifying, setIsVerifying] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [timer, setTimer] = useState(60);
   const [isResending, setIsResending] = useState(false);
+
   // Guard clause: Redirect back if no email was passed in route state
   useEffect(() => {
     if (!email) {
@@ -36,82 +35,74 @@ export default function ForgotPasswordVerifyOtp() {
     return () => clearInterval(interval);
   }, [timer]);
 
-  const handleVerifyOtp = async () => {
-    const code = otpArray.join('');
-    if (code.length < 6) {
-      toast.error('Please enter the complete 6-digit code.');
+  // Handle final submission (Sends OTP and Password together)
+  const handleResetPassword = async (e) => {
+    e.preventDefault();
+    const otpCode = otpArray.join('');
+
+    if (otpCode.length < 6) {
+      toast.error('Please enter a valid 6-digit verification code.');
       return;
     }
 
-    setIsVerifying(true);
-    setErrorMsg('');
-    try {
-      const response = await postForgotPasswordVerifyOtp({ email, otp: code });
-      toast.success(response.data?.message || 'OTP verified successfully! Please enter your new password.');
-      setIsOtpVerified(true);
-    } catch (error) {
-      const errorMsgText = error.response?.data?.message || 'Invalid OTP. Please try again.';
-      setErrorMsg(errorMsgText);
-      toast.error(errorMsgText);
-    } finally {
-      setIsVerifying(false);
-    }
-  };
-
-  const handleResetPassword = async (e) => {
-    e.preventDefault();
     if (!password) {
-      toast.error('Please enter a new password.');
+      toast.error('Please enter your new password.');
       return;
     }
 
     setIsLoading(true);
     try {
-      toast.success('Password reset successfully!');
+      const response = await postForgotPasswordVerifyOtp  ({
+        email,
+        otp: otpCode,
+        newPassword: password,
+      });
+
+      toast.success(response.data?.message || 'Password reset successfully!');
+      toast.dismiss();
       setTimeout(() => {
         navigate('/login');
       }, 1500);
     } catch (error) {
-      const errorMsgText = error.response?.data?.message || 'Failed to reset password. Please try again.';
+      const errorMsgText = error.response?.data?.message || 'Invalid OTP Or Failed to reset password. Please try again.';
       toast.error(errorMsgText);
+      
+      setErrorMsg(errorMsgText);
     } finally {
       setIsLoading(false);
     }
   };
 
+  // Handle Resend Code
   const handleResend = async () => {
     setIsResending(true);
     try {
       await postForgotPasswordSendOtp({ email });
       toast.success('A new verification code has been sent.');
       setTimer(60);
-      setOtpArray(['', '', '', '', '', '']);
-      setIsOtpVerified(false);
     } catch (error) {
       toast.error(error.response?.data?.message || 'Failed to resend code.');
     } finally {
       setIsResending(false);
     }
   };
+
   return (
     <>
       <Toaster position="top-center" />
       <ResetPasswordCard
-      otpArray={otpArray}
-      setOtpArray={setOtpArray}
-      password={password}
-      setPassword={setPassword}
-      setErrorMsg={setErrorMsg}
-      isOtpVerified={isOtpVerified}
-      onVerifyOtp={handleVerifyOtp}
-      onResetPassword={handleResetPassword}
-      isLoading={isLoading}
-      isVerifying={isVerifying}
-      email={email}
-      timer={timer}
-      onResend={handleResend}
-      isResending={isResending}
-    />
+        otpArray={otpArray}
+        setOtpArray={setOtpArray}
+        password={password}
+        setPassword={setPassword}
+        setErrorMsg={setErrorMsg}
+        onResetPassword={handleResetPassword}
+        isLoading={isLoading}
+        email={email}
+        timer={timer}
+        onResend={handleResend}
+        isResending={isResending}
+      />
     </>
   );
 }
