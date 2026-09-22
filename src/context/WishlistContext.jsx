@@ -81,16 +81,16 @@ export function WishlistProvider({ children }) {
   const actionLoading = Boolean(actionLoadingId);
 
   const value = useMemo(() => ({
-      wishlistIds,
-      wishlistCount,
-      loading,
-      actionLoading,
-      actionLoadingId,
-      isItemLoading,
-      isInWishlist,
-      toggleWishlist,
-      fetchWishlist,
-    }),
+    wishlistIds,
+    wishlistCount,
+    loading,
+    actionLoading,
+    actionLoadingId,
+    isItemLoading,
+    isInWishlist,
+    toggleWishlist,
+    fetchWishlist,
+  }),
     [
       wishlistIds,
       wishlistCount,

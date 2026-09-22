@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { Compass, Home } from "lucide-react";
-import bgVideo from "../assets/videos/404BG.mp4"; 
+import bgVideo from "../assets/videos/404BG.mp4";
 
 export default function PageNotFound() {
   return (
-    <div className="relative min-h-[75vh] w-full overflow-hidden">
+    <div className="relative min-h-screen w-full overflow-hidden">
       <video
         className="absolute inset-0 h-full w-full object-cover"
         autoPlay
@@ -18,7 +18,7 @@ export default function PageNotFound() {
 
       <div className="absolute inset-0 bg-black/55" aria-hidden="true" />
 
-      <div className="relative z-10 flex min-h-[75vh] w-full flex-col items-center justify-center px-6 py-16 text-center">
+      <div className="relative z-10 flex min-h-screen w-full flex-col items-center justify-center px-6 py-16 text-center">
         <span className="font-Instrument Serif text-8xl md:text-[200px] leading-none tracking-tight text-white">
           404
         </span>
@@ -33,7 +33,7 @@ export default function PageNotFound() {
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
           <Link
-            to="/products"
+            to="/shop"
             className="inline-flex items-center justify-center gap-2.5 rounded-3xl bg-[#7E4A2D] px-6 py-3 text-md md:text-base font-semibold tracking-wide text-white shadow-md transition-all hover:opacity-90 hover:shadow-lg active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#DE9E48] focus-visible:ring-offset-2 focus-visible:ring-offset-black border border-[#7E4A2D]"
           >
             <Compass className="h-6 w-6" aria-hidden="true" />

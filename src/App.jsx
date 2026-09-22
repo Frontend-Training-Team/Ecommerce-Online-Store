@@ -52,8 +52,8 @@ function App() {
             <Route path="/orders/:id" element={<OrderDetailPage />} />
           </Route>
 
-          <Route path="/*" element={<PageNotFound />} />
         </Route>
+        <Route path="/*" element={<PageNotFound />} />
       </Routes>
 
       <Toaster
