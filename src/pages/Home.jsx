@@ -1,9 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 import { getAllProducts } from "../api/products.api";
+
+import FeaturedProducts from "../components/ui/Home/FeaturedProducts";
 import HeroSection from "../components/ui/Home/HeroSection";
 import CategorySection from "../components/ui/Home/CategorySection";
-import FeaturedProducts from "../components/ui/Home/FeaturedProducts";
 import toast from "react-hot-toast";
+import HowItWorks from "../components/ui/Home/HowItWorks";
+import ShopByCategory from "../components/ui/Home/ShopByCategory";
+
 function Home() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -17,9 +21,9 @@ function Home() {
 
         setProducts(response.data.products || []);
       } catch (error) {
-                console.error("Failed to fetch products:", error);
-                toast.error("Failed to load products");}
-       finally {
+        console.error("Failed to fetch products:", error);
+        toast.error("Failed to load products");
+      } finally {
         setLoading(false);
       }
     };
@@ -35,12 +39,11 @@ function Home() {
     <>
       <HeroSection />
 
+      
+<ShopByCategory />
+      <FeaturedProducts products={products} loading={loading} />
       <CategorySection categories={categories} />
-
-      <FeaturedProducts
-        products={products}
-        loading={loading}
-      />
+         <HowItWorks />
     </>
   );
 }

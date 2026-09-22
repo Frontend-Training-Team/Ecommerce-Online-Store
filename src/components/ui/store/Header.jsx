@@ -28,6 +28,7 @@ function Header() {
             </div>
 
             <div>
+               
               <h1 className="text-xl font-bold leading-tight text-black dark:text-[#F5F1EA] sm:text-2xl">
                 LAMSA Store
               </h1>
