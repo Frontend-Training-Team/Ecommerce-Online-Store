@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import { postRegisterVerifyOtp, postRegisterSendOtp } from '../api/auth.api';
@@ -28,7 +28,7 @@ export default function VerifyOtpDetails() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const code = otp.join('');
-    
+
     if (code.length < 6) {
       toast.error('Please enter the complete 6-digit code.');
       return;
@@ -37,7 +37,7 @@ export default function VerifyOtpDetails() {
     setIsLoading(true);
     setErrorMsg('');
     try {
-      const response = await postRegisterVerifyOtp ({ email, otp: code });
+      const response = await postRegisterVerifyOtp({ email, otp: code });
       toast.success(response.data?.message || 'OTP verified successfully!');
       setTimeout(() => navigate('/Login'), 1500);
     } catch (error) {

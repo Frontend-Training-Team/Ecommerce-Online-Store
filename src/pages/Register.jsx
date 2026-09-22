@@ -30,7 +30,7 @@ const Register = () => {
 
       toast.success('OTP code sent to your email!')
 
-      navigate('/resetpasswordOtp', {
+      navigate('/verify-otp', {
         state: { email: formData.email },
       })
     } catch (error) {
