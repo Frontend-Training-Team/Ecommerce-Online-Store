@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useDebounce } from '../../../hooks/useDebounce';
 import { ProductGridSkeleton } from '../skeletons/ProductSkeleton';
-import ProductFilterSidebar from '../searchinput/FilterSidebar'; 
+import ProductFilterSidebar from '../searchinput/FilterSidebar';
 
 export default function ProductsPage() {
   const [searchTerm, setSearchTerm] = useState('');

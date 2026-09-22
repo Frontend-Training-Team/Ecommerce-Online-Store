@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { Tag, X, ArrowRight, ArrowLeft} from "lucide-react";
+import { Tag, X, ArrowRight, ArrowLeft } from "lucide-react";
 
 export default function OrderSummaryCard({ cart, onApplyCoupon, onRemoveCoupon }) {
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ export default function OrderSummaryCard({ cart, onApplyCoupon, onRemoveCoupon }
   const subtotal = Number(cart?.subtotal ?? 0);
   const discount = Number(cart?.discountAmount ?? 0);
   const tax = Math.max(subtotal - discount, 0) * TAX_RATE;
-  const total = Math.max(subtotal - discount, 0) + tax; 
+  const total = Math.max(subtotal - discount, 0) + tax;
 
   const handleRemove = async () => {
     if (removing) return;

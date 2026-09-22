@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
-import ProductPage from "./pages/Products";
 import ShopPage from "./pages/Shop";
 import ProductDetails from "./pages/ProductDetails";
 import StoreLayout from "./components/Layout/StoreLayout";
@@ -28,7 +27,6 @@ function App() {
         <Route element={<StoreLayout />}>
           {/* public pages */}
           <Route path="/" element={<Home />} />
-          <Route path="/products" element={<ProductPage />} />
           <Route path="/shop" element={<ShopPage />} />
           <Route path="/products/:id" element={<ProductDetails />} />
 

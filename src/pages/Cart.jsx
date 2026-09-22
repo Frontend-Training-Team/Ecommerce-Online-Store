@@ -95,7 +95,7 @@ export default function Cart() {
               </div>
 
               <div className="rounded-2xl border border-[#E8DDD4] bg-[#FAF7F3] shadow-sm dark:border-[#2e2724] dark:bg-[#1c1816] dark:shadow-lg dark:shadow-black/20">
-                <ul className="cart-scroll flex max-h-[70vh] flex-col divide-y divide-[#EAE1DB] overflow-y-auto lg:h-[42rem] lg:max-h-[42rem] dark:divide-[#2e2724]">
+                <ul className="cart-scroll flex max-h-[70vh] flex-col divide-y divide-[#EAE1DB] overflow-y-auto lg:h-168 lg:max-h-168 dark:divide-[#2e2724]">
                   {cartItems.map((item) => (
                     <CartItemRow
                       key={item._id}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -18,7 +18,7 @@ export default function Checkout() {
   useEffect(() => {
     const fetchCartData = async () => {
       const token = localStorage.getItem('userToken') || localStorage.getItem('token');
-      
+
       if (!token) {
         toast.warning('Please log in first to process your order accurately', {
           position: "top-right",
@@ -35,8 +35,8 @@ export default function Checkout() {
         const res = await getMyCart();
         const items = res.data?.cart?.items || res.data?.items || res.data?.cart || [];
         setCartItems(Array.isArray(items) ? items : []);
-      } catch (err) {
-        console.warn('Cart fetch bypassed');
+      } catch (error) {
+        console.error(error);
         setCartItems([]);
       } finally {
         setLoadingCart(false);
@@ -51,7 +51,7 @@ export default function Checkout() {
     const quantity = item.quantity || 1;
     return acc + price * quantity;
   }, 0);
-  
+
   const shipping = cartItems.length > 0 ? 50 : 0;
   const tax = Math.round(subtotal * 0.14);
   const total = subtotal + shipping + tax;
@@ -81,7 +81,7 @@ export default function Checkout() {
       });
 
       const orderId = response?.data?.order?._id || response?.data?._id || '3EDFB2A1';
-      await deleteClearCart().catch(() => {});
+      await deleteClearCart().catch(() => { });
       navigate('/order-success', { state: { orderId } });
 
     } catch (error) {

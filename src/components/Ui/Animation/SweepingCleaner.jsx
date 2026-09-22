@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function SweepingCleaner({ className = "w-10 h-10" }) {
   return (
     <div className={`relative flex items-center justify-center ${className}`}>
@@ -20,7 +18,7 @@ export default function SweepingCleaner({ className = "w-10 h-10" }) {
         <circle cx="15" cy="55" r="1.5" fill="currentColor" className="animate-bounce opacity-50" />
 
         <circle cx="36" cy="18" r="6.5" fill="currentColor" />
-        
+
         <path
           d="M29 17 C 29 11, 43 11, 43 17 Z"
           fill="currentColor"
@@ -42,7 +40,7 @@ export default function SweepingCleaner({ className = "w-10 h-10" }) {
             strokeLinecap="round"
             strokeLinejoin="round"
           />
-          
+
           <path
             d="M32 18 L 10 50"
             stroke="currentColor"

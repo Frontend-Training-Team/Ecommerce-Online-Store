@@ -1,6 +1,6 @@
 import ProductCard from './ProductCard';
 import { ProductGridSkeleton } from '../skeletons/ProductSkeleton';
-import {Search} from 'lucide-react';
+import { Search } from 'lucide-react';
 export default function ProductGrid({
   products = [],
   isLoading = false,

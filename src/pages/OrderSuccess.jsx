@@ -1,14 +1,12 @@
-import React from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { Check, Package, ShoppingBag } from 'lucide-react';
 
 export default function OrderSuccess() {
   const location = useLocation();
-  const orderId = location.state?.orderId || '3EDFB2A1';
-
+  const orderId = location.state?.orderId.slice(-8) || 'N/A';
   return (
     <div className="min-h-screen bg-[#faf8f5] flex flex-col items-center justify-center p-4 font-sans text-center">
-      
+
       {/* Circle Icon Badge */}
       <div className="w-16 h-16 bg-[#e6f4ea] text-[#1e8e3e] rounded-full flex items-center justify-center mb-6">
         <Check className="w-8 h-8 stroke-[2.5]" />
@@ -18,7 +16,7 @@ export default function OrderSuccess() {
       <h1 className="text-2xl sm:text-3xl[30px] font-bold text-[#2d2421] mb-2">
         Order Placed Successfully!
       </h1>
-      
+
       <p className="text-xs[12px] sm:text-sm[14px] text-[#8c7b70] mb-2">
         Thank you for your purchase. Your order has been confirmed.
       </p>
@@ -30,7 +28,7 @@ export default function OrderSuccess() {
 
       {/* Buttons Row */}
       <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-xs sm:max-w-none">
-        
+
         {/* Track My Order Button */}
         <Link
           to="/orders"
@@ -44,7 +42,7 @@ export default function OrderSuccess() {
 
         {/* Continue Shopping Button */}
         <Link
-          to="/"
+          to="/shop"
           className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-[#c07a50] hover:bg-[#ad6a42] text-white font-semibold text-xs[12px]
            flex items-center justify-center gap-2 transition-colors shadow-sm"
         >

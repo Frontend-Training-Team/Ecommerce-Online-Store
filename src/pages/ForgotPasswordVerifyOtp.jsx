@@ -1,19 +1,20 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { postForgotPasswordVerifyOtp, postForgotPasswordSendOtp } from '../api/auth.api';
-import OtpInput from '../components/Ui/auth/OtpInput';
+import ResetPasswordCard from '../components/Ui/auth/ResetPasswordCard';
 
 export default function ForgotPasswordVerifyOtp() {
   const navigate = useNavigate();
   const location = useLocation();
-  const email = location.state?.email || 'your email';
+  const email = location.state?.email || '';
 
-  const [otp, setOtp] = useState(['', '', '', '', '', '']);
+  const [otpArray, setOtpArray] = useState(['', '', '', '', '', '']);
+  const [password, setPassword] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [timer, setTimer] = useState(60);
   const [isResending, setIsResending] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
 
   // Guard clause: Redirect back if no email was passed in route state
   useEffect(() => {
@@ -34,41 +35,50 @@ export default function ForgotPasswordVerifyOtp() {
     return () => clearInterval(interval);
   }, [timer]);
 
-  const handleSubmit = async (e) => {
+  // Handle final submission (Sends OTP and Password together)
+  const handleResetPassword = async (e) => {
     e.preventDefault();
-    const code = otp.join('');
+    const otpCode = otpArray.join('');
 
-    if (code.length < 6) {
-      toast.error('Please enter the complete 6-digit code.');
+    if (otpCode.length < 6) {
+      toast.error('Please enter a valid 6-digit verification code.');
+      return;
+    }
+
+    if (!password) {
+      toast.error('Please enter your new password.');
       return;
     }
 
     setIsLoading(true);
-    setErrorMsg('');
     try {
+      const response = await postForgotPasswordVerifyOtp({
+        email,
+        otp: otpCode,
+        newPassword: password,
+      });
 
-      const response = await postForgotPasswordVerifyOtp({ email, otp: code });
-      toast.success(response.data?.message || 'OTP verified successfully!');
+      toast.success(response.data?.message || 'Password reset successfully!');
       setTimeout(() => {
-        navigate('/');
+        navigate('/login');
       }, 1500);
-
     } catch (error) {
-      const errorMsgText = error.response?.data?.message || 'Invalid OTP. Please try again.';
-      setErrorMsg(errorMsgText);
+      const errorMsgText = error.response?.data?.message || 'Invalid OTP Or Failed to reset password. Please try again.';
       toast.error(errorMsgText);
+
+      setErrorMsg(errorMsgText);
     } finally {
       setIsLoading(false);
     }
   };
 
+  // Handle Resend Code
   const handleResend = async () => {
     setIsResending(true);
     try {
       await postForgotPasswordSendOtp({ email });
-      toast.success('A new recovery code has been sent.');
+      toast.success('A new verification code has been sent.');
       setTimer(60);
-      setOtp(['', '', '', '', '', '']);
     } catch (error) {
       toast.error(error.response?.data?.message || 'Failed to resend code.');
     } finally {
@@ -78,13 +88,13 @@ export default function ForgotPasswordVerifyOtp() {
 
   return (
     <>
-      <Toaster position="top-center" />
-      <OtpInput
-        otp={otp}
-        setOtp={setOtp}
-        errorMsg={errorMsg}
+      <ResetPasswordCard
+        otpArray={otpArray}
+        setOtpArray={setOtpArray}
+        password={password}
+        setPassword={setPassword}
         setErrorMsg={setErrorMsg}
-        onSubmit={handleSubmit}
+        onResetPassword={handleResetPassword}
         isLoading={isLoading}
         email={email}
         timer={timer}

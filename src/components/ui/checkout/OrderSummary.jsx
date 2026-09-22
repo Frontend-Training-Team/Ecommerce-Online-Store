@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function OrderSummary({ cartItems = [], subtotal = 0, shipping = 50, tax = 0, total = 0, isSubmitting = false, onPlaceOrder }) {
   return (
     <div className="bg-white p-6 rounded-2xl shadow-sm border border-[#f0eae1] space-y-5 sticky top-6">

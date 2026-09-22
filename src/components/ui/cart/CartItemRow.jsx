@@ -42,9 +42,8 @@ export default function CartItemRow({ item, onQuantityChange, onRemove }) {
 
   return (
     <li
-      className={`flex shrink-0 flex-col gap-4 p-4 transition-colors sm:flex-row sm:items-center sm:justify-between sm:p-5 hover:bg-white/60 dark:hover:bg-white/[0.03] ${
-        busy ? "opacity-60" : ""
-      }`}
+      className={`flex shrink-0 flex-col gap-4 p-4 transition-colors sm:flex-row sm:items-center sm:justify-between sm:p-5 hover:bg-white/60 dark:hover:bg-white/[0.03] ${busy ? "opacity-60" : ""
+        }`}
     >
       <div className="flex min-w-0 flex-1 items-center gap-3.5">
         <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-[#E8DDD4] bg-[#FAF5F0] dark:border-[#3e352f] dark:bg-[#2a2420]">

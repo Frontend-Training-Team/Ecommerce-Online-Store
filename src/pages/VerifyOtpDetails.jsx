@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { postRegisterVerifyOtp, postRegisterSendOtp } from '../api/auth.api';
 import OtpInput from '../components/Ui/auth/OtpInput';
 
@@ -65,7 +65,6 @@ export default function VerifyOtpDetails() {
 
   return (
     <>
-      <Toaster position="top-center" />
       <OtpInput
         otp={otp}
         setOtp={setOtp}

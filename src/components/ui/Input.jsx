@@ -1,5 +1,3 @@
-import React from 'react';
-
 const IconInput = ({ label, error, registration, Icon, ...props }) => {
   return (
     <div className="flex flex-col space-y-1.5 text-left w-full">
@@ -15,13 +13,11 @@ const IconInput = ({ label, error, registration, Icon, ...props }) => {
         <input
           {...registration}
           {...props}
-          className={`w-full bg-white dark:bg-[#1F232B] border text-gray-800 dark:text-[#F5F1EA] placeholder:text-gray-400 dark:placeholder:text-gray-500 py-2.5 rounded-lg text-sm transition-all duration-200 outline-none ${
-            Icon ? 'pl-10 pr-4' : 'px-3.5'
-          } ${
-            error
+          className={`w-full bg-white dark:bg-[#1F232B] border text-gray-800 dark:text-[#F5F1EA] placeholder:text-gray-400 dark:placeholder:text-gray-500 py-2.5 rounded-lg text-sm transition-all duration-200 outline-none ${Icon ? 'pl-10 pr-4' : 'px-3.5'
+            } ${error
               ? 'border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500/20'
               : 'border-gray-200 dark:border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 hover:border-gray-300 dark:hover:border-gray-600'
-          } ${props.className || ''}`}
+            } ${props.className || ''}`}
         />
 
         {/* Icon */}

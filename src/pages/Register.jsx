@@ -30,14 +30,12 @@ const Register = () => {
 
       toast.success('OTP code sent to your email!')
 
-      navigate('/verify-otp', {
-        state: { email: formData.email },
-      })
-    } catch (error) {
-      const message =
-        error.response?.data?.message ||
-        'Failed to send OTP. Please try again.'
+      navigate('/verify-otp', { state: { email: formData.email } })
+    }
 
+    catch (error) {
+      const message =
+        error.response?.data?.message || 'Failed to send OTP. Please try again.'
       toast.error(message)
     } finally {
       setIsLoading(false)

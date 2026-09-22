@@ -1,13 +1,5 @@
 import { useState, useEffect } from 'react';
-import {
-  Filter,
-  ChevronDown,
-  X,
-  ArrowUp,
-  ArrowDown,
-  Sparkles,
-  Star
-} from 'lucide-react';
+import { Filter, ChevronDown, X, ArrowUp, ArrowDown, Sparkles, Star } from 'lucide-react';
 
 export default function ProductFilterSidebar({
   selectedCategory,

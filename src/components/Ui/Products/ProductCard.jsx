@@ -93,7 +93,7 @@ export default function ProductCard({ product, onAddToCart, onRateProduct }) {
   return (
     <>
       {/* Toast Notifications Stack */}
-      <div className="fixed top-6 left-1/2 -translate-x-1/2 z-[9999] flex flex-col gap-2 pointer-events-none items-center">
+      <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50 flex flex-col gap-2 pointer-events-none items-center">
         {toasts.map((toast) => (
           <div
             key={toast.id}
@@ -115,9 +115,8 @@ export default function ProductCard({ product, onAddToCart, onRateProduct }) {
       <div className="h-fit w-[320px] bg-white dark:bg-slate-900 border-2 border-gray-200 dark:border-slate-800 rounded-2xl p-2.5 mx-auto transition-all duration-300">
         <div className="relative h-[280px] w-[280px] mx-auto">
           <div
-            className={`relative h-[280px] w-[280px] bg-amber-600 dark:bg-amber-700 transition-transform duration-300 ${
-              isOutOfStock ? 'opacity-50' : 'hover:scale-[1.01]'
-            }`}
+            className={`relative h-[280px] w-[280px] bg-amber-600 dark:bg-amber-700 transition-transform duration-300 ${isOutOfStock ? 'opacity-50' : 'hover:scale-[1.01]'
+              }`}
             style={{
               clipPath: customPath,
               backgroundImage: `url(${imageUrl})`,
@@ -149,9 +148,8 @@ export default function ProductCard({ product, onAddToCart, onRateProduct }) {
               aria-label="Add to favorites"
             >
               <Heart
-                className={`h-5 w-5 transition-colors ${
-                  isFavorite ? 'fill-red-500 text-red-500' : 'text-gray-700 dark:text-gray-300'
-                }`}
+                className={`h-5 w-5 transition-colors ${isFavorite ? 'fill-red-500 text-red-500' : 'text-gray-700 dark:text-gray-300'
+                  }`}
               />
             </button>
 
@@ -192,11 +190,10 @@ export default function ProductCard({ product, onAddToCart, onRateProduct }) {
                   aria-label={`Rate ${star} stars`}
                 >
                   <svg
-                    className={`w-3.5 h-3.5 transition-colors duration-150 ${
-                      star <= Math.round(activeRating)
+                    className={`w-3.5 h-3.5 transition-colors duration-150 ${star <= Math.round(activeRating)
                         ? 'text-amber-400 fill-amber-400'
                         : 'text-gray-200 dark:text-slate-700 fill-gray-200 dark:fill-slate-700'
-                    }`}
+                      }`}
                     viewBox="0 0 20 20"
                   >
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
