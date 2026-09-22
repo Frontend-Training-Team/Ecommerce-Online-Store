@@ -31,7 +31,7 @@ export function CartProvider({ children }) {
             console.error("Failed to fetch cart:", error);
         } finally {
             setLoading(false);
-        }
+        }   
     }, []);
 
     useEffect(() => {

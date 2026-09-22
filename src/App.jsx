@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import ProductPage from "./pages/Products";
+import ShopPage from "./pages/Shop";
 import ProductDetails from "./pages/ProductDetails";
 import StoreLayout from "./components/Layout/StoreLayout";
 import RegisterPage from "./pages/Register";
@@ -28,6 +29,7 @@ function App() {
           {/* public pages */}
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<ProductPage />} />
+          <Route path="/shop" element={<ShopPage />} />
           <Route path="/products/:id" element={<ProductDetails />} />
 
           {/* Guest pages */}
@@ -38,10 +40,10 @@ function App() {
             <Route path="/forgot-password" element={<ForgotPasswordPage />} />
             <Route path="/forgot-password-verify-otp" element={<ForgotPasswordVerifyOtp />} />
           </Route>
-
+          <Route path="/cart" element={<CartPage />} />
           {/* Protected pages */}
           <Route element={<ProtectedRoute />}>
-            <Route path="/cart" element={<CartPage />} />
+            {/* <Route path="/cart" element={<CartPage />} /> */}
             <Route path="/wishlist" element={<WishlistPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/orders" element={<MyOrdersPage />} />
