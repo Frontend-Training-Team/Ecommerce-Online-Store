@@ -54,38 +54,37 @@ export default function Navbar() {
     if (searchQuery.trim()) {
       navigate(`/products?search=${encodeURIComponent(searchQuery.trim())}`);
       setIsSearchOpen(false);
+      setIsMobileMenuOpen(false);
     }
   };
 
   const navLinkClass = ({ isActive }) =>
-    `transition-colors duration-200 ${
-      isActive
-        ? "text-[#9A4D2C] dark:text-white font-semibold"
-        : "text-[#2E2E2E] dark:text-[#A0A4AB] hover:text-[#9A4D2C] dark:hover:text-white font-medium"
+    `transition-colors duration-200 ${isActive
+      ? "text-[#9A4D2C] dark:text-white font-semibold"
+      : "text-[#2E2E2E] dark:text-[#A0A4AB] hover:text-[#9A4D2C] dark:hover:text-white font-medium"
     }`;
 
   const mobileNavLinkClass = ({ isActive }) =>
-    `block px-4 py-2.5 rounded-lg text-sm transition-colors ${
-      isActive
-        ? "bg-white/80 dark:bg-[#202328] text-[#9A4D2C] dark:text-white font-semibold"
-        : "text-[#2E2E2E] dark:text-[#A0A4AB] hover:bg-white/50 dark:hover:bg-[#202328] hover:text-[#9A4D2C] dark:hover:text-white font-medium"
+    `block px-4 py-2.5 rounded-lg text-sm transition-colors ${isActive
+      ? "bg-white/80 dark:bg-[#202328] text-[#9A4D2C] dark:text-white font-semibold"
+      : "text-[#2E2E2E] dark:text-[#A0A4AB] hover:bg-white/50 dark:hover:bg-[#202328] hover:text-[#9A4D2C] dark:hover:text-white font-medium"
     }`;
 
   return (
     <header className="w-full bg-[#E2E2E4] dark:bg-[#16181D] border-b border-[#D0D2D7] dark:border-[#2F333B] sticky top-0 z-50 transition-colors duration-200">
-      <div className="w-full px-4 sm:px-8 lg:px-14 py-3 sm:py-3.5 flex items-center justify-between gap-4">
-        
+      <div className="w-full px-3.5 sm:px-6 lg:px-14 py-2.5 sm:py-3.5 flex items-center justify-between gap-2 sm:gap-4">
+
         {/* Left: Logo */}
         <Link to="/" className="flex items-center flex-shrink-0">
           <img
             src={logoImg}
             alt="LAMSA Home Furniture"
-            className="h-8 sm:h-9 md:h-10 object-contain dark:brightness-110"
+            className="h-7 sm:h-8 md:h-10 object-contain dark:brightness-110"
           />
         </Link>
 
-        {/* Center: Navigation Links */}
-        <nav className="hidden md:flex items-center gap-7 lg:gap-10 text-[14px]">
+        {/* Center: Navigation Links (Desktop) */}
+        <nav className="hidden md:flex items-center gap-6 lg:gap-10 text-[14px]">
           <NavLink to="/" className={navLinkClass}>
             Home
           </NavLink>
@@ -101,16 +100,15 @@ export default function Navbar() {
         </nav>
 
         {/* Right: Actions & Tools */}
-        <div className="flex items-center gap-2 sm:gap-2.5">
-          
-          {/* Smooth Expanding Search Pill (Shorter, fluid width transition) */}
+        <div className="flex items-center gap-2 sm:gap-2.5 flex-nowrap">
+
+          {/* Desktop Expanding Search (Hidden on Mobile to keep top bar clean and spacious) */}
           <div
             ref={searchContainerRef}
-            className={`relative flex items-center h-9 rounded-full transition-all duration-300 ease-in-out overflow-hidden ${
-              isSearchOpen
+            className={`hidden md:flex relative items-center h-9 rounded-full transition-all duration-300 ease-in-out overflow-hidden shrink-0 ${isSearchOpen
                 ? "w-40 sm:w-48 md:w-52 border border-[#9DA1AA] dark:border-[#2F333B] bg-white/70 dark:bg-[#202327] shadow-xs"
                 : "w-9 border border-[#9DA1AA] dark:border-[#2F333B] bg-transparent dark:bg-[#202327]"
-            }`}
+              }`}
           >
             {/* Search Icon button */}
             <button
@@ -132,9 +130,8 @@ export default function Navbar() {
             {/* Input & Clear Action (smooth fade in/out) */}
             <form
               onSubmit={handleSearchSubmit}
-              className={`flex-1 h-full flex items-center pr-2.5 min-w-0 transition-opacity duration-200 ${
-                isSearchOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none w-0"
-              }`}
+              className={`flex-1 h-full flex items-center pr-2.5 min-w-0 transition-opacity duration-200 ${isSearchOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none w-0"
+                }`}
             >
               <input
                 ref={searchInputRef}
@@ -162,42 +159,39 @@ export default function Navbar() {
             </form>
           </div>
 
-          {/* Dark Mode Switch - matching exact Figma Design for both Light & Dark modes */}
+          {/* Dark Mode Switch - matching exact Figma Design & preserving user's alignment */}
           <button
             type="button"
             onClick={toggleTheme}
             aria-label="Toggle Theme"
             title={isDark ? "Switch to light mode" : "Switch to dark mode"}
-            className="relative w-[64px] h-[34px] rounded-full bg-[#D4D6DA] dark:bg-[#202327] border border-[#9DA1AA] dark:border-[#2F333B] p-[3px] flex items-center cursor-pointer select-none transition-colors duration-200 shrink-0"
+            className="relative w-[58px] sm:w-[64px] h-[32px] sm:h-[34px] rounded-full bg-[#D4D6DA] dark:bg-[#202327] border border-[#9DA1AA] dark:border-[#2F333B] p-[3px] flex items-center cursor-pointer select-none transition-colors duration-200 shrink-0"
           >
             {/* Left Slot: Dot in dark mode */}
-            <div className="w-7 h-7 flex items-center justify-center">
+            <div className="w-6 sm:w-7 h-6 sm:h-7 flex items-center justify-center">
               <span
-                className={`w-2.5 h-2.5 rounded-full bg-[#727883] dark:bg-[#8A96A8] transition-all duration-300 ${
-                  isDark ? "opacity-100 scale-100" : "opacity-0 scale-50"
-                }`}
+                className={`w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#727883] dark:bg-[#8A96A8] transition-all duration-300 ${isDark ? "opacity-100 scale-100" : "opacity-0 scale-50"
+                  }`}
               />
             </div>
 
             {/* Right Slot: Dot in light mode */}
-            <div className="w-7 h-7 flex items-center justify-center ml-auto">
+            <div className="w-6 sm:w-7 h-6 sm:h-7 flex items-center justify-center ml-auto">
               <span
-                className={`w-2.5 h-2.5 rounded-full bg-[#727883] dark:bg-[#8A96A8] transition-all duration-300 ${
-                  !isDark ? "opacity-100 scale-100" : "opacity-0 scale-50"
-                }`}
+                className={`w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#727883] dark:bg-[#8A96A8] transition-all duration-300 ${!isDark ? "opacity-100 scale-100" : "opacity-0 scale-50"
+                  }`}
               />
             </div>
 
-            {/* Sliding White Knob with Sun / Moon Icon */}
+            {/* Sliding White Knob with Sun / Moon Icon (preserving user's top-[2px] left-[3px]) */}
             <div
-              className={`absolute top-[3px] left-[3px] w-7 h-7 rounded-full bg-white shadow-sm flex items-center justify-center transition-transform duration-300 ease-in-out ${
-                isDark ? "translate-x-[30px]" : "translate-x-0"
-              }`}
+              className={`absolute top-[2px] left-[3px] w-[26px] sm:w-7 h-[26px] sm:h-7 rounded-full bg-white shadow-sm flex items-center justify-center transition-transform duration-300 ease-in-out ${isDark ? "translate-x-[26px] sm:translate-x-[28px]" : "translate-x-0"
+                }`}
             >
               {isDark ? (
-                <Moon className="w-3.5 h-3.5 text-[#1A1C20] transition-transform duration-200" strokeWidth={2.2} />
+                <Moon className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-[#1A1C20] transition-transform duration-200" strokeWidth={2.2} />
               ) : (
-                <Sun className="w-3.5 h-3.5 text-[#1A1C20] transition-transform duration-200" strokeWidth={2.2} />
+                <Sun className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-[#1A1C20] transition-transform duration-200" strokeWidth={2.2} />
               )}
             </div>
           </button>
@@ -205,12 +199,12 @@ export default function Navbar() {
           {/* Wishlist Button */}
           <Link
             to="/wishlist"
-            className="w-9 h-9 rounded-full border border-[#9DA1AA] dark:border-[#2F333B] bg-transparent dark:bg-[#202327] flex items-center justify-center text-[#222222] dark:text-[#A0A5AE] hover:border-[#9A4D2C] dark:hover:border-white/30 hover:text-[#9A4D2C] dark:hover:text-white transition-all relative shrink-0"
+            className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-[#9DA1AA] dark:border-[#2F333B] bg-transparent dark:bg-[#202327] flex items-center justify-center text-[#222222] dark:text-[#A0A5AE] hover:border-[#9A4D2C] dark:hover:border-white/30 hover:text-[#9A4D2C] dark:hover:text-white transition-all relative shrink-0"
             title="Wishlist"
           >
-            <Heart className="w-4 h-4" strokeWidth={1.5} />
+            <Heart className="w-3.5 h-3.5 sm:w-4 sm:h-4" strokeWidth={1.5} />
             {wishlistCount > 0 && (
-              <span className="absolute -top-1 -right-1 bg-white text-black text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-xs border border-[#C5C8CD] dark:border-transparent">
+              <span className="absolute -top-1 -right-1 bg-white text-black text-[9px] sm:text-[10px] font-bold w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full flex items-center justify-center shadow-xs border border-[#C5C8CD] dark:border-transparent">
                 {wishlistCount}
               </span>
             )}
@@ -219,19 +213,19 @@ export default function Navbar() {
           {/* Cart Button with Figma White Badge */}
           <Link
             to="/cart"
-            className="w-9 h-9 rounded-full border border-[#9DA1AA] dark:border-[#2F333B] bg-transparent dark:bg-[#202327] flex items-center justify-center text-[#222222] dark:text-[#A0A5AE] hover:border-[#9A4D2C] dark:hover:border-white/30 hover:text-[#9A4D2C] dark:hover:text-white transition-all relative shrink-0"
+            className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-[#9DA1AA] dark:border-[#2F333B] bg-transparent dark:bg-[#202327] flex items-center justify-center text-[#222222] dark:text-[#A0A5AE] hover:border-[#9A4D2C] dark:hover:border-white/30 hover:text-[#9A4D2C] dark:hover:text-white transition-all relative shrink-0"
             title="Cart"
           >
-            <ShoppingBag className="w-4 h-4" strokeWidth={1.5} />
+            <ShoppingBag className="w-3.5 h-3.5 sm:w-4 sm:h-4" strokeWidth={1.5} />
             {cartCount > 0 && (
-              <span className="absolute -top-1 -right-1 bg-white text-black text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-xs border border-[#C5C8CD] dark:border-transparent">
+              <span className="absolute -top-1 -right-1 bg-white text-black text-[9px] sm:text-[10px] font-bold w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full flex items-center justify-center shadow-xs border border-[#C5C8CD] dark:border-transparent">
                 {cartCount}
               </span>
             )}
           </Link>
 
           {/* Desktop Divider */}
-          <div className="hidden md:block h-5 w-[1px] bg-[#9DA1AA] dark:bg-[#2F333B] mx-1"></div>
+          <div className="hidden md:block h-5 w-[1px] bg-[#9DA1AA] dark:bg-[#2F333B] mx-0.5 lg:mx-1 shrink-0"></div>
 
           {/* User Button (Desktop) */}
           <Link
@@ -246,7 +240,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden w-9 h-9 rounded-full border border-[#9DA1AA] dark:border-[#2F333B] bg-transparent dark:bg-[#202327] flex items-center justify-center text-[#222222] dark:text-[#A0A5AE] hover:border-[#9A4D2C] hover:text-[#9A4D2C] dark:hover:text-white transition-all cursor-pointer"
+            className="md:hidden w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-[#9DA1AA] dark:border-[#2F333B] bg-transparent dark:bg-[#202327] flex items-center justify-center text-[#222222] dark:text-[#A0A5AE] hover:border-[#9A4D2C] hover:text-[#9A4D2C] dark:hover:text-white transition-all cursor-pointer shrink-0"
             title="Toggle Menu"
             aria-label="Toggle Menu"
           >
@@ -261,10 +255,10 @@ export default function Navbar() {
 
       </div>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile Menu Dropdown (Search is cleanly placed here for mobile users) */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-[#E2E2E4] dark:bg-[#16181D] border-t border-[#D0D2D7] dark:border-[#2F333B] px-4 py-3 space-y-1 shadow-md">
-          {/* Mobile Search Bar */}
+        <div className="md:hidden bg-[#E2E2E4] dark:bg-[#16181D] border-t border-[#D0D2D7] dark:border-[#2F333B] px-4 py-3 space-y-1.5 shadow-md">
+          {/* Mobile Search Bar inside Menu */}
           <form
             onSubmit={(e) => {
               handleSearchSubmit(e);
@@ -277,7 +271,7 @@ export default function Navbar() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search products..."
-              className="w-full h-9 pl-9 pr-4 rounded-full border border-[#9DA1AA] dark:border-[#2F333B] bg-white/80 dark:bg-[#202328] text-sm text-[#222] dark:text-[#F5F1EA] placeholder-[#7A7E85] dark:placeholder-[#7E8590] outline-none focus:border-[#9A4D2C]"
+              className="w-full h-9 pl-9 pr-4 rounded-full border border-[#9DA1AA] dark:border-[#2F333B] bg-white/90 dark:bg-[#202328] text-sm text-[#222] dark:text-[#F5F1EA] placeholder-[#7A7E85] dark:placeholder-[#7E8590] outline-none focus:border-[#9A4D2C]"
             />
             <Search className="w-4 h-4 text-[#7A7E85] absolute left-3 top-1/2 -translate-y-1/2 pt-0.5" strokeWidth={1.5} />
           </form>
@@ -310,7 +304,7 @@ export default function Navbar() {
           >
             Wishlist
           </NavLink>
-          
+
           <hr className="border-[#D0D2D7] dark:border-[#2F333B] my-2" />
 
           <NavLink
