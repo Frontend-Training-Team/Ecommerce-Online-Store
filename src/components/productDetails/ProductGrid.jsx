@@ -11,6 +11,7 @@ export default function ProductGrid({
   onLoadMore,
   onAddToCart,
   onAddToCartSuccess,
+  columns = "xl:grid-cols-2 2xl:grid-cols-3"
 }) {
   if (isLoading && products.length === 0) {
     return <ProductGridSkeleton count={6} />;
@@ -30,7 +31,7 @@ export default function ProductGrid({
 
   return (
     <div className="w-full space-y-8">
-      <div className="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4 justify-items-center">
+      <div className={`grid grid-cols-1 ${columns} gap-4 justify-items-center`}>
         {products.map((product, index) => (
           <ProductCard
             key={product._id || product.id || index}

@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 import { useState, useEffect } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import ProductFilterSidebar from '../components/Ui/searchinput/FilterSidebar'
 import { useDebounce } from '../hooks/useDebounce'
 import { Search, X, SlidersHorizontal } from 'lucide-react'
@@ -7,6 +8,7 @@ import { getAllProducts } from '../api/products.api'
 import ProductGrid from '../components/productDetails/ProductGrid'
 
 export default function ShopPage() {
+  const [searchParams, setSearchParams] = useSearchParams()
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [minPrice, setMinPrice] = useState('')
@@ -22,6 +24,18 @@ export default function ShopPage() {
   const debouncedSearchTerm = useDebounce(searchTerm, 400)
   const debouncedMinPrice = useDebounce(minPrice, 400)
   const debouncedMaxPrice = useDebounce(maxPrice, 400)
+
+  const syncCategoryParam = (nextCategory) => {
+    const params = new URLSearchParams(searchParams)
+
+    if (nextCategory && nextCategory !== 'All') {
+      params.set('category', nextCategory)
+    } else {
+      params.delete('category')
+    }
+
+    setSearchParams(params, { replace: true })
+  }
 
   const handleAddToCart = (product) => {
     const existingCart = JSON.parse(localStorage.getItem('guestCart') || '[]')
@@ -39,6 +53,7 @@ export default function ShopPage() {
   const handleClearFilters = () => {
     setIsLoading(true)
     setSelectedCategory('All')
+    syncCategoryParam('All')
     setSearchTerm('')
     setMinPrice('')
     setMaxPrice('')
@@ -57,6 +72,15 @@ export default function ShopPage() {
       setIsLoadingMore(false)
     }, 500)
   }
+
+  useEffect(() => {
+    const categoryFromUrl = searchParams.get('category')
+    if (categoryFromUrl) {
+      setSelectedCategory(categoryFromUrl)
+    } else {
+      setSelectedCategory('All')
+    }
+  }, [searchParams])
 
   useEffect(() => {
     const fetchAllProducts = async () => {
@@ -143,6 +167,7 @@ export default function ShopPage() {
                 setSelectedCategory={(cat) => {
                   setIsLoading(true)
                   setSelectedCategory(cat)
+                  syncCategoryParam(cat)
                 }}
                 minPrice={minPrice}
                 setMinPrice={(val) => {

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import heroVideo from "../../../assets/video/hero.mp4";
-function HeroSection() {
+
+function HeroSection({ onViewCategories }) {
   return (
     <section className="relative overflow-hidden">
       <video
@@ -33,18 +34,19 @@ function HeroSection() {
           </p>
           <div className="mt-8 flex items-center justify-center gap-4">
             <Link
-              to="/products"
+              to="/shop"
               className="rounded-3xl bg-white px-6 py-2.5 text-sm font-semibold text-black transition hover:bg-[#70482F] active:scale-95"
             >
               Shop Now
             </Link>
 
-            <Link
-              to="/products"
+            <button
+              type="button"
+              onClick={onViewCategories}
               className="rounded-3xl border border-white/50 bg-transparent px-7 py-2.5 text-sm font-semibold text-white transition hover:bg-white/45 active:scale-95"
             >
               VIEW CATEGORIES
-            </Link>
+            </button>
           </div>
 
         </div>
