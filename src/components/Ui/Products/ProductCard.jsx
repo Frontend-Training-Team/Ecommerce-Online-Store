@@ -112,7 +112,7 @@ export default function ProductCard({ product, onAddToCart, onRateProduct }) {
         ))}
       </div>
 
-      <div className="h-fit w-[300px] bg-white dark:bg-slate-900 border-2 border-gray-200 dark:border-slate-800 rounded-2xl p-2.5 mx-auto transition-all duration-300">
+      <div className="h-fit w-[320px] bg-white dark:bg-slate-900 border-2 border-gray-200 dark:border-slate-800 rounded-2xl p-2.5 mx-auto transition-all duration-300">
         <div className="relative h-[280px] w-[280px] mx-auto">
           <div
             className={`relative h-[280px] w-[280px] bg-amber-600 dark:bg-amber-700 transition-transform duration-300 ${

@@ -41,10 +41,15 @@ export default function CartPage() {
           );
 
           if (product) {
+            const stockValue = Number(
+              product.countInStock ?? product.stock ?? product.quantity
+            );
+            const validStock = !isNaN(stockValue) && stockValue > 0 ? stockValue : 10;
+
             return {
               ...product,
-              cartQuantity: cartItem.quantity || 1,
-              maxStock: product.countInStock ?? product.stock ?? product.quantity ?? 10
+              cartQuantity: Number(cartItem.quantity) || 1,
+              maxStock: validStock
             };
           }
 
@@ -52,7 +57,7 @@ export default function CartPage() {
             _id: cartItem.productId,
             name: 'Product Details Unavailable',
             price: 0,
-            cartQuantity: cartItem.quantity || 1,
+            cartQuantity: Number(cartItem.quantity) || 1,
             maxStock: 5,
             images: ['https://via.placeholder.com/150']
           };
@@ -90,20 +95,32 @@ export default function CartPage() {
   };
 
   const handleIncreaseQuantity = (id) => {
+    let showLimitWarning = false;
+    let availableStock = 0;
+
     const updated = cartItems.map((item) => {
       const itemId = item._id || item.id;
       if (itemId === id) {
-        if (item.cartQuantity >= item.maxStock) {
-          showNotification(
-            `only ${item.maxStock} units available in stock`,
-            'warning'
-          );
+        const currentQty = Number(item.cartQuantity) || 1;
+        const maxStock = Number(item.maxStock) || 10;
+
+        if (currentQty >= maxStock) {
+          showLimitWarning = true;
+          availableStock = maxStock;
           return item;
         }
-        return { ...item, cartQuantity: item.cartQuantity + 1 };
+        return { ...item, cartQuantity: currentQty + 1 };
       }
       return item;
     });
+
+    if (showLimitWarning) {
+      showNotification(
+        `Only ${availableStock} units available in stock`,
+        'warning'
+      );
+      return;
+    }
 
     setCartItems(updated);
     updateLocalStorage(updated);
@@ -147,15 +164,15 @@ export default function CartPage() {
   }
 
   return (
-    <div className=" min-h-screen bg-slate-50/70 dark:bg-slate-900 py-10 px-4 sm:px-6 lg:px-8 font-sans transition-colors">
+    <div className="min-h-screen bg-white dark:bg-slate-950 py-10 px-4 sm:px-6 lg:px-8 font-sans transition-colors">
       {/* Toast Notification */}
       {toast.show && (
         <div
           style={{
             backgroundColor: toast.type === 'success' ? '#7A6E67' : '#7E4A2D'
           }}
-          className="fixed top-6 left-1/2 -translate-x-1/2 z-[9999] flex items-center gap-3 backdrop-blur-xl
-          text-white text-sm font-medium px-5 py-3 rounded-2xl  pointer-events-none transition-all 
+          className="fixed top-6 left-1/2 -translate-x-1/2 z-[9999] flex items-center gap-3 backdrop-blur-xl 
+          text-white text-sm font-medium px-5 py-3 rounded-2xl pointer-events-none transition-all 
           animate-in slide-in-from-top-3 ease-out"
         >
           {toast.type === 'success' && <Plus className="w-5 h-5 text-emerald-300 shrink-0" />}
@@ -203,8 +220,9 @@ export default function CartPage() {
                     return (
                       <div
                         key={id}
-                        className={`py-6 first:pt-0 last:pb-0 flex gap-4 sm:gap-6 items-start transition-all duration-700 ${isDeleting ? 'opacity-40 scale-95 translate-x-4 blur-[1px]' : 'opacity-100 scale-100'
-                          }`}
+                        className={`py-6 first:pt-0 last:pb-0 flex gap-4 sm:gap-6 items-start transition-all duration-700 ${
+                          isDeleting ? 'opacity-40 scale-95 translate-x-4 blur-[1px]' : 'opacity-100 scale-100'
+                        }`}
                       >
                         <div className="w-20 h-20 sm:w-24 sm:h-24 bg-slate-50 dark:bg-slate-900 rounded-xl overflow-hidden shrink-0 border border-slate-100 dark:border-slate-700 flex items-center justify-center p-2">
                           <img
@@ -245,7 +263,8 @@ export default function CartPage() {
                               <button
                                 onClick={() => handleDecreaseQuantity(id)}
                                 className="w-8 h-8 flex items-center justify-center text-copper-900 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition text-sm font-medium"
-                              >   -
+                              >
+                                -
                               </button>
                               <span className="w-10 text-center text-xs sm:text-sm font-semibold text-copper-700 dark:text-copper-400">
                                 {item.cartQuantity}
@@ -253,7 +272,8 @@ export default function CartPage() {
                               <button
                                 onClick={() => handleIncreaseQuantity(id)}
                                 className="w-8 h-8 flex items-center justify-center text-copper-900 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition text-sm font-medium"
-                              >   +
+                              >
+                                +
                               </button>
                             </div>
                             <p className="font-medium text-slate-900 dark:text-slate-100 text-sm sm:text-base whitespace-nowrap ml-auto">
@@ -277,7 +297,8 @@ export default function CartPage() {
                       value={couponCode}
                       onChange={(e) => setCouponCode(e.target.value)}
                       placeholder="Enter coupon code"
-                      className="w-full sm:flex-1 px-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-copper-500/20 focus:border-copper-400 transition min-w-0"
+                      className="w-full sm:flex-1 px-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl 
+                      text-sm text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-copper-500/20 focus:border-copper-400 transition min-w-0"
                     />
                     <button className="w-full sm:w-auto shrink-0 px-5 py-2.5 border border-copper-400 text-copper-700 dark:text-copper-400 dark:border-copper-500 font-semibold text-sm rounded-xl hover:bg-copper-50 dark:hover:bg-copper-950/50 transition active:scale-95 cursor-pointer">
                       Apply
