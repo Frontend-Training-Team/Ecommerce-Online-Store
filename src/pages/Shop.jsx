@@ -168,7 +168,7 @@ export default function ShopPage() {
           </aside>
 
           <section className="w-full min-w-0 flex flex-col items-center">
-            <div className="w-full max-w-[1244px] mx-auto">
+            <div className="w-full max-w-311 mx-auto">
               {/* Search Bar Container */}
               <div className="w-full mb-10">
                 <div className="flex items-center gap-3 w-full">

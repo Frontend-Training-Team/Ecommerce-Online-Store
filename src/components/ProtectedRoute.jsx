@@ -4,7 +4,6 @@ import { LoaderCircle } from "lucide-react";
 
 export default function ProtectedRoute() {
   const { user, loading } = useAuth();
-  const token = localStorage.getItem("token");
 
   if (loading) {
     return (
@@ -14,7 +13,7 @@ export default function ProtectedRoute() {
     );
   }
 
-  if (!user && !token) {
+  if (!user) {
     return <Navigate to="/login" replace />;
   }
 
