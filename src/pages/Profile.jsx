@@ -47,7 +47,7 @@ export default function ProfilePage() {
     loadData();
   }, [user]);
 
-  if (authLoading || loadingData) { 
+  if (authLoading || loadingData) {
     return <ProfileSkeleton />;
   }
 

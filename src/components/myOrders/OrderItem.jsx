@@ -17,7 +17,7 @@ function OrderItem({ Myorder }) {
     })
 
     return (<>
-        <aw href={`orders/${order._id}`} className="max-w-7xl bg-[#FAFAFA] border-[1.5px] border-[#DFDFDF] flex justify-between
+        <a href={`orders/${order._id}`} className="max-w-7xl bg-[#FAFAFA] border-[1.5px] border-[#DFDFDF] flex justify-between
         items-center py-5 px-8 rounded-2xl mb-7">
             {/* left side */}
             <div className="flex flex-col space-y-1">
@@ -33,7 +33,7 @@ function OrderItem({ Myorder }) {
                 <span className="text-2xl text-[#7E4A2D] font-Inter font-bold">EGP {order.totalPrice}</span>
                 <span className="text-xl text-[#A6A6A6] font-Inter">{order.item.length} item(s)</span>
             </div>
-        </aw>
+        </a>
     </>);
 }
 

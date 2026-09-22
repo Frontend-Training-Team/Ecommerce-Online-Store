@@ -1,94 +1,94 @@
 /* eslint-disable react-hooks/set-state-in-effect */
-import { useState, useEffect } from 'react';
-import { Heart, ShoppingCart } from "lucide-react";
-import { Plus } from 'lucide-react';
+import { useState, useEffect } from 'react'
+import { Heart, ShoppingCart } from "lucide-react"
+import { Plus } from 'lucide-react'
 
-import AddToCartButton from '../Animation/AddToCartButton';
+import AddToCartButton from '../Animation/AddToCartButton'
 
 export default function ProductCard({ product, onAddToCart, onRateProduct }) {
-  const [isFavorite, setIsFavorite] = useState(false);
-  const [toasts, setToasts] = useState([]);
+  const [isFavorite, setIsFavorite] = useState(false)
+  const [toasts, setToasts] = useState([])
 
-  const customPath = 'path("M 10 0 L 270 0 A 10 10 0 0 1 280 10 L 280 218 A 10 10 0 0 1 270 228 L 180 228 A 10 10 0 0 0 170 238 L 170 270 A 10 10 0 0 1 160 280 L 10 280 A 10 10 0 0 1 0 270 L 0 10 A 10 10 0 0 1 10 0 Z")';
-  const stock = product?.countInStock ?? product?.stock ?? product?.quantity ?? 0;
-  const isOutOfStock = stock <= 0;
+  const customPath = 'path("M 10 0 L 270 0 A 10 10 0 0 1 280 10 L 280 218 A 10 10 0 0 1 270 228 L 180 228 A 10 10 0 0 0 170 238 L 170 270 A 10 10 0 0 1 160 280 L 10 280 A 10 10 0 0 1 0 270 L 0 10 A 10 10 0 0 1 10 0 Z")'
+  const stock = product?.countInStock ?? product?.stock ?? product?.quantity ?? 0
+  const isOutOfStock = stock <= 0
 
-  const title = product?.name || product?.title || 'Untitled Product';
+  const title = product?.name || product?.title || 'Untitled Product'
   const categoryName =
     typeof product?.category === 'object'
       ? product?.category?.name
-      : product?.category || 'General';
+      : product?.category || 'General'
 
-  const brandName = product?.brand || product?.brandName || 'BRAND';
+  const brandName = product?.brand || product?.brandName || 'BRAND'
 
-  const originalPrice = Number(product?.price || 0);
-  const discountPrice = product?.discountPrice ? Number(product?.discountPrice) : null;
-  const currentPrice = discountPrice || originalPrice;
-  const oldPrice = discountPrice ? originalPrice : null;
+  const originalPrice = Number(product?.price || 0)
+  const discountPrice = product?.discountPrice ? Number(product?.discountPrice) : null
+  const currentPrice = discountPrice || originalPrice
+  const oldPrice = discountPrice ? originalPrice : null
 
   const calculatedDiscount =
     oldPrice && oldPrice > currentPrice
       ? Math.round(((oldPrice - currentPrice) / oldPrice) * 100)
-      : 0;
+      : 0
 
-  const initialRating = product?.averageRating || product?.rating || 0;
-  const [userRating, setUserRating] = useState(initialRating);
-  const [hoverRating, setHoverRating] = useState(0);
-  const reviewsCount = product?.numReviews || product?.reviewsCount || 0;
+  const initialRating = product?.averageRating || product?.rating || 0
+  const [userRating, setUserRating] = useState(initialRating)
+  const [hoverRating, setHoverRating] = useState(0)
+  const reviewsCount = product?.numReviews || product?.reviewsCount || 0
 
-  const productId = product?.id || product?._id;
-
-  useEffect(() => {
-    if (!productId) return;
-    const wishlist = JSON.parse(localStorage.getItem('guestWishlist') || '[]');
-    const exists = wishlist.some((item) => (item.id || item._id) === productId);
-    setIsFavorite(exists);
-  }, [productId]);
+  const productId = product?.id || product?._id
 
   useEffect(() => {
-    setUserRating(product?.averageRating || product?.rating || 0);
-  }, [product?.averageRating, product?.rating]);
+    if (!productId) return
+    const wishlist = JSON.parse(localStorage.getItem('guestWishlist') || '[]')
+    const exists = wishlist.some((item) => (item.id || item._id) === productId)
+    setIsFavorite(exists)
+  }, [productId])
+
+  useEffect(() => {
+    setUserRating(product?.averageRating || product?.rating || 0)
+  }, [product?.averageRating, product?.rating])
 
   const addToast = (message, type = 'success') => {
-    const id = Date.now() + Math.random();
-    setToasts((prev) => [...prev, { id, message, type }]);
+    const id = Date.now() + Math.random()
+    setToasts((prev) => [...prev, { id, message, type }])
     setTimeout(() => {
-      setToasts((prev) => prev.filter((t) => t.id !== id));
-    }, 3000);
-  };
+      setToasts((prev) => prev.filter((t) => t.id !== id))
+    }, 3000)
+  }
 
   const handleToggleFavorite = () => {
-    if (!product) return;
-    const wishlist = JSON.parse(localStorage.getItem('guestWishlist') || '[]');
-    const exists = wishlist.some((item) => (item.id || item._id) === productId);
+    if (!product) return
+    const wishlist = JSON.parse(localStorage.getItem('guestWishlist') || '[]')
+    const exists = wishlist.some((item) => (item.id || item._id) === productId)
 
-    let updated;
+    let updated
     if (exists) {
-      updated = wishlist.filter((item) => (item.id || item._id) !== productId);
-      setIsFavorite(false);
-      addToast('Removed from wishlist', 'info');
+      updated = wishlist.filter((item) => (item.id || item._id) !== productId)
+      setIsFavorite(false)
+      addToast('Removed from wishlist', 'info')
     } else {
-      updated = [...wishlist, product];
-      setIsFavorite(true);
-      addToast('Added to wishlist', 'success');
+      updated = [...wishlist, product]
+      setIsFavorite(true)
+      addToast('Added to wishlist', 'success')
     }
 
-    localStorage.setItem('guestWishlist', JSON.stringify(updated));
-    window.dispatchEvent(new Event('wishlistUpdated'));
-  };
+    localStorage.setItem('guestWishlist', JSON.stringify(updated))
+    window.dispatchEvent(new Event('wishlistUpdated'))
+  }
 
   const handleRatingClick = (starValue) => {
-    setUserRating(starValue);
+    setUserRating(starValue)
     if (onRateProduct) {
-      onRateProduct(productId, starValue);
+      onRateProduct(productId, starValue)
     }
-  };
+  }
 
   const imageUrl =
     product?.images?.[0]?.url ||
     (typeof product?.images?.[0] === 'string' ? product?.images[0] : null) ||
     product?.image ||
-    'https://via.placeholder.com/280';
+    'https://via.placeholder.com/280'
 
   return (
     <>
@@ -178,7 +178,7 @@ export default function ProductCard({ product, onAddToCart, onRateProduct }) {
 
           <div className="flex items-center justify-center gap-1 mb-1.5">
             {[1, 2, 3, 4, 5].map((star) => {
-              const activeRating = hoverRating || userRating;
+              const activeRating = hoverRating || userRating
               return (
                 <button
                   key={star}
@@ -191,15 +191,15 @@ export default function ProductCard({ product, onAddToCart, onRateProduct }) {
                 >
                   <svg
                     className={`w-3.5 h-3.5 transition-colors duration-150 ${star <= Math.round(activeRating)
-                        ? 'text-amber-400 fill-amber-400'
-                        : 'text-gray-200 dark:text-slate-700 fill-gray-200 dark:fill-slate-700'
+                      ? 'text-amber-400 fill-amber-400'
+                      : 'text-gray-200 dark:text-slate-700 fill-gray-200 dark:fill-slate-700'
                       }`}
                     viewBox="0 0 20 20"
                   >
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                   </svg>
                 </button>
-              );
+              )
             })}
             <span className="text-xs text-gray-400 dark:text-gray-500 ml-1">({reviewsCount})</span>
           </div>
@@ -217,5 +217,5 @@ export default function ProductCard({ product, onAddToCart, onRateProduct }) {
         </div>
       </div>
     </>
-  );
+  )
 }

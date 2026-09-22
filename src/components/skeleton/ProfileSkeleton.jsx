@@ -1,7 +1,7 @@
 export default function ProfileSkeleton() {
   return (
-    <div className="w-full bg-white min-h-screen py-10 sm:py-12 animate-pulse">
-      <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-7">
+    <div className="w-full bg-white min-h-screen py-10 sm:py-12">
+      <div className="w-full max-w-310 mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-7">
 
         <div className="flex flex-col gap-2.5">
           <div className="h-3.5 w-36 bg-[#EBE7E1] rounded"></div>
