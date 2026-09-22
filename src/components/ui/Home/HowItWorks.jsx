@@ -23,8 +23,8 @@ function HowItWorks() {
   return (
     <section className="py-12 bg-white">
       <div className="max-w-6xl mx-auto px-4 text-center">
-      
-        <h2 className="text-4xl font-serif text-[#9c4f2c]">
+
+        <h2 className="text-4xl font-Instrument text-[#9c4f2c]">
           How it Works
         </h2>
         <p className="mt-1 text-sm text-gray-500">
@@ -37,8 +37,8 @@ function HowItWorks() {
               className="flex flex-col items-center text-m" >
               <div className="w-12 h-12 rounded-full bg-[#9c4f2c] text-white flex items-center justify-center text-[16px]">
                 {step.number}
-              </div> 
-              <h3 className="mt-4 text-m font-medium text-gray-700">
+              </div>
+              <h3 className="mt-4 text-2xl font-medium font-Instrument text-gray-700">
                 {step.title}
               </h3>
               <p className="mt-2 max-w-xs text-[15px] leading-4 text-gray-400">

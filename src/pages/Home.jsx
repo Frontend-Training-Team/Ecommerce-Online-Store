@@ -1,9 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { getAllProducts } from "../api/products.api";
-
 import FeaturedProducts from "../components/ui/Home/FeaturedProducts";
 import HeroSection from "../components/ui/Home/HeroSection";
-import CategorySection from "../components/ui/Home/CategorySection";
+import QuoteSection from "../components/ui/Home/QuoteSection";
 import toast from "react-hot-toast";
 import HowItWorks from "../components/ui/Home/HowItWorks";
 import ShopByCategory from "../components/ui/Home/ShopByCategory";
@@ -38,12 +37,10 @@ function Home() {
   return (
     <>
       <HeroSection />
-
-      
-<ShopByCategory />
+      <ShopByCategory />
       <FeaturedProducts products={products} loading={loading} />
-      <CategorySection categories={categories} />
-         <HowItWorks />
+      <QuoteSection />
+      <HowItWorks />
     </>
   );
 }

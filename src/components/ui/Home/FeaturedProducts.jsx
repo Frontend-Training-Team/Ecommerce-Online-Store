@@ -17,11 +17,11 @@ function FeaturedProducts({ products, loading }) {
 
   return (
     <section className="bg-white py-16 dark:bg-[#171411]">
-      <div className="mx-auto max-w-7xl px-4 sm:px-8">
+      <div className="mx-auto max-w-fit px-4 sm:px-8">
 
         <div className="mb-8 flex items-end justify-between gap-4">
           <div>
-            <h2 className="text-3xl text-[#8E4726] dark:text-[#F5F1EA]">
+            <h2 className="text-4xl font-Instrument text-[#8E4726] dark:text-[#F5F1EA]">
               Featured Products
             </h2>
 
@@ -50,148 +50,12 @@ function FeaturedProducts({ products, loading }) {
               const discount = Math.round(
                 ((product.originalPrice - product.price) /
                   product.originalPrice) *
-                  100
+                100
               );
 
               return (
-                <div
-                  key={product._id}
-                  className="
-                    group overflow-hidden rounded-[18px]
-                    border border-[#E1DDD9]
-                    bg-white
-                    shadow-sm
-                    transition-all duration-300
-                    hover:-translate-y-1
-                    hover:shadow-xl
-                  "
-                >
-                  <div
-                    className="
-                      relative h-[330px]
-                      overflow-hidden
-                      bg-[#E9E9E9]
-                    "
-                  >
-                    <div className="absolute left-4 right-4 top-4 z-10 flex items-center justify-between">
-
-                      <span className="rounded-full bg-[#6e5647] px-4 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-white">
-                        {product.category}
-                      </span>
-                      <span className="rounded-full bg-[#08B84F] px-4 py-1.5 text-[8px] font-bold text-white">
-                        -{discount}%
-                      </span>
-                      
-                      <span className="rounded-full bg-white px-3 py-2 text-[10px] font-semibold uppercase tracking-wider text-black">
-                        {product.brand}
-                      </span>
-
-                    </div>
-                    <Link to={`/products/${product._id}`}>
-                      <img
-                        src={chair}
-                        alt={product.name}
-                        className="
-                          h-full w-full
-                          object-contain p-6
-                          transition-transform duration-500
-                          group-hover:scale-105
-                        "
-                      />
-                    </Link>
-                    <div className="absolute bottom-2 left-0 right-0 flex items-end justify-between">
-{/* ratel */}
-                      <div
-                        className="
-                          flex h-11 w-11
-                          items-center justify-center gap-1
-                          rounded-[12px]
-                          bg-white shadow-sm
-                        "
-                      >
-                        <Star
-                          size={12}
-                          fill="#F7C948"
-                          stroke="#F7C948"
-                        />
-
-                        <span className="text-sm font-medium text-[#333]">
-                          {product.rating}
-                        </span>
-                      </div>
-                      <div className="flex gap-2 pr-3">
-
-                        <button
-                          type="button"
-                          aria-label="Add to wishlist"
-                          className="
-                            flex h-11 w-11
-                            items-center justify-center
-                            rounded-[14px]
-                            bg-white
-                            text-[#111]
-                            shadow-sm
-                            transition
-                            hover:bg-[#F5F5F5]
-                            active:scale-95
-                          "
-                        >
-                          <Heart size={25} strokeWidth={1.8} />
-                        </button>
-
-                        <button
-                          type="button"
-                          aria-label="Add to cart"
-                          className="
-                            flex h-11 w-11
-                            items-center justify-center
-                            rounded-[14px]
-                            bg-white
-                            text-[#111]
-                            shadow-sm
-                            transition
-                            hover:bg-[#F5F5F5]
-                            active:scale-95
-                          "
-                        >
-                          <ShoppingBag size={24} strokeWidth={1.8} />
-                        </button>
-
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="px-5 pb-5 pt-4 ">
-
-                    <Link to={`/products/${product._id}`}>
-                      <h3
-                        className="
-                          min-h-[48px]
-                          line-clamp-2
-                          text-[20px]
-                          font-medium
-                          leading-6
-                          text-[#27211D]
-                          transition
-                          hover:text-[#8B5E3C]
-                        "
-                      >
-                        {product.name}
-                      </h3>
-                    </Link>
-                    <div className="mt-3 flex items-center gap-3">
-
-                      <span className="text-[20px] font-bold text-[#974C29]">
-                        ${product.price}
-                      </span>
-
-                      <span className="text-sm text-[#888] line-through">
-                        ${product.originalPrice}
-                      </span>
-
-                    </div>
-
-                  </div>
+                <div>
+                  <h1>Alo</h1>
                 </div>
               );
             })
