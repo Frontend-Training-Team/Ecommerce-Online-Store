@@ -5,7 +5,7 @@ export default function ConfirmationModal({
   title = "Are you sure?",
   description,
   confirmLabel = "Confirm",
-  cancelLabel = "Go Back",
+  cancelLabel = "Cancel",
   isLoading = false,
   onConfirm,
   onCancel,
