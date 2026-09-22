@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { User, Mail, Lock, ChevronRight } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
@@ -30,14 +30,12 @@ const Register = () => {
 
       toast.success('OTP code sent to your email!')
 
-      navigate('/resetpasswordOtp', {
-        state: { email: formData.email },
-      })
-    } catch (error) {
-      const message =
-        error.response?.data?.message ||
-        'Failed to send OTP. Please try again.'
+      navigate('/verify-otp', { state: { email: formData.email } })
+    }
 
+    catch (error) {
+      const message =
+        error.response?.data?.message || 'Failed to send OTP. Please try again.'
       toast.error(message)
     } finally {
       setIsLoading(false)

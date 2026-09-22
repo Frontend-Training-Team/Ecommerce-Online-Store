@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { postForgotPasswordVerifyOtp, postForgotPasswordSendOtp } from '../api/auth.api';
 import ResetPasswordCard from '../components/Ui/auth/ResetPasswordCard';
 
@@ -59,7 +59,6 @@ export default function ForgotPasswordVerifyOtp() {
       });
 
       toast.success(response.data?.message || 'Password reset successfully!');
-      toast.dismiss();
       setTimeout(() => {
         navigate('/login');
       }, 1500);
@@ -89,7 +88,6 @@ export default function ForgotPasswordVerifyOtp() {
 
   return (
     <>
-      <Toaster position="top-center" />
       <ResetPasswordCard
         otpArray={otpArray}
         setOtpArray={setOtpArray}

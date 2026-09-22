@@ -65,7 +65,6 @@ export default function VerifyOtpDetails() {
 
   return (
     <>
-      <Toaster position="top-center" />
       <OtpInput
         otp={otp}
         setOtp={setOtp}
