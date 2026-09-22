@@ -49,7 +49,7 @@ export default function ProductTabs({
   return (
     <div id="product-tabs" className="w-full flex flex-col md:flex-row gap-8 pt-8 border-t border-[#EDE8E3]">
 
-      <div className="flex md:flex-col gap-2 w-full md:w-52 flex-shrink-0">
+      <div className="flex md:flex-col gap-2 w-full md:w-52 shrink-0">
         <button
           type="button"
           onClick={() => setActiveTab("details")}
@@ -252,7 +252,7 @@ export default function ProductTabs({
                   <Link
                     to="/login"
                     className="h-9 px-5 rounded-lg bg-[#7E4A2D] hover:bg-[#683C23] text-white text-xs font-medium 
-                    flex items-center justify-center transition-colors flex-shrink-0"
+                    flex items-center justify-center transition-colors shrink-0"
                   >
                     Log In
                   </Link>

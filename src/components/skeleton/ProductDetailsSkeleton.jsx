@@ -1,16 +1,16 @@
 export default function ProductDetailsSkeleton() {
   return (
     <div className="w-full bg-white min-h-screen py-8 sm:py-12">
-      <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-14">
+      <div className="w-full max-w-310 mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-14">
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-10 lg:gap-x-14 gap-y-4 items-stretch">
 
-          <div className="order-1 lg:order-none lg:col-start-1 lg:row-start-1 w-full h-full min-h-[360px] lg:min-h-0 relative">
+          <div className="order-1 lg:order-0 lg:col-start-1 lg:row-start-1 w-full h-full min-h-90 lg:min-h-0 relative">
             <div className="relative lg:absolute lg:inset-0 w-full aspect-square lg:aspect-auto bg-[#F2EFEA] rounded-3xl border 
             border-[#EDE8E3]"></div>
           </div>
 
-          <div className="order-2 lg:order-none lg:col-start-1 lg:row-start-2 flex items-center justify-center gap-3 pt-1">
+          <div className="order-2 lg:order-0 lg:col-start-1 lg:row-start-2 flex items-center justify-center gap-3 pt-1">
             <div className="w-8 h-8 rounded-full bg-[#F2EFEA] border border-[#E3DDD5]"></div>
             {[1, 2, 3, 4].map((i) => (
               <div key={i} className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-[#F2EFEA] border border-[#EDE8E3]"></div>
@@ -18,7 +18,7 @@ export default function ProductDetailsSkeleton() {
             <div className="w-8 h-8 rounded-full bg-[#F2EFEA] border border-[#E3DDD5]"></div>
           </div>
 
-          <div className="order-3 lg:order-none lg:col-start-2 lg:row-start-1 w-full flex flex-col gap-5">
+          <div className="order-3 lg:order-0 lg:col-start-2 lg:row-start-1 w-full flex flex-col gap-5">
             <div className="flex items-center gap-2.5">
               <div className="h-6 w-20 bg-[#E8E2DC] rounded-full"></div>
               <div className="h-6 w-24 bg-[#E0D7CE] rounded-full"></div>
@@ -43,8 +43,8 @@ export default function ProductDetailsSkeleton() {
 
             <div className="flex items-center gap-3 pt-2 flex-wrap sm:flex-nowrap">
               <div className="h-14 w-36 sm:w-44 bg-[#F2EFEA] rounded-full border border-[#EDE8E3]"></div>
-              <div className="h-14 flex-1 min-w-[180px] bg-[#E8E2DC] rounded-full"></div>
-              <div className="h-14 w-14 rounded-full bg-[#F2EFEA] border border-[#EDE8E3] flex-shrink-0"></div>
+              <div className="h-14 flex-1 min-w-45 bg-[#E8E2DC] rounded-full"></div>
+              <div className="h-14 w-14 rounded-full bg-[#F2EFEA] border border-[#EDE8E3] shrink-0"></div>
             </div>
 
             <div className="border border-[#EDE8E3] rounded-2xl p-5 flex flex-col gap-4 mt-2 bg-white">
@@ -55,7 +55,7 @@ export default function ProductDetailsSkeleton() {
                   <div className="h-3 w-48 bg-[#F2EFEA] rounded"></div>
                 </div>
               </div>
-              <div className="h-[1px] bg-[#EDE8E3]"></div>
+              <div className="h-px bg-[#EDE8E3]"></div>
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-lg bg-[#F2EFEA]"></div>
                 <div className="flex flex-col gap-1.5 flex-1">

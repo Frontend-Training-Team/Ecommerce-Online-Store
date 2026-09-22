@@ -157,7 +157,7 @@ export default function ProductDetails() {
             productName={product.name}
           />
 
-          <div className="order-3 lg:order-none lg:col-start-2 lg:row-start-1 w-full h-full flex flex-col justify-between">
+          <div className="order-3 lg:order-0 lg:col-start-2 lg:row-start-1 w-full h-full flex flex-col justify-between">
             <ProductInfo
               product={product}
               onScrollToReviews={handleScrollToReviews}

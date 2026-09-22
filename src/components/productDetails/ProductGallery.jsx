@@ -21,7 +21,7 @@ export default function ProductGallery({
 
   return (
     <>
-      <div className="order-1 lg:order-none lg:col-start-1 lg:row-start-1 w-full h-full min-h-0 relative">
+      <div className="order-1 lg:order-0 lg:col-start-1 lg:row-start-1 w-full h-full min-h-0 relative">
         <div className="relative lg:absolute lg:inset-0 w-full aspect-square lg:aspect-auto bg-[#F7F5F2] rounded-3xl 
         overflow-hidden border border-[#EDE8E3] flex items-center justify-center group">
           {activeImage ? (
@@ -43,18 +43,18 @@ export default function ProductGallery({
       </div>
 
       {normalizedImages.length > 1 && (
-        <div className="order-2 lg:order-none lg:col-start-1 lg:row-start-2 relative flex items-center justify-center gap-3 pt-1">
+        <div className="order-2 lg:order-0 lg:col-start-1 lg:row-start-2 relative flex items-center justify-center gap-3 pt-1">
           <button
             type="button"
             onClick={handlePrev}
             aria-label="Previous image"
             className="w-8 h-8 rounded-full bg-white border border-[#D6CFC7] text-[#4A423C] hover:bg-[#FAF8F5] 
-            hover:text-[#7E4A2D] flex items-center justify-center shadow-sm transition-colors cursor-pointer flex-shrink-0"
+            hover:text-[#7E4A2D] flex items-center justify-center shadow-sm transition-colors cursor-pointer shrink-0"
           >
             <ChevronLeft className="w-4 h-4" />
           </button>
 
-          <div className="flex items-center gap-3 overflow-x-auto py-1 scrollbar-none max-w-[425px]">
+          <div className="flex items-center gap-3 overflow-x-auto py-1 scrollbar-none max-w-106.25">
             {normalizedImages.map((imgUrl, index) => {
               const isSelected = selectedIndex === index;
               return (
@@ -63,7 +63,7 @@ export default function ProductGallery({
                   type="button"
                   onClick={() => setSelectedIndex(index)}
                   className={`relative w-16 h-16 sm:w-20 sm:h-20 rounded-xl sm:rounded-2xl overflow-hidden 
-                  border-2 transition-all cursor-pointer flex-shrink-0 bg-[#F7F5F2] ${isSelected
+                  border-2 transition-all cursor-pointer shrink-0 bg-[#F7F5F2] ${isSelected
                       ? "border-[#7E4A2D] shadow-md scale-105 ring-2 ring-[#7E4A2D]/20"
                       : "border-transparent hover:border-[#D6CFC7] opacity-75 hover:opacity-100"
                     }`}
@@ -83,7 +83,7 @@ export default function ProductGallery({
             onClick={handleNext}
             aria-label="Next image"
             className="w-8 h-8 rounded-full bg-white border border-[#D6CFC7] text-[#4A423C] hover:bg-[#FAF8F5] 
-            hover:text-[#7E4A2D] flex items-center justify-center shadow-sm transition-colors cursor-pointer flex-shrink-0"
+            hover:text-[#7E4A2D] flex items-center justify-center shadow-sm transition-colors cursor-pointer shrink-0"
           >
             <ChevronRight className="w-4 h-4" />
           </button>

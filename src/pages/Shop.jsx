@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 import { useState, useEffect } from 'react'
 import ProductFilterSidebar from '../components/Ui/searchinput/FilterSidebar'
-import ProductGrid from '../components/Ui/Products/ProductGrid'
 import { useDebounce } from '../hooks/useDebounce'
 import { Search, X, SlidersHorizontal } from 'lucide-react'
 import { getAllProducts } from '../api/products.api'
+import ProductGrid from '../components/productDetails/ProductGrid'
 
 export default function ShopPage() {
   const [searchTerm, setSearchTerm] = useState('')
@@ -135,7 +135,7 @@ export default function ShopPage() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-slate-950 transition-colors duration-200 relative">
-      <main className="max-w-350 mx-auto px-4 mt-3 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-fit mx-auto px-4 mt-3 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] xl:grid-cols-[300px_1fr] gap-8 items-stretch">
           <aside className="w-full lg:border-r lg:border-gray-200 dark:lg:border-slate-800 lg:pr-8">
             <div>
@@ -174,7 +174,7 @@ export default function ShopPage() {
                 <div className="flex items-center gap-3 w-full">
                   <div className="relative flex-1 w-full flex items-center">
                     <span className="absolute left-4 z-10 pointer-events-none text-slate-400 dark:text-slate-500 flex items-center justify-center">
-                      <Search className="w-[16px] h-[16px]" />
+                      <Search className="w-4 h-4" />
                     </span>
                     <input
                       type="text"
@@ -193,7 +193,7 @@ export default function ShopPage() {
                         onClick={handleClearSearch}
                         className="absolute right-3.5 z-10 flex items-center justify-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition"
                         aria-label="Clear search"
-                      > <X className="w-[14px] h-[14px]" />
+                      > <X className="w-3.5 h-3.5" />
                       </button>
                     )}
                   </div>
@@ -203,7 +203,7 @@ export default function ShopPage() {
                     className="lg:hidden p-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 shadow-xs transition shrink-0 active:scale-95 flex items-center justify-center"
                     aria-label="Open Filters"
                   >
-                    <SlidersHorizontal className="w-[16px] h-[16px]" />
+                    <SlidersHorizontal className="w-4 h-4" />
                   </button>
                 </div>
               </div>
@@ -218,6 +218,7 @@ export default function ShopPage() {
                   onLoadMore={handleLoadMore}
                   onAddToCart={handleAddToCart}
                 />
+
               </div>
             </div>
           </section>

@@ -52,7 +52,7 @@ export default function SimilarProducts({
 
       <div
         ref={scrollRef}
-        className="flex gap-6 overflow-x-auto scroll-smooth py-2 px-1 [scrollbar-width:none] [-ms-overflow-style:none] 
+        className="flex gap-6 overflow-x-auto scroll-smooth py-2 px-1 scrollbar-none [-ms-overflow-style:none] 
         [&::-webkit-scrollbar]:hidden"
       >
         {products.map((product) => {

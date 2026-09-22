@@ -29,13 +29,24 @@ export default function ProductGrid({
   return (
     <div className="w-full space-y-8">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 justify-items-center">
-        {products.map((product, index) => (
+        {/* {products.map((product, index) => (
           <ProductCard
             key={product._id || product.id || index}
             product={product}
             onAddToCart={onAddToCart ? () => onAddToCart(product) : onAddToCartSuccess}
           />
-        ))}
+        ))} */}
+        {products.map((product, index) => {
+          return (
+            <div key={product._id} className="shrink-0">
+              <ProductCard
+                product={product}
+                isInWishlist={isWish}
+                onToggleWishlist={onToggleWishlist}
+              />
+            </div>
+          );
+        })}
       </div>
 
       {/* See More Button */}

@@ -115,7 +115,7 @@ export default function ProductInfo({
 
       <div className="flex items-center gap-3 w-full flex-wrap sm:flex-nowrap">
 
-        <div className="h-14 px-6 bg-[#F3F4F6] rounded-full flex items-center justify-between gap-6 w-36 sm:w-44 flex-shrink-0">
+        <div className="h-14 px-6 bg-[#F3F4F6] rounded-full flex items-center justify-between gap-6 w-36 sm:w-44 shrink-0">
           <button
             type="button"
             onClick={handleDecrease}
@@ -125,7 +125,7 @@ export default function ProductInfo({
           >
             -
           </button>
-          <span className="text-lg font-bold text-[#111827] min-w-[24px] text-center select-none">
+          <span className="text-lg font-bold text-[#111827] min-w-6 text-center select-none">
             {quantity}
           </span>
           <button
@@ -166,7 +166,7 @@ export default function ProductInfo({
           disabled={wishlistLoading}
           aria-label={isInWishlist ? "Remove from wishlist" : "Add to wishlist"}
           className={`w-14 h-14 rounded-full flex items-center justify-center border transition-all cursor-pointer 
-            flex-shrink-0 shadow-xs hover:scale-105 active:scale-95 
+            shrink-0 shadow-xs hover:scale-105 active:scale-95 
             ${
             isInWishlist
               ? "bg-[#FEE2E2] border-[#FCA5A5] text-[#DC2626]"
@@ -188,7 +188,7 @@ export default function ProductInfo({
       <div className="border border-[#E3DDD5] rounded-2xl p-4 sm:p-5 flex flex-col gap-3.5 bg-white shadow-sm mt-2">
         <div className="flex items-start gap-3.5">
           <div className="w-9 h-9 rounded-lg bg-[#FAF6F2] border border-[#EADBCE] text-[#7E4A2D] flex items-center 
-          justify-center flex-shrink-0">
+          justify-center shrink-0">
             <Truck className="w-4 h-4" />
           </div>
           <div className="flex flex-col">
@@ -199,11 +199,11 @@ export default function ProductInfo({
           </div>
         </div>
 
-        <div className="h-[1px] bg-[#EDE8E3]"></div>
+        <div className="h-px bg-[#EDE8E3]"></div>
 
         <div className="flex items-start gap-3.5">
           <div className="w-9 h-9 rounded-lg bg-[#FAF6F2] border border-[#EADBCE] text-[#7E4A2D] flex items-center 
-          justify-center flex-shrink-0">
+          justify-center shrink-0">
             <RotateCcw className="w-4 h-4" />
           </div>
           <div className="flex flex-col">
