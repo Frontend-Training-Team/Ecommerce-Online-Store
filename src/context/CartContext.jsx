@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable react-hooks/set-state-in-effect */
 import { createContext, useContext, useEffect, useState, useMemo, useCallback } from "react";
-import { getMyCart, postAddItemToCart, patchUpdateItemQuantity, deleteItemFromCart, deleteClearCart } from "../api/cart.api";
+import { getMyCart, postAddItemToCart, patchUpdateItemQuantity, deleteItemFromCart, deleteClearCart,postApplyCoupon, deleteCoupon } from "../api/cart.api";
 import { useAuth } from "./AuthContext";
 
 const CartContext = createContext(null);
@@ -109,6 +109,24 @@ export function CartProvider({ children }) {
         }
     }, []);
 
+    // apply coupon — response has no `items` array, so merge onto prev cart
+        const applyCoupon = useCallback(async (code) => {
+            const res = await postApplyCoupon({ code });
+            setCart((prev) => ({ ...(prev ?? {}), ...res.data }));
+            return res.data;
+        }, []);
+
+        // remove coupon — response only has { subtotal, total }; clear coupon/discount manually
+        const removeCoupon = useCallback(async () => {
+            const res = await deleteCoupon();
+            setCart((prev) =>
+            prev
+                ? { ...prev, ...res.data, coupon: null, discountAmount: 0 }
+                : prev
+            );
+            return res.data;
+        }, []);
+
     const value = useMemo(() => ({
         cart,
         cartItems,
@@ -120,9 +138,11 @@ export function CartProvider({ children }) {
         updateQuantity,
         removeFromCart,
         clearCart,
+        applyCoupon,
+        removeCoupon,
         setCart,
     }),
-        [cart, cartItems, cartCount, loading, fetchCart, incrementCartCount, addToCart, updateQuantity, removeFromCart, clearCart]
+        [cart, cartItems, cartCount, loading, fetchCart, incrementCartCount, addToCart, updateQuantity, removeFromCart, clearCart, applyCoupon, removeCoupon]
     );
 
     return (

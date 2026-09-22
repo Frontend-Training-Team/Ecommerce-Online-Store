@@ -30,6 +30,7 @@ function App() {
           <Route path="/products" element={<ProductPage />} />
           <Route path="/products/:id" element={<ProductDetails />} />
 
+
           {/* Guest pages */}
           <Route element={<GuestRoute />}>
             <Route path="/register" element={<RegisterPage />} />
