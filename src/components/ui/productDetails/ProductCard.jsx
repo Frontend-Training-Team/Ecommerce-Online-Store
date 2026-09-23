@@ -19,6 +19,8 @@ export default function ProductCard({
   const isWish = propIsInWishlist !== undefined ? propIsInWishlist : checkWishlist(product._id);
   const isWishLoading = isItemLoading(product._id);
 
+  const isOutOfStock = product.stock <= 0;
+
   const price = Number(product.price) || 0;
   const discountPrice = Number(product.discountPrice) || 0;
   const hasDiscount = discountPrice > 0 && discountPrice < price;
@@ -47,6 +49,8 @@ export default function ProductCard({
   const handleAddToCart = async (e) => {
     e.preventDefault();
     e.stopPropagation();
+    if (isOutOfStock) return;
+
     try {
       setAddingToCart(true);
       await addToCart(product._id, 1);
@@ -60,12 +64,11 @@ export default function ProductCard({
 
   return (
     <div className="h-fit w-fit bg-white border-2 border-gray-200 rounded-xl p-2.5 group">
-
       <div className="relative h-82.5 w-82.5">
         <Link
           to={`/products/${product._id}`}
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="block h-82.5 w-82.5"
+          className="block h-82.5 w-82.5 relative"
         >
           <div
             className="relative h-82.5 w-82.5 transition-transform duration-300 group-hover:scale-[1.01]"
@@ -76,14 +79,25 @@ export default function ProductCard({
               backgroundPosition: "center",
             }}
           />
+
+          {isOutOfStock && (
+            <div
+              className="absolute inset-0 bg-black/60 flex items-center justify-center z-20"
+              style={{ clipPath: customPath }}
+            >
+              <span className="text-state-danger font-Inter font-bold text-lg uppercase tracking-wider bg-black/40 px-4 py-2 rounded-lg backdrop-blur-sm border border-white/20">
+                Out of Stock
+              </span>
+            </div>
+          )}
         </Link>
 
         <div className="h-7 px-3.5 flex items-center justify-center bg-amber-950 rounded-3xl uppercase text-xs text-white 
-        text-Inter font-semibold tracking-wider absolute top-4 left-4 pointer-events-none max-w-32.5 truncate shadow-xs">
+        text-Inter font-semibold tracking-wider absolute top-4 left-4 pointer-events-none max-w-32.5 truncate shadow-xs z-30">
           <span>{product.category || "Category"}</span>
         </div>
 
-        <div className="absolute top-4 right-4 flex items-center gap-1.5 pointer-events-none z-10">
+        <div className="absolute top-4 right-4 flex items-center gap-1.5 pointer-events-none z-30">
           {hasDiscount && (
             <div className="h-7 px-2.5 flex items-center justify-center bg-[#00B207] text-white rounded-3xl text-xs 
             font-bold tracking-wide shadow-xs">
@@ -98,15 +112,14 @@ export default function ProductCard({
         </div>
 
         <div className="absolute bottom-2 left-2 bg-white rounded-xl shadow-xs border border-gray-100/80 w-12.5 h-12.5 
-        flex flex-col items-center justify-center pointer-events-none z-10">
+        flex flex-col items-center justify-center pointer-events-none z-30">
           <Star className="w-3.5 h-3.5 fill-[#F59E0B] text-[#F59E0B]" />
           <span className="text-xs font-bold text-[#1E1E1E] mt-1 leading-none">
             {rating}
           </span>
         </div>
 
-        <div className="absolute bottom-0 right-0 grid h-fit w-fit grid-cols-2 gap-2 z-10">
-
+        <div className="absolute bottom-0 right-0 grid h-fit w-fit grid-cols-2 gap-2 z-30">
           <button
             type="button"
             onClick={handleWishlistClick}
@@ -116,7 +129,7 @@ export default function ProductCard({
             ${isWish
                 ? "bg-[#FEE2E2] text-[#DC2626]"
                 : "bg-gray-200 text-black hover:bg-gray-300 hover:text-[#DC2626]"
-            } disabled:cursor-not-allowed`}
+              } disabled:cursor-not-allowed`}
           >
             {isWishLoading ? (
               <Loader2 className="h-6 w-6 animate-spin text-current" />
@@ -128,10 +141,13 @@ export default function ProductCard({
           <button
             type="button"
             onClick={handleAddToCart}
-            disabled={addingToCart}
+            disabled={addingToCart || isOutOfStock}
             aria-label="Add to cart"
-            className="flex h-13.5 w-13.5 items-center justify-center rounded-xl bg-gray-200 text-black 
-            hover:bg-gray-300 hover:text-[#8E4726] transition-all cursor-pointer disabled:cursor-not-allowed"
+            className={`flex h-13.5 w-13.5 items-center justify-center rounded-xl transition-all 
+            ${isOutOfStock
+                ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                : "bg-gray-200 text-black hover:bg-gray-300 hover:text-[#8E4726] cursor-pointer"
+              } disabled:cursor-not-allowed`}
           >
             {addingToCart ? (
               <Loader2 className="h-6 w-6 animate-spin text-current" />

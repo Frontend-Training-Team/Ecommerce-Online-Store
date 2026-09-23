@@ -119,10 +119,10 @@ export default function Navbar() {
           {/* Right: Actions & Tools */}
           <div className="flex items-center gap-2 sm:gap-2.5 flex-nowrap">
 
-            {/* Desktop Expanding Search (Hidden on Mobile to keep top bar clean and spacious) */}
+            {/* Desktop Expanding Search  */}
             <div
               ref={searchContainerRef}
-              className={`hidden md:flex relative items-center h-9 rounded-full transition-all duration-300 ease-in-out overflow-hidden shrink-0 
+              className={`hidden md:flex relative items-center h-9 rounded-full transition-all duration-300 ease-in-out overflow-hidden shrink-0   hover:scale-x-105
                 ${isHomePage
                   ? isSearchOpen
                     ? "w-40 sm:w-48 md:w-52 border border-white/60 bg-black/40 backdrop-blur-md shadow-lg"
@@ -144,11 +144,10 @@ export default function Navbar() {
                     searchInputRef.current?.focus();
                   }
                 }}
-                className={`w-9 h-9 flex items-center justify-center transition-colors cursor-pointer shrink-0 ${
-                  isHomePage
-                    ? "text-white hover:text-white"
-                    : "text-[#5B5B5B] bg-white/10 dark:text-[#A0A5AE] dark:hover:text-white"
-                }`}
+                className={`w-9 h-9 flex items-center justify-center transition-colors cursor-pointer shrink-0 ${isHomePage
+                  ? "text-white hover:text-white"
+                  : "text-[#5B5B5B] bg-white/10 dark:text-[#A0A5AE] dark:hover:text-white"
+                  }`}
                 title="Search"
                 aria-label="Search"
               >
@@ -158,9 +157,8 @@ export default function Navbar() {
               {/* Input & Clear Action (smooth fade in/out) */}
               <form
                 onSubmit={handleSearchSubmit}
-                className={`flex-1 h-full flex items-center pr-2.5 min-w-0 transition-opacity duration-200 ${
-                  isSearchOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none w-0"
-                }`}
+                className={`flex-1 h-full flex items-center pr-2.5 min-w-0 transition-opacity duration-200 ${isSearchOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none w-0"
+                  }`}
               >
                 <input
                   ref={searchInputRef}
@@ -171,11 +169,10 @@ export default function Navbar() {
                     if (e.key === "Escape") setIsSearchOpen(false);
                   }}
                   placeholder="Search..."
-                  className={`w-full h-full bg-transparent text-[13px] outline-none ${
-                    isHomePage
-                      ? "text-white placeholder-white/60"
-                      : "text-[#222222] dark:text-[#F5F1EA] placeholder-[#7A7E85] dark:placeholder-[#7E8590]"
-                  }`}
+                  className={`w-full h-full bg-transparent text-[13px] outline-none ${isHomePage
+                    ? "text-white placeholder-white/60"
+                    : "text-[#222222] dark:text-[#F5F1EA] placeholder-[#7A7E85] dark:placeholder-[#7E8590]"
+                    }`}
                 />
                 <button
                   type="button"
@@ -190,11 +187,10 @@ export default function Navbar() {
                       setIsSearchOpen(false);
                     }
                   }}
-                  className={`p-1 transition-colors cursor-pointer shrink-0 rounded-full ${
-                    isHomePage
-                      ? "text-white/80 hover:text-white hover:bg-white/20"
-                      : "text-[#5B5B5B] hover:text-black dark:text-[#A0A5AE] dark:hover:text-white hover:bg-gray-200/50 dark:hover:bg-slate-700/50"
-                  }`}
+                  className={`p-1 transition-colors cursor-pointer shrink-0 rounded-full ${isHomePage
+                    ? "text-white/80 hover:text-white hover:bg-white/20"
+                    : "text-[#5B5B5B] hover:text-black dark:text-[#A0A5AE] dark:hover:text-white hover:bg-gray-200/50 dark:hover:bg-slate-700/50"
+                    }`}
                   title={searchQuery ? "Clear search" : "Close search"}
                   aria-label={searchQuery ? "Clear search" : "Close search"}
                 >
@@ -203,41 +199,37 @@ export default function Navbar() {
               </form>
             </div>
 
-            {/* Dark Mode Switch - matching exact Figma Design & preserving user's alignment */}
+            {/* Dark Mode Switch */}
             <button
               type="button"
               onClick={toggleTheme}
               aria-label="Toggle Theme"
               title={isDark ? "Switch to light mode" : "Switch to dark mode"}
-              className={`relative w-14.5 sm:w-16 h-full sm:h-8-5 rounded-full p-0.75 flex items-center cursor-pointer select-none transition-colors duration-200 shrink-0 ${
-                isHomePage
-                  ? "bg-white/15 border border-white/40 hover:border-white/80 backdrop-blur-xs"
-                  : "bg-white/10 dark:bg-[#202327] border border-[#5B5B5B] dark:border-[#2F333B]"
-              }`}
+              className={`relative w-14.5 sm:w-16 h-full sm:h-8-5 rounded-full p-0.75 flex items-center cursor-pointer select-none transition-colors duration-200 shrink-0 ${isHomePage
+                ? "bg-white/15 border border-white/40 hover:border-white/80 backdrop-blur-xs"
+                : "bg-white/10 dark:bg-[#202327] border border-[#5B5B5B] dark:border-[#2F333B]"
+                }`}
             >
               {/* Left Slot: Dot in dark mode */}
               <div className="w-6 sm:w-7 h-6 sm:h-7 flex items-center justify-center">
                 <span
-                  className={`w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full transition-all duration-300 ${
-                    isHomePage ? "bg-white/70" : "bg-[#727883] dark:bg-[#8A96A8]"
-                  } ${isDark ? "opacity-100 scale-100" : "opacity-0 scale-50"}`}
+                  className={`w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full transition-all duration-300 ${isHomePage ? "bg-white/70" : "bg-[#727883] dark:bg-[#8A96A8]"
+                    } ${isDark ? "opacity-100 scale-100" : "opacity-0 scale-50"}`}
                 />
               </div>
 
               {/* Right Slot: Dot in light mode */}
               <div className="w-6 sm:w-7 h-6 sm:h-7 flex items-center justify-center ml-auto">
                 <span
-                  className={`w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full transition-all duration-300 ${
-                    isHomePage ? "bg-white/70" : "bg-[#727883] dark:bg-[#8A96A8]"
-                  } ${!isDark ? "opacity-100 scale-100" : "opacity-0 scale-50"}`}
+                  className={`w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full transition-all duration-300 ${isHomePage ? "bg-white/70" : "bg-[#727883] dark:bg-[#8A96A8]"
+                    } ${!isDark ? "opacity-100 scale-100" : "opacity-0 scale-50"}`}
                 />
               </div>
 
-              {/* Sliding White Knob with Sun / Moon Icon (preserving user's top-[2px] left-[3px]) */}
+              {/* Sliding White Knob with Sun / Moon Icon */}
               <div
-                className={`absolute top-0.6 left-0.75 w-6.5 sm:w-7 h-6.5 sm:h-7 rounded-full bg-white shadow-sm flex items-center justify-center transition-transform duration-300 ease-in-out ${
-                  isDark ? "translate-x-6.5 sm:translate-x-7" : "translate-x-0"
-                }`}
+                className={`absolute top-0.6 left-0.75 w-6.5 sm:w-7 h-6.5 sm:h-7 rounded-full bg-white shadow-sm flex items-center justify-center transition-transform duration-300 ease-in-out ${isDark ? "translate-x-6.5 sm:translate-x-7" : "translate-x-0"
+                  }`}
               >
                 {isDark ? (
                   <Moon className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-[#1A1C20] transition-transform duration-200" strokeWidth={2.2} />
@@ -247,14 +239,13 @@ export default function Navbar() {
               </div>
             </button>
 
-            {/* Wishlist Button (Hidden on Mobile, accessible in Mobile Menu) */}
+            {/* Wishlist Button */}
             <Link
               to="/wishlist"
-              className={`hidden md:flex w-8 h-8 sm:w-9 sm:h-9 rounded-full items-center justify-center transition-all relative shrink-0 ${
-                isHomePage
-                  ? "border border-white/40 text-white bg-white/10 hover:border-white hover:bg-white/20"
-                  : "border border-[#5B5B5B] dark:border-[#2F333B] dark:bg-[#202327] text-[#5B5B5B] bg-white/10 dark:text-[#A0A5AE] dark:hover:border-white/30 dark:hover:text-white"
-              }`}
+              className={`hidden md:flex w-8 h-8 sm:w-9 sm:h-9 rounded-full items-center justify-center transition-all relative shrink-0 ${isHomePage
+                ? "border border-white/40 text-white bg-white/10 hover:border-white hover:bg-white/20"
+                : "border border-[#5B5B5B] dark:border-[#2F333B] dark:bg-[#202327] text-[#5B5B5B] bg-white/10 dark:text-white hover:bg-white/20 hover:scale-x-105"
+                }`}
               title="Wishlist"
             >
               <Heart className="w-3.5 h-3.5 sm:w-4 sm:h-4" strokeWidth={1.5} />
@@ -265,14 +256,13 @@ export default function Navbar() {
               )}
             </Link>
 
-            {/* Cart Button with Figma White Badge (Hidden on Mobile, accessible in Mobile Menu) */}
+            {/* Cart Button */}
             <Link
               to="/cart"
-              className={`hidden md:flex w-8 h-8 sm:w-9 sm:h-9 rounded-full items-center justify-center transition-all relative shrink-0 ${
-                isHomePage
-                  ? "border border-white/40 text-white bg-white/10 hover:border-white hover:bg-white/20"
-                  : "border border-[#5B5B5B] dark:border-[#2F333B] dark:bg-[#202327] text-[#5B5B5B] bg-white/10 dark:text-[#A0A5AE] dark:hover:border-white/30 dark:hover:text-white"
-              }`}
+              className={`hidden md:flex w-8 h-8 sm:w-9 sm:h-9 rounded-full items-center justify-center transition-all relative shrink-0 ${isHomePage
+                ? "border border-white/40 text-white bg-white/10 hover:border-white hover:bg-white/20"
+                : "border border-[#5B5B5B] dark:border-[#2F333B] dark:bg-[#202327] text-[#5B5B5B] bg-white/10 dark:text-white hover:bg-white/20 hover:scale-x-105"
+                }`}
               title="Cart"
             >
               <ShoppingBag className="w-3.5 h-3.5 sm:w-4 sm:h-4" strokeWidth={1.5} />
@@ -284,18 +274,16 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop Divider */}
-            <div className={`hidden md:block h-5 w-px mx-0.5 lg:mx-1 shrink-0 ${
-              isHomePage ? "bg-white/40" : "bg-[#5B5B5B] dark:bg-[#2F333B]"
-            }`}></div>
+            <div className={`hidden md:block h-5 w-px mx-0.5 lg:mx-1 shrink-0 ${isHomePage ? "bg-white/40" : "bg-[#5B5B5B] dark:bg-[#2F333B]"
+              }`}></div>
 
-            {/* User Button (Desktop) */}
+            {/* Profile Button */}
             <Link
               to={user ? "/profile" : "/Login"}
-              className={`hidden md:flex h-9 px-3.5 rounded-full items-center gap-2 transition-all text-[13px] font-medium shrink-0 ${
-                isHomePage
-                  ? "border border-white/40 text-white bg-white/10 hover:border-white hover:bg-white/20"
-                  : "border border-[#5B5B5B] dark:border-[#2F333B] dark:bg-[#202327] text-[#5B5B5B] bg-white/10 dark:text-white hover:border-[#9A4D2C] hover:text-[#9A4D2C]"
-              }`}
+              className={`hidden md:flex h-9 px-3.5 rounded-full items-center gap-2 transition-all text-[13px] font-medium shrink-0 ${isHomePage
+                ? "border border-white/40 text-white bg-white/10 hover:border-white hover:bg-white/20"
+                : "border border-[#5B5B5B] dark:border-[#2F333B] dark:bg-[#202327] text-[#5B5B5B] bg-white/10 dark:text-white hover:bg-white/20 hover:scale-x-105"
+                }`}
             >
               <User className={`w-4 h-4 ${isHomePage ? "text-white" : "text-[#5B5B5B] dark:text-[#A0A5AE]"}`} strokeWidth={1.5} />
               <span>{user?.username ? user.username.split(" ")[0] : "Username"}</span>
@@ -305,11 +293,10 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`md:hidden w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center transition-all cursor-pointer shrink-0 ${
-                isHomePage
-                  ? "border border-white/40 text-white bg-white/10 hover:border-white"
-                  : "border border-[#5B5B5B] dark:border-[#2F333B] bg-transparent dark:bg-[#202327] text-[#222222] dark:text-[#A0A5AE] hover:border-[#9A4D2C] hover:text-[#9A4D2C] dark:hover:text-white"
-              }`}
+              className={`md:hidden w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center transition-all cursor-pointer shrink-0 ${isHomePage
+                ? "border border-white/40 text-white bg-white/10 hover:border-white"
+                : "border border-[#5B5B5B] dark:border-[#2F333B] bg-transparent dark:bg-[#202327] text-[#222222] dark:text-[#A0A5AE] hover:border-[#9A4D2C] hover:text-[#9A4D2C] dark:hover:text-white"
+                }`}
               title="Toggle Menu"
               aria-label="Toggle Menu"
             >
@@ -326,11 +313,10 @@ export default function Navbar() {
 
         {/* Mobile Menu Dropdown (Search is cleanly placed here for mobile users) */}
         {isMobileMenuOpen && (
-          <div className={`md:hidden px-4 py-3 space-y-1.5 shadow-md border-t ${
-            isHomePage
-              ? "bg-[#161413]/95 backdrop-blur-md border-white/15 text-white"
-              : "bg-[#E2E2E4] dark:bg-[#16181D] border-[#D0D2D7] dark:border-[#2F333B]"
-          }`}>
+          <div className={`md:hidden px-4 py-3 space-y-1.5 shadow-md border-t ${isHomePage
+            ? "bg-[#161413]/95 backdrop-blur-md border-white/15 text-white"
+            : "bg-[#E2E2E4] dark:bg-[#16181D] border-[#D0D2D7] dark:border-[#2F333B]"
+            }`}>
             {/* Mobile Search Bar inside Menu */}
             <form
               onSubmit={(e) => {
@@ -344,15 +330,13 @@ export default function Navbar() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search products..."
-                className={`w-full h-9 pl-9 pr-9 rounded-full border text-sm outline-none transition-colors ${
-                  isHomePage
-                    ? "border-white/30 bg-white/10 text-white placeholder-white/50 focus:border-white/60"
-                    : "border-[#5B5B5B] dark:border-[#2F333B] bg-white/90 dark:bg-[#202328] text-[#222] dark:text-[#F5F1EA] placeholder-[#7A7E85] dark:placeholder-[#7E8590] focus:border-[#9A4D2C]"
-                }`}
+                className={`w-full h-9 pl-9 pr-9 rounded-full border text-sm outline-none transition-colors ${isHomePage
+                  ? "border-white/30 bg-white/10 text-white placeholder-white/50 focus:border-white/60"
+                  : "border-[#5B5B5B] dark:border-[#2F333B] bg-white/90 dark:bg-[#202328] text-[#222] dark:text-[#F5F1EA] placeholder-[#7A7E85] dark:placeholder-[#7E8590] focus:border-[#9A4D2C]"
+                  }`}
               />
-              <Search className={`w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 pt-0.5 ${
-                isHomePage ? "text-white/60" : "text-[#7A7E85]"
-              }`} strokeWidth={1.5} />
+              <Search className={`w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 pt-0.5 ${isHomePage ? "text-white/60" : "text-[#7A7E85]"
+                }`} strokeWidth={1.5} />
               {searchQuery && (
                 <button
                   type="button"
@@ -362,9 +346,8 @@ export default function Navbar() {
                     e.stopPropagation();
                     setSearchQuery("");
                   }}
-                  className={`absolute right-2.5 top-1/2 -translate-y-1/2 p-1 cursor-pointer ${
-                    isHomePage ? "text-white/70 hover:text-white" : "text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
-                  }`}
+                  className={`absolute right-2.5 top-1/2 -translate-y-1/2 p-1 cursor-pointer ${isHomePage ? "text-white/70 hover:text-white" : "text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+                    }`}
                   aria-label="Clear search"
                 >
                   <X className="w-3.5 h-3.5" />
@@ -422,9 +405,8 @@ export default function Navbar() {
               </div>
             </NavLink>
 
-            <hr className={`my-2 ${
-              isHomePage ? "border-white/15" : "border-[#D0D2D7] dark:border-[#2F333B]"
-            }`} />
+            <hr className={`my-2 ${isHomePage ? "border-white/15" : "border-[#D0D2D7] dark:border-[#2F333B]"
+              }`} />
 
             <NavLink
               to={user ? "/profile" : "/Login"}

@@ -32,7 +32,7 @@ function Home() {
   }, []);
 
   const categories = useMemo(() => {
-    return [...new  Set(products.map((product) => product.category))];
+    return [...new Set(products.map((product) => product.category))];
   }, [products]);
 
   console.log(categories)

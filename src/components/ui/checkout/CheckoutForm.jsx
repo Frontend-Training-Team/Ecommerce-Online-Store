@@ -105,7 +105,7 @@ export default function CheckoutForm({ register, errors, handleSubmit, onSubmit 
             type="text"
             placeholder="Enter postal code"
             {...register('postalCode')}
-            className="w-full px-4 py-2.5 rounded-xl bg-white border border-[#e8dfd5] text-[#2d2421] placeholder-[#a39489] text-xs[12px]و
+            className="w-full px-4 py-2.5 rounded-xl bg-white border border-[#e8dfd5] text-[#2d2421] placeholder-[#a39489] text-xs[12px]
              focus:outline-none focus:border-[#c07a50] focus:ring-1 focus:ring-[#c07a50] transition-colors"
           />
         </div>

@@ -40,7 +40,7 @@ function App() {
             <Route path="/forgot-password" element={<ForgotPasswordPage />} />
             <Route path="/forgot-password-verify-otp" element={<ForgotPasswordVerifyOtp />} />
           </Route>
-          
+
           {/* Protected pages */}
           <Route element={<ProtectedRoute />}>
             <Route path="/cart" element={<CartPage />} />/

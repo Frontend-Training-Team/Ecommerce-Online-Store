@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Filter, ChevronDown, X, ArrowUp, ArrowDown, Sparkles, Star } from 'lucide-react';
+import { ChevronDown, X, ArrowUp, ArrowDown, Sparkles, Star } from 'lucide-react';
 
 export default function ProductFilterSidebar({
   selectedCategory,
@@ -32,13 +32,11 @@ export default function ProductFilterSidebar({
         const data = await response.json();
         const fetchedProducts = data.products || (Array.isArray(data) ? data : []);
 
-        
+
 
         const extractedCategories = fetchedProducts
           .map((p) => (p.category || p.categoryName || '').trim())
           .filter(Boolean);
-
-          console.log(extractedCategories)
 
         const uniqueCategories = [...new Set(extractedCategories)];
 
@@ -75,8 +73,8 @@ export default function ProductFilterSidebar({
 
       {/* Sidebar Container */}
       <div
-        className={`fixed inset-y-0 left-0 z-50 w-72 bg-white dark:bg-slate-900 p-5 overflow-y-auto transition-transform 
-          duration-300 ease-in-out lg:static lg:w-full lg:p-0 lg:bg-transparent dark:lg:bg-transparent lg:overflow-visible lg:translate-x-0 
+        className={`fixed inset-y-0 left-0 z-50 w-72 bg-white dark:bg-slate-900 p-5 overflow-y-auto transition-transform
+          duration-300 ease-in-out lg:static lg:w-full lg:p-0 lg:bg-transparent dark:lg:bg-transparent lg:overflow-visible lg:translate-x-0  
           ${isOpen ? 'translate-x-0' : '-translate-x-full'
           }`}
       >
@@ -84,10 +82,7 @@ export default function ProductFilterSidebar({
 
           {/* Main Title with Filter Icon */}
           <div className="flex items-center justify-between pb-1">
-            <div className="flex items-center gap-2 text-[35px] font-medium  font-Instrument dark:text-white">
-              <Filter className="w-5 h-5 fill-black dark:fill-white" />
-              <span>Filters</span>
-            </div>
+
             {onClose && (
               <button
                 onClick={onClose}
@@ -99,7 +94,7 @@ export default function ProductFilterSidebar({
             )}
           </div>
 
-          <hr className="border-slate-200 dark:border-slate-800" />
+          {/* <hr className="border-slate-200 dark:border-slate-800" /> */}
 
           {/* Applied Filters Section */}
           <div>
@@ -110,14 +105,14 @@ export default function ProductFilterSidebar({
                   onClick={onClearFilters}
                   className="text-[14px] text-inter hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 underline transition cursor-pointer"
                 >
-                  clear all
+                  Clear all
                 </button>
               )}
             </div>
 
-            <div className="flex flex-wrap items-center gap-1.5 min-h-[32px]">
+            <div className="flex flex-wrap items-center gap-1.5 min-h-8">
               {selectedCategory !== 'All' && (
-                <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 rounded text-xs font-medium">
+                <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 rounded text-xs font-medium capitalize">
                   {selectedCategory}
                   <button
                     onClick={() => setSelectedCategory('All')}
@@ -189,7 +184,7 @@ export default function ProductFilterSidebar({
           {/* Price Range Section */}
           <div>
             <h3 className="text-[16px] font-semibold text-inter dark:text-slate-100 mb-3">Price Range</h3>
-            <div className="flex items-center gap-3 w-[240px] h-[40px]">
+            <div className="flex items-center gap-3">
               <input
                 type="number"
                 placeholder="Min"

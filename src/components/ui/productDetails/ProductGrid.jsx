@@ -1,4 +1,3 @@
-
 import { ProductGridSkeleton } from '../skeleton/ProductSkeleton';
 import ProductCard from './ProductCard';
 import Pagination from './Pagination';
@@ -18,7 +17,7 @@ export default function ProductGrid({
   onPageChange,
 }) {
   if (isLoading && products.length === 0) {
-    return <ProductGridSkeleton count={6} />;
+    return <ProductGridSkeleton count={6} className={`grid-cols-1 ${columns} gap-4`} />;
   }
 
   if (!isLoading && products.length === 0) {
