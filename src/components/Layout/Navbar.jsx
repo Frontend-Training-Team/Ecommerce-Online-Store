@@ -247,10 +247,10 @@ export default function Navbar() {
               </div>
             </button>
 
-            {/* Wishlist Button */}
+            {/* Wishlist Button (Hidden on Mobile, accessible in Mobile Menu) */}
             <Link
               to="/wishlist"
-              className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center transition-all relative shrink-0 ${
+              className={`hidden md:flex w-8 h-8 sm:w-9 sm:h-9 rounded-full items-center justify-center transition-all relative shrink-0 ${
                 isHomePage
                   ? "border border-white/40 text-white bg-white/10 hover:border-white hover:bg-white/20"
                   : "border border-[#5B5B5B] dark:border-[#2F333B] dark:bg-[#202327] text-[#5B5B5B] bg-white/10 dark:text-[#A0A5AE] dark:hover:border-white/30 dark:hover:text-white"
@@ -265,10 +265,10 @@ export default function Navbar() {
               )}
             </Link>
 
-            {/* Cart Button with Figma White Badge */}
+            {/* Cart Button with Figma White Badge (Hidden on Mobile, accessible in Mobile Menu) */}
             <Link
               to="/cart"
-              className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center transition-all relative shrink-0 ${
+              className={`hidden md:flex w-8 h-8 sm:w-9 sm:h-9 rounded-full items-center justify-center transition-all relative shrink-0 ${
                 isHomePage
                   ? "border border-white/40 text-white bg-white/10 hover:border-white hover:bg-white/20"
                   : "border border-[#5B5B5B] dark:border-[#2F333B] dark:bg-[#202327] text-[#5B5B5B] bg-white/10 dark:text-[#A0A5AE] dark:hover:border-white/30 dark:hover:text-white"
@@ -326,7 +326,11 @@ export default function Navbar() {
 
         {/* Mobile Menu Dropdown (Search is cleanly placed here for mobile users) */}
         {isMobileMenuOpen && (
-          <div className="md:hidden bg-[#E2E2E4] dark:bg-[#16181D] border-t border-[#D0D2D7] dark:border-[#2F333B] px-4 py-3 space-y-1.5 shadow-md">
+          <div className={`md:hidden px-4 py-3 space-y-1.5 shadow-md border-t ${
+            isHomePage
+              ? "bg-[#161413]/95 backdrop-blur-md border-white/15 text-white"
+              : "bg-[#E2E2E4] dark:bg-[#16181D] border-[#D0D2D7] dark:border-[#2F333B]"
+          }`}>
             {/* Mobile Search Bar inside Menu */}
             <form
               onSubmit={(e) => {
@@ -340,9 +344,15 @@ export default function Navbar() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search products..."
-                className="w-full h-9 pl-9 pr-9 rounded-full border border-[#5B5B5B] dark:border-[#2F333B] bg-white/90 dark:bg-[#202328] text-sm text-[#222] dark:text-[#F5F1EA] placeholder-[#7A7E85] dark:placeholder-[#7E8590] outline-none focus:border-[#9A4D2C]"
+                className={`w-full h-9 pl-9 pr-9 rounded-full border text-sm outline-none transition-colors ${
+                  isHomePage
+                    ? "border-white/30 bg-white/10 text-white placeholder-white/50 focus:border-white/60"
+                    : "border-[#5B5B5B] dark:border-[#2F333B] bg-white/90 dark:bg-[#202328] text-[#222] dark:text-[#F5F1EA] placeholder-[#7A7E85] dark:placeholder-[#7E8590] focus:border-[#9A4D2C]"
+                }`}
               />
-              <Search className="w-4 h-4 text-[#7A7E85] absolute left-3 top-1/2 -translate-y-1/2 pt-0.5" strokeWidth={1.5} />
+              <Search className={`w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 pt-0.5 ${
+                isHomePage ? "text-white/60" : "text-[#7A7E85]"
+              }`} strokeWidth={1.5} />
               {searchQuery && (
                 <button
                   type="button"
@@ -352,7 +362,9 @@ export default function Navbar() {
                     e.stopPropagation();
                     setSearchQuery("");
                   }}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 cursor-pointer"
+                  className={`absolute right-2.5 top-1/2 -translate-y-1/2 p-1 cursor-pointer ${
+                    isHomePage ? "text-white/70 hover:text-white" : "text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+                  }`}
                   aria-label="Clear search"
                 >
                   <X className="w-3.5 h-3.5" />
@@ -386,10 +398,33 @@ export default function Navbar() {
               onClick={() => setIsMobileMenuOpen(false)}
               className={mobileNavLinkClass}
             >
-              Wishlist
+              <div className="flex items-center justify-between">
+                <span>Wishlist</span>
+                {wishlistCount > 0 && (
+                  <span className="bg-[#9A4D2C] text-white text-[11px] font-bold px-2 py-0.5 rounded-full">
+                    {wishlistCount}
+                  </span>
+                )}
+              </div>
+            </NavLink>
+            <NavLink
+              to="/cart"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className={mobileNavLinkClass}
+            >
+              <div className="flex items-center justify-between">
+                <span>Cart</span>
+                {cartCount > 0 && (
+                  <span className="bg-[#9A4D2C] text-white text-[11px] font-bold px-2 py-0.5 rounded-full">
+                    {cartCount}
+                  </span>
+                )}
+              </div>
             </NavLink>
 
-            <hr className="border-[#D0D2D7] dark:border-[#2F333B] my-2" />
+            <hr className={`my-2 ${
+              isHomePage ? "border-white/15" : "border-[#D0D2D7] dark:border-[#2F333B]"
+            }`} />
 
             <NavLink
               to={user ? "/profile" : "/Login"}
