@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { postForgotPasswordVerifyOtp, postForgotPasswordSendOtp } from '../api/auth.api';
-import ResetPasswordCard from '../components/Ui/auth/ResetPasswordCard';
+import ResetPasswordCard from '../components/ui/auth/ResetPasswordCard';
 
 export default function ForgotPasswordVerifyOtp() {
   const navigate = useNavigate();
@@ -11,7 +11,6 @@ export default function ForgotPasswordVerifyOtp() {
 
   const [otpArray, setOtpArray] = useState(['', '', '', '', '', '']);
   const [password, setPassword] = useState('');
-  const [errorMsg, setErrorMsg] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [timer, setTimer] = useState(60);
   const [isResending, setIsResending] = useState(false);
@@ -60,13 +59,11 @@ export default function ForgotPasswordVerifyOtp() {
 
       toast.success(response.data?.message || 'Password reset successfully!');
       setTimeout(() => {
-        navigate('/login');
+        navigate('/Login');
       }, 1500);
     } catch (error) {
       const errorMsgText = error.response?.data?.message || 'Invalid OTP Or Failed to reset password. Please try again.';
       toast.error(errorMsgText);
-
-      setErrorMsg(errorMsgText);
     } finally {
       setIsLoading(false);
     }
@@ -93,7 +90,7 @@ export default function ForgotPasswordVerifyOtp() {
         setOtpArray={setOtpArray}
         password={password}
         setPassword={setPassword}
-        setErrorMsg={setErrorMsg}
+        setErrorMsg={() => {}}
         onResetPassword={handleResetPassword}
         isLoading={isLoading}
         email={email}

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { Loader2, Plus, Edit2, Trash2, Home, Briefcase } from "lucide-react";
-import { patchUpdateUser } from "../../api/users.api";
+import { patchUpdateUser } from "../../../api/users.api";
 
 export default function AddressBook({ user, updateUser }) {
     const addresses = user?.addresses || [];
@@ -127,7 +127,7 @@ export default function AddressBook({ user, updateUser }) {
                 addresses: updatedList,
             });
             toast.success("Default address updated!");
-        } catch (err) {
+        } catch {
             toast.error("Failed to update default address");
         } finally {
             setDefaultingIndex(null);

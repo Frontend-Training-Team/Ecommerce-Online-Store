@@ -98,7 +98,7 @@ const ForgotPasswordPage = () => {
             Remembered your password?
           </span>
           <Link
-            to="/login"
+            to="/Login"
             className="font-semibold text-[#8E4726] dark:text-[#C86D43] hover:underline transition-colors"
           >
             Login

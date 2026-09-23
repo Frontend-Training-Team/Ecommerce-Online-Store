@@ -148,7 +148,7 @@ export default function OrderSummaryCard({ cart, onApplyCoupon, onRemoveCoupon }
       </div>
       <button
         type="button"
-        onClick={() => navigate("/products")}
+        onClick={() => navigate("/shop")}
         className="flex w-full items-center justify-center gap-2 rounded-xl border border-[#D8C2B6] bg-white px-4 py-3 text-sm font-semibold text-[#5C4A3E] transition-colors hover:bg-[#F5EFEA] hover:text-[#2D241E] dark:border-[#3a322d] dark:bg-[#221d1a] dark:text-[#c5b6a3] dark:hover:bg-[#342823] dark:hover:text-[#f3ede6]"
       >
         <ArrowLeft className="h-4 w-4" />

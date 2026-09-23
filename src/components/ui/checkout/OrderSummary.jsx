@@ -8,12 +8,12 @@ export default function OrderSummary({ cartItems = [], subtotal = 0, shipping = 
       {/* Cart Items */}
       <div className="space-y-4 max-h-72 overflow-y-auto pr-1">
         {cartItems.length === 0 ? (
-          <p className="text-xs[12px] text-[#a39489] italic">Your cart is empty.</p>
+          <p className="text-xs text-[#a39489] italic">Your cart is empty.</p>
         ) : (
           cartItems.map((item, idx) => {
             const product = item.product || item;
             return (
-              <div key={item._id || idx} className="flex items-center justify-between text-xs[12px]">
+              <div key={item._id || idx} className="flex items-center justify-between text-xs">
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 rounded-lg bg-[#faf8f5] border border-[#e8dfd5] overflow-hidden
                    flex-shrink-0 flex items-center justify-center">
@@ -36,7 +36,7 @@ export default function OrderSummary({ cartItems = [], subtotal = 0, shipping = 
       </div>
 
       {/* Pricing Details */}
-      <div className="border-t border-[#f5efe6] pt-4 space-y-2.5 text-xs[12px] text-[#736358]">
+      <div className="border-t border-[#f5efe6] pt-4 space-y-2.5 text-xs text-[#736358]">
         <div className="flex justify-between">
           <span>Subtotal</span>
           <span className="font-semibold text-[#2d2421]">EGP {subtotal}</span>
@@ -60,7 +60,7 @@ export default function OrderSummary({ cartItems = [], subtotal = 0, shipping = 
         type="button"
         onClick={onPlaceOrder}
         disabled={isSubmitting}
-        className="w-full py-3 px-6 rounded-xl bg-[#c07a50] hover:bg-[#ad6a42] text-white font-semibold text-sml[14px]
+        className="w-full py-3 px-6 rounded-xl bg-[#c07a50] hover:bg-[#ad6a42] text-white font-semibold text-sm
          transition-colors shadow-sm active:scale-[0.99] disabled:opacity-50"
       >
         {isSubmitting ? 'Placing Order...' : 'Place Order'}

@@ -1,16 +1,17 @@
 /* eslint-disable react-hooks/set-state-in-effect */
-import { useState, useEffect } from 'react'
-import { useSearchParams } from 'react-router-dom'
-import ProductFilterSidebar from '../components/Ui/searchinput/FilterSidebar'
+import { useState, useEffect, useRef } from 'react'
+import { useSearchParams, Link } from 'react-router-dom'
+import ProductFilterSidebar from '../components/ui/searchinput/FilterSidebar'
 import { useDebounce } from '../hooks/useDebounce'
 import { Search, X, SlidersHorizontal } from 'lucide-react'
 import { getAllProducts } from '../api/products.api'
-import ProductGrid from '../components/productDetails/ProductGrid'
+import ProductGrid from '../components/ui/productDetails/ProductGrid'
 
 export default function ShopPage() {
   const [searchParams, setSearchParams] = useSearchParams()
-  const [searchTerm, setSearchTerm] = useState('')
-  const [selectedCategory, setSelectedCategory] = useState('All')
+  const searchInputRef = useRef(null)
+  const [searchTerm, setSearchTerm] = useState(() => searchParams.get('search') || searchParams.get('keyword') || '')
+  const [selectedCategory, setSelectedCategory] = useState(() => searchParams.get('category') || 'All')
   const [minPrice, setMinPrice] = useState('')
   const [maxPrice, setMaxPrice] = useState('')
   const [sortBy, setSortBy] = useState('default')
@@ -18,9 +19,9 @@ export default function ShopPage() {
 
   const [allProducts, setAllProducts] = useState([])
   const [filteredProducts, setFilteredProducts] = useState([])
-  const [visibleCount, setVisibleCount] = useState(12)
+  const ITEMS_PER_PAGE = 12
+  const [currentPage, setCurrentPage] = useState(() => Math.max(1, parseInt(searchParams.get('page') || '1', 10)))
   const [isLoading, setIsLoading] = useState(true)
-  const [isLoadingMore, setIsLoadingMore] = useState(false)
   const debouncedSearchTerm = useDebounce(searchTerm, 400)
   const debouncedMinPrice = useDebounce(minPrice, 400)
   const debouncedMaxPrice = useDebounce(maxPrice, 400)
@@ -33,8 +34,10 @@ export default function ShopPage() {
     } else {
       params.delete('category')
     }
+    params.delete('page')
 
     setSearchParams(params, { replace: true })
+    setCurrentPage(1)
   }
 
   const handleAddToCart = (product) => {
@@ -55,22 +58,52 @@ export default function ShopPage() {
     setSelectedCategory('All')
     syncCategoryParam('All')
     setSearchTerm('')
+    const params = new URLSearchParams(searchParams)
+    params.delete('search')
+    params.delete('keyword')
+    params.delete('page')
+    setSearchParams(params, { replace: true })
+    setCurrentPage(1)
     setMinPrice('')
     setMaxPrice('')
     setSortBy('default')
   }
 
-  const handleClearSearch = () => {
+  const handleClearSearch = (e) => {
+    if (e) {
+      e.preventDefault()
+      e.stopPropagation()
+    }
     setIsLoading(true)
     setSearchTerm('')
+    const params = new URLSearchParams(searchParams)
+    params.delete('search')
+    params.delete('keyword')
+    params.delete('page')
+    setSearchParams(params, { replace: true })
+    setCurrentPage(1)
+    searchInputRef.current?.focus()
   }
 
-  const handleLoadMore = () => {
-    setIsLoadingMore(true)
-    setTimeout(() => {
-      setVisibleCount((prev) => prev + 12)
-      setIsLoadingMore(false)
-    }, 500)
+  const totalPages = Math.max(1, Math.ceil(filteredProducts.length / ITEMS_PER_PAGE))
+
+  const handlePageChange = (newPage) => {
+    if (newPage < 1 || newPage > totalPages || newPage === currentPage) return
+    setCurrentPage(newPage)
+    const params = new URLSearchParams(searchParams)
+    if (newPage === 1) {
+      params.delete('page')
+    } else {
+      params.set('page', String(newPage))
+    }
+    setSearchParams(params, { replace: true })
+
+    const target = document.getElementById('shop-products-top')
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
   }
 
   useEffect(() => {
@@ -80,13 +113,45 @@ export default function ShopPage() {
     } else {
       setSelectedCategory('All')
     }
+
+    const searchFromUrl = searchParams.get('search') || searchParams.get('keyword') || ''
+    setSearchTerm((prev) => (prev !== searchFromUrl ? searchFromUrl : prev))
+
+    const pageFromUrl = parseInt(searchParams.get('page') || '1', 10)
+    if (!isNaN(pageFromUrl) && pageFromUrl > 0) {
+      setCurrentPage((prev) => (prev !== pageFromUrl ? pageFromUrl : prev))
+    }
   }, [searchParams])
+
+  useEffect(() => {
+    setSearchParams(
+      (prevParams) => {
+        const currentSearch = prevParams.get('search') || prevParams.get('keyword') || ''
+        const trimmed = debouncedSearchTerm.trim()
+        if (trimmed) {
+          if (currentSearch !== trimmed) {
+            const next = new URLSearchParams(prevParams)
+            next.set('search', trimmed)
+            next.delete('keyword')
+            return next
+          }
+        } else if (!searchTerm.trim() && currentSearch) {
+          const next = new URLSearchParams(prevParams)
+          next.delete('search')
+          next.delete('keyword')
+          return next
+        }
+        return prevParams
+      },
+      { replace: true }
+    )
+  }, [debouncedSearchTerm, searchTerm, setSearchParams])
 
   useEffect(() => {
     const fetchAllProducts = async () => {
       setIsLoading(true)
       try {
-        const response = await getAllProducts()
+        const response = await getAllProducts({ limit: 100 })
         const data = response.data
         const list = data.products || []
         setAllProducts(list)
@@ -146,20 +211,20 @@ export default function ShopPage() {
       }
 
       setFilteredProducts(result)
-      setVisibleCount(12)
+      setCurrentPage(1)
       setIsLoading(false)
     }, 300)
 
     return () => clearTimeout(filterTimer)
   }, [debouncedSearchTerm, selectedCategory, debouncedMinPrice, debouncedMaxPrice, sortBy, allProducts])
 
-  const displayedProducts = filteredProducts.slice(0, visibleCount)
-  const hasMore = visibleCount < filteredProducts.length
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
+  const displayedProducts = filteredProducts.slice(startIndex, startIndex + ITEMS_PER_PAGE)
 
   return (
     <div className="mt-16 xl:mt-17 min-h-screen bg-white dark:bg-slate-950 transition-colors duration-200 relative">
-      <main className="max-w-fit mx-auto px-4 mt-3 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] xl:grid-cols-[300px_1fr] gap-8 items-stretch">
+      <main className="w-full max-w-7xl 2xl:max-w-[1480px] mx-auto px-4 mt-3 sm:px-6 lg:px-8 py-8">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-[280px_1fr] xl:grid-cols-[300px_1fr] gap-8 items-start">
           <aside className="w-full lg:border-r lg:border-gray-200 dark:lg:border-slate-800 lg:pr-8">
             <div>
               <ProductFilterSidebar
@@ -191,58 +256,90 @@ export default function ShopPage() {
             </div>
           </aside>
 
-          <section className="w-full min-w-0 flex flex-col items-center">
-            <div className="w-full max-w-311 mx-auto">
+          <section id="shop-products-top" className="w-full min-w-0 flex flex-col scroll-mt-24">
+            <div className="w-full">
               {/* Search Bar Container */}
-              <div className="w-full mb-10">
+              <div className="w-full mb-6 sm:mb-8">
                 <div className="flex items-center gap-3 w-full">
                   <div className="relative flex-1 w-full flex items-center">
                     <span className="absolute left-4 z-10 pointer-events-none text-slate-400 dark:text-slate-500 flex items-center justify-center">
-                      <Search className="w-4 h-4" />
+                      <Search className="w-4.5 h-4.5" />
                     </span>
                     <input
+                      ref={searchInputRef}
                       type="text"
+                      placeholder="Search for products, brands and more..."
                       value={searchTerm}
-                      onChange={(e) => {
-                        setIsLoading(true)
-                        setSearchTerm(e.target.value)
-                      }}
-                      placeholder="Search products..."
-                      className="w-full pl-11 pr-10 py-3 bg-[#ECEFF1] dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg font-inter
-                      focus:outline-none focus:ring-2 focus:ring-slate-400 text-sm shadow-xs transition text-slate-900 dark:text-slate-100
-                    placeholder:text-[#5B5B5B] font-medium leading-none"
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      className="w-full h-12 pl-11 pr-11 bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-2xl text-sm focus:outline-none focus:border-amber-900/50 dark:focus:border-amber-600 transition-colors shadow-none text-slate-800 dark:text-slate-100 placeholder:text-slate-400"
                     />
                     {searchTerm && (
                       <button
+                        type="button"
                         onClick={handleClearSearch}
-                        className="absolute right-3.5 z-10 flex items-center justify-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition"
+                        onMouseDown={(e) => e.preventDefault()}
                         aria-label="Clear search"
-                      > <X className="w-3.5 h-3.5" />
+                        className="absolute right-3.5 z-10 w-7 h-7 flex items-center justify-center rounded-full text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-gray-200/60 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                      >
+                        <X className="w-4 h-4" />
                       </button>
                     )}
                   </div>
 
+                  {/* Mobile Filter Toggle */}
                   <button
                     onClick={() => setIsFilterOpen(true)}
-                    className="lg:hidden p-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 shadow-xs transition shrink-0 active:scale-95 flex items-center justify-center"
-                    aria-label="Open Filters"
+                    className="lg:hidden h-12 px-4 bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-2xl flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-200 shadow-none cursor-pointer"
                   >
                     <SlidersHorizontal className="w-4 h-4" />
+                    <span>Filter</span>
                   </button>
                 </div>
               </div>
+
+              {/* Search Results Heading & Breadcrumbs */}
+              {(debouncedSearchTerm.trim() || searchTerm.trim()) && (
+                <div className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-gray-100 dark:border-slate-800 pb-5">
+                  <div className="flex items-center gap-3 sm:gap-4 flex-wrap">
+                    <h2 className="font-Serif italic text-2xl sm:text-3xl text-[#1E1915] dark:text-[#f3ede6] font-medium tracking-tight">
+                      “{(debouncedSearchTerm || searchTerm).trim()}”
+                    </h2>
+                    <span className="w-10 sm:w-16 h-px bg-gray-300 dark:bg-slate-700 inline-block" />
+                    <span className="text-sm font-semibold tracking-wide text-[#706861] dark:text-slate-400 uppercase">
+                      {filteredProducts.length} {filteredProducts.length === 1 ? 'Result' : 'Results'}
+                    </span>
+                  </div>
+
+                  <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs sm:text-sm text-gray-500 dark:text-slate-400">
+                    <Link to="/" className="hover:text-amber-900 dark:hover:text-amber-400 transition-colors">
+                      Home
+                    </Link>
+                    <span className="text-gray-300 dark:text-slate-600">/</span>
+                    <button
+                      type="button"
+                      onClick={handleClearSearch}
+                      className="hover:text-amber-900 dark:hover:text-amber-400 transition-colors cursor-pointer"
+                    >
+                      Search
+                    </button>
+                    <span className="text-gray-300 dark:text-slate-600">/</span>
+                    <span className="text-[#222222] dark:text-slate-200 font-medium truncate max-w-[140px] sm:max-w-xs">
+                      {(debouncedSearchTerm || searchTerm).trim()}
+                    </span>
+                  </nav>
+                </div>
+              )}
 
               {/* Product Grid */}
               <div className="w-full">
                 <ProductGrid
                   products={displayedProducts}
                   isLoading={isLoading}
-                  isLoadingMore={isLoadingMore}
-                  hasMore={hasMore}
-                  onLoadMore={handleLoadMore}
                   onAddToCart={handleAddToCart}
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={handlePageChange}
                 />
-
               </div>
             </div>
           </section>

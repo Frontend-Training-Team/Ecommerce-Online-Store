@@ -1,6 +1,6 @@
-export function ProductGridSkeleton({ count = 8 }) {
+export function ProductGridSkeleton({ count = 8, className = "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" }) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
+    <div className={`grid ${className} w-full justify-items-center`}>
       {Array.from({ length: count }).map((_, index) => (
         <div key={index} className="h-fit w-fit bg-white dark:bg-[#181412] border-2 border-gray-200 dark:border-[#2e2724] rounded-xl p-2.5 animate-pulse group">
           <div className="relative h-82.5 w-82.5 bg-gray-200 dark:bg-[#221d1a] rounded-lg">

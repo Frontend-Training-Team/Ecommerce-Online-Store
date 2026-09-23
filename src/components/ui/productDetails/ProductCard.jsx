@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Heart, ShoppingBag, Loader2, Star } from "lucide-react";
-import { useCart } from "../../context/CartContext";
-import { useWishlist } from "../../context/WishlistContext";
+import { useCart } from "../../../context/CartContext";
+import { useWishlist } from "../../../context/WishlistContext";
 import toast from "react-hot-toast";
 
 export default function ProductCard({
@@ -68,7 +68,7 @@ export default function ProductCard({
           className="block h-82.5 w-82.5"
         >
           <div
-            className="relative h-82.5 w-82.5 bg-amber-600 transition-transform duration-300 group-hover:scale-[1.01]"
+            className="relative h-82.5 w-82.5 transition-transform duration-300 group-hover:scale-[1.01]"
             style={{
               clipPath: customPath,
               backgroundImage: `url(${imageUrl})`,

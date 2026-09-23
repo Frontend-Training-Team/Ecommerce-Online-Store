@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { postRegisterVerifyOtp, postRegisterSendOtp } from '../api/auth.api';
-import OtpInput from '../components/Ui/auth/OtpInput';
+import OtpInput from '../components/ui/auth/OtpInput';
 
 export default function VerifyOtpDetails() {
   const navigate = useNavigate();

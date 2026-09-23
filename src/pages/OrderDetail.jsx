@@ -6,10 +6,10 @@ import { getSingleOrder, patchCancelOrder } from "../api/orders.api";
 import toast from "react-hot-toast";
 import { ArrowLeft, XCircle } from "lucide-react";
 import ConfirmationModal from "../components/ui/cart/ConfirmationModal";
-import OrderProgress from "../components/Ui/order/OrderProgress";
-import { PaymentCard, ShippingCard } from "../components/Ui/order/OrderInfo";
-import OrderItems from "../components/Ui/order/OrderItems";
-import OrderSkeleton from "../components/Ui/skeletons/OrderSkeleton";
+import OrderProgress from "../components/ui/order/OrderProgress";
+import { PaymentCard, ShippingCard } from "../components/ui/order/OrderInfo";
+import OrderItems from "../components/ui/order/OrderItems";
+import OrderSkeleton from "../components/ui/skeleton/OrderSkeleton";
 
 const STATUS_BADGE_STYLES = {
   pending: "bg-[#EFE6DC] text-[#7B542B] border-[#DFC9BA] dark:bg-white/5 dark:text-neutral-300 dark:border-white/10",
@@ -79,7 +79,7 @@ export default function OrderDetail() {
           <div className="flex items-center gap-6">
             <button
               type="button"
-              onClick={() => navigate("/profile/orders")}
+              onClick={() => navigate("/orders")}
               aria-label="Back to orders"
               className="flex h-12 w-12 items-center justify-center rounded-full border border-[#D8C2B6] bg-white text-[#5C4A3E] transition-all hover:bg-[#F5EFEA] hover:text-[#2D241E] active:scale-95 dark:border-[#3a322d] dark:bg-[#221d1a] dark:text-[#c5b6a3] dark:hover:border-[#52443d] dark:hover:text-[#f3ede6]"
             >

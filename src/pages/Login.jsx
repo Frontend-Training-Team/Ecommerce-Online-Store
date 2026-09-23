@@ -4,10 +4,12 @@ import { Mail, Lock, ChevronRight } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import { postLogin } from '../api/auth.api'
+import { useAuth } from '../context/AuthContext'
 
 const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
+  const { fetchUser } = useAuth()
 
   const {
     register,
@@ -28,6 +30,7 @@ const LoginPage = () => {
       const data = response.data
       if (data?.token) {
         localStorage.setItem('token', data.token)
+        await fetchUser()
       }
       toast.success('Logged in successfully!')
       navigate('/')

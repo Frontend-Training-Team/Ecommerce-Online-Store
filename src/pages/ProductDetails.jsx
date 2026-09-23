@@ -6,11 +6,11 @@ import { useWishlist } from "../context/WishlistContext";
 import { getSingleproduct, getAllProducts } from "../api/products.api";
 import { getProductReviews, postAddAReview } from "../api/reviews.api";
 
-import ProductGallery from "../components/productDetails/ProductGallery";
-import ProductInfo from "../components/productDetails/ProductInfo";
-import ProductTabs from "../components/productDetails/ProductTabs";
-import SimilarProducts from "../components/productDetails/SimilarProducts";
-import ProductDetailsSkeleton from "../components/skeleton/ProductDetailsSkeleton";
+import ProductGallery from "../components/ui/productDetails/ProductGallery";
+import ProductInfo from "../components/ui/productDetails/ProductInfo";
+import ProductTabs from "../components/ui/productDetails/ProductTabs";
+import SimilarProducts from "../components/ui/productDetails/SimilarProducts";
+import ProductDetailsSkeleton from "../components/ui/skeleton/ProductDetailsSkeleton";
 import { ArrowLeft, AlertCircle } from "lucide-react";
 import toast from "react-hot-toast";
 
@@ -136,7 +136,7 @@ export default function ProductDetails() {
           The product you are looking for may have been removed or the link might be invalid.
         </p>
         <Link
-          to="/products"
+          to="/shop"
           className="h-11 px-7 rounded-xl bg-[#7E4A2D] hover:bg-[#683C23] text-white text-sm font-medium 
           flex items-center gap-2 transition-colors cursor-pointer"
         >
@@ -148,7 +148,7 @@ export default function ProductDetails() {
   }
 
   return (
-    <div className="w-full bg-white min-h-screen py-8 sm:py-12">
+    <div className="mt-16 xl:mt-17 w-full bg-white dark:bg-[#141110] min-h-screen py-8 sm:py-12">
       <div className="w-full max-w-310 mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-14">
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-10 lg:gap-x-14 gap-y-4 items-stretch">

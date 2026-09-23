@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { Loader2, Mail, CheckCircle2 } from "lucide-react";
-import { postForgotPasswordSendOtp, postForgotPasswordVerifyOtp } from "../../api/auth.api";
+import { postForgotPasswordSendOtp, postForgotPasswordVerifyOtp } from "../../../api/auth.api";
 
 export default function SecurityTab({ user, setActiveTab }) {
     const [step, setStep] = useState(1);

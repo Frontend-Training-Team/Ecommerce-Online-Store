@@ -16,7 +16,7 @@ export default function EmptyCart() {
       </div>
       <button
         type="button"
-        onClick={() => navigate("/products")}
+        onClick={() => navigate("/shop")}
         className="mt-2 rounded-xl bg-gradient-to-r from-[#8A4C1E] to-[#A76434] px-6 py-2.5 text-sm font-semibold text-white shadow-md transition-all hover:shadow-lg active:scale-[0.98] dark:from-[#cca474] dark:to-[#cca474] dark:text-[#141110]"
       >
         Start Browsing

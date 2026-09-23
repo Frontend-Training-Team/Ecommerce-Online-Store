@@ -1,24 +1,21 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Loader2, Star, Trash2 } from "lucide-react";
-import { useCart } from "../../context/CartContext";
-import { useWishlist } from "../../context/WishlistContext";
+import { Loader2, Star, Trash2, ShoppingBag } from "lucide-react";
+import { useWishlist } from "../../../context/WishlistContext";
+import { useCart } from "../../../context/CartContext";
 import toast from "react-hot-toast";
 
 export default function WishlistCard({
   product,
-  isInWishlist: propIsInWishlist,
-  onToggleWishlist,
   onRemove,
 }) {
+  const { isItemLoading } = useWishlist();
   const { addToCart } = useCart();
-  const { isInWishlist: checkWishlist, toggleWishlist, isItemLoading } = useWishlist();
   const [addingToCart, setAddingToCart] = useState(false);
+  const [isRemoving, setIsRemoving] = useState(false);
 
   if (!product) return null;
 
-  const isWish =
-    propIsInWishlist !== undefined ? propIsInWishlist : checkWishlist(product._id);
   const isWishLoading = isItemLoading(product._id);
 
   const price = Number(product.price) || 0;
@@ -40,30 +37,25 @@ export default function WishlistCard({
     "";
 
   const customPath =
-    'path("M 12 0 L 318 0 A 12 12 0 0 1 330 12 L 330 258 A 12 12 0 0 1 318 270 L 275 270 A 12 12 0 0 0 268 282 L 268 318 A 12 12 0 0 1 250 330 L 12 330 A 12 12 0 0 1 0 318 L 0 12 A 12 12 0 0 1 12 0 Z")';
+    'path("M 12 0 L 318 0 A 12 12 0 0 1 330 12 L 330 258 A 12 12 0 0 1 318 270 L 217 270 A 12 12 0 0 0 205 282 L 205 318 A 12 12 0 0 1 193 330 L 12 330 A 12 12 0 0 1 0 318 L 0 12 A 12 12 0 0 1 12 0 Z")';
 
-  const handleWishlistClick = async (e) => {
+  const handleRemove = async (e) => {
     e.preventDefault();
     e.stopPropagation();
-
-    if (onToggleWishlist) {
-      onToggleWishlist(product._id);
-      return;
-    }
-
-    await toggleWishlist(product._id);
-  };
-
-  const handleRemove = async () => {
-    if (onRemove) {
-      await onRemove(product._id);
+    if (isRemoving) return;
+    try {
+      setIsRemoving(true);
+      if (onRemove) {
+        await onRemove(product._id);
+      }
+    } finally {
+      setIsRemoving(false);
     }
   };
 
   const handleAddToCart = async (e) => {
     e.preventDefault();
     e.stopPropagation();
-
     try {
       setAddingToCart(true);
       await addToCart(product._id, 1);
@@ -84,7 +76,7 @@ export default function WishlistCard({
           className="block h-82.5 w-82.5"
         >
           <div
-            className="relative h-82.5 w-82.5 bg-amber-600 transition-transform duration-300 group-hover:scale-[1.01]"
+            className="relative h-82.5 w-82.5 transition-transform duration-300 group-hover:scale-[1.01]"
             style={{
               clipPath: customPath,
               backgroundImage: `url(${imageUrl})`,
@@ -117,18 +109,32 @@ export default function WishlistCard({
           </span>
         </div>
 
-        <div className="absolute bottom-0 right-0 z-10">
+        <div className="absolute bottom-0 right-0 grid h-fit w-fit grid-cols-2 gap-2 z-10">
           <button
             type="button"
             onClick={handleRemove}
-            disabled={isWishLoading}
+            disabled={isRemoving || isWishLoading}
             aria-label="Remove from wishlist"
             className="flex h-13.5 w-13.5 items-center justify-center rounded-xl bg-gray-200 text-red-500 hover:bg-red-100 hover:text-red-600 transition-all cursor-pointer disabled:cursor-not-allowed"
           >
-            {isWishLoading ? (
+            {isRemoving || isWishLoading ? (
               <Loader2 className="h-6 w-6 animate-spin text-current" />
             ) : (
               <Trash2 className="h-6 w-6" />
+            )}
+          </button>
+
+          <button
+            type="button"
+            onClick={handleAddToCart}
+            disabled={addingToCart}
+            aria-label="Add to cart"
+            className="flex h-13.5 w-13.5 items-center justify-center rounded-xl bg-gray-200 text-black hover:bg-gray-300 hover:text-[#8E4726] transition-all cursor-pointer disabled:cursor-not-allowed"
+          >
+            {addingToCart ? (
+              <Loader2 className="h-6 w-6 animate-spin text-current" />
+            ) : (
+              <ShoppingBag className="h-6 w-6" />
             )}
           </button>
         </div>

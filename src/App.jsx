@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import ShopPage from "./pages/Shop";
 import ProductDetails from "./pages/ProductDetails";
@@ -28,13 +28,15 @@ function App() {
           {/* public pages */}
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={<ShopPage />} />
+          <Route path="/products" element={<Navigate to="/shop" replace />} />
           <Route path="/products/:id" element={<ProductDetails />} />
 
           {/* Guest pages */}
           <Route element={<GuestRoute />}>
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/verify-otp" element={<VerifyOtpDetailsPage />} />
-            <Route path="/login" element={<LoginPage />} />
+            <Route path="/Login" element={<LoginPage />} />
+            <Route path="/login" element={<Navigate to="/Login" replace />} />
             <Route path="/forgot-password" element={<ForgotPasswordPage />} />
             <Route path="/forgot-password-verify-otp" element={<ForgotPasswordVerifyOtp />} />
           </Route>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { Loader2, ArrowRight } from "lucide-react";
-import { patchUpdateUser } from "../../api/users.api";
+import { patchUpdateUser } from "../../../api/users.api";
 
 export default function EditProfile({ user, updateUser, setActiveTab }) {
   const [formData, setFormData] = useState({

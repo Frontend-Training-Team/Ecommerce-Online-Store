@@ -4,12 +4,12 @@ import { useAuth } from "../context/AuthContext";
 import { getMyOrders } from "../api/orders.api";
 import { getMyWishlist } from "../api/wishlist.api";
 
-import ProfileSkeleton from "../components/skeleton/ProfileSkeleton";
-import ProfileSidebar from "../components/profile/ProfileSidebar";
-import ProfileOverview from "../components/profile/ProfileOverview";
-import EditProfile from "../components/profile/EditProfile";
-import AddressBook from "../components/profile/AddressBook";
-import SecurityTab from "../components/profile/SecurityTab";
+import ProfileSkeleton from "../components/ui/skeleton/ProfileSkeleton";
+import ProfileSidebar from "../components/ui/profile/ProfileSidebar";
+import ProfileOverview from "../components/ui/profile/ProfileOverview";
+import EditProfile from "../components/ui/profile/EditProfile";
+import AddressBook from "../components/ui/profile/AddressBook";
+import SecurityTab from "../components/ui/profile/SecurityTab";
 
 export default function ProfilePage() {
   const { user, loading: authLoading, updateUser } = useAuth();

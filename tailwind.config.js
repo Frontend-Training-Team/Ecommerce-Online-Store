@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
 export default {
-    darkMode: 'media',
+    darkMode: 'class',
     content: [
         "./index.html",
         "./src/**/*.{js,ts,jsx,tsx}",
@@ -13,7 +13,6 @@ export default {
                 Serif: ['"Playfair Display"', 'serif'],
                 numeric: ['"JetBrains Mono"', 'monospace'],
                 Inter: ['"Inter"', 'sans-serif'],
-                numeric: ['"Instrumental Serif"', "serif"]
             },
             colors: {
                 brand: {

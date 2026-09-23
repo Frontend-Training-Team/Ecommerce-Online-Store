@@ -20,7 +20,7 @@ export default function ResetPasswordCard({
     const newOtp = [...otpArray];
     newOtp[index] = value.substring(value.length - 1);
     setOtpArray(newOtp);
-    setErrorMsg('');
+    setErrorMsg?.('');
 
     if (value && index < 5) {
       inputRefs.current[index + 1]?.focus();

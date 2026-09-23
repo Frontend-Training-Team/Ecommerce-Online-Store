@@ -1,50 +1,26 @@
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import toast from 'react-hot-toast';
 import CheckoutForm from '../components/ui/checkout/CheckoutForm';
 import OrderSummary from '../components/ui/checkout/OrderSummary';
 import { postPlaceOrder } from '../api/orders.api';
-import { getMyCart, deleteClearCart } from '../api/cart.api';
+import { useCart } from '../context/CartContext';
 
 export default function Checkout() {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
-  const [loadingCart, setLoadingCart] = useState(true);
+  const { cartItems, loading: loadingCart, clearCart } = useCart();
 
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   useEffect(() => {
-    const fetchCartData = async () => {
-      const token = localStorage.getItem('userToken') || localStorage.getItem('token');
-
-      if (!token) {
-        toast.warning('Please log in first to process your order accurately', {
-          position: "top-right",
-          autoClose: 4000,
-          theme: "colored",
-        });
-
-        setCartItems([]);
-        setLoadingCart(false);
-        return;
-      }
-
-      try {
-        const res = await getMyCart();
-        const items = res.data?.cart?.items || res.data?.items || res.data?.cart || [];
-        setCartItems(Array.isArray(items) ? items : []);
-      } catch (error) {
-        console.error(error);
-        setCartItems([]);
-      } finally {
-        setLoadingCart(false);
-      }
-    };
-
-    fetchCartData();
-  }, []);
+    const token = localStorage.getItem('token');
+    if (!token) {
+      toast.error('Please log in first to proceed to checkout');
+      navigate('/Login');
+    }
+  }, [navigate]);
 
   const subtotal = cartItems.reduce((acc, item) => {
     const price = item.price || item.product?.price || 0;
@@ -57,8 +33,12 @@ export default function Checkout() {
   const total = subtotal + shipping + tax;
 
   const handleOrderSubmit = async (formData) => {
+    if (!cartItems || cartItems.length === 0) {
+      toast.error('Your cart is empty. Please add products before placing an order.');
+      return;
+    }
+
     setIsSubmitting(true);
-    const token = localStorage.getItem('userToken') || localStorage.getItem('token');
 
     const orderPayload = {
       shippingAddress: {
@@ -74,20 +54,17 @@ export default function Checkout() {
     };
 
     try {
-      const response = await postPlaceOrder(orderPayload, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await postPlaceOrder(orderPayload);
+      const orderId = response?.data?.order?._id || response?.data?._id;
 
-      const orderId = response?.data?.order?._id || response?.data?._id || '3EDFB2A1';
-      await deleteClearCart().catch(() => { });
+      await clearCart().catch(() => {});
+      toast.success('Order placed successfully!');
       navigate('/order-success', { state: { orderId } });
-
     } catch (error) {
-      console.warn('Order API bypassed for testing/demo:', error);
-      const fallbackOrderId = '3EDFB2A1';
-      navigate('/order-success', { state: { orderId: fallbackOrderId } });
+      console.error('Order placement failed:', error);
+      const message =
+        error.response?.data?.message || error.userMessage || 'Failed to place order. Please try again.';
+      toast.error(message);
     } finally {
       setIsSubmitting(false);
     }

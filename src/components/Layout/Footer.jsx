@@ -3,7 +3,7 @@ import logoImg from "../../assets/images/4.png";
 
 export default function Footer() {
     return (
-        <footer className="relative isolate w-full overflow-hidden pt-8 sm:pt-14 md:pt-20 pb-8">
+        <footer className="relative isolate w-full overflow-hidden pt-8 sm:pt-14 md:pt-2 pb-8">
 
             <svg
                 className="absolute inset-0 w-full h-full pointer-events-none z-0"
@@ -17,7 +17,7 @@ export default function Footer() {
                 />
             </svg>
 
-            <div className="w-full max-w-[960px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col relative z-10">
+            <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col relative z-10">
 
                 <div className="w-full bg-[#7E4A2D] rounded-xl sm:rounded-2xl p-6 sm:p-8 md:px-12 md:py-11 flex flex-col 
                 md:flex-row items-center justify-between gap-6 md:gap-8 shadow-[0_12px_28px_rgba(0,0,0,0.12)]">
@@ -31,7 +31,7 @@ export default function Footer() {
                     <div className="w-full md:w-1/2 flex justify-center md:justify-end">
                         <form
                             onSubmit={(e) => e.preventDefault()}
-                            className="w-full max-w-[390px] bg-white rounded-md sm:rounded-lg p-1.5 flex items-center 
+                            className="w-full max-w-[440px] bg-white rounded-md sm:rounded-lg p-1.5 flex items-center 
                             shadow-sm"
                         >
                             <input
@@ -73,7 +73,7 @@ export default function Footer() {
                         <Link to="/" className="hover:text-[#7E4A2D] transition-colors">
                             Home
                         </Link>
-                        <Link to="/products" className="hover:text-[#7E4A2D] transition-colors">
+                        <Link to="/shop" className="hover:text-[#7E4A2D] transition-colors">
                             Shop
                         </Link>
                         <Link to="/orders" className="hover:text-[#7E4A2D] transition-colors">

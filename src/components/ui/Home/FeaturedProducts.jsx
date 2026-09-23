@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import ProductGrid from "../../productDetails/ProductGrid";
+import ProductGrid from "../productDetails/ProductGrid";
 
 function FeaturedProducts({ products = [], loading = false }) {
   const featuredProducts = products.slice(0, 4);
@@ -31,7 +31,7 @@ function FeaturedProducts({ products = [], loading = false }) {
           <ProductGrid
             products={featuredProducts}
             isLoading={loading}
-            columns="grid grid-cols-1 md-grid-cols-2 lg:grid-cols-2 2xl:grid-cols-4"
+            columns="sm:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-4"
           />
         </div>
 

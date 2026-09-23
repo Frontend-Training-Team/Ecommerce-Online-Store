@@ -7,7 +7,7 @@ import CartItemRow from "../components/ui/cart/CartItemRow";
 import OrderSummaryCard from "../components/ui/cart/OrderSummaryCard";
 import EmptyCart from "../components/ui/cart/EmptyCart";
 import ConfirmationModal from "../components/ui/cart/ConfirmationModal";
-import CartSkeleton from "../components/Ui/skeletons/CartSkeleton";
+import CartSkeleton from "../components/ui/skeleton/CartSkeleton";
 
 export default function Cart() {
   const navigate = useNavigate();
@@ -45,7 +45,7 @@ export default function Cart() {
     return <CartSkeleton />;
   }
 
-  const isEmpty = cartItems?.length;
+  const isCartEmpty = !cartItems || cartItems.length === 0;
 
   return (
     <div className="mt-16 xl:mt-17 flex flex-col min-h-screen w-full bg-[#FAFAF8] px-4 py-10 dark:bg-[#141110] md:px-8 lg:px-12">
@@ -72,7 +72,7 @@ export default function Cart() {
         </div>
 
 
-        {isEmpty == 0 ? (
+        {isCartEmpty ? (
           <div className="flex flex-1 items-center justify-center">
             <EmptyCart />
           </div>

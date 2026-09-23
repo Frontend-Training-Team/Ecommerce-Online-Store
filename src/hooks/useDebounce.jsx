@@ -4,9 +4,13 @@ export function useDebounce(value, delay = 400) {
   const [debouncedValue, setDebouncedValue] = useState(value);
 
   useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedValue(value);
-    }, delay);
+    const isImmediate = !value || (typeof value === 'string' && !value.trim());
+    const handler = setTimeout(
+      () => {
+        setDebouncedValue(value);
+      },
+      isImmediate ? 0 : delay
+    );
 
     return () => {
       clearTimeout(handler);

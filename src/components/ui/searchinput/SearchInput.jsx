@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDebounce } from '../../../hooks/useDebounce';
-import { ProductGridSkeleton } from '../skeletons/ProductSkeleton';
+import { ProductGridSkeleton } from '../skeleton/ProductSkeleton';
 import ProductFilterSidebar from '../searchinput/FilterSidebar';
 
 export default function ProductsPage() {

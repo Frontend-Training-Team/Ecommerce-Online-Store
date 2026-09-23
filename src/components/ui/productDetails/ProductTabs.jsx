@@ -250,7 +250,7 @@ export default function ProductTabs({
                     Please log in to write a review and rate this product.
                   </p>
                   <Link
-                    to="/login"
+                    to="/Login"
                     className="h-9 px-5 rounded-lg bg-[#7E4A2D] hover:bg-[#683C23] text-white text-xs font-medium 
                     flex items-center justify-center transition-colors shrink-0"
                   >
