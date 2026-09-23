@@ -223,20 +223,21 @@ export default function ShopPage() {
 
   return (
     <div className="mt-16 xl:mt-17 min-h-screen bg-white dark:bg-slate-950 transition-colors duration-200 relative">
-      <main className="w-full max-w-7xl 2xl:max-w-[1480px] mx-auto px-4 mt-3 sm:px-6 lg:px-8 py-8">
+      <main className="w-full max-w-7xl 2xl:max-w-370 mx-auto px-4 mt-3 sm:px-6 lg:px-8 py-8">
         <div className="mb-8 sm:mb-5 flex flex-wrap items-center justify-between gap-4 border-b border-[#EAE1DB] pb-5 dark:border-[#2e2724]">
           <div>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium font-Instrument text-[#2D241E] dark:text-[#f3ede6]">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium font-Instrument text-[#2D241E] dark:text-[#f3ede6]">
               Shop
             </h1>
             <p className="text-xs sm:text-sm font-medium text-[#8C7A6E] dark:text-[#a38f7d] mt-1">
-              Manage and track your recent orders
+              {/* Manage and track your recent orders */}
+              Find everything you need in one place
             </p>
           </div>
 
           <div className="flex items-center gap-3">
             <span className="rounded-full border border-[#DFC9BA] dark:border-[#4a3a2a] bg-[#F3E8DF] dark:bg-[#2a221a] px-3.5 sm:px-4 py-1.5 text-xs sm:text-sm font-bold uppercase tracking-wider text-[#7B542B] dark:text-[#fcba69] shadow-2xs">
-              55555
+              {selectedCategory === 'All' ? 'All Categories' : selectedCategory}
             </span>
           </div>
         </div>
@@ -339,7 +340,7 @@ export default function ShopPage() {
                       Search
                     </button>
                     <span className="text-gray-300 dark:text-slate-600">/</span>
-                    <span className="text-[#222222] dark:text-slate-200 font-medium truncate max-w-[140px] sm:max-w-xs">
+                    <span className="text-[#222222] dark:text-slate-200 font-medium truncate max-w-35 sm:max-w-xs">
                       {(debouncedSearchTerm || searchTerm).trim()}
                     </span>
                   </nav>

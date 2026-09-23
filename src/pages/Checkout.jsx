@@ -72,22 +72,24 @@ export default function Checkout() {
 
   if (loadingCart) {
     return (
-      <div className="min-h-screen bg-[#faf8f5] flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <p className="text-[#8c7b70] text-sm font-medium">Loading checkout...</p>
       </div>
     );
   }
 
   return (
-    <div className="mt-16 xl:mt-17 min-h-screen bg-[#faf8f5] py-10 px-4 sm:px-6 lg:px-8 font-sans">
+    <div className="mt-16 xl:mt-17 min-h-screen py-10 px-4 sm:px-6 lg:px-8 font-sans">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center gap-2 mb-1">
-            <span className="text-[#c07a50] text-2xl">⚡</span>
-            <span className="text-[24px] font-bold text-[#2d2421]">Lamsa Store</span>
+        <div className="mb-8 sm:mb-5 flex flex-wrap items-center justify-between gap-4 border-b border-[#EAE1DB] pb-5 dark:border-[#2e2724]">
+          <div>
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium font-Instrument text-[#2D241E] dark:text-[#f3ede6]">
+               Checkout
+            </h1>
+            <p className="text-xs sm:text-sm font-medium text-[#8C7A6E] dark:text-[#a38f7d] mt-1">
+              Please enter your shipping and delivery details
+            </p>
           </div>
-          <h1 className="text-[20px] font-bold text-[#2d2421]">Complete Your Purchase</h1>
-          <p className="text-[12px] text-[#8c7b70] mt-0.5">Please enter your shipping and delivery details</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">

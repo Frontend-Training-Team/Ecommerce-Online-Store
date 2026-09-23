@@ -5,7 +5,7 @@ export default function CheckoutForm({ register, errors, handleSubmit, onSubmit 
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       {/* Shipping Address Card */}
       <div className="bg-white p-6 rounded-2xl shadow-sm border border-[#f0eae1] space-y-4">
-        <div className="flex items-center gap-2 text-[#c07a50] font-bold text-[16px] pb-2 border-b border-[#f5efe6]">
+        <div className="flex items-center gap-2 pb-2 border-b border-[#f5efe6] text-xl font-serif text-[#2D241E] dark:border-[#2e2724] dark:text-[#f3ede6]">
           <MapPin className="w-5 h-5" />
           <h2>Shipping Address</h2>
         </div>
@@ -113,7 +113,7 @@ export default function CheckoutForm({ register, errors, handleSubmit, onSubmit 
 
       {/* Payment Method Card */}
       <div className="bg-white p-6 rounded-2xl shadow-sm border border-[#f0eae1] space-y-4">
-        <div className="flex items-center gap-2 text-[#c07a50] font-bold text-[16px] pb-2 border-b border-[#f5efe6]">
+        <div className="flex items-center gap-2 pb-2 border-b border-[#f5efe6] text-xl font-serif text-[#2D241E] dark:border-[#2e2724] dark:text-[#f3ede6]">
           <CreditCard className="w-5 h-5" />
           <h2>Payment Method</h2>
         </div>
@@ -131,7 +131,7 @@ export default function CheckoutForm({ register, errors, handleSubmit, onSubmit 
 
       {/* Order Notes Card */}
       <div className="bg-white p-6 rounded-2xl shadow-sm border border-[#f0eae1] space-y-3">
-        <div className="flex items-center gap-2 text-[#c07a50] font-bold text-base pb-2 border-b border-[#f5efe6]">
+        <div className="flex items-center gap-2 pb-2 border-b border-[#f5efe6] text-xl font-serif text-[#2D241E] dark:border-[#2e2724] dark:text-[#f3ede6]">
           <FileText className="w-5 h-5" />
           <h2>Order Notes (Optional)</h2>
         </div>

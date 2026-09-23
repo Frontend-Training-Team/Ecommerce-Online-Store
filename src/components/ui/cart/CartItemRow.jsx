@@ -61,7 +61,7 @@ export default function CartItemRow({ item, onQuantityChange, onRemove }) {
         </div>
       </div>
 
-      <div className="flex shrink-0 items-center gap-6 sm:gap-7">
+      <div className="ml-auto flex shrink-0 items-center gap-4 sm:gap-5">
         <div className="flex items-center rounded-lg border border-[#D8C2B6] bg-[#F5EFEA] p-0.5 dark:border-[#3a322d] dark:bg-[#26201d]">
           <button
             type="button"
@@ -86,7 +86,7 @@ export default function CartItemRow({ item, onQuantityChange, onRemove }) {
           </button>
         </div>
 
-        <div className="w-24 text-right">
+        <div className="w-28 text-right">
           <span className="block text-sm font-bold text-[#2D241E] dark:text-[#f3ede6]">
             EGP {Number(item.price * item.quantity).toFixed(2)}
           </span>

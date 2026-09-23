@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { Tag, X, ArrowRight, ArrowLeft } from "lucide-react";
+import { Tag, X, ArrowRight, ArrowLeft, Trash2 } from "lucide-react";
 
-export default function OrderSummaryCard({ cart, onApplyCoupon, onRemoveCoupon }) {
+export default function OrderSummaryCard({ cart, onApplyCoupon, onRemoveCoupon, onEmptyCart }) {
   const navigate = useNavigate();
   const [code, setCode] = useState("");
   const [applying, setApplying] = useState(false);
@@ -46,8 +46,8 @@ export default function OrderSummaryCard({ cart, onApplyCoupon, onRemoveCoupon }
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="rounded-2xl border border-[#E8DDD4] bg-[#FAF7F3] p-5 shadow-sm dark:border-[#2e2724] dark:bg-[#1c1816] dark:shadow-lg dark:shadow-black/20">
-        <h2 className="border-b border-[#EBE1D7] pb-4 text-xl font-serif text-[#2D241E] dark:border-[#2e2724] dark:text-[#f3ede6]">
+      <div className="rounded-2xl border border-[#f0eae1] bg-white p-6 shadow-sm dark:border-[#2e2724] dark:bg-[#1c1816] dark:shadow-lg dark:shadow-black/20">
+        <h2 className="border-b border-[#f5efe6] pb-4 text-xl font-serif text-[#2D241E] dark:border-[#2e2724] dark:text-[#f3ede6]">
           Order Summary
         </h2>
 
@@ -105,7 +105,7 @@ export default function OrderSummaryCard({ cart, onApplyCoupon, onRemoveCoupon }
         </button>
       </div>
 
-      <div className="rounded-2xl border border-[#E8DDD4] bg-[#FAF7F3] p-4 shadow-sm dark:border-[#2e2724] dark:bg-[#1c1816] dark:shadow-lg dark:shadow-black/20">
+      <div className="rounded-2xl border border-[#f0eae1] bg-white p-4 shadow-sm dark:border-[#2e2724] dark:bg-[#1c1816] dark:shadow-lg dark:shadow-black/20">
         <label className="mb-2.5 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#8C7A6E] dark:text-[#a38f7d]" htmlFor="coupon-code">
           <Tag className="h-4 w-4 text-[#8C7A6E] dark:text-[#cca474]" />
           Coupon Code
