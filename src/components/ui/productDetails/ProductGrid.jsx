@@ -12,7 +12,7 @@ export default function ProductGrid({
   onLoadMore,
   onAddToCart,
   onAddToCartSuccess,
-  columns = "sm:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3",
+  columns = "xl:grid-cols-2 2xl:grid-cols-3",
   currentPage = 1,
   totalPages = 0,
   onPageChange,
@@ -23,7 +23,8 @@ export default function ProductGrid({
 
   if (!isLoading && products.length === 0) {
     return (
-      <div className="w-full flex flex-col items-center justify-center py-16 px-4 bg-white/40 dark:bg-slate-800/40 backdrop-blur-md rounded-3xl border border-gray-200 dark:border-slate-700 text-center shadow-none">
+      <div className="w-full flex flex-col items-center justify-center py-16 px-4 bg-white/40 dark:bg-slate-800/40 
+      backdrop-blur-md rounded-3xl border border-gray-200 dark:border-slate-700 text-center shadow-none">
         <div className="text-3xl mb-3 opacity-80"><Search className="w-5 h-5" /></div>
         <h3 className="text-lg font-bold text-gray-700 dark:text-gray-300 mb-1">No products found</h3>
         <p className="text-sm text-gray-500 dark:text-gray-400 max-w-sm">

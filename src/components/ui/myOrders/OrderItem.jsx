@@ -69,7 +69,8 @@ function OrderItem({ Myorder }) {
     return (
         <Link
             to={`/orders/${order._id}`}
-            className="max-w-7xl bg-[#FAFAFA] dark:bg-[#1A1817] border-[1.5px] border-[#DFDFDF] dark:border-[#2E2A27] flex justify-between items-center py-5 px-6 sm:px-8 rounded-2xl mb-7 hover:border-[#7E4A2D]/40 dark:hover:border-[#fcba69]/30 transition-all hover:shadow-xs group"
+            className="max-w-7xl bg-[#FAFAFA] dark:bg-[#1A1817] border-[1.5px] border-[#DFDFDF] dark:border-[#2E2A27] flex justify-between items-center 
+            py-5 px-6 sm:px-8 rounded-2xl mb-7 hover:border-[#7E4A2D]/40 dark:hover:border-[#fcba69]/30 transition-all hover:shadow-xs group"
         >
             {/* left side */}
             <div className="flex flex-col space-y-2">
@@ -77,7 +78,8 @@ function OrderItem({ Myorder }) {
                     <span className={`w-2 h-2 rounded-full shrink-0 ${currentConfig.dotClass}`}></span>
                     <span>{currentConfig.label}</span>
                 </span>
-                <span className="text-xl sm:text-2xl text-black dark:text-white font-Inter font-semibold uppercase group-hover:text-[#7E4A2D] dark:group-hover:text-[#fcba69] transition-colors">
+                <span className="text-xl sm:text-2xl text-black dark:text-white font-Inter font-semibold uppercase 
+                group-hover:text-[#7E4A2D] dark:group-hover:text-[#fcba69] transition-colors">
                     #{order._id?.slice(-8)}
                 </span>
                 <span className="text-sm sm:text-[16px] text-[#666666] dark:text-[#A0A4AB] font-Inter font-medium">

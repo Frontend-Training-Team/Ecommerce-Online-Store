@@ -224,6 +224,22 @@ export default function ShopPage() {
   return (
     <div className="mt-16 xl:mt-17 min-h-screen bg-white dark:bg-slate-950 transition-colors duration-200 relative">
       <main className="w-full max-w-7xl 2xl:max-w-[1480px] mx-auto px-4 mt-3 sm:px-6 lg:px-8 py-8">
+        <div className="mb-8 sm:mb-5 flex flex-wrap items-center justify-between gap-4 border-b border-[#EAE1DB] pb-5 dark:border-[#2e2724]">
+          <div>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium font-Instrument text-[#2D241E] dark:text-[#f3ede6]">
+              Shop
+            </h1>
+            <p className="text-xs sm:text-sm font-medium text-[#8C7A6E] dark:text-[#a38f7d] mt-1">
+              Manage and track your recent orders
+            </p>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <span className="rounded-full border border-[#DFC9BA] dark:border-[#4a3a2a] bg-[#F3E8DF] dark:bg-[#2a221a] px-3.5 sm:px-4 py-1.5 text-xs sm:text-sm font-bold uppercase tracking-wider text-[#7B542B] dark:text-[#fcba69] shadow-2xs">
+              55555
+            </span>
+          </div>
+        </div>
         <div className="w-full grid grid-cols-1 lg:grid-cols-[280px_1fr] xl:grid-cols-[300px_1fr] gap-8 items-start">
           <aside className="w-full lg:border-r lg:border-gray-200 dark:lg:border-slate-800 lg:pr-8">
             <div>

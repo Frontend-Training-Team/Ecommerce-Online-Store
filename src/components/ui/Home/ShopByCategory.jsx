@@ -6,11 +6,9 @@ import category4 from "../../../assets/images/categories/category4.png";
 
 const categoryImages = [category1, category2, category3, category4];
 
-function ShopByCategory({ categories = [] }) {
-  const categoryList =
-    Array.isArray(categories) && categories.length > 0
-      ? categories
-      : ["Chair", "Desk", "Lamp", "Table"];
+function ShopByCategory() {
+  
+  const categoryList = ["Fashion", "Sport", "Home", "Electronics"];
 
   return (
     <section className="bg-white py-10">
@@ -29,11 +27,11 @@ function ShopByCategory({ categories = [] }) {
           {categoryList.map((category, index) => (
             <Link
               key={`${category}-${index}`}
-              to={`/shop?category=${encodeURIComponent(category)}`}
-              className="block w-[350px] transition-transform duration-300 hover:scale-105 overflow-hidden"
+              to={`/shop?category=${categoryList[index]}`}
+              className="block w-87.5 transition-transform duration-300 hover:scale-105 overflow-hidden"
             >
               <div
-                className="flex h-[350px] items-center justify-center rounded-xl bg-cover bg-center bg-no-repeat"
+                className="flex h-87.5 items-center justify-center rounded-xl bg-cover bg-center bg-no-repeat"
                 style={{
                   backgroundImage: `url(${categoryImages[index % categoryImages.length]})`,
                 }}

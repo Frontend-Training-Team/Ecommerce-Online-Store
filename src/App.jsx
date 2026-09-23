@@ -40,10 +40,10 @@ function App() {
             <Route path="/forgot-password" element={<ForgotPasswordPage />} />
             <Route path="/forgot-password-verify-otp" element={<ForgotPasswordVerifyOtp />} />
           </Route>
-          <Route path="/cart" element={<CartPage />} />
+          
           {/* Protected pages */}
           <Route element={<ProtectedRoute />}>
-            {/* <Route path="/cart" element={<CartPage />} /> */}
+            <Route path="/cart" element={<CartPage />} />/
             <Route path="/wishlist" element={<WishlistPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/order-success" element={<OrderSuccessPage />} />

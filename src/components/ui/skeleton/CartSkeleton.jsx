@@ -1,6 +1,6 @@
 const CartSkeleton = () => {
     return (
-        <div className="flex flex-col min-h-screen w-full bg-[#FAFAF8] px-4 py-10 dark:bg-[#141110] md:px-8 lg:px-12 animate-pulse">
+        <div className="flex flex-col min-h-screen mt-18 w-full bg-[#FAFAF8] px-4 py-10 dark:bg-[#141110] md:px-8 lg:px-12 animate-pulse">
             <div className="mx-auto flex w-full max-w-6xl flex-col">
 
                 {/* Header Skeleton */}

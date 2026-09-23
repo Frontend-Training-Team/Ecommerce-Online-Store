@@ -41,11 +41,11 @@ export default function Cart() {
 
   const isInitialLoad = loading && (!cart || cartItems?.length === 0);
 
+  const isCartEmpty = !cartItems || cartItems.length === 0;
+
   if (isInitialLoad) {
     return <CartSkeleton />;
   }
-
-  const isCartEmpty = !cartItems || cartItems.length === 0;
 
   return (
     <div className="mt-16 xl:mt-17 flex flex-col min-h-screen w-full bg-[#FAFAF8] px-4 py-10 dark:bg-[#141110] md:px-8 lg:px-12">

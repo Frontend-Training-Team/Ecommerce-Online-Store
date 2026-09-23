@@ -32,9 +32,13 @@ export default function ProductFilterSidebar({
         const data = await response.json();
         const fetchedProducts = data.products || (Array.isArray(data) ? data : []);
 
+        
+
         const extractedCategories = fetchedProducts
           .map((p) => (p.category || p.categoryName || '').trim())
           .filter(Boolean);
+
+          console.log(extractedCategories)
 
         const uniqueCategories = [...new Set(extractedCategories)];
 
@@ -72,14 +76,15 @@ export default function ProductFilterSidebar({
       {/* Sidebar Container */}
       <div
         className={`fixed inset-y-0 left-0 z-50 w-72 bg-white dark:bg-slate-900 p-5 overflow-y-auto transition-transform 
-          duration-300 ease-in-out lg:static lg:w-full lg:p-0 lg:bg-transparent dark:lg:bg-transparent lg:overflow-visible lg:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'
+          duration-300 ease-in-out lg:static lg:w-full lg:p-0 lg:bg-transparent dark:lg:bg-transparent lg:overflow-visible lg:translate-x-0 
+          ${isOpen ? 'translate-x-0' : '-translate-x-full'
           }`}
       >
         <div className="space-y-5 text-slate-800 dark:text-slate-100 font-sans">
 
           {/* Main Title with Filter Icon */}
           <div className="flex items-center justify-between pb-1">
-            <div className="flex items-center gap-2 text-[24px] font-Inter dark:text-white">
+            <div className="flex items-center gap-2 text-[35px] font-medium  font-Instrument dark:text-white">
               <Filter className="w-5 h-5 fill-black dark:fill-white" />
               <span>Filters</span>
             </div>

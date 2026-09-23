@@ -105,7 +105,7 @@ export default function ResetPasswordCard({
 
       `}</style>
 
-      <div className="form-spinning-border p-[2px] shadow-2xl max-w-lg w-full">
+      <div className="form-spinning-border p-[2px] mt-18 shadow-2xl max-w-lg w-full">
         <div className="relative bg-white dark:bg-gray-900 p-6 sm:p-8 rounded-[calc(1.5rem-2px)] w-full flex flex-col items-center text-center z-10 transition-colors duration-300">
 
           <div className="w-12 h-12 bg-[#D88D68]/15 text-[#D88D68] rounded-2xl flex items-center justify-center mb-3 text-xl shadow-sm border border-[#D88D68]/20 lock-float">
