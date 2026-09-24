@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { User, Mail, Lock, ChevronRight } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
@@ -30,14 +30,12 @@ const Register = () => {
 
       toast.success('OTP code sent to your email!')
 
-      navigate('/resetpasswordOtp', {
-        state: { email: formData.email },
-      })
-    } catch (error) {
-      const message =
-        error.response?.data?.message ||
-        'Failed to send OTP. Please try again.'
+      navigate('/verify-otp', { state: { email: formData.email } })
+    }
 
+    catch (error) {
+      const message =
+        error.response?.data?.message || 'Failed to send OTP. Please try again.'
       toast.error(message)
     } finally {
       setIsLoading(false)
@@ -45,14 +43,14 @@ const Register = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#12141A] flex flex-col justify-center items-center px-4 py-12 transition-colors duration-200 font-sans">
+    <div className="min-h-screen bg-white dark:bg-noir-900 flex flex-col justify-center items-center mt-9 px-4 py-12 transition-colors duration-200 font-sans">
 
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-[#1F2937] dark:text-white mb-2">
+        <h1 className="text-4xl font-bold text-[#1F2937] dark:text-fg mb-2">
           Sign Up
         </h1>
 
-        <p className="text-sm text-[#828282] dark:text-[#9CA3AF]">
+        <p className="text-sm text-[#828282] dark:text-fg-tertiary">
           Please fill your information below
         </p>
       </div>
@@ -67,12 +65,12 @@ const Register = () => {
 
           {/* Username Field */}
           <div>
-            <label className="block mb-1.5 text-sm font-medium text-[#1F2937] dark:text-[#E5E7EB]">
+            <label className="block mb-1.5 text-sm font-medium text-[#1F2937] dark:text-fg-secondary">
               Username
             </label>
 
             <div className="relative flex items-center">
-              <User className="absolute left-4 h-5 w-5 text-[#828282] dark:text-[#9CA3AF]" />
+              <User className="absolute left-4 h-5 w-5 text-[#828282] dark:text-fg-tertiary" />
 
               <input
                 type="text"
@@ -84,12 +82,12 @@ const Register = () => {
                     message: 'Username must be at least 3 characters',
                   },
                 })}
-                className="w-full pl-12 pr-4 py-3.5 bg-transparent rounded-xl border border-[#8E4726] dark:border-[#B25B32] text-[#1F2937] dark:text-white placeholder-[#828282] dark:placeholder-[#6B7280] font-semibold focus:outline-none focus:ring-1 focus:ring-[#8E4726] dark:focus:ring-[#B25B32] transition-all text-sm"
+                className="w-full pl-12 pr-4 py-3.5 bg-transparent dark:bg-noir-750 rounded-xl border border-[#8E4726] dark:border-copper-600 text-[#1F2937] dark:text-fg placeholder-[#828282] dark:placeholder-fg-placeholder font-semibold focus:outline-none focus:ring-1 focus:ring-[#8E4726] dark:focus:border-copper-400 dark:focus:ring-copper-400/25 transition-all text-sm"
               />
             </div>
 
             {errors.username && (
-              <span className="text-xs text-[#8E4726] dark:text-[#E57373] mt-1 block px-1 font-medium">
+              <span className="text-xs text-[#8E4726] dark:text-state-danger mt-1 block px-1 font-medium">
                 {errors.username.message}
               </span>
             )}
@@ -97,12 +95,12 @@ const Register = () => {
 
           {/* Email Field */}
           <div>
-            <label className="block mb-1.5 text-sm font-medium text-[#1F2937] dark:text-[#E5E7EB]">
+            <label className="block mb-1.5 text-sm font-medium text-[#1F2937] dark:text-fg-secondary">
               Email
             </label>
 
             <div className="relative flex items-center">
-              <Mail className="absolute left-4 h-5 w-5 text-[#828282] dark:text-[#9CA3AF]" />
+              <Mail className="absolute left-4 h-5 w-5 text-[#828282] dark:text-fg-tertiary" />
 
               <input
                 type="email"
@@ -114,12 +112,12 @@ const Register = () => {
                     message: 'Invalid email address',
                   },
                 })}
-                className="w-full pl-12 pr-4 py-3.5 bg-transparent rounded-xl border border-[#8E4726] dark:border-[#B25B32] text-[#1F2937] dark:text-white placeholder-[#828282] dark:placeholder-[#6B7280] font-semibold focus:outline-none focus:ring-1 focus:ring-[#8E4726] dark:focus:ring-[#B25B32] transition-all text-sm"
+                className="w-full pl-12 pr-4 py-3.5 bg-transparent dark:bg-noir-750 rounded-xl border border-[#8E4726] dark:border-copper-600 text-[#1F2937] dark:text-fg placeholder-[#828282] dark:placeholder-fg-placeholder font-semibold focus:outline-none focus:ring-1 focus:ring-[#8E4726] dark:focus:border-copper-400 dark:focus:ring-copper-400/25 transition-all text-sm"
               />
             </div>
 
             {errors.email && (
-              <span className="text-xs text-[#8E4726] dark:text-[#E57373] mt-1 block px-1 font-medium">
+              <span className="text-xs text-[#8E4726] dark:text-state-danger mt-1 block px-1 font-medium">
                 {errors.email.message}
               </span>
             )}
@@ -127,16 +125,16 @@ const Register = () => {
 
           {/* Password Field */}
           <div>
-            <label className="block mb-1.5 text-sm font-medium text-[#1F2937] dark:text-[#E5E7EB]">
+            <label className="block mb-1.5 text-sm font-medium text-[#1F2937] dark:text-fg-secondary">
               Password
             </label>
 
             <div className="relative flex items-center">
-              <Lock className="absolute left-4 h-5 w-5 text-[#828282] dark:text-[#9CA3AF]" />
+              <Lock className="absolute left-4 h-5 w-5 text-[#828282] dark:text-fg-tertiary" />
 
               <input
                 type="password"
-                placeholder="••••••••"
+                placeholder="•••••••••••••"
                 {...register('password', {
                   required: 'Password is required',
                   minLength: {
@@ -144,12 +142,12 @@ const Register = () => {
                     message: 'Password must be at least 6 characters',
                   },
                 })}
-                className="w-full pl-12 pr-4 py-3.5 bg-transparent rounded-xl border border-[#8E4726] dark:border-[#B25B32] text-[#1F2937] dark:text-white placeholder-[#828282] dark:placeholder-[#6B7280] font-semibold focus:outline-none focus:ring-1 focus:ring-[#8E4726] dark:focus:ring-[#B25B32] transition-all text-sm"
+                className="w-full pl-12 pr-4 py-3.5 bg-transparent dark:bg-noir-750 rounded-xl border border-[#8E4726] dark:border-copper-600 text-[#1F2937] dark:text-fg placeholder-[#828282] dark:placeholder-fg-placeholder font-semibold focus:outline-none focus:ring-1 focus:ring-[#8E4726] dark:focus:border-copper-400 dark:focus:ring-copper-400/25 transition-all text-sm"
               />
             </div>
 
             {errors.password && (
-              <span className="text-xs text-[#8E4726] dark:text-[#E57373] mt-1 block px-1 font-medium">
+              <span className="text-xs text-[#8E4726] dark:text-state-danger mt-1 block px-1 font-medium">
                 {errors.password.message}
               </span>
             )}
@@ -159,7 +157,7 @@ const Register = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full py-3.5 px-4 bg-[#8E4726] hover:bg-[#75391E] dark:bg-[#A3522C] dark:hover:bg-[#8E4726] text-white font-medium rounded-xl transition-all duration-200 flex items-center justify-center space-x-2 text-sm disabled:opacity-50 shadow-sm cursor-pointer mt-2"
+            className="w-full py-3.5 px-4 bg-[#8E4726] hover:bg-[#75391E] dark:bg-copper-500 dark:hover:bg-copper-400 text-white dark:text-fg-on-accent font-medium rounded-xl transition-all duration-200 flex items-center justify-center space-x-2 text-sm disabled:opacity-50 shadow-sm dark:shadow-noir-sm cursor-pointer mt-2"
           >
             <span>Sign Up</span>
             <ChevronRight className="h-4 w-4" />
@@ -167,14 +165,14 @@ const Register = () => {
 
         </form>
 
-        <div className="mt-8 pt-6 border-t border-[#EAECF0] dark:border-[#282D37] flex items-center justify-between text-sm">
-          <span className="text-[#475467] dark:text-[#9CA3AF]">
+        <div className="mt-8 pt-6 border-t border-[#EAECF0] dark:border-line-subtle flex items-center justify-between text-sm">
+          <span className="text-[#475467] dark:text-fg-secondary">
             Already have an account?
           </span>
 
           <Link
-            to="/login"
-            className="font-semibold text-[#8E4726] dark:text-[#C86D43] hover:underline transition-colors"
+            to="/Login"
+            className="font-semibold text-[#8E4726] dark:text-copper-400 hover:underline dark:hover:text-copper-300 transition-colors"
           >
             Login
           </Link>
@@ -187,4 +185,4 @@ const Register = () => {
   )
 }
 
-export default Register
+export default Register

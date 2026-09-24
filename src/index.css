@@ -73,9 +73,63 @@
     src: url('../src/assets/fonts/instrument-serif-v5-latin_latin-ext-regular.woff2') format('woff2');
 }
 
+/* ==== Dark Mode — Lamsa Noir & Copper (see DESIGN_SYSTEM.md) ==== */
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+    color-scheme: light;
+}
+
+.dark {
+    color-scheme: dark;
+}
+
+.dark body {
+    background-color: #0B0A09;
+    color: #F1EBE2;
+}
+
+.dark ::selection {
+    background: rgba(217, 155, 112, .28);
+    color: #F1EBE2;
+}
+
+.dark ::-webkit-scrollbar-track {
+    background: #0B0A09;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+    background: #2B2825;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+    background: #3B3632;
+}
+
+.dark input:-webkit-autofill,
+.dark input:-webkit-autofill:hover,
+.dark input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #F1EBE2;
+    caret-color: #F1EBE2;
+    box-shadow: 0 0 0 1000px #1B1917 inset;
+}
+
+.dark :focus-visible {
+    outline-color: #D99B70;
+}
+
+.dark .form-spinning-border::before {
+    background: conic-gradient(transparent 0 70%, rgba(217, 155, 112, .45));
+}
+
+.dark .input-spinning-border:not(.completed)::before {
+    background: conic-gradient(from 0deg, transparent, transparent, #D99B70);
+}
+
 @layer utilities {
     ::-webkit-scrollbar {
-        width: 10px;
+        width: 1px;
     }
 
     ::-webkit-scrollbar-thumb {
@@ -85,12 +139,12 @@
     ::-webkit-scrollbar-thumb:hover {
         background: gray;
     }
-    /* إلغاء لون الخلفية والخط الناتج عن الـ Autofill وتأكيد اللون الأصلي */
-input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active {
-  -webkit-transition: color 9999s ease-out, background-color 9999s ease-out;
-  -webkit-transition-delay: 9999s;
-}
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+        -webkit-transition: color 9999s ease-out, background-color 9999s ease-out;
+        -webkit-transition-delay: 9999s;
+    }
 }

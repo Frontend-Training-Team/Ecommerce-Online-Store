@@ -1,6 +1,6 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
-import ProductPage from "./pages/Products";
+import ShopPage from "./pages/Shop";
 import ProductDetails from "./pages/ProductDetails";
 import StoreLayout from "./components/Layout/StoreLayout";
 import RegisterPage from "./pages/Register";
@@ -9,6 +9,7 @@ import PageNotFound from "./pages/PageNotFound";
 import OrderDetailPage from "./pages/OrderDetail";
 import MyOrdersPage from "./pages/MyOrders";
 import ForgotPasswordPage from "./pages/ForgetPassword";
+import ForgotPasswordVerifyOtp from "./pages/ForgotPasswordVerifyOtp";
 import CartPage from "./pages/Cart";
 import WishlistPage from "./pages/Wishlist";
 import CheckoutPage from "./pages/Checkout";
@@ -18,7 +19,6 @@ import VerifyOtpDetailsPage from "./pages/VerifyOtpDetails";
 import ProtectedRoute from "./components/ProtectedRoute";
 import GuestRoute from "./components/GuestRoute";
 import { Toaster } from "react-hot-toast";
-import ResetPasswordOtp from "./pages/ResetPasswordOtp"
 
 function App() {
   return (
@@ -27,41 +27,42 @@ function App() {
         <Route element={<StoreLayout />}>
           {/* public pages */}
           <Route path="/" element={<Home />} />
-          <Route path="/products" element={<ProductPage />} />
+          <Route path="/shop" element={<ShopPage />} />
+          <Route path="/products" element={<Navigate to="/shop" replace />} />
           <Route path="/products/:id" element={<ProductDetails />} />
 
           {/* Guest pages */}
           <Route element={<GuestRoute />}>
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/verify-otp" element={<VerifyOtpDetailsPage />} />
-            <Route path="/login" element={<LoginPage />} />
+            <Route path="/Login" element={<LoginPage />} />
+            <Route path="/login" element={<Navigate to="/Login" replace />} />
             <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-            <Route path="/resetpasswordOtp" element={<ResetPasswordOtp/>}/>
+            <Route path="/forgot-password-verify-otp" element={<ForgotPasswordVerifyOtp />} />
           </Route>
 
           {/* Protected pages */}
-          <Route path="/orders" element={<MyOrdersPage />} />
           <Route element={<ProtectedRoute />}>
-            <Route path="/cart" element={<CartPage />} />
+            <Route path="/cart" element={<CartPage />} />/
             <Route path="/wishlist" element={<WishlistPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/order-success" element={<OrderSuccessPage />} />
             <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/orders" element={<MyOrdersPage />} />
             <Route path="/orders/:id" element={<OrderDetailPage />} />
           </Route>
 
-          <Route path="/*" element={<PageNotFound />} />
         </Route>
+        <Route path="/*" element={<PageNotFound />} />
       </Routes>
 
       <Toaster
         position="top-center"
         toastOptions={{
           duration: 2000,
-          style: {
-            background: '#ffffff',
-            color: '#000',
-          },
+          className:
+            '!bg-white !text-black ' +
+            'dark:!bg-noir-700 dark:!text-fg dark:!border dark:!border-line dark:!shadow-noir-md',
         }}
       />
 

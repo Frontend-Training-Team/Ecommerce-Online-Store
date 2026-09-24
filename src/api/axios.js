@@ -46,8 +46,8 @@ api.interceptors.response.use(
         // Unauthorized 
         localStorage.removeItem('token');
         error.userMessage = apiMessage || 'The session has ended, log in again';
-        if (window.location.pathname !== '/login') {
-          window.location.href = '/login';
+        if (window.location.pathname.toLowerCase() !== '/login') {
+          window.location.href = '/Login';
         }
         break;
 
