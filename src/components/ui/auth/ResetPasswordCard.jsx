@@ -105,7 +105,7 @@ export default function ResetPasswordCard({
 
       `}</style>
 
-      <div className="form-spinning-border p-[2px] mt-18 shadow-2xl max-w-lg w-full">
+      <div className="form-spinning-border p-0.5 mt-18 shadow-2xl max-w-lg w-full">
         <div className="relative bg-white dark:bg-gray-900 p-6 sm:p-8 rounded-[calc(1.5rem-2px)] w-full flex flex-col items-center text-center z-10 transition-colors duration-300">
 
           <div className="w-12 h-12 bg-[#D88D68]/15 text-[#D88D68] rounded-2xl flex items-center justify-center mb-3 text-xl shadow-sm border border-[#D88D68]/20 lock-float">
@@ -122,7 +122,7 @@ export default function ResetPasswordCard({
           <form onSubmit={onResetPassword} className="w-full space-y-5 text-start">
 
             <div>
-              <label className="text-xs font-semibold text-gray-600 dark:text-gray-400 block mb-2">
+              <label className="text-s font-semibold text-gray-600 dark:text-gray-400 block mb-2">
                 Verification Code
               </label>
 
@@ -130,13 +130,14 @@ export default function ResetPasswordCard({
                 {otpArray.map((digit, index) => (
                   <div
                     key={index}
-                    className={`input-spinning-border p-[2px] shadow-sm border ${isOtpComplete ? 'completed border-[#D88D68]' : 'border-[#D88D68]/60'
+                    className={`input-spinning-border p-0.5 shadow-sm border ${isOtpComplete ? 'completed border-[#D88D68]' : 'border-[#D88D68]/60'
                       }`}
                   >
                     <input
                       ref={(el) => (inputRefs.current[index] = el)}
                       type="text"
                       inputMode="numeric"
+                      autoComplete='one-time-code'
                       maxLength={1}
                       value={digit}
                       onChange={(e) => handleChange(e.target.value, index)}
@@ -148,15 +149,16 @@ export default function ResetPasswordCard({
               </div>
             </div>
             <div className="space-y-1.5 text-start pt-2">
-              <label className="text-xl font-semibold text-gray-600 dark:text-gray-400">
+              <label className="text-s font-semibold text-gray-600 dark:text-gray-400">
                 New Password
               </label>
               <input
                 type="password"
                 placeholder="Enter new password"
+                autoComplete='new-password'
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3.5 text-sm rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:border-[#D88D68] shadow-sm transition-all"
+                className="w-full px-4 py-3.5 mt-3 text-sm rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:border-[#D88D68] shadow-sm transition-all"
               />
             </div>
 

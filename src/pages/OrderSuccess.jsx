@@ -7,7 +7,7 @@ export default function OrderSuccess() {
   const orderId = rawId ? String(rawId).slice(-8) : 'N/A';
 
   return (
-    <div className="min-h-screen bg-[#faf8f5] flex flex-col items-center justify-center p-4 font-sans text-center">
+    <div className="min-h-screen flex flex-col items-center justify-center p-4 font-sans text-center">
 
       {/* Circle Icon Badge */}
       <div className="w-16 h-16 bg-[#e6f4ea] text-[#1e8e3e] rounded-full flex items-center justify-center mb-6">
