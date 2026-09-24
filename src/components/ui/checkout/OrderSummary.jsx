@@ -1,4 +1,5 @@
-export default function OrderSummary({ cartItems = [], subtotal = 0, shipping = 50, tax = 0, total = 0, isSubmitting = false, onPlaceOrder }) {
+export default function OrderSummary({ cartItems = [], subtotal = 0, discount = 0, coupon = null,
+  shipping = 0, tax = 0, total = 0, isSubmitting = false, onPlaceOrder }) {
   return (
     <div className="rounded-2xl border border-[#E8DDD4] bg-white p-5 shadow-sm dark:border-line dark:bg-noir-800 dark:shadow-none">
       <h2 className="border-b border-[#EBE1D7] pb-4 text-xl font-serif text-[#2D241E] dark:border-line-subtle dark:text-fg">
@@ -39,26 +40,51 @@ export default function OrderSummary({ cartItems = [], subtotal = 0, shipping = 
 
       <div className="mt-5 border-t border-[#EBE1D7] pt-4 text-xs text-[#736358] dark:border-line-subtle dark:text-fg-secondary">
         <div className="space-y-2.5">
+
           <div className="flex items-center justify-between">
             <span>Subtotal</span>
-            <span className="font-medium text-[#2d2421] dark:text-fg">EGP {subtotal}</span>
+            <span className="font-medium text-[#2d2421] dark:text-fg">EGP {Number(subtotal).toFixed(2)}</span>
           </div>
+
           <div className="flex items-center justify-between">
             <span>Shipping</span>
-            <span className="rounded bg-emerald-100 px-2 py-0.5 text-xs font-semibold text-emerald-700 dark:bg-state-success/10 dark:text-state-success">EGP {shipping}</span>
+            <span className="rounded bg-emerald-100 px-2 py-0.5 text-xs font-semibold text-emerald-700 
+            dark:bg-state-success/10 dark:text-state-success">{shipping > 0 ? `EGP ${Number(shipping).toFixed(2)}` : 'Free'}</span>
           </div>
+
+          {discount > 0 && (
+            <div className="flex items-center justify-between text-emerald-600 dark:text-state-success">
+              <span className="flex items-center gap-1.5">
+                Discount
+                {coupon && (
+                  <span className="rounded border border-emerald-200 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider dark:border-state-success/25">
+                    {coupon}
+                  </span>
+                )}
+              </span>
+              <span className="font-medium">-EGP {Number(discount).toFixed(2)}</span>
+            </div>
+          )}
+
           <div className="flex items-center justify-between">
             <span>Tax (14%)</span>
-            <span className="font-medium text-[#2d2421] dark:text-fg">EGP {tax}</span>
+            <span className="font-medium text-[#2d2421] dark:text-fg">EGP {Number(tax).toFixed(2)}</span>
           </div>
+
         </div>
 
         <div className="my-4 border-t border-dashed border-[#EBE1D7] dark:border-line-subtle" />
 
         <div className="mb-5 flex items-baseline justify-between">
           <span className="text-sm font-semibold text-[#5C4A3E] dark:text-fg">Total</span>
+<<<<<<< HEAD
           <span className="bg-linear-to-r from-[#8A4C1E] to-[#A76434] bg-clip-text text-2xl font-extrabold tracking-tight text-transparent dark:bg-none dark:text-copper-400">
             EGP {total}
+=======
+          <span className="bg-linear-to-r from-[#8A4C1E] to-[#A76434] bg-clip-text text-2xl font-extrabold 
+          tracking-tight text-transparent dark:bg-none dark:text-copper-400">
+            EGP {Number(total).toFixed(2)}
+>>>>>>> 15e25795ca37597b62be8c070e8a07851e2bf444
           </span>
         </div>
       </div>

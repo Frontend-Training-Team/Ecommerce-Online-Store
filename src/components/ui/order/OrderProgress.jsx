@@ -47,11 +47,11 @@ export default function OrderProgress({ order, estimatedArrival = "2-4 Business 
               return (
                 <li
                   key={step.key}
-                  className={`relative flex min-h-[3rem] items-start gap-3 ${isLast ? "" : "flex-1"}`}
+                  className={`relative flex min-h-12 items-start gap-3 ${isLast ? "" : "flex-1"}`}
                 >
                   {!isLast && (
                     <span
-                      className={`absolute left-[13px] top-7 bottom-0 w-[2px] ${isDone ? "bg-[#8A4C1E] dark:bg-copper-500" : "bg-[#E2D4C7] dark:bg-noir-650"
+                      className={`absolute left-3.25 top-7 bottom-0 w-0.5 ${isDone ? "bg-[#8A4C1E] dark:bg-copper-500" : "bg-[#E2D4C7] dark:bg-noir-650"
                         }`}
                       aria-hidden="true"
                     />
