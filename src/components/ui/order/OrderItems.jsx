@@ -14,7 +14,7 @@ export default function OrderItems({ items = [] }) {
       </div>
 
       {/* fixed height, scrolls internally if there are more items */}
-      <ul className="order-items-scroll h-[15rem] divide-y divide-[#EAE1DB] overflow-y-auto pr-1 dark:divide-line-subtle">
+      <ul className="order-items-scroll h-60 divide-y divide-[#EAE1DB] overflow-y-auto pr-1 dark:divide-line-subtle">
         {items.map((item, idx) => (
           <li
             key={item.product ?? idx}

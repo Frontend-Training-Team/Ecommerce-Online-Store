@@ -545,7 +545,7 @@ The new video (`hero.mp4`) goes in `src/assets/video/hero.mp4` (the existing imp
 
 {/* dark mode only */}
 <div className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-40
-  bg-gradient-to-b from-transparent to-noir-900 dark:block" />
+  bg-linear-to-b from-transparent to-noir-900 dark:block" />
 ```
 
 | Element | Classes |

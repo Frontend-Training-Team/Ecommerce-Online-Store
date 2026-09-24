@@ -4,7 +4,7 @@ export function ShippingCard({ shippingAddress = {} }) {
   const { fullName, phone, country, city, address, postalCode } = shippingAddress;
 
   return (
-    <div className="flex h-full min-h-[9rem] flex-col rounded-2xl border border-[#E8DDD4] bg-[#FAF7F3] p-5 shadow-sm dark:border-line dark:bg-noir-800 dark:shadow-none">
+    <div className="flex h-full min-h-36 flex-col rounded-2xl border border-[#E8DDD4] bg-[#FAF7F3] p-5 shadow-sm dark:border-line dark:bg-noir-800 dark:shadow-none">
       <div className="mb-2.5 flex items-center gap-2 border-b border-[#EBE1D7] pb-2.5 text-xs font-bold uppercase tracking-wider text-[#2D241E] dark:border-line-subtle dark:text-fg-secondary">
         <MapPin className="h-4 w-4 text-[#8C7A6E] dark:text-fg-tertiary" />
         Shipping Address
@@ -82,7 +82,7 @@ export function PaymentCard({ order }) {
             Placed on {formatDate(createdAt)} · {paymentStatus}
           </p>
         </div>
-        <p className="bg-gradient-to-r from-[#8A4C1E] to-[#A76434] bg-clip-text text-2xl font-extrabold tracking-tight text-transparent dark:bg-none dark:text-copper-400">
+        <p className="bg-linear-to-r from-[#8A4C1E] to-[#A76434] bg-clip-text text-2xl font-extrabold tracking-tight text-transparent dark:bg-none dark:text-copper-400">
           EGP {Number(totalPrice).toFixed(2)}
         </p>
       </div>

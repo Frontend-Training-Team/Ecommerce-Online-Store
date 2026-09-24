@@ -58,7 +58,7 @@ export default function SecurityTab({ user, setActiveTab }) {
                     <span className="text-xs sm:text-sm font-medium text-[#3A332D] dark:text-fg">Verify email</span>
                 </span>
 
-                <span className="w-8 sm:w-12 h-[1px] bg-[#D6D0CA] dark:bg-line-strong"></span>
+                <span className="w-8 sm:w-12 h-px bg-[#D6D0CA] dark:bg-line-strong"></span>
 
                 <span className="flex items-center gap-2">
                     <span className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-semibold 
@@ -67,7 +67,7 @@ export default function SecurityTab({ user, setActiveTab }) {
                     <span className="text-xs sm:text-sm font-medium text-[#3A332D] dark:text-fg">New password</span>
                 </span>
 
-                <span className="w-8 sm:w-12 h-[1px] bg-[#D6D0CA] dark:bg-line-strong"></span>
+                <span className="w-8 sm:w-12 h-px bg-[#D6D0CA] dark:bg-line-strong"></span>
 
                 <span className="flex items-center gap-2">
                     <span className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-semibold 
@@ -80,7 +80,7 @@ export default function SecurityTab({ user, setActiveTab }) {
             {step === 1 && (
                 <section className="w-full bg-white dark:bg-noir-800 border border-[#E3DEDA] dark:border-line rounded-2xl p-6 sm:p-8 flex flex-col gap-6 shadow-sm dark:shadow-none">
                     <div className="flex items-center gap-4 border-b border-[#EDE8E3] dark:border-line-subtle pb-5">
-                        <div className="w-12 h-12 rounded-full bg-[#F2EBE5] dark:bg-copper-900 flex items-center justify-center text-[#8A4526] dark:text-copper-300 flex-shrink-0">
+                        <div className="w-12 h-12 rounded-full bg-[#F2EBE5] dark:bg-copper-900 flex items-center justify-center text-[#8A4526] dark:text-copper-300 shrink-0">
                             <Mail className="w-5 h-5" />
                         </div>
                         <div>
@@ -210,7 +210,7 @@ export default function SecurityTab({ user, setActiveTab }) {
                         <CheckCircle2 className="w-8 h-8" />
                     </div>
                     <h3 className="font-Serif text-2xl font-medium text-[#1F4A36] dark:text-fg">Password updated</h3>
-                    <p className="text-sm text-[#3A4A41] dark:text-fg-secondary max-w-[420px]">
+                    <p className="text-sm text-[#3A4A41] dark:text-fg-secondary max-w-105">
                         Your password has been successfully changed. Your account is now secured.
                     </p>
                     <button

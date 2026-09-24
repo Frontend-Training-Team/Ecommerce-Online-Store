@@ -1,5 +1,4 @@
-/* eslint-disable react-hooks/set-state-in-effect */
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 import { useSearchParams, Link } from 'react-router-dom'
 import ProductFilterSidebar from '../components/ui/searchinput/FilterSidebar'
 import { useDebounce } from '../hooks/useDebounce'
@@ -10,60 +9,179 @@ import ProductGrid from '../components/ui/productDetails/ProductGrid'
 export default function ShopPage() {
   const [searchParams, setSearchParams] = useSearchParams()
   const searchInputRef = useRef(null)
-  const [searchTerm, setSearchTerm] = useState(() => searchParams.get('search') || searchParams.get('keyword') || '')
-  const [selectedCategory, setSelectedCategory] = useState(() => searchParams.get('category') || 'All')
+
+  // URL is the single source of truth for Category, Search, and Page
+  const categoryFromUrl = searchParams.get('category') || 'All'
+  const searchFromUrl = searchParams.get('search') || searchParams.get('keyword') || ''
+  const pageFromUrl = Math.max(1, parseInt(searchParams.get('page') || '1', 10))
+
+  // In-page search input state (allows typing before debounce updates URL)
+  const [searchTerm, setSearchTerm] = useState(searchFromUrl)
   const [minPrice, setMinPrice] = useState('')
   const [maxPrice, setMaxPrice] = useState('')
   const [sortBy, setSortBy] = useState('default')
   const [isFilterOpen, setIsFilterOpen] = useState(false)
 
   const [allProducts, setAllProducts] = useState([])
-  const [filteredProducts, setFilteredProducts] = useState([])
-  const ITEMS_PER_PAGE = 12
-  const [currentPage, setCurrentPage] = useState(() => Math.max(1, parseInt(searchParams.get('page') || '1', 10)))
   const [isLoading, setIsLoading] = useState(true)
-  const debouncedSearchTerm = useDebounce(searchTerm, 400)
-  const debouncedMinPrice = useDebounce(minPrice, 400)
-  const debouncedMaxPrice = useDebounce(maxPrice, 400)
 
-  const syncCategoryParam = (nextCategory) => {
+  const debouncedMinPrice = useDebounce(minPrice, 350)
+  const debouncedMaxPrice = useDebounce(maxPrice, 350)
+
+  // Adjust search term when URL search param changes (e.g. from Navbar or Category clicks)
+  const [prevSearchFromUrl, setPrevSearchFromUrl] = useState(searchFromUrl)
+  if (prevSearchFromUrl !== searchFromUrl) {
+    setPrevSearchFromUrl(searchFromUrl)
+    setSearchTerm(searchFromUrl)
+  }
+
+  // Debounced URL search updater — called ONLY when typing in the in-page input
+  const debounceTimerRef = useRef(null)
+  const updateUrlSearch = (val) => {
+    if (debounceTimerRef.current) clearTimeout(debounceTimerRef.current)
+    debounceTimerRef.current = setTimeout(() => {
+      const trimmed = val.trim()
+      setSearchParams(
+        (prevParams) => {
+          const current = prevParams.get('search') || prevParams.get('keyword') || ''
+          if (trimmed === current) return prevParams
+          const next = new URLSearchParams(prevParams)
+          if (trimmed) {
+            next.set('search', trimmed)
+            next.delete('keyword')
+          } else {
+            next.delete('search')
+            next.delete('keyword')
+          }
+          next.delete('page')
+          return next
+        },
+        { replace: true }
+      )
+    }, 350)
+  }
+
+  useEffect(() => {
+    return () => {
+      if (debounceTimerRef.current) clearTimeout(debounceTimerRef.current)
+    }
+  }, [])
+
+  // Fetch all products once on component mount
+  useEffect(() => {
+    let isMounted = true
+    const fetchAllProducts = async () => {
+      setIsLoading(true)
+      try {
+        const response = await getAllProducts({ limit: 100 })
+        const data = response.data
+        const list = data.products || (Array.isArray(data) ? data : [])
+        if (isMounted) {
+          setAllProducts(list)
+        }
+      } catch (error) {
+        console.error('Error fetching products:', error)
+      } finally {
+        if (isMounted) {
+          setIsLoading(false)
+        }
+      }
+    }
+    fetchAllProducts()
+    return () => {
+      isMounted = false
+    }
+  }, [])
+
+  // Synchronous, instant filtering with useMemo (Eliminates flashes and race conditions!)
+  const activeSearch = searchTerm.trim() || searchFromUrl.trim()
+  const activeCategory = categoryFromUrl
+
+  const filteredProducts = useMemo(() => {
+    if (!allProducts || allProducts.length === 0) return []
+
+    let result = allProducts
+
+    // 1. Search Query Filter
+    if (activeSearch) {
+      const query = activeSearch.toLowerCase()
+      result = result.filter((item) => {
+        const name = String(item.name || '').toLowerCase()
+        const desc = String(item.description || item.shortDescription || '').toLowerCase()
+        const brand = String(item.brand || '').toLowerCase()
+        return name.includes(query) || desc.includes(query) || brand.includes(query)
+      })
+    }
+
+    // 2. Category Filter
+    if (activeCategory && activeCategory !== 'All') {
+      const cat = activeCategory.toLowerCase()
+      result = result.filter((item) => {
+        const itemCat = String(item.category || item.categoryName || '').toLowerCase()
+        const itemSubCat = String(item.subcategory || '').toLowerCase()
+        return itemCat === cat || itemSubCat === cat || itemCat.includes(cat)
+      })
+    }
+
+    // 3. Price Filters
+    if (debouncedMinPrice !== '') {
+      const min = Number(debouncedMinPrice)
+      result = result.filter((item) => (item.discountPrice || item.price || 0) >= min)
+    }
+
+    if (debouncedMaxPrice !== '') {
+      const max = Number(debouncedMaxPrice)
+      result = result.filter((item) => (item.discountPrice || item.price || 0) <= max)
+    }
+
+    // 4. Sorting
+    if (sortBy !== 'default') {
+      result = [...result].sort((a, b) => {
+        const stockA = Number(a.stock ?? a.quantity ?? 0)
+        const stockB = Number(b.stock ?? b.quantity ?? 0)
+        const stockPriority = (stockB > 0 ? 1 : 0) - (stockA > 0 ? 1 : 0)
+
+        if (stockPriority !== 0) return stockPriority
+
+        if (sortBy === 'lowToHigh') {
+          return (a.discountPrice || a.price || 0) - (b.discountPrice || b.price || 0)
+        }
+        if (sortBy === 'highToLow') {
+          return (b.discountPrice || b.price || 0) - (a.discountPrice || a.price || 0)
+        }
+        if (sortBy === 'newest') {
+          return new Date(b.createdAt) - new Date(a.createdAt)
+        }
+
+        return 0
+      })
+    }
+
+    return result
+  }, [allProducts, activeSearch, activeCategory, debouncedMinPrice, debouncedMaxPrice, sortBy])
+
+  const ITEMS_PER_PAGE = 12
+  const totalPages = Math.max(1, Math.ceil(filteredProducts.length / ITEMS_PER_PAGE))
+  const currentPage = Math.min(pageFromUrl, totalPages)
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
+  const displayedProducts = filteredProducts.slice(startIndex, startIndex + ITEMS_PER_PAGE)
+
+  const handleCategoryChange = (nextCategory) => {
     const params = new URLSearchParams(searchParams)
-
     if (nextCategory && nextCategory !== 'All') {
       params.set('category', nextCategory)
     } else {
       params.delete('category')
     }
     params.delete('page')
-
     setSearchParams(params, { replace: true })
-    setCurrentPage(1)
-  }
-
-  const handleAddToCart = (product) => {
-    const existingCart = JSON.parse(localStorage.getItem('guestCart') || '[]')
-    const productId = product?.id || product?._id
-    const existingIndex = existingCart.findIndex((item) => item.productId === productId)
-
-    if (existingIndex > -1) {
-      existingCart[existingIndex].quantity += 1
-    } else {
-      existingCart.push({ productId, quantity: 1 })
-    }
-    localStorage.setItem('guestCart', JSON.stringify(existingCart))
   }
 
   const handleClearFilters = () => {
-    setIsLoading(true)
-    setSelectedCategory('All')
-    syncCategoryParam('All')
-    setSearchTerm('')
-    const params = new URLSearchParams(searchParams)
-    params.delete('search')
-    params.delete('keyword')
-    params.delete('page')
+    if (debounceTimerRef.current) clearTimeout(debounceTimerRef.current)
+    const params = new URLSearchParams()
     setSearchParams(params, { replace: true })
-    setCurrentPage(1)
+    setSearchTerm('')
     setMinPrice('')
     setMaxPrice('')
     setSortBy('default')
@@ -74,22 +192,18 @@ export default function ShopPage() {
       e.preventDefault()
       e.stopPropagation()
     }
-    setIsLoading(true)
+    if (debounceTimerRef.current) clearTimeout(debounceTimerRef.current)
     setSearchTerm('')
     const params = new URLSearchParams(searchParams)
     params.delete('search')
     params.delete('keyword')
     params.delete('page')
     setSearchParams(params, { replace: true })
-    setCurrentPage(1)
     searchInputRef.current?.focus()
   }
 
-  const totalPages = Math.max(1, Math.ceil(filteredProducts.length / ITEMS_PER_PAGE))
-
   const handlePageChange = (newPage) => {
     if (newPage < 1 || newPage > totalPages || newPage === currentPage) return
-    setCurrentPage(newPage)
     const params = new URLSearchParams(searchParams)
     if (newPage === 1) {
       params.delete('page')
@@ -106,120 +220,18 @@ export default function ShopPage() {
     }
   }
 
-  useEffect(() => {
-    const categoryFromUrl = searchParams.get('category')
-    if (categoryFromUrl) {
-      setSelectedCategory(categoryFromUrl)
+  const handleAddToCart = (product) => {
+    const existingCart = JSON.parse(localStorage.getItem('guestCart') || '[]')
+    const productId = product?.id || product?._id
+    const existingIndex = existingCart.findIndex((item) => item.productId === productId)
+
+    if (existingIndex > -1) {
+      existingCart[existingIndex].quantity += 1
     } else {
-      setSelectedCategory('All')
+      existingCart.push({ productId, quantity: 1 })
     }
-
-    const searchFromUrl = searchParams.get('search') || searchParams.get('keyword') || ''
-    setSearchTerm((prev) => (prev !== searchFromUrl ? searchFromUrl : prev))
-
-    const pageFromUrl = parseInt(searchParams.get('page') || '1', 10)
-    if (!isNaN(pageFromUrl) && pageFromUrl > 0) {
-      setCurrentPage((prev) => (prev !== pageFromUrl ? pageFromUrl : prev))
-    }
-  }, [searchParams])
-
-  useEffect(() => {
-    setSearchParams(
-      (prevParams) => {
-        const currentSearch = prevParams.get('search') || prevParams.get('keyword') || ''
-        const trimmed = debouncedSearchTerm.trim()
-        if (trimmed) {
-          if (currentSearch !== trimmed) {
-            const next = new URLSearchParams(prevParams)
-            next.set('search', trimmed)
-            next.delete('keyword')
-            return next
-          }
-        } else if (!searchTerm.trim() && currentSearch) {
-          const next = new URLSearchParams(prevParams)
-          next.delete('search')
-          next.delete('keyword')
-          return next
-        }
-        return prevParams
-      },
-      { replace: true }
-    )
-  }, [debouncedSearchTerm, searchTerm, setSearchParams])
-
-  useEffect(() => {
-    const fetchAllProducts = async () => {
-      setIsLoading(true)
-      try {
-        const response = await getAllProducts({ limit: 100 })
-        const data = response.data
-        const list = data.products || []
-        setAllProducts(list)
-        setFilteredProducts(list)
-      } catch (error) {
-        console.error('Error fetching products:', error)
-      } finally {
-        setIsLoading(false)
-      }
-    }
-    fetchAllProducts()
-  }, [])
-
-  useEffect(() => {
-    if (allProducts.length === 0) return
-
-    setIsLoading(true)
-
-    const filterTimer = setTimeout(() => {
-      let result = [...allProducts]
-
-      if (debouncedSearchTerm.trim()) {
-        const query = debouncedSearchTerm.toLowerCase().trim()
-        result = result.filter((item) => {
-          const name = String(item.name || '').toLowerCase()
-          const desc = String(item.description || item.shortDescription || '').toLowerCase()
-          const brand = String(item.brand || '').toLowerCase()
-          return name.includes(query) || desc.includes(query) || brand.includes(query)
-        })
-      }
-
-      if (selectedCategory !== 'All') {
-        const cat = selectedCategory.toLowerCase()
-        result = result.filter((item) => {
-          const itemCat = String(item.category || '').toLowerCase()
-          const itemSubCat = String(item.subcategory || '').toLowerCase()
-          return itemCat === cat || itemSubCat === cat || itemCat.includes(cat)
-        })
-      }
-
-      if (debouncedMinPrice !== '') {
-        const min = Number(debouncedMinPrice)
-        result = result.filter((item) => (item.discountPrice || item.price || 0) >= min)
-      }
-
-      if (debouncedMaxPrice !== '') {
-        const max = Number(debouncedMaxPrice)
-        result = result.filter((item) => (item.discountPrice || item.price || 0) <= max)
-      }
-
-      if (sortBy === 'lowToHigh') {
-        result.sort((a, b) => (a.discountPrice || a.price) - (b.discountPrice || b.price))
-      } else if (sortBy === 'highToLow') {
-        result.sort((a, b) => (b.discountPrice || b.price) - (a.discountPrice || a.price))
-      } else if (sortBy === 'newest') {
-        result.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-      }
-
-      setFilteredProducts(result)
-      setCurrentPage(1)
-      setIsLoading(false)
-    }, 300)
-
-    return () => clearTimeout(filterTimer)
-  }, [debouncedSearchTerm, selectedCategory, debouncedMinPrice, debouncedMaxPrice, sortBy, allProducts])
-
-  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
-  const displayedProducts = filteredProducts.slice(startIndex, startIndex + ITEMS_PER_PAGE)
+    localStorage.setItem('guestCart', JSON.stringify(existingCart))
+  }
 
   return (
     <div className="mt-16 xl:mt-17 min-h-screen bg-white dark:bg-noir-900 transition-colors duration-200 relative">
@@ -230,42 +242,29 @@ export default function ShopPage() {
               Shop
             </h1>
             <p className="text-xs sm:text-sm font-medium text-[#8C7A6E] dark:text-fg-tertiary mt-1">
-              {/* Manage and track your recent orders */}
               Find everything you need in one place
             </p>
           </div>
 
           <div className="flex items-center gap-3">
             <span className="rounded-full border border-[#DFC9BA] dark:border-copper-800 bg-[#F3E8DF] dark:bg-copper-900 px-3.5 sm:px-4 py-1.5 text-xs sm:text-sm font-bold uppercase tracking-wider text-[#7B542B] dark:text-copper-300 shadow-2xs">
-              {selectedCategory === 'All' ? 'All Categories' : selectedCategory}
+              {categoryFromUrl === 'All' ? 'All Categories' : categoryFromUrl}
             </span>
           </div>
         </div>
-        <div className="w-full grid grid-cols-1 lg:grid-cols-[280px_1fr] xl:grid-cols-[300px_1fr] gap-8 items-start ">
-          <aside className="w-full h-full border-r lg:border-gray-200 dark:border-line lg:pr-8 ">
+
+        <div className="w-full grid grid-cols-1 lg:grid-cols-[280px_1fr] xl:grid-cols-[300px_1fr] gap-8 items-start">
+          <aside className="w-full h-full border-r lg:border-gray-200 dark:border-line lg:pr-8">
             <div>
               <ProductFilterSidebar
-                selectedCategory={selectedCategory}
-                setSelectedCategory={(cat) => {
-                  setIsLoading(true)
-                  setSelectedCategory(cat)
-                  syncCategoryParam(cat)
-                }}
+                selectedCategory={categoryFromUrl}
+                setSelectedCategory={handleCategoryChange}
                 minPrice={minPrice}
-                setMinPrice={(val) => {
-                  setIsLoading(true)
-                  setMinPrice(val)
-                }}
+                setMinPrice={setMinPrice}
                 maxPrice={maxPrice}
-                setMaxPrice={(val) => {
-                  setIsLoading(true)
-                  setMaxPrice(val)
-                }}
+                setMaxPrice={setMaxPrice}
                 sortBy={sortBy}
-                setSortBy={(sort) => {
-                  setIsLoading(true)
-                  setSortBy(sort)
-                }}
+                setSortBy={setSortBy}
                 onClearFilters={handleClearFilters}
                 isOpen={isFilterOpen}
                 onClose={() => setIsFilterOpen(false)}
@@ -287,7 +286,11 @@ export default function ShopPage() {
                       type="text"
                       placeholder="Search for products, brands and more..."
                       value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
+                      onChange={(e) => {
+                        const val = e.target.value
+                        setSearchTerm(val)
+                        updateUrlSearch(val)
+                      }}
                       className="w-full h-12 pl-11 pr-11 bg-gray-50 dark:bg-noir-800 border border-gray-200 dark:border-line-control dark:hover:border-line-hover rounded-2xl text-sm focus:outline-none focus:border-amber-900/50 dark:focus:border-copper-400 transition-colors shadow-none text-slate-800 dark:text-fg placeholder:text-slate-400 dark:placeholder:text-fg-placeholder"
                     />
                     {searchTerm && (
@@ -315,11 +318,11 @@ export default function ShopPage() {
               </div>
 
               {/* Search Results Heading & Breadcrumbs */}
-              {(debouncedSearchTerm.trim() || searchTerm.trim()) && (
+              {activeSearch && (
                 <div className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-gray-100 dark:border-line-subtle pb-5">
                   <div className="flex items-center gap-3 sm:gap-4 flex-wrap">
                     <h2 className="font-Serif italic text-2xl sm:text-3xl text-[#1E1915] dark:text-fg font-medium tracking-tight">
-                      “{(debouncedSearchTerm || searchTerm).trim()}”
+                      “{activeSearch}”
                     </h2>
                     <span className="w-10 sm:w-16 h-px bg-gray-300 dark:bg-line-strong inline-block" />
                     <span className="text-sm font-semibold tracking-wide text-[#706861] dark:text-fg-secondary uppercase">
@@ -341,7 +344,7 @@ export default function ShopPage() {
                     </button>
                     <span className="text-gray-300 dark:text-fg-disabled">/</span>
                     <span className="text-[#222222] dark:text-fg font-medium truncate max-w-35 sm:max-w-xs">
-                      {(debouncedSearchTerm || searchTerm).trim()}
+                      {activeSearch}
                     </span>
                   </nav>
                 </div>
@@ -364,4 +367,4 @@ export default function ShopPage() {
       </main>
     </div>
   )
-}
+}

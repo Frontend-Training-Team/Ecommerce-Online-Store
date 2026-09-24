@@ -28,7 +28,7 @@ export default function ProfileSidebar({ activeTab, setActiveTab, ordersCount = 
   ];
 
   return (
-    <aside className="w-full md:w-[280px] lg:w-[310px] flex-shrink-0 flex flex-col gap-5">
+    <aside className="w-full md:w-70 lg:w-77.5 shrink-0 flex flex-col gap-5">
 
       <div className="bg-white dark:bg-noir-800 border border-[#E3DEDA] dark:border-line rounded-2xl p-6 flex flex-col items-center text-center shadow-sm dark:shadow-none">
 
@@ -116,7 +116,7 @@ export default function ProfileSidebar({ activeTab, setActiveTab, ordersCount = 
           )}
         </Link>
 
-        <div className="h-[1px] bg-[#EDE8E3] dark:bg-line-subtle my-1.5 mx-2"></div>
+        <div className="h-px bg-[#EDE8E3] dark:bg-line-subtle my-1.5 mx-2"></div>
 
         <button
           onClick={logout}
