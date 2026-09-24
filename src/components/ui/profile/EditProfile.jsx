@@ -88,7 +88,7 @@ export default function EditProfile({ user, updateUser, setActiveTab }) {
 
         <div className="flex items-center gap-5 pb-5 border-b border-[#EDE8E3] dark:border-line-subtle">
           <div className="w-20 h-20 rounded-full bg-[#F2EBE5] dark:bg-copper-900 border border-[#E0D3C6] dark:border-copper-800 text-[#8A4526] dark:text-copper-300 font-Serif 
-          text-2xl flex items-center justify-center overflow-hidden flex-shrink-0">
+          text-2xl flex items-center justify-center overflow-hidden shrink-0">
             {formData.avatar ? (
               <img
                 key={formData.avatar}

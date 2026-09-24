@@ -81,10 +81,11 @@ export default function VerifyOtp({
         }
       `}</style>
 
-      <div className="form-spinning-border p-[2px] shadow-2xl dark:shadow-none max-w-lg w-full">
+      <div className="form-spinning-border p-0.5 shadow-2xl dark:shadow-none max-w-lg w-full">
         <div className="relative bg-white dark:bg-noir-800 p-6 sm:p-8 rounded-[calc(1.5rem-2px)] w-full flex flex-col items-center text-center z-10 transition-colors duration-300">
 
-          <div className="w-12 h-12 bg-[#D88D68]/15 dark:bg-copper-400/15 text-[#D88D68] dark:text-copper-400 rounded-2xl flex items-center justify-center mb-3 text-xl shadow-sm border border-[#D88D68]/20 dark:border-copper-500/20 lock-float">
+          <div className="w-12 h-12 bg-[#D88D68]/15 dark:bg-copper-400/15 text-[#D88D68] dark:text-copper-400 rounded-2xl flex items-center
+           justify-center mb-3 text-xl shadow-sm border border-[#D88D68]/20 dark:border-copper-500/20 lock-float">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
             </svg>
@@ -104,9 +105,9 @@ export default function VerifyOtp({
                 return (
                   <div
                     key={index}
-                    className={`relative w-11 h-12 sm:w-12 sm:h-14 rounded-xl transition-all duration-300 border-2 ${isFilled
-                      ? 'border-[#D88D68] bg-gray-900 shadow-md dark:border-copper-400 dark:bg-noir-750'
-                      : 'border-gray-700 bg-gray-900/50 hover:border-[#D88D68]/50 focus-within:border-[#D88D68] dark:border-line-control dark:bg-noir-750 dark:hover:border-copper-600 dark:focus-within:border-copper-400'
+                    className={`relative w-11 h-12 sm:w-12 sm:h-14 rounded-xl  ${isFilled
+                      ? '  bg-[#D88D68]/15  shadow-md border-2 border-[#D88D68]/20 dark:border-copper-500/20 dark:bg-noir-750'
+                      : '  bg-[#D88D68]/15  dark:border-line-control dark:bg-noir-750 dark:hover:border-copper-600 dark:focus-within:border-copper-400'
                       }`}
                   >
                     <input
@@ -117,7 +118,7 @@ export default function VerifyOtp({
                       value={digit}
                       onChange={(e) => handleChange(e.target.value, index)}
                       onKeyDown={(e) => handleKeyDown(e, index)}
-                      className="w-full h-full text-center text-xl font-bold bg-transparent text-white dark:text-fg focus:outline-none block rounded-xl"
+                      className="w-full h-full text-center text-xl font-bold bg-transparent text-black dark:text-fg focus:outline-none block rounded-xl"
                     />
                   </div>
                 );
@@ -164,4 +165,4 @@ export default function VerifyOtp({
       </div>
     </div>
   );
-}
+}

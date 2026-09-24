@@ -62,7 +62,7 @@ export default function Navbar() {
   };
 
   const navLinkClass = ({ isActive }) =>
-    `transition-colors duration-200 ${isActive
+    `transition-colors duration-200 whitespace-nowrap shrink-0 ${isActive
       ? isHomePage
         ? "text-white font-semibold drop-shadow-sm"
         : "text-[#9A4D2C] dark:text-copper-300 font-semibold"
@@ -89,19 +89,19 @@ export default function Navbar() {
         ? "bg-transparent"
         : "bg-[#E2E2E4] dark:bg-noir-900/85 dark:backdrop-blur-md border-b border-[#D0D2D7] dark:border-line-subtle"
         }`}>
-        <div className="w-full px-3.5 sm:px-6 lg:px-14 py-2.5 sm:py-3.5 flex items-center justify-between gap-2 sm:gap-4">
+        <div className="w-full px-3.5 sm:px-6 md:px-4 lg:px-8 xl:px-14 py-2.5 sm:py-3.5 flex items-center justify-between gap-2 sm:gap-4">
 
           {/* Left: Logo */}
           <Link to="/" className="flex items-center shrink-0">
             <img
               src={logoImg}
               alt="LAMSA Home Furniture"
-              className="h-7 sm:h-8 md:h-10 object-contain"
+              className="h-7 sm:h-8 md:h-9 lg:h-10 object-contain"
             />
           </Link>
 
           {/* Center: Navigation Links (Desktop) */}
-          <nav className="hidden md:flex items-center gap-6 lg:gap-10 text-[14px]">
+          <nav className="hidden md:flex items-center gap-3 lg:gap-6 xl:gap-8 2xl:gap-10 text-[13.5px] lg:text-[14px]">
             <NavLink to="/" className={navLinkClass}>
               Home
             </NavLink>
@@ -117,18 +117,18 @@ export default function Navbar() {
           </nav>
 
           {/* Right: Actions & Tools */}
-          <div className="flex items-center gap-2 sm:gap-2.5 flex-nowrap">
+          <div className="flex items-center gap-1.5 md:gap-2 lg:gap-2.5 flex-nowrap shrink-0">
 
             {/* Desktop Expanding Search  */}
             <div
               ref={searchContainerRef}
-              className={`hidden md:flex relative items-center h-9 rounded-full transition-all duration-300 ease-in-out overflow-hidden shrink-0   hover:scale-x-105
+              className={`hidden md:flex relative items-center h-9 rounded-full transition-all duration-300 ease-in-out overflow-hidden shrink-0 hover:scale-x-105
                 ${isHomePage
                   ? isSearchOpen
-                    ? "w-40 sm:w-48 md:w-52 border border-white/60 bg-black/40 backdrop-blur-md shadow-lg"
+                    ? "w-36 lg:w-48 xl:w-52 border border-white/60 bg-black/40 backdrop-blur-md shadow-lg"
                     : "w-9 border border-white/40 bg-white/10 hover:border-white hover:bg-white/20"
                   : isSearchOpen
-                    ? "w-40 sm:w-48 md:w-52 border border-[#5B5B5B] dark:border-line-control bg-white/70 dark:bg-noir-750 shadow-xs"
+                    ? "w-36 lg:w-48 xl:w-52 border border-[#5B5B5B] dark:border-line-control bg-white/70 dark:bg-noir-750 shadow-xs"
                     : "w-9 border border-[#5B5B5B] dark:border-line-strong dark:hover:border-line-hover bg-transparent dark:bg-noir-800"
                 }`}
             >

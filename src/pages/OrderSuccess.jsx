@@ -33,7 +33,7 @@ export default function OrderSuccess() {
 
         {/* Track My Order Button */}
         <Link
-          to="/orders"
+          to={`/orders/${rawId}`}
           className="w-full sm:w-auto px-5 py-2.5 rounded-xl border border-[#c07a50] dark:border-copper-600 bg-transparent text-[#c07a50] dark:text-copper-400 hover:bg-[#c07a50]/5 dark:hover:bg-copper-400/5 font-semibold text-xs flex items-center justify-center gap-2 transition-colors"
         >
           <Package className="w-4 h-4" />
@@ -53,4 +53,4 @@ export default function OrderSuccess() {
 
     </div>
   );
-}
+}

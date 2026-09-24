@@ -12,6 +12,7 @@
   "dependencies": {
     "@rolldown/binding-win32-x64-msvc": "^1.2.6",
     "axios": "^1.20.0",
+    "framer-motion": "^13.4.3",
     "lucide-react": "^1.47.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",

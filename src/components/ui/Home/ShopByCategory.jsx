@@ -8,7 +8,7 @@ const categoryImages = [category1, category2, category3, category4];
 
 function ShopByCategory() {
   
-  const categoryList = ["Fashion", "Sport", "Home", "Electronics"];
+  const categoryList = ["Fashion", "Sports", "Home", "Electronics"];
 
   return (
     <section className="bg-white dark:bg-noir-900 py-10">

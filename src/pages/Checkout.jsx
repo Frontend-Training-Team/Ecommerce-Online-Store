@@ -11,7 +11,7 @@ import { ArrowLeft } from 'lucide-react';
 export default function Checkout() {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { cartItems, loading: loadingCart, clearCart } = useCart();
+  const { cart, cartItems, loading: loadingCart, clearCart } = useCart();
 
   const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -23,15 +23,19 @@ export default function Checkout() {
     }
   }, [navigate]);
 
-  const subtotal = cartItems.reduce((acc, item) => {
+  const TAX_RATE = 0.14;
+  const subtotal = Number(cart?.subtotal ?? cartItems.reduce((acc, item) => {
     const price = item.price || item.product?.price || 0;
     const quantity = item.quantity || 1;
     return acc + price * quantity;
-  }, 0);
+  }, 0));
 
-  const shipping = cartItems.length > 0 ? 50 : 0;
-  const tax = Math.round(subtotal * 0.14);
-  const total = subtotal + shipping + tax;
+  const discount = Number(cart?.discountAmount ?? 0);
+  const coupon = cart?.coupon || null;
+  const shipping = (subtotal > 0 && subtotal < 1000) ? 50 : 0;
+  const taxableAmount = Math.max(subtotal - discount, 0);
+  const tax = taxableAmount * TAX_RATE;
+  const total = taxableAmount + shipping + tax;
 
   const handleOrderSubmit = async (formData) => {
     if (!cartItems || cartItems.length === 0) {
@@ -117,6 +121,8 @@ export default function Checkout() {
             <OrderSummary
               cartItems={cartItems}
               subtotal={subtotal}
+              discount={discount}
+              coupon={coupon}
               shipping={shipping}
               tax={tax}
               total={total}
