@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import heroVideo from "../../../assets/video/hero.mp4";
+import heroVideo from "../../../assets/videos/hero.mp4";
 import { Sparkles } from "lucide-react";
 
 function HeroSection({ onViewCategories }) {

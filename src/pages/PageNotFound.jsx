@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Compass, Home } from "lucide-react";
-import bgVideo from "../assets/videos/404BG.mp4";
+import bgVideo from "../assets/videos/hero.mp4";
 
 export default function PageNotFound() {
   return (

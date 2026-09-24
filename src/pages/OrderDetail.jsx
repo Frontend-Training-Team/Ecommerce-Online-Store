@@ -86,7 +86,7 @@ export default function OrderDetail() {
               <ArrowLeft className="h-5 w-5" />
             </button>
             <div>
-              <h2 className="text-3xl font-medium font-Instrument text-[#2D241E] dark:text-[#f3ede6] lg:text-5xl mb-2">Order Detail</h2>
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium font-Instrument text-[#2D241E] dark:text-[#f3ede6] mb-2">Order Detail</h1>
               <p className="text-xs font-medium text-[#8C7A6E] dark:text-[#a38f7d]">
                 Order #{order._id?.slice(-8).toUpperCase()}
               </p>

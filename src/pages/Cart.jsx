@@ -78,7 +78,7 @@ export default function Cart() {
 
 
         {isCartEmpty ? (
-          <div className="flex flex-1 items-center justify-center">
+          <div className="flex">
             <EmptyCart />
           </div>
         ) : (
