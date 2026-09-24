@@ -15,7 +15,9 @@ function HeroSection({ onViewCategories }) {
         <source src={heroVideo} type="video/mp4" />
       </video>
 
-      <div className="absolute inset-0 bg-black/60"></div>
+      <div className="absolute inset-0 bg-black/60 dark:bg-noir-950/70"></div>
+
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-40 bg-gradient-to-b from-transparent to-noir-900 dark:block"></div>
 
       <div className="relative z-10 mx-auto flex min-h-[85vh] sm:min-h-[90vh] lg:min-h-screen max-w-7xl items-center justify-center px-4 sm:px-6 lg:px-8 pt-24 pb-14 sm:pt-32 sm:pb-20 lg:py-24 text-center">
         <div className="max-w-4xl w-full">
@@ -36,7 +38,7 @@ function HeroSection({ onViewCategories }) {
           <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto px-4 sm:px-0">
             <Link
               to="/shop"
-              className="w-full sm:w-auto min-w-36 text-center rounded-3xl bg-white px-7 py-3 sm:py-2.5 text-sm font-semibold text-black transition hover:bg-[#70482F] hover:text-white uppercase active:scale-95 shadow-md"
+              className="w-full sm:w-auto min-w-36 text-center rounded-3xl bg-white dark:bg-fg px-7 py-3 sm:py-2.5 text-sm font-semibold text-black dark:text-noir-900 transition hover:bg-[#70482F] dark:hover:bg-copper-400 hover:text-white dark:hover:text-fg-on-accent uppercase active:scale-95 shadow-md"
             >
               Shop Now
             </Link>

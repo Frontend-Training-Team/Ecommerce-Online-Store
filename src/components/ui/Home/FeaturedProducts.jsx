@@ -5,22 +5,22 @@ function FeaturedProducts({ products = [], loading = false }) {
   const featuredProducts = products.slice(0, 4);
 
   return (
-    <section className="bg-white py-16 dark:bg-[#171411]">
+    <section className="bg-white py-16 dark:bg-noir-900">
       <div className="mx-auto max-w-fit px-4 sm:px-8">
         <div className="mb-8 flex items-end justify-between gap-4">
           <div>
-            <h2 className="text-4xl font-Instrument text-[#8E4726] dark:text-[#F5F1EA]">
+            <h2 className="text-4xl font-Instrument text-[#8E4726] dark:text-fg">
               Featured Products
             </h2>
 
-            <p className="mt-2 text-sm text-[#7B7B7B] dark:text-[#A99A8F]">
+            <p className="mt-2 text-sm text-[#7B7B7B] dark:text-fg-tertiary">
               Handpicked just for you
             </p>
           </div>
 
           <Link
             to="/shop"
-            className="hidden rounded-xl border border-[#C9B09D] px-5 py-2.5 text-sm font-semibold text-[#6B4935] transition hover:bg-[#E9DDD2] sm:block"
+            className="hidden rounded-xl border border-[#C9B09D] dark:border-line-strong px-5 py-2.5 text-sm font-semibold text-[#6B4935] dark:text-copper-400 transition hover:bg-[#E9DDD2] dark:hover:bg-noir-750 dark:hover:border-line-hover dark:hover:text-copper-300 sm:block"
           >
             View All
           </Link>
@@ -39,7 +39,7 @@ function FeaturedProducts({ products = [], loading = false }) {
         <div className="mt-8 flex justify-center sm:hidden">
           <Link
             to="/shop"
-            className="rounded-xl bg-[#8B5E3C] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#70482F]"
+            className="rounded-xl bg-[#8B5E3C] dark:bg-copper-500 px-6 py-3 text-sm font-semibold text-white dark:text-fg-on-accent transition hover:bg-[#70482F] dark:hover:bg-copper-400"
           >
             View All Products
           </Link>

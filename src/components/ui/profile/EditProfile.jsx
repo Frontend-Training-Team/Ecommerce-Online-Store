@@ -50,44 +50,44 @@ export default function EditProfile({ user, updateUser, setActiveTab }) {
     <div className="flex-1 w-full">
       <form
         onSubmit={handleSubmit}
-        className="w-full bg-white border border-[#E3DEDA] rounded-2xl p-6 sm:p-8 flex flex-col gap-6 shadow-sm"
+        className="w-full bg-white dark:bg-noir-800 border border-[#E3DEDA] dark:border-line rounded-2xl p-6 sm:p-8 flex flex-col gap-6 shadow-sm dark:shadow-none"
       >
 
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-[#EDE8E3] pb-5">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-[#EDE8E3] dark:border-line-subtle pb-5">
           <div>
-            <h2 className="font-Serif text-2xl font-medium text-[#211C18]">Edit profile</h2>
-            <p className="text-sm text-[#6F655D] mt-1">
+            <h2 className="font-Serif text-2xl font-medium text-[#211C18] dark:text-fg">Edit profile</h2>
+            <p className="text-sm text-[#6F655D] dark:text-fg-tertiary mt-1">
               Update your account details and profile information.
             </p>
           </div>
 
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-xs font-semibold text-[#8C837B] uppercase tracking-wider hidden sm:inline">
+            <span className="text-xs font-semibold text-[#8C837B] dark:text-fg-tertiary uppercase tracking-wider hidden sm:inline">
               Need something else?
             </span>
             <button
               type="button"
               onClick={() => setActiveTab("addresses")}
-              className="h-9 px-3.5 rounded-lg border border-[#DDD7D1] bg-[#FAF8F6] hover:bg-[#F2EBE5] 
-              text-xs font-medium text-[#3A332D] flex items-center gap-1.5 transition-colors cursor-pointer"
+              className="h-9 px-3.5 rounded-lg border border-[#DDD7D1] dark:border-line-strong bg-[#FAF8F6] dark:bg-noir-750 hover:bg-[#F2EBE5] dark:hover:bg-noir-650 
+              text-xs font-medium text-[#3A332D] dark:text-fg-secondary flex items-center gap-1.5 transition-colors cursor-pointer"
             >
               <span>Addresses</span>
-              <ArrowRight className="w-3.5 h-3.5 text-[#8A4526]" />
+              <ArrowRight className="w-3.5 h-3.5 text-[#8A4526] dark:text-copper-400" />
             </button>
             <button
               type="button"
               onClick={() => setActiveTab("security")}
-              className="h-9 px-3.5 rounded-lg border border-[#DDD7D1] bg-[#FAF8F6] hover:bg-[#F2EBE5] 
-              text-xs font-medium text-[#3A332D] flex items-center gap-1.5 transition-colors cursor-pointer"
+              className="h-9 px-3.5 rounded-lg border border-[#DDD7D1] dark:border-line-strong bg-[#FAF8F6] dark:bg-noir-750 hover:bg-[#F2EBE5] dark:hover:bg-noir-650 
+              text-xs font-medium text-[#3A332D] dark:text-fg-secondary flex items-center gap-1.5 transition-colors cursor-pointer"
             >
               <span>Password</span>
-              <ArrowRight className="w-3.5 h-3.5 text-[#8A4526]" />
+              <ArrowRight className="w-3.5 h-3.5 text-[#8A4526] dark:text-copper-400" />
             </button>
           </div>
         </div>
 
-        <div className="flex items-center gap-5 pb-5 border-b border-[#EDE8E3]">
-          <div className="w-20 h-20 rounded-full bg-[#F2EBE5] border border-[#E0D3C6] text-[#8A4526] font-Serif 
+        <div className="flex items-center gap-5 pb-5 border-b border-[#EDE8E3] dark:border-line-subtle">
+          <div className="w-20 h-20 rounded-full bg-[#F2EBE5] dark:bg-copper-900 border border-[#E0D3C6] dark:border-copper-800 text-[#8A4526] dark:text-copper-300 font-Serif 
           text-2xl flex items-center justify-center overflow-hidden flex-shrink-0">
             {formData.avatar ? (
               <img
@@ -102,8 +102,8 @@ export default function EditProfile({ user, updateUser, setActiveTab }) {
             )}
           </div>
           <div>
-            <h4 className="text-sm font-semibold text-[#211C18]">Profile avatar</h4>
-            <p className="text-xs text-[#6F655D] mt-0.5">
+            <h4 className="text-sm font-semibold text-[#211C18] dark:text-fg">Profile avatar</h4>
+            <p className="text-xs text-[#6F655D] dark:text-fg-tertiary mt-0.5">
               Paste an image link below to update your photo.
             </p>
           </div>
@@ -112,65 +112,65 @@ export default function EditProfile({ user, updateUser, setActiveTab }) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
 
           <div className="flex flex-col gap-1.5">
-            <label className="text-xs font-semibold text-[#4A423C] uppercase tracking-wider">Username *</label>
+            <label className="text-xs font-semibold text-[#4A423C] dark:text-fg-secondary uppercase tracking-wider">Username *</label>
             <input
               type="text"
               value={formData.username}
               onChange={(e) => setFormData({ ...formData, username: e.target.value })}
               required
-              className="h-12 px-4 rounded-xl border border-[#DDD7D1] bg-[#FAF8F6] focus:bg-white 
-              focus:border-[#8A4526] text-sm text-[#211C18] focus:outline-none transition-all"
+              className="h-12 px-4 rounded-xl border border-[#DDD7D1] dark:border-line-control bg-[#FAF8F6] dark:bg-noir-750 focus:bg-white dark:focus:bg-noir-750 
+              focus:border-[#8A4526] dark:focus:border-copper-400 text-sm text-[#211C18] dark:text-fg dark:placeholder-fg-placeholder focus:outline-none transition-all"
             />
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label className="text-xs font-semibold text-[#4A423C] uppercase tracking-wider">Phone number</label>
+            <label className="text-xs font-semibold text-[#4A423C] dark:text-fg-secondary uppercase tracking-wider">Phone number</label>
             <input
               type="tel"
               value={formData.phone}
               onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
               placeholder="+20 100 123 4567"
-              className="h-12 px-4 rounded-xl border border-[#DDD7D1] bg-[#FAF8F6] focus:bg-white 
-              focus:border-[#8A4526] text-sm text-[#211C18] focus:outline-none transition-all"
+              className="h-12 px-4 rounded-xl border border-[#DDD7D1] dark:border-line-control bg-[#FAF8F6] dark:bg-noir-750 focus:bg-white dark:focus:bg-noir-750 
+              focus:border-[#8A4526] dark:focus:border-copper-400 text-sm text-[#211C18] dark:text-fg dark:placeholder-fg-placeholder focus:outline-none transition-all"
             />
           </div>
 
           <div className="flex flex-col gap-1.5 sm:col-span-2">
-            <label className="text-xs font-semibold text-[#4A423C] uppercase tracking-wider">Email address</label>
+            <label className="text-xs font-semibold text-[#4A423C] dark:text-fg-secondary uppercase tracking-wider">Email address</label>
             <div className="relative flex items-center">
               <input
                 type="email"
                 value={user?.email || ""}
                 disabled
-                className="w-full h-12 px-4 rounded-xl border border-[#E3DEDA] bg-[#F2F0EE] text-sm text-[#6F655D] 
+                className="w-full h-12 px-4 rounded-xl border border-[#E3DEDA] dark:border-line bg-[#F2F0EE] dark:bg-noir-750 text-sm text-[#6F655D] dark:text-fg-tertiary 
                 cursor-not-allowed pr-20"
               />
-              <span className="absolute right-3 text-[11px] px-2 py-0.5 rounded-full bg-[#E8F0EA] text-[#2F6B4F] 
+              <span className="absolute right-3 text-[11px] px-2 py-0.5 rounded-full bg-[#E8F0EA] dark:bg-state-success/10 text-[#2F6B4F] dark:text-state-success 
               font-medium">
                 Locked
               </span>
             </div>
-            <span className="text-[11px] text-[#8C837B]">Email is tied to your login security.</span>
+            <span className="text-[11px] text-[#8C837B] dark:text-fg-tertiary">Email is tied to your login security.</span>
           </div>
 
           <div className="flex flex-col gap-1.5 sm:col-span-2">
-            <label className="text-xs font-semibold text-[#4A423C] uppercase tracking-wider">Avatar URL (Optional)</label>
+            <label className="text-xs font-semibold text-[#4A423C] dark:text-fg-secondary uppercase tracking-wider">Avatar URL (Optional)</label>
             <input
               type="url"
               value={formData.avatar}
               onChange={(e) => setFormData({ ...formData, avatar: e.target.value })}
               placeholder="https://images.unsplash.com/... or https://example.com/photo.jpg"
-              className="w-full h-12 px-4 rounded-xl border border-[#DDD7D1] bg-[#FAF8F6] focus:bg-white 
-              focus:border-[#8A4526] text-sm text-[#211C18] focus:outline-none transition-all"
+              className="w-full h-12 px-4 rounded-xl border border-[#DDD7D1] dark:border-line-control bg-[#FAF8F6] dark:bg-noir-750 focus:bg-white dark:focus:bg-noir-750 
+              focus:border-[#8A4526] dark:focus:border-copper-400 text-sm text-[#211C18] dark:text-fg dark:placeholder-fg-placeholder focus:outline-none transition-all"
             />
           </div>
         </div>
 
-        <div className="flex items-center gap-3 pt-4 border-t border-[#EDE8E3]">
+        <div className="flex items-center gap-3 pt-4 border-t border-[#EDE8E3] dark:border-line-subtle">
           <button
             type="submit"
             disabled={loading}
-            className="h-11 px-7 rounded-xl bg-[#8A4526] hover:bg-[#72361D] text-white text-sm font-medium 
+            className="h-11 px-7 rounded-xl bg-[#8A4526] dark:bg-copper-500 hover:bg-[#72361D] dark:hover:bg-copper-400 text-white dark:text-fg-on-accent text-sm font-medium 
             transition-colors flex items-center gap-2 cursor-pointer disabled:opacity-70"
           >
             {loading && <Loader2 className="w-4 h-4 animate-spin" />}
@@ -180,8 +180,8 @@ export default function EditProfile({ user, updateUser, setActiveTab }) {
           <button
             type="button"
             onClick={() => setActiveTab("overview")}
-            className="h-11 px-6 rounded-xl border border-[#D6D0CA] bg-white text-sm font-medium text-[#3A332D] 
-            hover:bg-[#FAF8F6] transition-colors cursor-pointer"
+            className="h-11 px-6 rounded-xl border border-[#D6D0CA] dark:border-line-strong bg-white dark:bg-noir-800 text-sm font-medium text-[#3A332D] dark:text-fg-secondary 
+            hover:bg-[#FAF8F6] dark:hover:bg-noir-750 dark:hover:text-fg transition-colors cursor-pointer"
           >
             Cancel
           </button>

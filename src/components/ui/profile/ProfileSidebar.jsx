@@ -30,9 +30,9 @@ export default function ProfileSidebar({ activeTab, setActiveTab, ordersCount = 
   return (
     <aside className="w-full md:w-[280px] lg:w-[310px] flex-shrink-0 flex flex-col gap-5">
 
-      <div className="bg-white border border-[#E3DEDA] rounded-2xl p-6 flex flex-col items-center text-center shadow-sm">
+      <div className="bg-white dark:bg-noir-800 border border-[#E3DEDA] dark:border-line rounded-2xl p-6 flex flex-col items-center text-center shadow-sm dark:shadow-none">
 
-        <div className="w-24 h-24 rounded-full bg-[#F2EBE5] border border-[#E0D3C6] text-[#8A4526] font-Serif 
+        <div className="w-24 h-24 rounded-full bg-[#F2EBE5] dark:bg-copper-900 border border-[#E0D3C6] dark:border-copper-800 text-[#8A4526] dark:text-copper-300 font-Serif 
         text-3xl flex items-center justify-center overflow-hidden mb-3">
           {user?.avatar && !imgError ? (
             <img
@@ -47,24 +47,24 @@ export default function ProfileSidebar({ activeTab, setActiveTab, ordersCount = 
           )}
         </div>
 
-        <h3 className="font-Serif text-xl font-medium text-[#211C18] mb-1">
+        <h3 className="font-Serif text-xl font-medium text-[#211C18] dark:text-fg mb-1">
           {user?.username || "Valued Customer"}
         </h3>
-        <p className="text-sm text-[#6F655D] mb-3 break-all">
+        <p className="text-sm text-[#6F655D] dark:text-fg-tertiary mb-3 break-all">
           {user?.email}
         </p>
 
-        <span className="px-3.5 py-1 rounded-full bg-[#F2EBE5] text-[#8A4526] text-xs font-semibold 
+        <span className="px-3.5 py-1 rounded-full bg-[#F2EBE5] dark:bg-copper-900 text-[#8A4526] dark:text-copper-300 text-xs font-semibold 
         tracking-wider uppercase mb-2">
           {user?.role || "CUSTOMER"}
         </span>
 
-        <span className="text-xs text-[#8C837B]">
+        <span className="text-xs text-[#8C837B] dark:text-fg-tertiary">
           Member since {memberSince}
         </span>
       </div>
 
-      <nav className="bg-white border border-[#E3DEDA] rounded-2xl p-2.5 flex flex-col gap-1 shadow-sm">
+      <nav className="bg-white dark:bg-noir-800 border border-[#E3DEDA] dark:border-line rounded-2xl p-2.5 flex flex-col gap-1 shadow-sm dark:shadow-none">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = item.id === (activeTab === "edit-profile" ? "overview" : activeTab);
@@ -74,11 +74,11 @@ export default function ProfileSidebar({ activeTab, setActiveTab, ordersCount = 
               onClick={() => setActiveTab(item.id)}
               className={`w-full h-12 px-4 rounded-xl flex items-center gap-3 text-[14px] font-medium 
                 transition-colors cursor-pointer text-left ${isActive
-                  ? "bg-[#8A4526] text-white shadow-sm"
-                  : "text-[#3A332D] hover:bg-[#FAF8F6] hover:text-[#8A4526]"
+                  ? "bg-[#8A4526] dark:bg-copper-500 text-white dark:text-fg-on-accent shadow-sm"
+                  : "text-[#3A332D] dark:text-fg-secondary hover:bg-[#FAF8F6] dark:hover:bg-noir-750 hover:text-[#8A4526] dark:hover:text-copper-300"
                 }`}
             >
-              <Icon className={`w-4 h-4 ${isActive ? "text-white" : "text-[#6F655D]"}`} strokeWidth={1.8} />
+              <Icon className={`w-4 h-4 ${isActive ? "text-white dark:text-fg-on-accent" : "text-[#6F655D] dark:text-fg-tertiary"}`} strokeWidth={1.8} />
               <span>{item.label}</span>
             </button>
           );
@@ -86,15 +86,15 @@ export default function ProfileSidebar({ activeTab, setActiveTab, ordersCount = 
 
         <Link
           to="/orders"
-          className="w-full h-12 px-4 rounded-xl flex items-center justify-between text-[14px] font-medium text-[#3A332D] 
-          hover:bg-[#FAF8F6] hover:text-[#8A4526] transition-colors"
+          className="w-full h-12 px-4 rounded-xl flex items-center justify-between text-[14px] font-medium text-[#3A332D] dark:text-fg-secondary 
+          hover:bg-[#FAF8F6] dark:hover:bg-noir-750 hover:text-[#8A4526] dark:hover:text-copper-300 transition-colors"
         >
           <div className="flex items-center gap-3">
-            <ShoppingBag className="w-4 h-4 text-[#6F655D]" strokeWidth={1.8} />
+            <ShoppingBag className="w-4 h-4 text-[#6F655D] dark:text-fg-tertiary" strokeWidth={1.8} />
             <span>My orders</span>
           </div>
           {ordersCount > 0 && (
-            <span className="text-xs bg-[#F2EBE5] text-[#8A4526] px-2 py-0.5 rounded-full font-semibold">
+            <span className="text-xs bg-[#F2EBE5] dark:bg-copper-900 text-[#8A4526] dark:text-copper-300 px-2 py-0.5 rounded-full font-semibold">
               {ordersCount}
             </span>
           )}
@@ -102,29 +102,29 @@ export default function ProfileSidebar({ activeTab, setActiveTab, ordersCount = 
 
         <Link
           to="/wishlist"
-          className="w-full h-12 px-4 rounded-xl flex items-center justify-between text-[14px] font-medium text-[#3A332D] 
-          hover:bg-[#FAF8F6] hover:text-[#8A4526] transition-colors"
+          className="w-full h-12 px-4 rounded-xl flex items-center justify-between text-[14px] font-medium text-[#3A332D] dark:text-fg-secondary 
+          hover:bg-[#FAF8F6] dark:hover:bg-noir-750 hover:text-[#8A4526] dark:hover:text-copper-300 transition-colors"
         >
           <div className="flex items-center gap-3">
-            <Heart className="w-4 h-4 text-[#6F655D]" strokeWidth={1.8} />
+            <Heart className="w-4 h-4 text-[#6F655D] dark:text-fg-tertiary" strokeWidth={1.8} />
             <span>Wishlist</span>
           </div>
           {wishlistCount > 0 && (
-            <span className="text-xs bg-[#F2EBE5] text-[#8A4526] px-2 py-0.5 rounded-full font-semibold">
+            <span className="text-xs bg-[#F2EBE5] dark:bg-copper-900 text-[#8A4526] dark:text-copper-300 px-2 py-0.5 rounded-full font-semibold">
               {wishlistCount}
             </span>
           )}
         </Link>
 
-        <div className="h-[1px] bg-[#EDE8E3] my-1.5 mx-2"></div>
+        <div className="h-[1px] bg-[#EDE8E3] dark:bg-line-subtle my-1.5 mx-2"></div>
 
         <button
           onClick={logout}
           className="w-full h-12 px-4 rounded-xl flex items-center gap-3 text-[14px] font-medium 
-          text-[#A83A2C] hover:bg-red-50 transition-colors cursor-pointer text-left border 
-          hover:border-red-200"
+          text-[#A83A2C] dark:text-state-danger hover:bg-red-50 dark:hover:bg-state-danger/10 transition-colors cursor-pointer text-left border 
+          hover:border-red-200 dark:hover:border-state-danger/25"
         >
-          <LogOut className="w-4 h-4 text-[#A83A2C]" strokeWidth={1.8} />
+          <LogOut className="w-4 h-4 text-[#A83A2C] dark:text-state-danger" strokeWidth={1.8} />
           <span>Log out</span>
         </button>
       </nav>

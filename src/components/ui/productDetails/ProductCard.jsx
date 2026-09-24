@@ -63,7 +63,7 @@ export default function ProductCard({
   };
 
   return (
-    <div className="h-fit w-fit bg-white border-2 border-gray-200 rounded-xl p-2.5 group">
+    <div className="h-fit w-fit bg-white dark:bg-noir-800 border-2 border-gray-200 dark:border-line rounded-xl p-2.5 group">
       <div className="relative h-82.5 w-82.5">
         <Link
           to={`/products/${product._id}`}
@@ -71,7 +71,7 @@ export default function ProductCard({
           className="block h-82.5 w-82.5 relative"
         >
           <div
-            className="relative h-82.5 w-82.5 transition-transform duration-300 group-hover:scale-[1.01]"
+            className="relative h-82.5 w-82.5 transition-transform duration-300 group-hover:scale-[1.01] dark:brightness-[.92]"
             style={{
               clipPath: customPath,
               backgroundImage: `url(${imageUrl})`,
@@ -85,36 +85,36 @@ export default function ProductCard({
               className="absolute inset-0 bg-black/60 flex items-center justify-center z-20"
               style={{ clipPath: customPath }}
             >
-              <span className="text-state-danger font-Inter font-bold text-lg uppercase tracking-wider bg-black/40 px-4 py-2 rounded-lg backdrop-blur-sm border border-white/20">
+              <span className="text-[#F87171] dark:text-state-danger font-Inter font-bold text-lg uppercase tracking-wider bg-black/40 px-4 py-2 rounded-lg backdrop-blur-sm border border-white/20">
                 Out of Stock
               </span>
             </div>
           )}
         </Link>
 
-        <div className="h-7 px-3.5 flex items-center justify-center bg-amber-950 rounded-3xl uppercase text-xs text-white 
+        <div className="h-7 px-3.5 flex items-center justify-center bg-amber-950 dark:bg-noir-900/85 dark:backdrop-blur-sm dark:ring-1 dark:ring-white/10 rounded-3xl uppercase text-xs text-white dark:text-fg 
         text-Inter font-semibold tracking-wider absolute top-4 left-4 pointer-events-none max-w-32.5 truncate shadow-xs z-30">
           <span>{product.category || "Category"}</span>
         </div>
 
         <div className="absolute top-4 right-4 flex items-center gap-1.5 pointer-events-none z-30">
           {hasDiscount && (
-            <div className="h-7 px-2.5 flex items-center justify-center bg-[#00B207] text-white rounded-3xl text-xs 
+            <div className="h-7 px-2.5 flex items-center justify-center bg-[#00B207] dark:bg-state-success-solid text-white dark:text-noir-950 rounded-3xl text-xs 
             font-bold tracking-wide shadow-xs">
               <span>-{discountPercent}%</span>
             </div>
           )}
 
-          <div className="h-7 px-3 flex items-center justify-center bg-white text-[#1E1E1E] rounded-3xl uppercase text-xs 
+          <div className="h-7 px-3 flex items-center justify-center bg-white dark:bg-noir-900/85 dark:backdrop-blur-sm text-[#1E1E1E] dark:text-fg dark:ring-1 dark:ring-white/10 rounded-3xl uppercase text-xs 
           text-Inter font-semibold tracking-wider shadow-xs max-w-27.5 truncate">
             <span>{product.brand || "BRAND"}</span>
           </div>
         </div>
 
-        <div className="absolute bottom-2 left-2 bg-white rounded-xl shadow-xs border border-gray-100/80 w-12.5 h-12.5 
+        <div className="absolute bottom-2 left-2 bg-white dark:bg-noir-750 rounded-xl shadow-xs border border-gray-100/80 dark:border-line w-12.5 h-12.5 
         flex flex-col items-center justify-center pointer-events-none z-30">
-          <Star className="w-3.5 h-3.5 fill-[#F59E0B] text-[#F59E0B]" />
-          <span className="text-xs font-bold text-[#1E1E1E] mt-1 leading-none">
+          <Star className="w-3.5 h-3.5 fill-[#F59E0B] text-[#F59E0B] dark:fill-star dark:text-star" />
+          <span className="text-xs font-bold text-[#1E1E1E] dark:text-fg mt-1 leading-none">
             {rating}
           </span>
         </div>
@@ -127,8 +127,8 @@ export default function ProductCard({
             aria-label="Wishlist"
             className={`flex h-13.5 w-13.5 items-center justify-center rounded-xl transition-all cursor-pointer 
             ${isWish
-                ? "bg-[#FEE2E2] text-[#DC2626]"
-                : "bg-gray-200 text-black hover:bg-gray-300 hover:text-[#DC2626]"
+                ? "bg-[#FEE2E2] text-[#DC2626] dark:bg-state-danger/15 dark:text-state-danger"
+                : "bg-gray-200 text-black hover:bg-gray-300 hover:text-[#DC2626] dark:bg-noir-700 dark:text-fg dark:hover:bg-noir-650 dark:hover:text-state-danger"
               } disabled:cursor-not-allowed`}
           >
             {isWishLoading ? (
@@ -145,8 +145,8 @@ export default function ProductCard({
             aria-label="Add to cart"
             className={`flex h-13.5 w-13.5 items-center justify-center rounded-xl transition-all 
             ${isOutOfStock
-                ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                : "bg-gray-200 text-black hover:bg-gray-300 hover:text-[#8E4726] cursor-pointer"
+                ? "bg-gray-100 text-gray-400 dark:bg-noir-750 dark:text-fg-disabled cursor-not-allowed"
+                : "bg-gray-200 text-black hover:bg-gray-300 hover:text-[#8E4726] dark:bg-noir-700 dark:text-fg dark:hover:bg-noir-650 dark:hover:text-copper-300 cursor-pointer"
               } disabled:cursor-not-allowed`}
           >
             {addingToCart ? (
@@ -164,19 +164,19 @@ export default function ProductCard({
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           className="block"
         >
-          <p className="font-Instrument text-2xl text-[#1E1E1E] mb-2 hover:text-[#8E4726] transition-colors line-clamp-1">
+          <p className="font-Instrument text-2xl text-[#1E1E1E] dark:text-fg mb-2 hover:text-[#8E4726] dark:hover:text-copper-300 transition-colors line-clamp-1">
             {product.name}
           </p>
         </Link>
-        <span className="text-xl text-[#8E4726] font-Inter font-semibold">
+        <span className="text-xl text-[#8E4726] dark:text-copper-400 font-Inter font-semibold">
           ${currentPrice.toFixed(2)}
         </span>
         {hasDiscount && (
-          <span className="text-md text-[#7B7B7B] font-Inter font-medium ml-2 line-through">
+          <span className="text-md text-[#7B7B7B] dark:text-fg-tertiary font-Inter font-medium ml-2 line-through">
             ${price.toFixed(2)}
           </span>
         )}
       </div>
     </div>
   );
-}
+}

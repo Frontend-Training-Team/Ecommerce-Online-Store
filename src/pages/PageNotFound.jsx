@@ -16,7 +16,7 @@ export default function PageNotFound() {
         <source src={bgVideo} type="video/mp4" />
       </video>
 
-      <div className="absolute inset-0 bg-black/55" aria-hidden="true" />
+      <div className="absolute inset-0 bg-black/55 dark:bg-noir-950/70" aria-hidden="true" />
 
       <div className="relative z-10 flex min-h-screen w-full flex-col items-center justify-center px-6 py-16 text-center">
         <span className="font-Instrument Serif text-8xl md:text-[200px] leading-none tracking-tight text-white">
@@ -34,7 +34,7 @@ export default function PageNotFound() {
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
           <Link
             to="/shop"
-            className="inline-flex items-center justify-center gap-2.5 rounded-3xl bg-[#7E4A2D] px-6 py-3 text-md md:text-base font-semibold tracking-wide text-white shadow-md transition-all hover:opacity-90 hover:shadow-lg active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#DE9E48] focus-visible:ring-offset-2 focus-visible:ring-offset-black border border-[#7E4A2D]"
+            className="inline-flex items-center justify-center gap-2.5 rounded-3xl bg-[#7E4A2D] dark:bg-copper-500 px-6 py-3 text-md md:text-base font-semibold tracking-wide text-white dark:text-fg-on-accent shadow-md transition-all hover:opacity-90 dark:hover:bg-copper-400 hover:shadow-lg active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#DE9E48] dark:focus-visible:ring-copper-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black dark:focus-visible:ring-offset-noir-950 border border-[#7E4A2D] dark:border-copper-500"
           >
             <Compass className="h-6 w-6" aria-hidden="true" />
             Browse Products
@@ -42,9 +42,9 @@ export default function PageNotFound() {
 
           <Link
             to="/"
-            className="inline-flex items-center justify-center gap-2.5 rounded-3xl bg-white/95 px-6 py-3 text-md md:text-base font-semibold tracking-wide text-[#20140d] shadow-md transition-all hover:bg-white active:scale-95 border border-transparent hover:border-[#DE9E48] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#DE9E48] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+            className="inline-flex items-center justify-center gap-2.5 rounded-3xl bg-white/95 dark:bg-fg px-6 py-3 text-md md:text-base font-semibold tracking-wide text-[#20140d] dark:text-noir-900 shadow-md transition-all hover:bg-white dark:hover:bg-copper-300 active:scale-95 border border-transparent hover:border-[#DE9E48] dark:hover:border-copper-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#DE9E48] dark:focus-visible:ring-copper-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black dark:focus-visible:ring-offset-noir-950"
           >
-            <Home className="h-6 w-6 text-stone-500" aria-hidden="true" />
+            <Home className="h-6 w-6 text-stone-500 dark:text-noir-600" aria-hidden="true" />
             Return to Home
           </Link>
         </div>

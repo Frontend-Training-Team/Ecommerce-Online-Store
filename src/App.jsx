@@ -60,10 +60,9 @@ function App() {
         position="top-center"
         toastOptions={{
           duration: 2000,
-          style: {
-            background: '#ffffff',
-            color: '#000',
-          },
+          className:
+            '!bg-white !text-black ' +
+            'dark:!bg-noir-700 dark:!text-fg dark:!border dark:!border-line dark:!shadow-noir-md',
         }}
       />
 

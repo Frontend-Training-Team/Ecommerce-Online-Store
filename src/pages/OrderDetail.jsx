@@ -12,12 +12,13 @@ import OrderItems from "../components/ui/order/OrderItems";
 import OrderSkeleton from "../components/ui/skeleton/OrderSkeleton";
 
 const STATUS_BADGE_STYLES = {
-  pending: "bg-[#EFE6DC] text-[#7B542B] border-[#DFC9BA] dark:bg-white/5 dark:text-neutral-300 dark:border-white/10",
-  confirmed: "bg-[#F3E8DF] text-[#7B542B] border-[#DFC9BA] dark:bg-[#2a221a] dark:text-[#fcba69] dark:border-[#4a3a2a]",
-  processing: "bg-blue-100 text-blue-700 border-blue-200 dark:bg-blue-500/10 dark:text-blue-400 dark:border-blue-500/20",
-  shipped: "bg-indigo-100 text-indigo-700 border-indigo-200 dark:bg-indigo-500/10 dark:text-indigo-400 dark:border-indigo-500/20",
-  delivered: "bg-emerald-100 text-emerald-700 border-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/20",
-  cancelled: "bg-red-100 text-red-700 border-red-200 dark:bg-red-500/10 dark:text-red-400 dark:border-red-500/20",
+  pending: "bg-[#EFE6DC] text-[#7B542B] border-[#DFC9BA] dark:bg-state-warning/10 dark:text-state-warning dark:border-state-warning/25",
+  confirmed: "bg-[#F3E8DF] text-[#7B542B] border-[#DFC9BA] dark:bg-state-confirmed/10 dark:text-state-confirmed dark:border-state-confirmed/25",
+  processing: "bg-blue-100 text-blue-700 border-blue-200 dark:bg-state-info/10 dark:text-state-info dark:border-state-info/25",
+  shipped: "bg-indigo-100 text-indigo-700 border-indigo-200 dark:bg-state-shipped/10 dark:text-state-shipped dark:border-state-shipped/25",
+  delivered: "bg-emerald-100 text-emerald-700 border-emerald-200 dark:bg-state-success/10 dark:text-state-success dark:border-state-success/25",
+  cancelled: "bg-red-100 text-red-700 border-red-200 dark:bg-state-danger/10 dark:text-state-danger dark:border-state-danger/25",
+  returned: "bg-[#EFE6DC] text-[#7B542B] border-[#DFC9BA] dark:bg-state-neutral/10 dark:text-state-neutral dark:border-state-neutral/25",
 };
 
 const CANCELLABLE_STATUSES = ["pending", "confirmed"];
@@ -63,7 +64,7 @@ export default function OrderDetail() {
 
   if (loading || !order) {
     return (
-      <div className="mt-16 xl:mt-17 flex min-h-[60vh] w-full items-center justify-center bg-[#FAFAF8] dark:bg-[#141110]">
+      <div className="mt-16 xl:mt-17 flex min-h-[60vh] w-full items-center justify-center bg-[#FAFAF8] dark:bg-noir-900">
         <OrderSkeleton />
       </div>
     );
@@ -73,21 +74,21 @@ export default function OrderDetail() {
   const isCancelled = order.status === "cancelled";
 
   return (
-    <div className="mt-16 xl:mt-17 min-h-screen w-full bg-[#FAFAF8] px-4 py-15 dark:bg-[#141110] md:px-8 lg:px-12">
+    <div className="mt-16 xl:mt-17 min-h-screen w-full bg-[#FAFAF8] px-4 py-15 dark:bg-noir-900 md:px-8 lg:px-12">
       <div className="mx-auto flex w-full max-w-6xl flex-col">
-        <div className="mb-12 flex flex-wrap items-center justify-between gap-4 border-b border-[#EAE1DB] pb-5 dark:border-[#2e2724]">
+        <div className="mb-12 flex flex-wrap items-center justify-between gap-4 border-b border-[#EAE1DB] pb-5 dark:border-line">
           <div className="flex items-center gap-6">
             <button
               type="button"
               onClick={() => navigate("/orders")}
               aria-label="Back to orders"
-              className="flex h-12 w-12 items-center justify-center rounded-full border border-[#D8C2B6] bg-white text-[#5C4A3E] transition-all hover:bg-[#F5EFEA] hover:text-[#2D241E] active:scale-95 dark:border-[#3a322d] dark:bg-[#221d1a] dark:text-[#c5b6a3] dark:hover:border-[#52443d] dark:hover:text-[#f3ede6]"
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-[#D8C2B6] bg-white text-[#5C4A3E] transition-all hover:bg-[#F5EFEA] hover:text-[#2D241E] active:scale-95 dark:border-line-strong dark:bg-noir-800 dark:text-fg-secondary dark:hover:bg-noir-750 dark:hover:border-line-hover dark:hover:text-fg"
             >
               <ArrowLeft className="h-5 w-5" />
             </button>
             <div>
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium font-Instrument text-[#2D241E] dark:text-[#f3ede6] mb-2">Order Detail</h1>
-              <p className="text-xs font-medium text-[#8C7A6E] dark:text-[#a38f7d]">
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium font-Instrument text-[#2D241E] dark:text-fg mb-2">Order Detail</h1>
+              <p className="text-xs font-medium text-[#8C7A6E] dark:text-fg-tertiary">
                 Order #{order._id?.slice(-8).toUpperCase()}
               </p>
             </div>
@@ -105,7 +106,7 @@ export default function OrderDetail() {
               <button
                 type="button"
                 onClick={() => setIsModalOpen(true)}
-                className="flex items-center gap-1.5 rounded-xl border border-[#C5A893] bg-[#FAF5F0] px-4 py-2 text-xs font-semibold text-[#6F4723] transition-all hover:bg-[#F2E8DF] active:scale-[0.98] dark:border-[#48342d] dark:bg-[#261e1b] dark:text-[#e2a890] dark:hover:bg-[#342823]"
+                className="flex items-center gap-1.5 rounded-xl border border-[#C5A893] bg-[#FAF5F0] px-4 py-2 text-xs font-semibold text-[#6F4723] transition-all hover:bg-[#F2E8DF] active:scale-[0.98] dark:border-copper-800 dark:bg-copper-900 dark:text-copper-300 dark:hover:bg-copper-800"
               >
                 <XCircle className="h-4 w-4" />
                 Cancel Order

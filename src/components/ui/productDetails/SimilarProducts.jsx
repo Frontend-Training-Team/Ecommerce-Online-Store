@@ -22,9 +22,9 @@ export default function SimilarProducts({
   };
 
   return (
-    <section className="w-full flex flex-col gap-6 pt-10 border-t border-[#EDE8E3]">
+    <section className="w-full flex flex-col gap-6 pt-10 border-t border-[#EDE8E3] dark:border-line">
       <div className="flex items-center justify-between">
-        <h2 className="font-Serif text-2xl sm:text-3xl text-[#1E1915] font-normal tracking-tight">
+        <h2 className="font-Serif text-2xl sm:text-3xl text-[#1E1915] dark:text-fg font-normal tracking-tight">
           Similar items you might also like
         </h2>
 
@@ -33,7 +33,7 @@ export default function SimilarProducts({
             type="button"
             onClick={() => handleScroll("left")}
             aria-label="Previous products"
-            className="w-10 h-10 rounded-full border border-gray-200 bg-white hover:bg-gray-100 text-[#1E1915] flex 
+            className="w-10 h-10 rounded-full border border-gray-200 dark:border-line-strong bg-white dark:bg-noir-800 hover:bg-gray-100 dark:hover:bg-noir-750 text-[#1E1915] dark:text-fg flex 
             items-center justify-center transition-all cursor-pointer shadow-xs active:scale-95"
           >
             <ChevronLeft className="w-5 h-5" />
@@ -42,7 +42,7 @@ export default function SimilarProducts({
             type="button"
             onClick={() => handleScroll("right")}
             aria-label="Next products"
-            className="w-10 h-10 rounded-full border border-gray-200 bg-white hover:bg-gray-100 text-[#1E1915] flex 
+            className="w-10 h-10 rounded-full border border-gray-200 dark:border-line-strong bg-white dark:bg-noir-800 hover:bg-gray-100 dark:hover:bg-noir-750 text-[#1E1915] dark:text-fg flex 
             items-center justify-center transition-all cursor-pointer shadow-xs active:scale-95"
           >
             <ChevronRight className="w-5 h-5" />

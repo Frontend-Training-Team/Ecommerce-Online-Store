@@ -54,25 +54,25 @@ export default function ProfilePage() {
   if (!user) return null;
 
   return (
-    <div className="mt-16 xl:mt-17 w-full bg-[#ffffff] min-h-screen py-10 sm:py-12">
+    <div className="mt-16 xl:mt-17 w-full bg-[#ffffff] dark:bg-noir-900 min-h-screen py-10 sm:py-12">
       <div className="w-full max-w-310 mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-7">
 
         <div className="flex flex-col gap-2">
-          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-[#6F655D]">
-            <Link to="/" className="hover:text-[#8A4526]">Home</Link>
+          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-[#6F655D] dark:text-fg-secondary">
+            <Link to="/" className="hover:text-[#8A4526] dark:hover:text-copper-300">Home</Link>
             <span>/</span>
             <span>My Account</span>
             <span>/</span>
-            <span className="text-[#8A4526] font-medium capitalize">{activeTab.replace("-", " ")}</span>
+            <span className="text-[#8A4526] dark:text-copper-400 font-medium capitalize">{activeTab.replace("-", " ")}</span>
           </nav>
 
-          <h1 className="font-Serif text-3xl sm:text-4xl lg:text-[42px] font-medium text-[#211C18]">
+          <h1 className="font-Serif text-3xl sm:text-4xl lg:text-[42px] font-medium text-[#211C18] dark:text-fg">
             {activeTab === "overview" && "My Profile"}
             {activeTab === "edit-profile" && "Edit Profile"}
             {activeTab === "addresses" && "Address Book"}
             {activeTab === "security" && "Change Password"}
           </h1>
-          <p className="text-xs sm:text-sm text-[#6F655D]">
+          <p className="text-xs sm:text-sm text-[#6F655D] dark:text-fg-secondary">
             Manage your personal details, delivery addresses and account security.
           </p>
         </div>

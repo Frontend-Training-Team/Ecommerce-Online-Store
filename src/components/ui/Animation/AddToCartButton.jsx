@@ -28,7 +28,7 @@ export default function AddToCartButton({ productId, onSuccess, disabled = false
       onClick={handleClick}
       disabled={disabled || isAnimating}
       aria-label="Add to cart"
-      className="relative w-full h-full flex items-center justify-center rounded-xl bg-[#8E4726] hover:bg-[#72381e] dark:bg-amber-700 dark:hover:bg-amber-800 text-white transition-all active:scale-95 cursor-pointer overflow-hidden shadow-sm"
+      className="relative w-full h-full flex items-center justify-center rounded-xl bg-[#8E4726] hover:bg-[#72381e] dark:bg-copper-500 dark:hover:bg-copper-400 text-white dark:text-fg-on-accent transition-all active:scale-95 cursor-pointer overflow-hidden shadow-sm"
     >
       {!isAnimating && (
         <ShoppingCart className="w-5 h-5 transition-transform duration-200 hover:scale-110" />
@@ -36,12 +36,12 @@ export default function AddToCartButton({ productId, onSuccess, disabled = false
 
       {isAnimating && (
         <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
-          <div className="absolute top-1 left-1/2 -translate-x-1/2 w-3 h-3 bg-[#d4a373] dark:bg-amber-200 border border-[#8e5229] dark:border-amber-900 rounded-[2px] animate-[dropAndDisappear_0.6s_cubic-bezier(0.45,0,0.55,1)_forwards] z-10 flex items-center justify-center">
-            <div className="w-full h-[2px] bg-[#8e5229]/40 dark:bg-amber-900/40" />
+          <div className="absolute top-1 left-1/2 -translate-x-1/2 w-3 h-3 bg-[#d4a373] dark:bg-copper-800 border border-[#8e5229] dark:border-copper-600 rounded-[2px] animate-[dropAndDisappear_0.6s_cubic-bezier(0.45,0,0.55,1)_forwards] z-10 flex items-center justify-center">
+            <div className="w-full h-[2px] bg-[#8e5229]/40 dark:bg-copper-400/40" />
           </div>
 
           <div className="animate-[driveCart_1.6s_ease-in-out_forwards]">
-            <ShoppingCart className="w-5 h-5 text-white" />
+            <ShoppingCart className="w-5 h-5 text-white dark:text-fg-on-accent" />
           </div>
         </div>
       )}

@@ -21,16 +21,16 @@ export default function OrderProgress({ order, estimatedArrival = "2-4 Business 
     : STEPS;
 
   return (
-    <div className="flex h-full min-h-0 flex-col rounded-2xl border border-[#E8DDD4] bg-[#FAF7F3] p-5 shadow-sm dark:border-[#2e2724] dark:bg-[#1c1816] dark:shadow-lg dark:shadow-black/20">
+    <div className="flex h-full min-h-0 flex-col rounded-2xl border border-[#E8DDD4] bg-[#FAF7F3] p-5 shadow-sm dark:border-line dark:bg-noir-800 dark:shadow-none">
       <div className="mb-4 flex shrink-0 items-center justify-between">
-        <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#2D241E] dark:text-[#c5b6a3]">
-          <TrendingUp className="h-4 w-4 text-[#8C7A6E] dark:text-[#cca474]" />
+        <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#2D241E] dark:text-fg-secondary">
+          <TrendingUp className="h-4 w-4 text-[#8C7A6E] dark:text-fg-tertiary" />
           Order Progress
         </div>
         <span
           className={`rounded-full border px-3 py-1 text-xs font-semibold ${isCancelled
-              ? "border-red-200 bg-red-100 text-red-700 dark:border-red-500/20 dark:bg-red-500/10 dark:text-red-400"
-              : "border-transparent bg-[#EFE6DC] text-[#8C7A6E] dark:border-[#44352b] dark:bg-[#29211c] dark:text-[#fcba69]"
+              ? "border-red-200 bg-red-100 text-red-700 dark:border-state-danger/25 dark:bg-state-danger/10 dark:text-state-danger"
+              : "border-transparent bg-[#EFE6DC] text-[#8C7A6E] dark:border-copper-800 dark:bg-copper-900 dark:text-copper-300"
             }`}
         >
           {isCancelled ? "Cancelled" : `${completeCount} of ${STEPS.length} Complete`}
@@ -51,7 +51,7 @@ export default function OrderProgress({ order, estimatedArrival = "2-4 Business 
                 >
                   {!isLast && (
                     <span
-                      className={`absolute left-[13px] top-7 bottom-0 w-[2px] ${isDone ? "bg-[#8A4C1E] dark:bg-[#cca474]" : "bg-[#E2D4C7] dark:bg-[#2d2521]"
+                      className={`absolute left-[13px] top-7 bottom-0 w-[2px] ${isDone ? "bg-[#8A4C1E] dark:bg-copper-500" : "bg-[#E2D4C7] dark:bg-noir-650"
                         }`}
                       aria-hidden="true"
                     />
@@ -59,10 +59,10 @@ export default function OrderProgress({ order, estimatedArrival = "2-4 Business 
 
                   <span
                     className={`relative z-10 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 ring-4 ${step.isCancelPoint
-                        ? "border-red-500 bg-red-500 text-white ring-[#FAF7F3] dark:ring-[#1c1816]"
+                        ? "border-red-500 bg-red-500 text-white ring-[#FAF7F3] dark:border-state-danger-solid dark:bg-state-danger-solid dark:ring-noir-800"
                         : isDone
-                          ? "border-[#8A4C1E] bg-[#8A4C1E] text-white ring-[#FAF7F3] dark:border-[#cca474] dark:bg-[#cca474] dark:text-[#141110] dark:ring-[#1c1816]"
-                          : "border-[#C5B3A5] bg-white text-[#C5B3A5] ring-[#FAF7F3] dark:border-[#3e342e] dark:bg-[#1c1816] dark:text-[#52443d] dark:ring-[#1c1816]"
+                          ? "border-[#8A4C1E] bg-[#8A4C1E] text-white ring-[#FAF7F3] dark:border-copper-500 dark:bg-copper-500 dark:text-fg-on-accent dark:ring-noir-800"
+                          : "border-[#C5B3A5] bg-white text-[#C5B3A5] ring-[#FAF7F3] dark:border-line-strong dark:bg-noir-800 dark:text-fg-disabled dark:ring-noir-800"
                       }`}
                   >
                     {step.isCancelPoint ? (
@@ -77,10 +77,10 @@ export default function OrderProgress({ order, estimatedArrival = "2-4 Business 
                   <div className="flex flex-1 flex-col justify-center pt-1">
                     <span
                       className={`text-sm font-semibold ${step.isCancelPoint
-                          ? "text-red-600 dark:text-red-400"
+                          ? "text-red-600 dark:text-state-danger"
                           : isDone
-                            ? "text-[#2D241E] dark:text-[#f3ede6]"
-                            : "text-[#A3968F] dark:text-[#8f7e71]"
+                            ? "text-[#2D241E] dark:text-fg"
+                            : "text-[#A3968F] dark:text-fg-tertiary"
                         }`}
                     >
                       {step.label}
@@ -93,9 +93,9 @@ export default function OrderProgress({ order, estimatedArrival = "2-4 Business 
         </div>
 
         {!isCancelled && !isDelivered && (
-          <div className="mt-4 lg:mt-auto flex items-center justify-between border-t border-[#EBE1D7] pt-3 dark:border-[#2e2724]">
-            <span className="text-s text-[#8C7A6E] dark:text-[#a38f7d]">Estimated arrival</span>
-            <span className="text-xs font-bold text-[#2D241E] dark:text-[#f3ede6]">{estimatedArrival}</span>
+          <div className="mt-4 lg:mt-auto flex items-center justify-between border-t border-[#EBE1D7] pt-3 dark:border-line-subtle">
+            <span className="text-s text-[#8C7A6E] dark:text-fg-tertiary">Estimated arrival</span>
+            <span className="text-xs font-bold text-[#2D241E] dark:text-fg">{estimatedArrival}</span>
           </div>
         )}
       </div>

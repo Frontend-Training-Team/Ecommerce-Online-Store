@@ -47,7 +47,7 @@ export default function ProductTabs({
   };
 
   return (
-    <div id="product-tabs" className="w-full flex flex-col md:flex-row gap-8 pt-8 border-t border-[#EDE8E3]">
+    <div id="product-tabs" className="w-full flex flex-col md:flex-row gap-8 pt-8 border-t border-[#EDE8E3] dark:border-line">
 
       <div className="flex md:flex-col gap-2 w-full md:w-52 shrink-0">
         <button
@@ -55,8 +55,8 @@ export default function ProductTabs({
           onClick={() => setActiveTab("details")}
           className={`h-11 px-5 rounded-xl text-sm font-medium text-left transition-all cursor-pointer flex items-center 
             justify-between ${activeTab === "details"
-            ? "bg-[#F5EDE6] text-[#7E4A2D] font-semibold shadow-xs"
-            : "text-[#635B53] hover:bg-[#FAF8F5] hover:text-[#1E1915]"
+            ? "bg-[#F5EDE6] dark:bg-copper-900 text-[#7E4A2D] dark:text-copper-300 font-semibold shadow-xs"
+            : "text-[#635B53] dark:text-fg-secondary hover:bg-[#FAF8F5] dark:hover:bg-noir-800 hover:text-[#1E1915] dark:hover:text-fg"
             }`}
         >
           <span>Details</span>
@@ -67,16 +67,16 @@ export default function ProductTabs({
           onClick={() => setActiveTab("reviews")}
           className={`h-11 px-5 rounded-xl text-sm font-medium text-left transition-all cursor-pointer flex items-center 
             justify-between ${activeTab === "reviews"
-            ? "bg-[#F5EDE6] text-[#7E4A2D] font-semibold shadow-xs"
-            : "text-[#635B53] hover:bg-[#FAF8F5] hover:text-[#1E1915]"
+            ? "bg-[#F5EDE6] dark:bg-copper-900 text-[#7E4A2D] dark:text-copper-300 font-semibold shadow-xs"
+            : "text-[#635B53] dark:text-fg-secondary hover:bg-[#FAF8F5] dark:hover:bg-noir-800 hover:text-[#1E1915] dark:hover:text-fg"
             }`}
         >
           <span>Reviews</span>
           {numReviews > 0 && (
             <span
               className={`text-xs px-2 py-0.5 rounded-full ${activeTab === "reviews"
-                ? "bg-[#7E4A2D] text-white"
-                : "bg-[#EFECE8] text-[#635B53]"
+                ? "bg-[#7E4A2D] dark:bg-copper-500 text-white dark:text-fg-on-accent"
+                : "bg-[#EFECE8] dark:bg-noir-650 text-[#635B53] dark:text-fg-secondary"
                 }`}
             >
               {numReviews}
@@ -89,10 +89,10 @@ export default function ProductTabs({
 
         {activeTab === "details" && (
           <div className="flex flex-col gap-4">
-            <h2 className="font-Serif text-xl sm:text-2xl font-medium text-[#1E1915]">
+            <h2 className="font-Serif text-xl sm:text-2xl font-medium text-[#1E1915] dark:text-fg">
               Product Description
             </h2>
-            <div className="text-sm sm:text-[15px] text-[#5C544E] leading-relaxed whitespace-pre-line">
+            <div className="text-sm sm:text-[15px] text-[#5C544E] dark:text-fg-secondary leading-relaxed whitespace-pre-line">
               {description || "No detailed description provided for this product."}
             </div>
           </div>
@@ -101,12 +101,12 @@ export default function ProductTabs({
         {activeTab === "reviews" && (
           <div className="flex flex-col gap-8">
             <div>
-              <h2 className="font-Serif text-xl sm:text-2xl font-medium text-[#1E1915] mb-3">
+              <h2 className="font-Serif text-xl sm:text-2xl font-medium text-[#1E1915] dark:text-fg mb-3">
                 Reviews
               </h2>
 
               <div className="flex items-center gap-3">
-                <span className="font-Serif text-3xl sm:text-4xl text-[#1E1915] font-normal">
+                <span className="font-Serif text-3xl sm:text-4xl text-[#1E1915] dark:text-fg font-normal">
                   {Number(averageRating || 0).toFixed(1)}
                 </span>
 
@@ -115,23 +115,23 @@ export default function ProductTabs({
                     <Star
                       key={star}
                       className={`w-4 h-4 ${star <= Math.round(averageRating || 0)
-                        ? "fill-[#F5A623] text-[#F5A623]"
-                        : "fill-gray-200 text-gray-200"
+                        ? "fill-[#F5A623] dark:fill-star text-[#F5A623] dark:text-star"
+                        : "fill-gray-200 dark:fill-noir-600 text-gray-200 dark:text-noir-600"
                         }`}
                     />
                   ))}
                 </div>
 
-                <span className="text-xs sm:text-sm text-[#706861]">
+                <span className="text-xs sm:text-sm text-[#706861] dark:text-fg-secondary">
                   ({numReviews || 0} Reviews)
                 </span>
               </div>
             </div>
 
-            <div className="flex flex-col divide-y divide-[#EDE8E3] border-t border-[#EDE8E3]">
+            <div className="flex flex-col divide-y divide-[#EDE8E3] dark:divide-line border-t border-[#EDE8E3] dark:border-line">
               {reviews.length === 0 ? (
-                <div className="py-8 text-center flex flex-col items-center gap-2 text-[#706861]">
-                  <MessageSquare className="w-8 h-8 text-[#C7BEB4] stroke-1" />
+                <div className="py-8 text-center flex flex-col items-center gap-2 text-[#706861] dark:text-fg-secondary">
+                  <MessageSquare className="w-8 h-8 text-[#C7BEB4] dark:text-fg-placeholder stroke-1" />
                   <p className="text-sm font-medium">No reviews yet.</p>
                   <p className="text-xs">Be the first to share your experience with this product!</p>
                 </div>
@@ -144,13 +144,13 @@ export default function ProductTabs({
                     <div key={rev._id || idx} className="py-5 flex flex-col gap-2">
                       <div className="flex items-center justify-between gap-4">
                         <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-full bg-[#7E4A2D] text-white flex items-center justify-center 
+                          <div className="w-8 h-8 rounded-full bg-[#7E4A2D] dark:bg-copper-900 text-white dark:text-copper-300 flex items-center justify-center 
                           text-xs font-semibold">
                             {initial}
                           </div>
                           <div>
-                            <h4 className="text-sm font-medium text-[#1E1915]">{author}</h4>
-                            <span className="text-xs text-[#8F877F]">
+                            <h4 className="text-sm font-medium text-[#1E1915] dark:text-fg">{author}</h4>
+                            <span className="text-xs text-[#8F877F] dark:text-fg-tertiary">
                               {formatDate(rev.createdAt)}
                             </span>
                           </div>
@@ -161,15 +161,15 @@ export default function ProductTabs({
                             <Star
                               key={star}
                               className={`w-3.5 h-3.5 ${star <= (rev.rating || 5)
-                                ? "fill-[#F5A623] text-[#F5A623]"
-                                : "fill-gray-200 text-gray-200"
+                                ? "fill-[#F5A623] dark:fill-star text-[#F5A623] dark:text-star"
+                                : "fill-gray-200 dark:fill-noir-600 text-gray-200 dark:text-noir-600"
                                 }`}
                             />
                           ))}
                         </div>
                       </div>
 
-                      <p className="text-sm text-[#4A423C] leading-relaxed pl-11">
+                      <p className="text-sm text-[#4A423C] dark:text-fg-secondary leading-relaxed pl-11">
                         {rev.comment}
                       </p>
                     </div>
@@ -178,12 +178,12 @@ export default function ProductTabs({
               )}
             </div>
 
-            <div className="pt-6 border-t border-[#EDE8E3] flex flex-col gap-4">
+            <div className="pt-6 border-t border-[#EDE8E3] dark:border-line flex flex-col gap-4">
               <div>
-                <h3 className="font-Serif text-xl font-medium text-[#1E1915]">
+                <h3 className="font-Serif text-xl font-medium text-[#1E1915] dark:text-fg">
                   Write a Review
                 </h3>
-                <p className="text-xs sm:text-sm text-[#706861] mt-1">
+                <p className="text-xs sm:text-sm text-[#706861] dark:text-fg-secondary mt-1">
                   What is it like to Product?
                 </p>
               </div>
@@ -201,18 +201,18 @@ export default function ProductTabs({
                           onMouseEnter={() => setHoverRating(star)}
                           onMouseLeave={() => setHoverRating(0)}
                           onClick={() => setRating(star)}
-                          className="p-1 text-[#F5A623] transition-transform hover:scale-110 cursor-pointer"
+                          className="p-1 text-[#F5A623] dark:text-star transition-transform hover:scale-110 cursor-pointer"
                         >
                           <Star
                             className={`w-5 h-5 ${isFilled
-                              ? "fill-[#F5A623] text-[#F5A623]"
-                              : "text-[#D6CFC7]"
+                              ? "fill-[#F5A623] dark:fill-star text-[#F5A623] dark:text-star"
+                              : "text-[#D6CFC7] dark:text-noir-600"
                               }`}
                           />
                         </button>
                       );
                     })}
-                    <span className="text-xs text-[#706861] ml-2">
+                    <span className="text-xs text-[#706861] dark:text-fg-secondary ml-2">
                       {rating} of 5 stars
                     </span>
                   </div>
@@ -223,14 +223,14 @@ export default function ProductTabs({
                     onChange={(e) => setComment(e.target.value)}
                     required
                     placeholder="Share your thoughts...."
-                    className="w-full p-4 rounded-xl border border-[#DDD7D1] bg-[#FAF8F5] focus:bg-white 
-                    focus:border-[#7E4A2D] text-sm text-[#1E1915] focus:outline-none transition-all resize-y"
+                    className="w-full p-4 rounded-xl border border-[#DDD7D1] dark:border-line-control bg-[#FAF8F5] dark:bg-noir-750 focus:bg-white dark:focus:bg-noir-750 
+                    focus:border-[#7E4A2D] dark:focus:border-copper-400 text-sm text-[#1E1915] dark:text-fg dark:placeholder-fg-placeholder focus:outline-none transition-all resize-y"
                   />
 
                   <button
                     type="submit"
                     disabled={submittingReview}
-                    className="self-start h-11 px-7 rounded-xl bg-[#7E4A2D] hover:bg-[#683C23] text-white 
+                    className="self-start h-11 px-7 rounded-xl bg-[#7E4A2D] dark:bg-copper-500 hover:bg-[#683C23] dark:hover:bg-copper-400 text-white dark:text-fg-on-accent 
                     text-sm font-medium transition-colors flex items-center gap-2 cursor-pointer disabled:opacity-60"
                   >
                     {submittingReview ? (
@@ -244,14 +244,14 @@ export default function ProductTabs({
                   </button>
                 </form>
               ) : (
-                <div className="p-5 rounded-xl bg-[#FAF8F5] border border-[#E3DDD5] flex flex-col sm:flex-row items-center 
+                <div className="p-5 rounded-xl bg-[#FAF8F5] dark:bg-noir-800 border border-[#E3DDD5] dark:border-line flex flex-col sm:flex-row items-center 
                 justify-between gap-3">
-                  <p className="text-xs sm:text-sm text-[#5C544E]">
+                  <p className="text-xs sm:text-sm text-[#5C544E] dark:text-fg-secondary">
                     Please log in to write a review and rate this product.
                   </p>
                   <Link
                     to="/Login"
-                    className="h-9 px-5 rounded-lg bg-[#7E4A2D] hover:bg-[#683C23] text-white text-xs font-medium 
+                    className="h-9 px-5 rounded-lg bg-[#7E4A2D] dark:bg-copper-500 hover:bg-[#683C23] dark:hover:bg-copper-400 text-white dark:text-fg-on-accent text-xs font-medium 
                     flex items-center justify-center transition-colors shrink-0"
                   >
                     Log In

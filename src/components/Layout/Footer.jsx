@@ -10,20 +10,20 @@ export default function Footer() {
                 viewBox="0 0 1024 288"
                 preserveAspectRatio="none"
             >
-                <rect width="1024" height="288" fill="#FFFFFF" />
+                <rect width="1024" height="288" className="fill-[#FFFFFF] dark:fill-noir-900" />
                 <path
                     d="M 0,90 Q 512,152 1024,90 L 1024,288 L 0,288 Z"
-                    fill="#E4E4E4"
+                    className="fill-[#E4E4E4] dark:fill-noir-850"
                 />
             </svg>
 
             <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col relative z-10">
 
-                <div className="w-full bg-[#7E4A2D] rounded-xl sm:rounded-2xl p-6 sm:p-8 md:px-12 md:py-11 flex flex-col 
-                md:flex-row items-center justify-between gap-6 md:gap-8 shadow-[0_12px_28px_rgba(0,0,0,0.12)]">
+                <div className="w-full bg-[#7E4A2D] dark:bg-copper-900 dark:ring-1 dark:ring-copper-800 rounded-xl sm:rounded-2xl p-6 sm:p-8 md:px-12 md:py-11 flex flex-col 
+                md:flex-row items-center justify-between gap-6 md:gap-8 shadow-[0_12px_28px_rgba(0,0,0,0.12)] dark:shadow-none">
 
                     <div className="w-full md:w-1/2 text-center md:text-left">
-                        <h2 className="text-xl sm:text-2xl md:text-3xl font-Serif text-white leading-snug tracking-wide">
+                        <h2 className="text-xl sm:text-2xl md:text-3xl font-Serif text-white dark:text-copper-200 leading-snug tracking-wide">
                             Stay updated with the <br className="hidden sm:block" /> latest from Lamsa!
                         </h2>
                     </div>
@@ -31,19 +31,19 @@ export default function Footer() {
                     <div className="w-full md:w-1/2 flex justify-center md:justify-end">
                         <form
                             onSubmit={(e) => e.preventDefault()}
-                            className="w-full max-w-[440px] bg-white rounded-md sm:rounded-lg p-1.5 flex items-center 
+                            className="w-full max-w-110 bg-white dark:bg-noir-800 dark:ring-1 dark:ring-line-strong rounded-md sm:rounded-lg p-1.5 flex items-center 
                             shadow-sm"
                         >
                             <input
                                 type="email"
                                 placeholder="Enter your email"
-                                className="flex-1 min-w-0 px-3 sm:px-4 py-2 text-xs sm:text-sm text-[#222222] bg-transparent 
-                                focus:outline-none placeholder-[#888888]"
+                                className="flex-1 min-w-0 px-3 sm:px-4 py-2 text-xs sm:text-sm text-[#222222] dark:text-fg bg-transparent 
+                                focus:outline-none placeholder-[#888888] dark:placeholder-fg-placeholder"
                                 required
                             />
                             <button
                                 type="submit"
-                                className="flex-shrink-0 bg-[#8E4726] hover:bg-[#7D3E21] text-white text-xs sm:text-[13px] 
+                                className="shrink-0 bg-[#8E4726] dark:bg-copper-500 hover:bg-[#7D3E21] dark:hover:bg-copper-400 text-white dark:text-fg-on-accent text-xs sm:text-[13px] 
                                 font-medium px-4 sm:px-6 py-2 sm:py-2.5 rounded-md transition-colors whitespace-nowrap cursor-pointer"
                             >
                                 Subscribe Now
@@ -53,7 +53,7 @@ export default function Footer() {
 
                 </div>
 
-                <div className="w-full border-t border-[#D0D0D0] mt-8 mb-6"></div>
+                <div className="w-full border-t border-[#D0D0D0] dark:border-line mt-8 mb-6"></div>
 
                 <div className="w-full flex flex-col md:flex-row items-center justify-between gap-5 md:gap-4 text-center 
                 md:text-left">
@@ -69,22 +69,22 @@ export default function Footer() {
                     </div>
 
                     <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs sm:text-[13px] 
-                    font-medium text-[#4A4744]">
-                        <Link to="/" className="hover:text-[#7E4A2D] transition-colors">
+                    font-medium text-[#4A4744] dark:text-fg-secondary">
+                        <Link to="/" className="hover:text-[#7E4A2D] dark:hover:text-copper-300 transition-colors">
                             Home
                         </Link>
-                        <Link to="/shop" className="hover:text-[#7E4A2D] transition-colors">
+                        <Link to="/shop" className="hover:text-[#7E4A2D] dark:hover:text-copper-300 transition-colors">
                             Shop
                         </Link>
-                        <Link to="/orders" className="hover:text-[#7E4A2D] transition-colors">
+                        <Link to="/orders" className="hover:text-[#7E4A2D] dark:hover:text-copper-300 transition-colors">
                             My Orders
                         </Link>
-                        <Link to="/wishlist" className="hover:text-[#7E4A2D] transition-colors">
+                        <Link to="/wishlist" className="hover:text-[#7E4A2D] dark:hover:text-copper-300 transition-colors">
                             Wishlist
                         </Link>
                     </nav>
 
-                    <div className="text-[11px] sm:text-[12px] text-[#7A7570] text-center md:text-right">
+                    <div className="text-[11px] sm:text-[12px] text-[#7A7570] dark:text-fg-tertiary text-center md:text-right">
                         © 2026 Lamsa. All rights reserved.
                     </div>
 

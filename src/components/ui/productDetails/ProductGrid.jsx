@@ -22,11 +22,11 @@ export default function ProductGrid({
 
   if (!isLoading && products.length === 0) {
     return (
-      <div className="w-full flex flex-col items-center justify-center py-16 px-4 bg-white/40 dark:bg-slate-800/40 
-      backdrop-blur-md rounded-3xl border border-gray-200 dark:border-slate-700 text-center shadow-none">
+      <div className="w-full flex flex-col items-center justify-center py-16 px-4 bg-white/40 dark:bg-noir-800/40 
+      backdrop-blur-md rounded-3xl border border-gray-200 dark:border-line text-center shadow-none">
         <div className="text-3xl mb-3 opacity-80"><Search className="w-5 h-5" /></div>
-        <h3 className="text-lg font-bold text-gray-700 dark:text-gray-300 mb-1">No products found</h3>
-        <p className="text-sm text-gray-500 dark:text-gray-400 max-w-sm">
+        <h3 className="text-lg font-bold text-gray-700 dark:text-fg-secondary mb-1">No products found</h3>
+        <p className="text-sm text-gray-500 dark:text-fg-tertiary max-w-sm">
           Try adjusting your search or filter keywords.
         </p>
       </div>
@@ -63,9 +63,9 @@ export default function ProductGrid({
             type="button"
             onClick={onLoadMore}
             disabled={isLoadingMore}
-            className="px-8 py-3 bg-gray-100 dark:bg-slate-800 text-copper-700 dark:text-copper-400 hover:bg-copper-700 hover:text-white dark:hover:bg-copper-600 dark:hover:text-white 
+            className="px-8 py-3 bg-gray-100 dark:bg-noir-750 text-copper-700 dark:text-copper-400 hover:bg-copper-700 hover:text-white dark:hover:bg-copper-500 dark:hover:text-fg-on-accent 
             rounded-xl font-medium text-sm transition shadow-sm active:scale-95 flex items-center gap-2.5
-            disabled:opacity-70 disabled:cursor-not-allowed group min-w-35 justify-center border border-gray-200 dark:border-slate-700 cursor-pointer"
+            disabled:opacity-70 disabled:cursor-not-allowed group min-w-35 justify-center border border-gray-200 dark:border-line cursor-pointer"
           >
             {isLoadingMore ? (
               <>
@@ -80,4 +80,4 @@ export default function ProductGrid({
       )}
     </div>
   );
-}
+}

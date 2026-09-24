@@ -67,18 +67,18 @@ export default function ProductFilterSidebar({
       {isOpen && (
         <div
           onClick={onClose}
-          className="fixed inset-0 bg-black/40 backdrop-blur-xs z-40 lg:hidden transition-opacity"
+          className="fixed inset-0 bg-black/40 dark:bg-black/70 backdrop-blur-xs z-40 lg:hidden transition-opacity"
         />
       )}
 
       {/* Sidebar Container */}
       <div
-        className={`fixed inset-y-0 left-0 z-50 w-72 bg-white dark:bg-slate-900 p-5 overflow-y-auto transition-transform
+        className={`fixed inset-y-0 left-0 z-50 w-72 bg-white dark:bg-noir-850 p-5 overflow-y-auto transition-transform
           duration-300 ease-in-out lg:static lg:w-full lg:p-0 lg:bg-transparent dark:lg:bg-transparent lg:overflow-visible lg:translate-x-0  
           ${isOpen ? 'translate-x-0' : '-translate-x-full'
           }`}
       >
-        <div className="space-y-5 text-slate-800 dark:text-slate-100 font-sans">
+        <div className="space-y-5 text-slate-800 dark:text-fg font-sans">
 
           {/* Main Title with Filter Icon */}
           <div className="flex items-center justify-between pb-1">
@@ -86,7 +86,7 @@ export default function ProductFilterSidebar({
             {onClose && (
               <button
                 onClick={onClose}
-                className="lg:hidden p-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition"
+                className="lg:hidden p-1 text-slate-400 dark:text-fg-tertiary hover:text-slate-600 dark:hover:text-fg transition"
                 aria-label="Close filters"
               >
                 <X className="w-5 h-5" />
@@ -94,16 +94,16 @@ export default function ProductFilterSidebar({
             )}
           </div>
 
-          {/* <hr className="border-slate-200 dark:border-slate-800" /> */}
+          {/* <hr className="border-slate-200 dark:border-line-subtle" /> */}
 
           {/* Applied Filters Section */}
           <div>
             <div className="flex items-center justify-between mb-2.5">
-              <span className="text-[16px] font-semibold text-inter dark:text-slate-100">Applied Filters</span>
+              <span className="text-[16px] font-semibold text-inter dark:text-fg">Applied Filters</span>
               {hasActiveFilters && (
                 <button
                   onClick={onClearFilters}
-                  className="text-[14px] text-inter hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 underline transition cursor-pointer"
+                  className="text-[14px] text-inter hover:text-slate-800 dark:text-fg-tertiary dark:hover:text-fg underline transition cursor-pointer"
                 >
                   Clear all
                 </button>
@@ -112,11 +112,11 @@ export default function ProductFilterSidebar({
 
             <div className="flex flex-wrap items-center gap-1.5 min-h-8">
               {selectedCategory !== 'All' && (
-                <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 rounded text-xs font-medium capitalize">
+                <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-slate-100 dark:bg-noir-700 text-slate-700 dark:text-fg-secondary rounded text-xs font-medium capitalize">
                   {selectedCategory}
                   <button
                     onClick={() => setSelectedCategory('All')}
-                    className="hover:text-red-500 transition ml-0.5"
+                    className="hover:text-red-500 dark:hover:text-state-danger transition ml-0.5"
                   >
                     <X className="w-3 h-3" />
                   </button>
@@ -124,12 +124,12 @@ export default function ProductFilterSidebar({
               )}
 
               {sortBy !== 'default' && sortBadges[sortBy] && (
-                <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 rounded text-xs font-medium">
+                <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-slate-100 dark:bg-noir-700 text-slate-700 dark:text-fg-secondary rounded text-xs font-medium">
                   {sortBadges[sortBy].icon}
                   <span>{sortBadges[sortBy].label}</span>
                   <button
                     onClick={() => setSortBy('default')}
-                    className="hover:text-red-500 transition ml-0.5"
+                    className="hover:text-red-500 dark:hover:text-state-danger transition ml-0.5"
                   >
                     <X className="w-3 h-3" />
                   </button>
@@ -137,31 +137,31 @@ export default function ProductFilterSidebar({
               )}
 
               {!hasActiveFilters && (
-                <span className="text-[12px] text-inter dark:text-slate-500 italic">No filters applied</span>
+                <span className="text-[12px] text-inter dark:text-fg-tertiary italic">No filters applied</span>
               )}
             </div>
           </div>
 
-          <hr className="border-slate-200 dark:border-slate-800" />
+          <hr className="border-slate-200 dark:border-line-subtle" />
 
           {/* Categories Section */}
           <div>
-            <h3 className="text-[16px] font-semibold text-inter dark:text-slate-100 mb-3">Category</h3>
+            <h3 className="text-[16px] font-semibold text-inter dark:text-fg mb-3">Category</h3>
 
             {isLoadingCategories ? (
               <div className="space-y-2.5 animate-pulse">
-                <div className="h-4 bg-slate-100 dark:bg-slate-800 rounded w-3/4"></div>
-                <div className="h-4 bg-slate-100 dark:bg-slate-800 rounded w-1/2"></div>
-                <div className="h-4 bg-slate-100 dark:bg-slate-800 rounded w-2/3"></div>
+                <div className="h-4 bg-slate-100 dark:bg-noir-700 rounded w-3/4"></div>
+                <div className="h-4 bg-slate-100 dark:bg-noir-700 rounded w-1/2"></div>
+                <div className="h-4 bg-slate-100 dark:bg-noir-700 rounded w-2/3"></div>
               </div>
             ) : (
-              <div className="space-y-2.5 text-sm text-slate-700 dark:text-slate-300">
+              <div className="space-y-2.5 text-sm text-slate-700 dark:text-fg-secondary">
                 {categories.map((cat) => {
                   const isChecked = selectedCategory.toLowerCase() === cat.value.toLowerCase();
                   return (
                     <label
                       key={cat.value}
-                      className="flex items-center gap-2.5 cursor-pointer select-none text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white transition"
+                      className="flex items-center gap-2.5 cursor-pointer select-none text-slate-700 dark:text-fg-secondary hover:text-slate-900 dark:hover:text-fg transition"
                     >
                       <input
                         type="checkbox"
@@ -169,7 +169,7 @@ export default function ProductFilterSidebar({
                         onChange={() => {
                           setSelectedCategory(isChecked ? 'All' : cat.value);
                         }}
-                        className="w-4 h-4 rounded border-slate-300 dark:border-slate-700 text-slate-900 focus:ring-slate-500 dark:bg-slate-800 dark:checked:bg-slate-100 cursor-pointer"
+                        className="w-4 h-4 rounded border-slate-300 dark:border-line-control text-slate-900 dark:text-copper-400 dark:accent-copper-400 focus:ring-slate-500 dark:focus:ring-copper-400 dark:bg-noir-750 dark:checked:bg-copper-400 cursor-pointer"
                       />
                       <span className="capitalize">{cat.label}</span>
                     </label>
@@ -179,40 +179,40 @@ export default function ProductFilterSidebar({
             )}
           </div>
 
-          <hr className="border-slate-200 dark:border-slate-800" />
+          <hr className="border-slate-200 dark:border-line-subtle" />
 
           {/* Price Range Section */}
           <div>
-            <h3 className="text-[16px] font-semibold text-inter dark:text-slate-100 mb-3">Price Range</h3>
+            <h3 className="text-[16px] font-semibold text-inter dark:text-fg mb-3">Price Range</h3>
             <div className="flex items-center gap-3">
               <input
                 type="number"
                 placeholder="Min"
                 value={minPrice}
                 onChange={(e) => setMinPrice(e.target.value)}
-                className="w-full px-3 py-2  dark:bg-slate-800 border border-[#9F9F9F] dark:border-slate-700 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 rounded-lg text-sm focus:outline-none focus:border-slate-400 min-w-0 shadow-xs"
+                className="w-full px-3 py-2  dark:bg-noir-750 border border-[#9F9F9F] dark:border-line-control dark:hover:border-line-hover text-slate-900 dark:text-fg placeholder-slate-400 dark:placeholder-fg-placeholder rounded-lg text-sm focus:outline-none focus:border-slate-400 dark:focus:border-copper-400 min-w-0 shadow-xs"
               />
               <input
                 type="number"
                 placeholder="Max"
                 value={maxPrice}
                 onChange={(e) => setMaxPrice(e.target.value)}
-                className="w-full px-3 py-2  dark:bg-slate-800 border border-[#9F9F9F] dark:border-slate-700 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 rounded-lg text-sm focus:outline-none focus:border-slate-400 min-w-0 shadow-xs"
+                className="w-full px-3 py-2  dark:bg-noir-750 border border-[#9F9F9F] dark:border-line-control dark:hover:border-line-hover text-slate-900 dark:text-fg placeholder-slate-400 dark:placeholder-fg-placeholder rounded-lg text-sm focus:outline-none focus:border-slate-400 dark:focus:border-copper-400 min-w-0 shadow-xs"
               />
             </div>
           </div>
 
-          <hr className="border-slate-200 dark:border-slate-800" />
+          <hr className="border-slate-200 dark:border-line-subtle" />
 
           {/* Sort By Section */}
           <div>
-            <h3 className="text-[16px] font-semibold text-inter dark:text-slate-100 mb-3">Sort By</h3>
+            <h3 className="text-[16px] font-semibold text-inter dark:text-fg mb-3">Sort By</h3>
             <div className="relative">
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="w-full px-3 py-2  dark:bg-slate-800 border border-[#9F9F9F] dark:border-slate-700 rounded-lg text-sm appearance-none
-                focus:outline-none focus:border-slate-400 text-slate-500 dark:text-slate-300 cursor-pointer shadow-xs pr-8"
+                className="w-full px-3 py-2  dark:bg-noir-750 border border-[#9F9F9F] dark:border-line-control dark:hover:border-line-hover rounded-lg text-sm appearance-none
+                focus:outline-none focus:border-slate-400 dark:focus:border-copper-400 text-slate-500 dark:text-fg-tertiary cursor-pointer shadow-xs pr-8"
               >
                 <option value="default">Default</option>
                 <option value="newest">Newest</option>
@@ -220,7 +220,7 @@ export default function ProductFilterSidebar({
                 <option value="highToLow">Price: High to Low</option>
                 <option value="topRated">Top Rated</option>
               </select>
-              <ChevronDown className="w-4 h-4 text-slate-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+              <ChevronDown className="w-4 h-4 text-slate-400 dark:text-fg-tertiary absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
             </div>
           </div>
 
@@ -228,4 +228,4 @@ export default function ProductFilterSidebar({
       </div>
     </>
   );
-}
+}

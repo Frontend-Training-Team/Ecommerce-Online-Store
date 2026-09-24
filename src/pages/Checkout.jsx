@@ -73,16 +73,16 @@ export default function Checkout() {
 
   if (loadingCart) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-[#8c7b70] text-sm font-medium">Loading checkout...</p>
+      <div className="min-h-screen flex items-center justify-center dark:bg-noir-900">
+        <p className="text-[#8c7b70] dark:text-fg-tertiary text-sm font-medium">Loading checkout...</p>
       </div>
     );
   }
 
   return (
-    <div className="mt-16 xl:mt-17 min-h-screen py-10 px-4 sm:px-6 lg:px-8 font-sans">
+    <div className="mt-16 xl:mt-17 min-h-screen py-10 px-4 sm:px-6 lg:px-8 font-sans dark:bg-noir-900">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-8 sm:mb-5 flex flex-wrap items-center justify-between gap-4 border-b border-[#EAE1DB] pb-5 dark:border-[#2e2724]">
+        <div className="mb-8 sm:mb-5 flex flex-wrap items-center justify-between gap-4 border-b border-[#EAE1DB] pb-5 dark:border-line">
           <div className="flex items-center gap-3.5">
             <button
               type="button"

@@ -50,7 +50,7 @@ export default function ResetPasswordCard({
   };
   const isOtpComplete = otpArray.every((digit) => digit !== '' && digit !== null && digit !== undefined);
   return (
-    <div className="w-full min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-950 p-4 transition-colors duration-300">
+    <div className="w-full min-h-screen flex items-center justify-center bg-gray-50 dark:bg-noir-900 p-4 transition-colors duration-300">
 
       <style>{`
         @keyframes spinnerRotate {
@@ -82,22 +82,11 @@ export default function ResetPasswordCard({
           animation: spinnerRotate 5s linear infinite;
           z-index: 0;
         }
-.input-spinning-border {
+        .input-spinning-border {
           position: relative;
           overflow: hidden;
           border-radius: 0.75rem;
           transform: translateZ(0);
-        }
-        .input-spinning-border:not(.completed)::before {
-          content: '';
-          position: absolute;
-          top: -50%;
-          left: -50%;
-          width: 200%;
-          height: 200%;
-          background: conic-gradient(from 0deg, transparent, transparent, #D88D68);
-          animation: spinnerRotate 4s linear infinite;
-          z-index: 0;
         }
         .input-spinning-border.completed::before {
           display: none;
@@ -105,24 +94,24 @@ export default function ResetPasswordCard({
 
       `}</style>
 
-      <div className="form-spinning-border p-0.5 mt-18 shadow-2xl max-w-lg w-full">
-        <div className="relative bg-white dark:bg-gray-900 p-6 sm:p-8 rounded-[calc(1.5rem-2px)] w-full flex flex-col items-center text-center z-10 transition-colors duration-300">
+      <div className="form-spinning-border p-0.5 mt-18 shadow-2xl dark:shadow-none max-w-lg w-full">
+        <div className="relative bg-white dark:bg-noir-800 p-6 sm:p-8 rounded-[calc(1.5rem-2px)] w-full flex flex-col items-center text-center z-10 transition-colors duration-300">
 
-          <div className="w-12 h-12 bg-[#D88D68]/15 text-[#D88D68] rounded-2xl flex items-center justify-center mb-3 text-xl shadow-sm border border-[#D88D68]/20 lock-float">
+          <div className="w-12 h-12 bg-[#D88D68]/15 dark:bg-copper-400/15 text-[#D88D68] dark:text-copper-400 rounded-2xl flex items-center justify-center mb-3 text-xl shadow-sm border border-[#D88D68]/20 dark:border-copper-500/20 lock-float">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
           </div>
 
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-1">Reset Password</h2>
-          <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mb-6">
-            Enter the code sent to <span className="text-gray-800 dark:text-gray-200 font-medium">{email}</span> to unlock and reset your password.
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-fg mb-1">Reset Password</h2>
+          <p className="text-xs sm:text-sm text-gray-500 dark:text-fg-tertiary mb-6">
+            Enter the code sent to <span className="text-gray-800 dark:text-fg font-medium">{email}</span> to unlock and reset your password.
           </p>
 
           <form onSubmit={onResetPassword} className="w-full space-y-5 text-start">
 
             <div>
-              <label className="text-s font-semibold text-gray-600 dark:text-gray-400 block mb-2">
+              <label className="text-s font-semibold text-gray-600 dark:text-fg-secondary block mb-2">
                 Verification Code
               </label>
 
@@ -130,7 +119,7 @@ export default function ResetPasswordCard({
                 {otpArray.map((digit, index) => (
                   <div
                     key={index}
-                    className={`input-spinning-border p-0.5 shadow-sm border ${isOtpComplete ? 'completed border-[#D88D68]' : 'border-[#D88D68]/60'
+                    className={`input-spinning-border p-0.5 shadow-sm border ${isOtpComplete ? 'completed border-[#D88D68] dark:border-copper-400' : 'border-[#D88D68]/60 dark:border-copper-500/60'
                       }`}
                   >
                     <input
@@ -142,14 +131,14 @@ export default function ResetPasswordCard({
                       value={digit}
                       onChange={(e) => handleChange(e.target.value, index)}
                       onKeyDown={(e) => handleKeyDown(e, index)}
-                      className="relative w-10 h-11 sm:w-11 sm:h-12 text-center text-xl font-bold bg-gray-50 dark:bg-gray-900 rounded-[calc(0.75rem-2px)] text-gray-800 dark:text-gray-100 focus:outline-none z-10 block transition-colors duration-200 disabled:opacity-60"
+                      className="relative w-10 h-11 sm:w-11 sm:h-12 text-center text-xl font-bold bg-gray-50 dark:bg-noir-750 rounded-[calc(0.75rem-2px)] text-gray-800 dark:text-fg focus:outline-none z-10 block transition-colors duration-200 disabled:opacity-60"
                     />
                   </div>
                 ))}
               </div>
             </div>
             <div className="space-y-1.5 text-start pt-2">
-              <label className="text-s font-semibold text-gray-600 dark:text-gray-400">
+              <label className="text-s font-semibold text-gray-600 dark:text-fg-secondary">
                 New Password
               </label>
               <input
@@ -158,30 +147,30 @@ export default function ResetPasswordCard({
                 autoComplete='new-password'
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3.5 mt-3 text-sm rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:border-[#D88D68] shadow-sm transition-all"
+                className="w-full px-4 py-3.5 mt-3 text-sm rounded-xl border-2 border-gray-200 dark:border-line-control bg-white dark:bg-noir-750 text-gray-800 dark:text-fg dark:placeholder-fg-placeholder focus:outline-none focus:border-[#D88D68] dark:focus:border-copper-400 shadow-sm transition-all"
               />
             </div>
 
             <button
               type="submit"
               disabled={!isOtpComplete || !password || isLoading}
-              className="w-full py-3.5 px-6 bg-[#D88D68] hover:bg-[#B67352] text-white font-semibold text-base rounded-xl transition-all duration-200 shadow-lg shadow-[#D88D68]/25 cursor-pointer disabled:opacity-50 mt-2"
+              className="w-full py-3.5 px-6 bg-[#D88D68] hover:bg-[#B67352] dark:bg-copper-500 dark:hover:bg-copper-400 text-white dark:text-fg-on-accent font-semibold text-base rounded-xl transition-all duration-200 shadow-lg shadow-[#D88D68]/25 dark:shadow-none cursor-pointer disabled:opacity-50 mt-2"
             >
               {isLoading ? 'Resetting...' : 'Reset Password'}
             </button>
           </form>
 
-          <div className="text-center mt-6 pt-2 w-full text-sm text-gray-500 dark:text-gray-400">
+          <div className="text-center mt-6 pt-2 w-full text-sm text-gray-500 dark:text-fg-tertiary">
             {timer > 0 ? (
               <span>
-                Didn't receive the code? Resend in <span className="font-semibold text-gray-700 dark:text-gray-300">{timer}s</span>
+                Didn't receive the code? Resend in <span className="font-semibold text-gray-700 dark:text-copper-400">{timer}s</span>
               </span>
             ) : (
               <button
                 type="button"
                 onClick={onResend}
                 disabled={isResending}
-                className="font-semibold text-[#D88D68] hover:underline focus:outline-none disabled:opacity-50 cursor-pointer"
+                className="font-semibold text-[#D88D68] dark:text-copper-400 hover:underline dark:hover:text-copper-300 focus:outline-none disabled:opacity-50 cursor-pointer"
               >
                 {isResending ? 'Resending...' : 'Resend Code'}
               </button>

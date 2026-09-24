@@ -30,14 +30,14 @@ export default function Pagination({
     >
       {/* Current Page Box */}
       <div
-        className="h-10 min-w-10 px-3.5 bg-[#F1ECE6] dark:bg-slate-800 text-[#1E1E1E] dark:text-white rounded-lg flex items-center justify-center font-Inter font-semibold text-sm shadow-2xs border border-gray-200/40 dark:border-slate-700"
+        className="h-10 min-w-10 px-3.5 bg-[#F1ECE6] dark:bg-noir-750 text-[#1E1E1E] dark:text-fg rounded-lg flex items-center justify-center font-Inter font-semibold text-sm shadow-2xs border border-gray-200/40 dark:border-line"
         aria-current="page"
       >
         <span>{formattedCurrent}</span>
       </div>
 
       {/* Total Pages Count */}
-      <span className="text-xs sm:text-sm font-medium text-[#706861] dark:text-slate-400 font-Inter">
+      <span className="text-xs sm:text-sm font-medium text-[#706861] dark:text-fg-tertiary font-Inter">
         of {formattedTotal}
       </span>
 
@@ -47,7 +47,7 @@ export default function Pagination({
         onClick={handlePrev}
         disabled={currentPage <= 1}
         aria-label="Previous Page"
-        className="w-10 h-10 rounded-lg bg-[#F1ECE6] dark:bg-slate-800 text-[#1E1E1E] dark:text-white hover:bg-[#E4DDD4] dark:hover:bg-slate-700 disabled:opacity-40 disabled:hover:bg-[#F1ECE6] dark:disabled:hover:bg-slate-800 disabled:cursor-not-allowed flex items-center justify-center transition-colors cursor-pointer border border-gray-200/40 dark:border-slate-700 active:scale-95"
+        className="w-10 h-10 rounded-lg bg-[#F1ECE6] dark:bg-noir-750 text-[#1E1E1E] dark:text-fg hover:bg-[#E4DDD4] dark:hover:bg-noir-650 disabled:opacity-40 disabled:hover:bg-[#F1ECE6] dark:disabled:hover:bg-noir-750 disabled:cursor-not-allowed flex items-center justify-center transition-colors cursor-pointer border border-gray-200/40 dark:border-line active:scale-95"
       >
         <ChevronLeft className="w-4 h-4" />
       </button>
@@ -58,7 +58,7 @@ export default function Pagination({
         onClick={handleNext}
         disabled={currentPage >= totalPages}
         aria-label="Next Page"
-        className="w-10 h-10 rounded-lg bg-[#F1ECE6] dark:bg-slate-800 text-[#1E1E1E] dark:text-white hover:bg-[#E4DDD4] dark:hover:bg-slate-700 disabled:opacity-40 disabled:hover:bg-[#F1ECE6] dark:disabled:hover:bg-slate-800 disabled:cursor-not-allowed flex items-center justify-center transition-colors cursor-pointer border border-gray-200/40 dark:border-slate-700 active:scale-95"
+        className="w-10 h-10 rounded-lg bg-[#F1ECE6] dark:bg-noir-750 text-[#1E1E1E] dark:text-fg hover:bg-[#E4DDD4] dark:hover:bg-noir-650 disabled:opacity-40 disabled:hover:bg-[#F1ECE6] dark:disabled:hover:bg-noir-750 disabled:cursor-not-allowed flex items-center justify-center transition-colors cursor-pointer border border-gray-200/40 dark:border-line active:scale-95"
       >
         <ChevronRight className="w-4 h-4" />
       </button>

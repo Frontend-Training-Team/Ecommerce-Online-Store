@@ -96,11 +96,11 @@ export default function ProductsPage() {
   ]);
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
+    <div className="p-6 bg-gray-50 dark:bg-noir-900 min-h-screen">
       {/* 1. Search Bar */}
       <div className="mb-6">
         <div className="relative w-full">
-          <span className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">
+          <span className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400 dark:text-fg-tertiary">
             🔍
           </span>
           <input
@@ -108,7 +108,7 @@ export default function ProductsPage() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search products..."
-            className="w-full pl-10 pr-4 py-2.5 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm shadow-sm"
+            className="w-full pl-10 pr-4 py-2.5 bg-white dark:bg-noir-800 border border-gray-200 dark:border-line-control dark:hover:border-line-hover rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:border-copper-400 dark:focus:ring-copper-400/25 text-sm dark:text-fg dark:placeholder-fg-placeholder shadow-sm"
           />
         </div>
       </div>
@@ -142,22 +142,22 @@ export default function ProductsPage() {
                 return (
                   <div
                     key={product._id || product.id}
-                    className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm flex flex-col justify-between"
+                    className="bg-white dark:bg-noir-800 p-4 rounded-xl border border-gray-100 dark:border-line shadow-sm dark:shadow-none flex flex-col justify-between"
                   >
                     <div>
                       <img
                         src={imageUrl}
                         alt={product.title || product.name}
-                        className="w-full h-40 object-cover rounded-lg mb-3"
+                        className="w-full h-40 object-cover rounded-lg mb-3 dark:brightness-[.92]"
                       />
-                      <h4 className="font-medium text-sm text-gray-800 line-clamp-2">
+                      <h4 className="font-medium text-sm text-gray-800 dark:text-fg line-clamp-2">
                         {product.title || product.name}
                       </h4>
-                      <p className="text-indigo-600 font-bold mt-2">
+                      <p className="text-indigo-600 dark:text-copper-400 font-bold mt-2">
                         EGP {product.price}
                       </p>
                     </div>
-                    <button className="mt-4 w-full bg-indigo-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 transition">
+                    <button className="mt-4 w-full bg-indigo-600 dark:bg-copper-500 text-white dark:text-fg-on-accent py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 dark:hover:bg-copper-400 transition">
                       Add to Cart
                     </button>
                   </div>
@@ -165,8 +165,8 @@ export default function ProductsPage() {
               })}
             </div>
           ) : (
-            <div className="flex flex-col items-center justify-center py-16 bg-white rounded-xl border border-gray-100 text-center">
-              <p className="text-gray-500 text-lg font-medium">
+            <div className="flex flex-col items-center justify-center py-16 bg-white dark:bg-noir-800 rounded-xl border border-gray-100 dark:border-line text-center">
+              <p className="text-gray-500 dark:text-fg-tertiary text-lg font-medium">
                 No products found
               </p>
             </div>
@@ -175,4 +175,4 @@ export default function ProductsPage() {
       </div>
     </div>
   );
-}
+}

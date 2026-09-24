@@ -5,7 +5,7 @@ export default function SweepingCleaner({ className = "w-10 h-10" }) {
         viewBox="-4 -4 72 72"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-full h-full text-red-500 overflow-visible"
+        className="w-full h-full text-red-500 dark:text-state-danger overflow-visible"
       >
         <path
           d="M10 54 C 20 52, 28 54, 38 53"
