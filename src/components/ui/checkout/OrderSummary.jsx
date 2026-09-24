@@ -77,14 +77,9 @@ export default function OrderSummary({ cartItems = [], subtotal = 0, discount = 
 
         <div className="mb-5 flex items-baseline justify-between">
           <span className="text-sm font-semibold text-[#5C4A3E] dark:text-fg">Total</span>
-<<<<<<< HEAD
-          <span className="bg-linear-to-r from-[#8A4C1E] to-[#A76434] bg-clip-text text-2xl font-extrabold tracking-tight text-transparent dark:bg-none dark:text-copper-400">
-            EGP {total}
-=======
           <span className="bg-linear-to-r from-[#8A4C1E] to-[#A76434] bg-clip-text text-2xl font-extrabold 
           tracking-tight text-transparent dark:bg-none dark:text-copper-400">
             EGP {Number(total).toFixed(2)}
->>>>>>> 15e25795ca37597b62be8c070e8a07851e2bf444
           </span>
         </div>
       </div>

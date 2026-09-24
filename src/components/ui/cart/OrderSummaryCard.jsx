@@ -103,12 +103,8 @@ export default function OrderSummaryCard({ cart, onApplyCoupon, onRemoveCoupon, 
 
         <div className="mb-5 flex items-baseline justify-between">
           <span className="text-sm font-semibold text-[#5C4A3E] dark:text-fg">Total</span>
-<<<<<<< HEAD
-          <span className="bg-linear-to-r from-[#8A4C1E] to-[#A76434] bg-clip-text text-2xl font-extrabold tracking-tight text-transparent dark:bg-none dark:text-copper-400">
-=======
           <span className="bg-linear-to-r from-[#8A4C1E] to-[#A76434] bg-clip-text text-2xl font-extrabold 
           tracking-tight text-transparent dark:bg-none dark:text-copper-400">
->>>>>>> 15e25795ca37597b62be8c070e8a07851e2bf444
             EGP {total.toFixed(2)}
           </span>
         </div>
@@ -116,12 +112,8 @@ export default function OrderSummaryCard({ cart, onApplyCoupon, onRemoveCoupon, 
         <button
           type="button"
           onClick={() => navigate("/checkout")}
-<<<<<<< HEAD
-          className="flex w-full items-center justify-center gap-2 rounded-xl bg-linear-to-r from-[#8A4C1E] to-[#A76434] px-4 py-3.5 text-sm font-semibold text-white shadow-md transition-all hover:shadow-lg active:scale-[0.98] dark:from-copper-500 dark:to-copper-500 dark:text-fg-on-accent dark:hover:from-copper-400 dark:hover:to-copper-400"
-=======
           className="flex w-full items-center justify-center gap-2 rounded-xl bg-linear-to-r from-[#8A4C1E] 
           to-[#A76434] px-4 py-3.5 text-sm font-semibold text-white shadow-md transition-all hover:shadow-lg active:scale-[0.98] dark:from-copper-500 dark:to-copper-500 dark:text-fg-on-accent dark:hover:from-copper-400 dark:hover:to-copper-400"
->>>>>>> 15e25795ca37597b62be8c070e8a07851e2bf444
         >
           Proceed to Checkout
           <ArrowRight className="h-4 w-4" />
