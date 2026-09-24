@@ -17,7 +17,7 @@ function HeroSection({ onViewCategories }) {
 
       <div className="absolute inset-0 bg-black/60 dark:bg-noir-950/70"></div>
 
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-40 bg-gradient-to-b from-transparent to-noir-900 dark:block"></div>
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-40 bg-linear-to-b from-transparent to-noir-900 dark:block"></div>
 
       <div className="relative z-10 mx-auto flex min-h-[85vh] sm:min-h-[90vh] lg:min-h-screen max-w-7xl items-center justify-center px-4 sm:px-6 lg:px-8 pt-24 pb-14 sm:pt-32 sm:pb-20 lg:py-24 text-center">
         <div className="max-w-4xl w-full">
@@ -28,11 +28,11 @@ function HeroSection({ onViewCategories }) {
             </span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold sm:font-bold font-Inter text-white leading-tight sm:leading-tight uppercase tracking-tight">
-            shop the future, delivered today
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-Inter text-white uppercase leading-tight">
+            shop the future, <br></br> delivered today
           </h1>
 
-          <p className="mx-auto mt-4 sm:mt-5 max-w-sm sm:max-w-xl md:max-w-2xl text-xs sm:text-base md:text-lg font-Inter leading-relaxed sm:leading-6 text-white/90 drop-shadow-xs px-2 sm:px-0">
+          <p className="mx-auto mt-4 sm:mt-5 text-[16px] sm:text-base font-Inter sm:leading-6 text-white/90 drop-shadow-xs px-2 sm:px-0">
             Discover premium products at unbeatable prices. Fast delivery, easy returns, and exceptional quality.
           </p>
           <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto px-4 sm:px-0">

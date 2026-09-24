@@ -74,7 +74,7 @@ export default function OrderDetail() {
   const isCancelled = order.status === "cancelled";
 
   return (
-    <div className="mt-16 xl:mt-17 min-h-screen w-full bg-[#FAFAF8] px-4 py-15 dark:bg-noir-900 md:px-8 lg:px-12">
+    <div className="mt-16 xl:mt-17 min-h-screen w-full px-4 py-15 dark:bg-noir-900 md:px-8 lg:px-12">
       <div className="mx-auto flex w-full max-w-6xl flex-col">
         <div className="mb-12 flex flex-wrap items-center justify-between gap-4 border-b border-[#EAE1DB] pb-5 dark:border-line">
           <div className="flex items-center gap-6">
