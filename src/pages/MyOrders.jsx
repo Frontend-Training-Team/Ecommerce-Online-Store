@@ -52,7 +52,8 @@ function MyOrdersPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              className="mb-8 sm:mb-10 flex flex-wrap items-center justify-between gap-4 border-b border-[#EAE1DB] pb-5 dark:border-line">
+              className="mb-8 sm:mb-10 flex flex-wrap items-center justify-between gap-4 border-b border-[#EAE1DB] 
+              pb-5 dark:border-line">
                 <div>
                     <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium font-Instrument text-[#2D241E] dark:text-fg">
                         My Orders
@@ -63,7 +64,9 @@ function MyOrdersPage() {
                 </div>
 
                 <div className="flex items-center gap-3">
-                    <span className="rounded-full border border-[#DFC9BA] dark:border-line-strong bg-[#F3E8DF] dark:bg-noir-700 px-3.5 sm:px-4 py-1.5 text-xs sm:text-sm font-bold uppercase tracking-wider text-[#7B542B] dark:text-copper-400 shadow-2xs">
+                    <span className="rounded-full border border-[#DFC9BA] dark:border-line-strong bg-[#F3E8DF] 
+                    dark:bg-noir-700 px-3.5 sm:px-4 py-1.5 text-xs sm:text-sm font-bold uppercase tracking-wider 
+                    text-[#7B542B] dark:text-copper-400 shadow-2xs">
                         {loading ? "..." : `${ordersArray.length} ${ordersArray.length === 1 ? "Order" : "Orders"}`}
                     </span>
                 </div>
@@ -77,8 +80,10 @@ function MyOrdersPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
-                  className="w-full bg-white dark:bg-noir-800 min-h-[50vh] flex flex-col items-center justify-center p-6 text-center rounded-2xl border border-gray-100 dark:border-line">
-                    <div className="w-16 h-16 rounded-full bg-[#FAF5F0] dark:bg-noir-750 text-[#7E4A2D] dark:text-copper-400 flex items-center justify-center mb-4">
+                  className="w-full bg-white dark:bg-noir-800 min-h-[50vh] flex flex-col items-center justify-center 
+                  p-6 text-center rounded-2xl border border-gray-100 dark:border-line">
+                    <div className="w-16 h-16 rounded-full bg-[#FAF5F0] dark:bg-noir-750 text-[#7E4A2D] 
+                    dark:text-copper-400 flex items-center justify-center mb-4">
                         <Package className="w-8 h-8" />
                     </div>
                     <h2 className="font-Serif text-2xl sm:text-3xl text-[#1E1915] dark:text-fg font-medium mb-2">
@@ -89,7 +94,8 @@ function MyOrdersPage() {
                     </p>
                     <Link
                         to="/shop"
-                        className="h-11 px-7 rounded-xl bg-[#7E4A2D] dark:bg-copper-500 hover:bg-[#683C23] dark:hover:bg-copper-400 text-white dark:text-fg-on-accent text-sm font-medium 
+                        className="h-11 px-7 rounded-xl bg-[#7E4A2D] dark:bg-copper-500 hover:bg-[#683C23] 
+                        dark:hover:bg-copper-400 text-white dark:text-fg-on-accent text-sm font-medium 
                         flex items-center gap-2 transition-colors cursor-pointer"
                     >
                         <ArrowLeft className="w-4 h-4" />

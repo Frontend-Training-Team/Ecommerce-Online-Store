@@ -92,13 +92,17 @@ export default function Checkout() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="mb-8 sm:mb-5 flex flex-wrap items-center justify-between gap-4 border-b border-[#EAE1DB] pb-5 dark:border-line">
+          className="mb-8 sm:mb-5 flex flex-wrap items-center justify-between gap-4 border-b border-[#EAE1DB] pb-5 
+          dark:border-line">
           <div className="flex items-center gap-3.5">
             <button
               type="button"
               onClick={() => navigate("/cart")}
               aria-label="Go back"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-[#D8C2B6] bg-white text-[#5C4A3E] transition-all hover:bg-[#F5EFEA] hover:text-[#2D241E] active:scale-95 dark:border-line-strong dark:bg-noir-800 dark:text-fg-secondary dark:hover:bg-noir-750 dark:hover:border-line-hover dark:hover:text-fg"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-[#D8C2B6] bg-white 
+              text-[#5C4A3E] transition-all hover:bg-[#F5EFEA] hover:text-[#2D241E] active:scale-95 
+              dark:border-line-strong dark:bg-noir-800 dark:text-fg-secondary dark:hover:bg-noir-750 
+              dark:hover:border-line-hover dark:hover:text-fg"
             >
               <ArrowLeft className="h-5 w-5" />
             </button>

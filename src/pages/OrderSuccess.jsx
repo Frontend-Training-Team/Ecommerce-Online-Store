@@ -16,7 +16,8 @@ export default function OrderSuccess() {
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className="w-16 h-16 bg-[#e6f4ea] dark:bg-state-success/10 text-[#1e8e3e] dark:text-state-success rounded-full flex items-center justify-center mb-6">
+        className="w-16 h-16 bg-[#e6f4ea] dark:bg-state-success/10 text-[#1e8e3e] dark:text-state-success 
+        rounded-full flex items-center justify-center mb-6">
         <Check className="w-8 h-8 stroke-[2.5]" />
       </motion.div>
 
@@ -60,7 +61,9 @@ export default function OrderSuccess() {
         {/* Track My Order Button */}
         <Link
           to={`/orders/${rawId}`}
-          className="w-full sm:w-auto px-5 py-2.5 rounded-xl border border-[#c07a50] dark:border-copper-600 bg-transparent text-[#c07a50] dark:text-copper-400 hover:bg-[#c07a50]/5 dark:hover:bg-copper-400/5 font-semibold text-xs flex items-center justify-center gap-2 transition-colors"
+          className="w-full sm:w-auto px-5 py-2.5 rounded-xl border border-[#c07a50] dark:border-copper-600 
+          bg-transparent text-[#c07a50] dark:text-copper-400 hover:bg-[#c07a50]/5 dark:hover:bg-copper-400/5 
+          font-semibold text-xs flex items-center justify-center gap-2 transition-colors"
         >
           <Package className="w-4 h-4" />
           <span>Track My Order</span>
@@ -69,7 +72,9 @@ export default function OrderSuccess() {
         {/* Continue Shopping Button */}
         <Link
           to="/shop"
-          className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-[#c07a50] dark:bg-copper-500 hover:bg-[#ad6a42] dark:hover:bg-copper-400 text-white dark:text-fg-on-accent font-semibold text-xs flex items-center justify-center gap-2 transition-colors shadow-sm"
+          className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-[#c07a50] dark:bg-copper-500 hover:bg-[#ad6a42] 
+          dark:hover:bg-copper-400 text-white dark:text-fg-on-accent font-semibold text-xs flex items-center 
+          justify-center gap-2 transition-colors shadow-sm"
         >
           <ShoppingBag className="w-4 h-4" />
           <span>Continue Shopping</span>

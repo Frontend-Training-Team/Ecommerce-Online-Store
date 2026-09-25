@@ -253,7 +253,9 @@ export default function ShopPage() {
           </div>
 
           <div className="flex items-center gap-3">
-            <span className="rounded-full border border-[#DFC9BA] dark:border-copper-800 bg-[#F3E8DF] dark:bg-copper-900 px-3.5 sm:px-4 py-1.5 text-xs sm:text-sm font-bold uppercase tracking-wider text-[#7B542B] dark:text-copper-300 shadow-2xs">
+            <span className="rounded-full border border-[#DFC9BA] dark:border-copper-800 bg-[#F3E8DF] 
+            dark:bg-copper-900 px-3.5 sm:px-4 py-1.5 text-xs sm:text-sm font-bold uppercase tracking-wider 
+            text-[#7B542B] dark:text-copper-300 shadow-2xs">
               {categoryFromUrl === 'All' ? 'All Categories' : categoryFromUrl}
             </span>
           </div>
@@ -294,7 +296,8 @@ export default function ShopPage() {
                 className="w-full mt-5 mb-6 sm:mb-8">
                 <div className="flex items-center gap-3 w-full">
                   <div className="relative flex-1 w-full flex items-center">
-                    <span className="absolute left-4 z-10 pointer-events-none text-slate-400 dark:text-fg-tertiary flex items-center justify-center">
+                    <span className="absolute left-4 z-10 pointer-events-none text-slate-400 dark:text-fg-tertiary 
+                    flex items-center justify-center">
                       <Search className="w-4.5 h-4.5" />
                     </span>
                     <input
@@ -307,7 +310,10 @@ export default function ShopPage() {
                         setSearchTerm(val)
                         updateUrlSearch(val)
                       }}
-                      className="w-full h-12 pl-11 pr-11 bg-gray-50 dark:bg-noir-800 border border-gray-200 dark:border-line-control dark:hover:border-line-hover rounded-2xl text-sm focus:outline-none focus:border-amber-900/50 dark:focus:border-copper-400 transition-colors shadow-none text-slate-800 dark:text-fg placeholder:text-slate-400 dark:placeholder:text-fg-placeholder"
+                      className="w-full h-12 pl-11 pr-11 bg-gray-50 dark:bg-noir-800 border border-gray-200 
+                      dark:border-line-control dark:hover:border-line-hover rounded-2xl text-sm focus:outline-none 
+                      focus:border-amber-900/50 dark:focus:border-copper-400 transition-colors shadow-none text-slate-800 
+                      dark:text-fg placeholder:text-slate-400 dark:placeholder:text-fg-placeholder"
                     />
                     {searchTerm && (
                       <button
@@ -315,7 +321,9 @@ export default function ShopPage() {
                         onClick={handleClearSearch}
                         onMouseDown={(e) => e.preventDefault()}
                         aria-label="Clear search"
-                        className="absolute right-3.5 z-10 w-7 h-7 flex items-center justify-center rounded-full text-slate-400 dark:text-fg-tertiary hover:text-slate-700 dark:hover:text-fg hover:bg-gray-200/60 dark:hover:bg-noir-650 transition-colors cursor-pointer"
+                        className="absolute right-3.5 z-10 w-7 h-7 flex items-center justify-center rounded-full 
+                        text-slate-400 dark:text-fg-tertiary hover:text-slate-700 dark:hover:text-fg 
+                        hover:bg-gray-200/60 dark:hover:bg-noir-650 transition-colors cursor-pointer"
                       >
                         <X className="w-4 h-4" />
                       </button>
@@ -325,7 +333,9 @@ export default function ShopPage() {
                   {/* Mobile Filter Toggle */}
                   <button
                     onClick={() => setIsFilterOpen(true)}
-                    className="lg:hidden h-12 px-4 bg-gray-50 dark:bg-noir-800 border border-gray-200 dark:border-line-strong rounded-2xl flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-fg-secondary shadow-none cursor-pointer"
+                    className="lg:hidden h-12 px-4 bg-gray-50 dark:bg-noir-800 border border-gray-200 
+                    dark:border-line-strong rounded-2xl flex items-center gap-2 text-sm font-medium text-slate-700 
+                    dark:text-fg-secondary shadow-none cursor-pointer"
                   >
                     <SlidersHorizontal className="w-4 h-4" />
                     <span>Filter</span>

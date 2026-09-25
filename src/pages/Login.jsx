@@ -45,7 +45,8 @@ const LoginPage = () => {
   }
 
   return (
-    <div className="h-screen overflow-hidden bg-white dark:bg-noir-900 flex flex-col justify-center items-center px-4 transition-colors duration-200 font-sans">
+    <div className="h-screen overflow-hidden bg-white dark:bg-noir-900 flex flex-col justify-center 
+    items-center px-4 transition-colors duration-200 font-sans">
 
       <motion.div
         initial={{ opacity: 0, y: -20 }}

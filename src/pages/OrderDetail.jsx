@@ -82,18 +82,23 @@ export default function OrderDetail() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="mb-12 flex flex-wrap items-center justify-between gap-4 border-b border-[#EAE1DB] pb-5 dark:border-line">
+          className="mb-12 flex flex-wrap items-center justify-between gap-4 border-b border-[#EAE1DB] pb-5 
+          dark:border-line">
           <div className="flex items-center gap-6">
             <button
               type="button"
               onClick={() => navigate("/orders")}
               aria-label="Back to orders"
-              className="flex h-12 w-12 items-center justify-center rounded-full border border-[#D8C2B6] bg-white text-[#5C4A3E] transition-all hover:bg-[#F5EFEA] hover:text-[#2D241E] active:scale-95 dark:border-line-strong dark:bg-noir-800 dark:text-fg-secondary dark:hover:bg-noir-750 dark:hover:border-line-hover dark:hover:text-fg"
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-[#D8C2B6] 
+              bg-white text-[#5C4A3E] transition-all hover:bg-[#F5EFEA] hover:text-[#2D241E] active:scale-95 
+              dark:border-line-strong dark:bg-noir-800 dark:text-fg-secondary dark:hover:bg-noir-750 
+              dark:hover:border-line-hover dark:hover:text-fg"
             >
               <ArrowLeft className="h-5 w-5" />
             </button>
             <div>
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium font-Instrument text-[#2D241E] dark:text-fg mb-2">Order Detail</h1>
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium font-Instrument text-[#2D241E] 
+              dark:text-fg mb-2">Order Detail</h1>
               <p className="text-xs font-medium text-[#8C7A6E] dark:text-fg-tertiary">
                 Order #{order._id?.slice(-8).toUpperCase()}
               </p>
@@ -102,7 +107,8 @@ export default function OrderDetail() {
 
           <div className="flex items-center gap-3">
             <span
-              className={`rounded-full border px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider ${STATUS_BADGE_STYLES[order.status] ?? STATUS_BADGE_STYLES.pending
+              className={`rounded-full border px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider 
+                ${STATUS_BADGE_STYLES[order.status] ?? STATUS_BADGE_STYLES.pending
                 }`}
             >
               {order.status}
@@ -112,7 +118,9 @@ export default function OrderDetail() {
               <button
                 type="button"
                 onClick={() => setIsModalOpen(true)}
-                className="flex items-center gap-1.5 rounded-xl border border-[#C5A893] bg-[#FAF5F0] px-4 py-2 text-xs font-semibold text-[#6F4723] transition-all hover:bg-[#F2E8DF] active:scale-[0.98] dark:border-copper-800 dark:bg-copper-900 dark:text-copper-300 dark:hover:bg-copper-800"
+                className="flex items-center gap-1.5 rounded-xl border border-[#C5A893] bg-[#FAF5F0] px-4 
+                py-2 text-xs font-semibold text-[#6F4723] transition-all hover:bg-[#F2E8DF] active:scale-[0.98] 
+                dark:border-copper-800 dark:bg-copper-900 dark:text-copper-300 dark:hover:bg-copper-800"
               >
                 <XCircle className="h-4 w-4" />
                 Cancel Order
