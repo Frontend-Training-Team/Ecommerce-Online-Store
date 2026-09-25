@@ -286,7 +286,7 @@ export default function Navbar() {
                 }`}
             >
               <User className={`w-4 h-4 ${isHomePage ? "text-white" : "text-[#5B5B5B] dark:text-fg-secondary"}`} strokeWidth={1.5} />
-              <span>{user?.username ? user.username.split(" ")[0] : "Username"}</span>
+              <span>{user?.username ? user.username.split(" ")[0] : "Login"}</span>
             </Link>
 
             {/* Mobile Menu Hamburger Button */}

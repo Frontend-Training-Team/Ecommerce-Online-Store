@@ -7,6 +7,7 @@ import OrderSummary from '../components/ui/checkout/OrderSummary';
 import { postPlaceOrder } from '../api/orders.api';
 import { useCart } from '../context/CartContext';
 import { ArrowLeft } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function Checkout() {
   const navigate = useNavigate();
@@ -86,13 +87,22 @@ export default function Checkout() {
   return (
     <div className="mt-16 xl:mt-17 min-h-screen py-10 px-4 sm:px-6 lg:px-8 font-sans dark:bg-noir-900">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-8 sm:mb-5 flex flex-wrap items-center justify-between gap-4 border-b border-[#EAE1DB] pb-5 dark:border-line">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="mb-8 sm:mb-5 flex flex-wrap items-center justify-between gap-4 border-b border-[#EAE1DB] pb-5 
+          dark:border-line">
           <div className="flex items-center gap-3.5">
             <button
               type="button"
               onClick={() => navigate("/cart")}
               aria-label="Go back"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-[#D8C2B6] bg-white text-[#5C4A3E] transition-all hover:bg-[#F5EFEA] hover:text-[#2D241E] active:scale-95 dark:border-line-strong dark:bg-noir-800 dark:text-fg-secondary dark:hover:bg-noir-750 dark:hover:border-line-hover dark:hover:text-fg"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-[#D8C2B6] bg-white 
+              text-[#5C4A3E] transition-all hover:bg-[#F5EFEA] hover:text-[#2D241E] active:scale-95 
+              dark:border-line-strong dark:bg-noir-800 dark:text-fg-secondary dark:hover:bg-noir-750 
+              dark:hover:border-line-hover dark:hover:text-fg"
             >
               <ArrowLeft className="h-5 w-5" />
             </button>
@@ -106,18 +116,28 @@ export default function Checkout() {
               </p>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          <div className="lg:col-span-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
+            className="lg:col-span-8">
             <CheckoutForm
               register={register}
               errors={errors}
               handleSubmit={handleSubmit}
               onSubmit={handleOrderSubmit}
             />
-          </div>
-          <div className="lg:col-span-4">
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+            className="lg:col-span-4">
             <OrderSummary
               cartItems={cartItems}
               subtotal={subtotal}
@@ -129,7 +149,7 @@ export default function Checkout() {
               isSubmitting={isSubmitting}
               onPlaceOrder={handleSubmit(handleOrderSubmit)}
             />
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

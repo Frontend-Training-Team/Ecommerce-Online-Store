@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import heroVideo from "../../../assets/videos/hero.mp4";
 import { Sparkles } from "lucide-react";
+import { motion } from "framer-motion";
 
 function HeroSection({ onViewCategories }) {
   return (
@@ -21,21 +22,37 @@ function HeroSection({ onViewCategories }) {
 
       <div className="relative z-10 mx-auto flex min-h-[85vh] sm:min-h-[90vh] lg:min-h-screen max-w-7xl items-center justify-center px-4 sm:px-6 lg:px-8 pt-24 pb-14 sm:pt-32 sm:pb-20 lg:py-24 text-center">
         <div className="max-w-4xl w-full">
-          <div className="flex mx-auto mb-4 sm:mb-6 w-fit rounded-full items-center bg-white/10 backdrop-blur-xs border border-white/20 px-3.5 py-1.5 sm:px-5 sm:py-2 shadow-xs">
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="flex mx-auto mb-4 sm:mb-6 w-fit rounded-full items-center bg-white/10 backdrop-blur-xs border border-white/20 px-3.5 py-1.5 sm:px-5 sm:py-2 shadow-xs">
             <Sparkles className="text-white h-3.5 w-3.5 sm:h-4 sm:w-4 mr-2 shrink-0"/>
             <span className="text-white text-xs sm:text-sm font-Inter tracking-wide">
               Premium Shopping Experience
             </span>
-          </div>
+          </motion.div>
 
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-Inter text-white uppercase leading-tight">
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            className="text-5xl md:text-6xl lg:text-7xl font-Inter text-white uppercase leading-tight">
             shop the future, <br></br> delivered today
-          </h1>
+          </motion.h1>
 
-          <p className="mx-auto mt-4 sm:mt-5 text-[16px] sm:text-base font-Inter sm:leading-6 text-white/90 drop-shadow-xs px-2 sm:px-0">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+            className="mx-auto mt-4 sm:mt-5 text-[16px] sm:text-base font-Inter sm:leading-6 text-white/90 drop-shadow-xs px-2 sm:px-0">
             Discover premium products at unbeatable prices. Fast delivery, easy returns, and exceptional quality.
-          </p>
-          <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto px-4 sm:px-0">
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+            className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto px-4 sm:px-0">
             <Link
               to="/shop"
               className="w-full sm:w-auto min-w-36 text-center rounded-3xl bg-white dark:bg-fg px-7 py-3 sm:py-2.5 text-sm font-semibold text-black dark:text-noir-900 transition hover:bg-[#70482F] dark:hover:bg-copper-400 hover:text-white dark:hover:text-fg-on-accent uppercase active:scale-95 shadow-md"
@@ -50,7 +67,7 @@ function HeroSection({ onViewCategories }) {
             >
               View Categories
             </button>
-          </div>
+          </motion.div>
 
         </div>
       </div>

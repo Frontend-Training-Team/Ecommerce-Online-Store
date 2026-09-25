@@ -10,6 +10,7 @@ import OrderProgress from "../components/ui/order/OrderProgress";
 import { PaymentCard, ShippingCard } from "../components/ui/order/OrderInfo";
 import OrderItems from "../components/ui/order/OrderItems";
 import OrderSkeleton from "../components/ui/skeleton/OrderSkeleton";
+import { motion } from "framer-motion";
 
 const STATUS_BADGE_STYLES = {
   pending: "bg-[#EFE6DC] text-[#7B542B] border-[#DFC9BA] dark:bg-state-warning/10 dark:text-state-warning dark:border-state-warning/25",
@@ -76,18 +77,28 @@ export default function OrderDetail() {
   return (
     <div className="mt-16 xl:mt-17 min-h-screen w-full px-4 py-15 dark:bg-noir-900 md:px-8 lg:px-12">
       <div className="mx-auto flex w-full max-w-6xl flex-col">
-        <div className="mb-12 flex flex-wrap items-center justify-between gap-4 border-b border-[#EAE1DB] pb-5 dark:border-line">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="mb-12 flex flex-wrap items-center justify-between gap-4 border-b border-[#EAE1DB] pb-5 
+          dark:border-line">
           <div className="flex items-center gap-6">
             <button
               type="button"
               onClick={() => navigate("/orders")}
               aria-label="Back to orders"
-              className="flex h-12 w-12 items-center justify-center rounded-full border border-[#D8C2B6] bg-white text-[#5C4A3E] transition-all hover:bg-[#F5EFEA] hover:text-[#2D241E] active:scale-95 dark:border-line-strong dark:bg-noir-800 dark:text-fg-secondary dark:hover:bg-noir-750 dark:hover:border-line-hover dark:hover:text-fg"
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-[#D8C2B6] 
+              bg-white text-[#5C4A3E] transition-all hover:bg-[#F5EFEA] hover:text-[#2D241E] active:scale-95 
+              dark:border-line-strong dark:bg-noir-800 dark:text-fg-secondary dark:hover:bg-noir-750 
+              dark:hover:border-line-hover dark:hover:text-fg"
             >
               <ArrowLeft className="h-5 w-5" />
             </button>
             <div>
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium font-Instrument text-[#2D241E] dark:text-fg mb-2">Order Detail</h1>
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium font-Instrument text-[#2D241E] 
+              dark:text-fg mb-2">Order Detail</h1>
               <p className="text-xs font-medium text-[#8C7A6E] dark:text-fg-tertiary">
                 Order #{order._id?.slice(-8).toUpperCase()}
               </p>
@@ -96,7 +107,8 @@ export default function OrderDetail() {
 
           <div className="flex items-center gap-3">
             <span
-              className={`rounded-full border px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider ${STATUS_BADGE_STYLES[order.status] ?? STATUS_BADGE_STYLES.pending
+              className={`rounded-full border px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider 
+                ${STATUS_BADGE_STYLES[order.status] ?? STATUS_BADGE_STYLES.pending
                 }`}
             >
               {order.status}
@@ -106,27 +118,39 @@ export default function OrderDetail() {
               <button
                 type="button"
                 onClick={() => setIsModalOpen(true)}
-                className="flex items-center gap-1.5 rounded-xl border border-[#C5A893] bg-[#FAF5F0] px-4 py-2 text-xs font-semibold text-[#6F4723] transition-all hover:bg-[#F2E8DF] active:scale-[0.98] dark:border-copper-800 dark:bg-copper-900 dark:text-copper-300 dark:hover:bg-copper-800"
+                className="flex items-center gap-1.5 rounded-xl border border-[#C5A893] bg-[#FAF5F0] px-4 
+                py-2 text-xs font-semibold text-[#6F4723] transition-all hover:bg-[#F2E8DF] active:scale-[0.98] 
+                dark:border-copper-800 dark:bg-copper-900 dark:text-copper-300 dark:hover:bg-copper-800"
               >
                 <XCircle className="h-4 w-4" />
                 Cancel Order
               </button>
             )}
           </div>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 ">
           {!isCancelled && (
-            <div className="lg:col-span-5">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
+              className="lg:col-span-5">
               <OrderProgress order={order} />
-            </div>
+            </motion.div>
           )}
 
-          <div className={`flex flex-col gap-4 ${isCancelled ? "lg:col-span-12" : "lg:col-span-7"}`}>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+            className={`flex flex-col gap-4 ${isCancelled ? "lg:col-span-12" : "lg:col-span-7"}`}>
             <OrderItems items={order.items} />
             <ShippingCard shippingAddress={order.shippingAddress} />
             <PaymentCard order={order} />
-          </div>
+          </motion.div>
         </div>
       </div>
 

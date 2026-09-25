@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import category1 from "../../../assets/images/categories/category1.png";
 import category2 from "../../../assets/images/categories/category2.jpg";
 import category3 from "../../../assets/images/categories/category3.png";
@@ -13,7 +14,12 @@ function ShopByCategory() {
   return (
     <section className="bg-white dark:bg-noir-900 py-10">
       <div className="mx-auto max-w-fit">
-        <div className="mb-10 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="mb-10 text-center">
           <h2 className="text-4xl font-Instrument text-[#9c4f2c] dark:text-fg">
             Shop by Category
           </h2>
@@ -21,12 +27,18 @@ function ShopByCategory() {
           <p className="mt-2 text-gray-500 dark:text-fg-tertiary">
             Browse our wide range of categories
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-4 gap-5">
           {categoryList.map((category, index) => (
-            <Link
+            <motion.div
               key={`${category}-${index}`}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+            >
+            <Link
               to={`/shop?category=${categoryList[index]}`}
               className="block w-87.5 transition-transform duration-300 hover:scale-105 overflow-hidden"
             >
@@ -41,6 +53,7 @@ function ShopByCategory() {
                 {category}
               </p>
             </Link>
+            </motion.div>
           ))}
         </div>
       </div>

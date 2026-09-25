@@ -2,6 +2,7 @@ import { ProductGridSkeleton } from '../skeleton/ProductSkeleton';
 import ProductCard from './ProductCard';
 import Pagination from './Pagination';
 import { Search } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function ProductGrid({
   products = [],
@@ -37,11 +38,18 @@ export default function ProductGrid({
     <div className="w-full space-y-8">
       <div className={`grid grid-cols-1 ${columns} gap-4 justify-items-center`}>
         {products.map((product, index) => (
-          <ProductCard
+          <motion.div
             key={product._id || product.id || index}
-            product={product}
-            onAddToCart={onAddToCart ? () => onAddToCart(product) : onAddToCartSuccess}
-          />
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: (index % 4) * 0.1, ease: "easeOut" }}
+          >
+            <ProductCard
+              product={product}
+              onAddToCart={onAddToCart ? () => onAddToCart(product) : onAddToCartSuccess}
+            />
+          </motion.div>
         ))}
       </div>
 
@@ -80,4 +88,4 @@ export default function ProductGrid({
       )}
     </div>
   );
-}
+}

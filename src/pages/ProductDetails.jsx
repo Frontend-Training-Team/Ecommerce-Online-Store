@@ -13,6 +13,7 @@ import SimilarProducts from "../components/ui/productDetails/SimilarProducts";
 import ProductDetailsSkeleton from "../components/ui/skeleton/ProductDetailsSkeleton";
 import { ArrowLeft, AlertCircle } from "lucide-react";
 import toast from "react-hot-toast";
+import { motion } from "framer-motion";
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -125,8 +126,10 @@ export default function ProductDetails() {
 
   if (error || !product) {
     return (
-      <div className="mt-16 xl:mt-17 w-full bg-white dark:bg-noir-900 min-h-[60vh] flex flex-col items-center justify-center p-6 text-center">
-        <div className="w-16 h-16 rounded-full bg-[#FAF5F0] dark:bg-copper-900 text-[#7E4A2D] dark:text-copper-300 flex items-center justify-center mb-4">
+      <div className="mt-16 xl:mt-17 w-full bg-white dark:bg-noir-900 min-h-[60vh] flex flex-col items-center 
+      justify-center p-6 text-center">
+        <div className="w-16 h-16 rounded-full bg-[#FAF5F0] dark:bg-copper-900 text-[#7E4A2D] dark:text-copper-300 
+        flex items-center justify-center mb-4">
           <AlertCircle className="w-8 h-8" />
         </div>
         <h2 className="font-Serif text-2xl sm:text-3xl text-[#1E1915] dark:text-fg font-medium mb-2">
@@ -137,7 +140,8 @@ export default function ProductDetails() {
         </p>
         <Link
           to="/shop"
-          className="h-11 px-7 rounded-xl bg-[#7E4A2D] dark:bg-copper-500 hover:bg-[#683C23] dark:hover:bg-copper-400 text-white dark:text-fg-on-accent text-sm font-medium
+          className="h-11 px-7 rounded-xl bg-[#7E4A2D] dark:bg-copper-500 hover:bg-[#683C23] dark:hover:bg-copper-400 
+          text-white dark:text-fg-on-accent text-sm font-medium
           flex items-center gap-2 transition-colors cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4" />
@@ -151,13 +155,30 @@ export default function ProductDetails() {
     <div className="mt-16 xl:mt-17 w-full bg-white dark:bg-noir-900 min-h-screen py-8 sm:py-12">
       <div className="w-full max-w-310 mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-14">
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-10 lg:gap-x-14 gap-y-4 items-stretch">
-          <ProductGallery
-            images={product.images || []}
-            productName={product.name}
-          />
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-x-10 lg:gap-x-14 gap-y-4 items-stretch">
 
-          <div className="order-3 lg:order-0 lg:col-start-2 lg:row-start-1 w-full h-full flex flex-col justify-between">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x : 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}>
+            <ProductGallery
+              images={product.images || []}
+              productName={product.name}
+            />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+            className="order-3 lg:order-0 lg:col-start-2 lg:row-start-1 w-full h-full flex flex-col justify-between">
             <ProductInfo
               product={product}
               onScrollToReviews={handleScrollToReviews}
@@ -165,20 +186,27 @@ export default function ProductDetails() {
               onToggleWishlist={() => toggleWishlist(product._id)}
               wishlistLoading={isItemLoading(product?._id) || actionLoading}
             />
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
-        <ProductTabs
-          description={product.description}
-          reviews={reviews}
-          averageRating={averageRating}
-          numReviews={numReviews}
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-          onAddReview={handleAddReview}
-          submittingReview={submittingReview}
-          isLoggedIn={Boolean(user)}
-        />
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          <ProductTabs
+            description={product.description}
+            reviews={reviews}
+            averageRating={averageRating}
+            numReviews={numReviews}
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+            onAddReview={handleAddReview}
+            submittingReview={submittingReview}
+            isLoggedIn={Boolean(user)}
+          />
+        </motion.div>
 
         <SimilarProducts
           products={similarProducts}

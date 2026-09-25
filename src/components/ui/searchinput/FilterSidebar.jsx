@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ChevronDown, X, ArrowUp, ArrowDown, Sparkles, Star } from 'lucide-react';
+import { getAllProducts } from '../../../api/products.api';
 
 export default function ProductFilterSidebar({
   selectedCategory,
@@ -28,11 +29,10 @@ export default function ProductFilterSidebar({
     const fetchCategories = async () => {
       setIsLoadingCategories(true);
       try {
-        const response = await fetch('https://e-commerce-api-3wara.vercel.app/products?limit=100');
-        const data = await response.json();
+        const response = await getAllProducts({limit:100});
+        const data = response.data;
+
         const fetchedProducts = data.products || (Array.isArray(data) ? data : []);
-
-
 
         const extractedCategories = fetchedProducts
           .map((p) => (p.category || p.categoryName || '').trim())
@@ -228,4 +228,4 @@ export default function ProductFilterSidebar({
       </div>
     </>
   );
-}
+}

@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { postRegisterVerifyOtp, postRegisterSendOtp } from '../api/auth.api';
 import OtpInput from '../components/ui/auth/OtpInput';
+import { motion } from 'framer-motion';
 
 export default function VerifyOtpDetails() {
   const navigate = useNavigate();
@@ -64,7 +65,12 @@ export default function VerifyOtpDetails() {
   };
 
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
       <OtpInput
         otp={otp}
         setOtp={setOtp}
@@ -77,6 +83,6 @@ export default function VerifyOtpDetails() {
         onResend={handleResend}
         isResending={isResending}
       />
-    </>
+    </motion.div>
   );
 }
