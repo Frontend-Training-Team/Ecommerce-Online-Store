@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import ProductGrid from "../productDetails/ProductGrid";
 
 function FeaturedProducts({ products = [], loading = false }) {
@@ -7,7 +8,12 @@ function FeaturedProducts({ products = [], loading = false }) {
   return (
     <section className="bg-white py-16 dark:bg-noir-900">
       <div className="mx-auto max-w-fit px-4 sm:px-8">
-        <div className="mb-8 flex items-end justify-between gap-4">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="mb-8 flex items-end justify-between gap-4">
           <div>
             <h2 className="text-4xl font-Instrument text-[#8E4726] dark:text-fg">
               Featured Products
@@ -24,7 +30,7 @@ function FeaturedProducts({ products = [], loading = false }) {
           >
             View All
           </Link>
-        </div>
+        </motion.div>
 
 
         <div className="w-full">

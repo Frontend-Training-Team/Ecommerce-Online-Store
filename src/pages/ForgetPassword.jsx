@@ -4,6 +4,7 @@ import { Mail, ChevronRight } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import { postForgotPasswordSendOtp } from '../api/auth.api'
+import { motion } from 'framer-motion'
 
 const ForgotPasswordPage = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -42,17 +43,27 @@ const ForgotPasswordPage = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-noir-900 flex flex-col justify-center items-center px-4 py-12 transition-colors duration-200 font-sans">
 
-      <div className="text-center mb-8">
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="text-center mb-8">
         <h1 className="text-3xl font-bold text-[#1F2937] dark:text-fg mb-2">
           Forgot Password?
         </h1>
         <p className="text-sm text-[#828282] dark:text-fg-tertiary">
           Please enter your email to receive a reset code
         </p>
-      </div>
+      </motion.div>
 
 
-      <div className="w-full max-w-md">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
+        className="w-full max-w-md">
         <form onSubmit={handleSubmit(handleForgotPasswordSubmit)} className="space-y-5">
 
           {/* Email Field */}
@@ -104,7 +115,7 @@ const ForgotPasswordPage = () => {
             Login
           </Link>
         </div>
-      </div>
+      </motion.div>
     </div>
   )
 }

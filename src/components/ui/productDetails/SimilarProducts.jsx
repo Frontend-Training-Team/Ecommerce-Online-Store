@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import ProductCard from "./ProductCard";
+import { motion } from "framer-motion";
 
 export default function SimilarProducts({
   products = [],
@@ -22,7 +23,12 @@ export default function SimilarProducts({
   };
 
   return (
-    <section className="w-full flex flex-col gap-6 pt-10 border-t border-[#EDE8E3] dark:border-line">
+    <motion.section
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="w-full flex flex-col gap-6 pt-10 border-t border-[#EDE8E3] dark:border-line">
       <div className="flex items-center justify-between">
         <h2 className="font-Serif text-2xl sm:text-3xl text-[#1E1915] dark:text-fg font-normal tracking-tight">
           Similar items you might also like
@@ -68,6 +74,6 @@ export default function SimilarProducts({
           );
         })}
       </div>
-    </section>
+    </motion.section>
   );
 }

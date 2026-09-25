@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import { postLogin } from '../api/auth.api'
 import { useAuth } from '../context/AuthContext'
+import { motion } from 'framer-motion'
 
 const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -46,17 +47,27 @@ const LoginPage = () => {
   return (
     <div className="h-screen overflow-hidden bg-white dark:bg-noir-900 flex flex-col justify-center items-center px-4 transition-colors duration-200 font-sans">
 
-      <div className="text-center mb-8">
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="text-center mb-8">
         <h1 className="text-4xl font-bold text-[#1F2937] dark:text-fg mb-2">
-          Login
+          Welcome Back
         </h1>
         <p className="text-sm text-[#828282] dark:text-fg-tertiary">
-          Please fill your information below
+          Sign in to your account
         </p>
-      </div>
+      </motion.div>
 
 
-      <div className="w-full max-w-md">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
+        className="w-full max-w-md">
         <form onSubmit={handleSubmit(handleLoginSubmit)} className="space-y-5">
 
           {/* Email Field */}
@@ -143,10 +154,10 @@ const LoginPage = () => {
             Sign up
           </Link>
         </div>
-      </div>
+      </motion.div>
 
     </div>
   )
 }
 
-export default LoginPage
+export default LoginPage

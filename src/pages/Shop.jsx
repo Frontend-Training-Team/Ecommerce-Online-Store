@@ -5,6 +5,7 @@ import { useDebounce } from '../hooks/useDebounce'
 import { Search, X, SlidersHorizontal } from 'lucide-react'
 import { getAllProducts } from '../api/products.api'
 import ProductGrid from '../components/ui/productDetails/ProductGrid'
+import { motion } from 'framer-motion'
 
 export default function ShopPage() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -236,7 +237,12 @@ export default function ShopPage() {
   return (
     <div className="mt-16 xl:mt-17 min-h-screen bg-white dark:bg-noir-900 transition-colors duration-200 relative">
       <main className="w-full max-w-7xl 2xl:max-w-370 mx-auto px-4 mt-3 sm:px-6 lg:px-8 py-8">
-        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#EAE1DB] pb-5 dark:border-line">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="flex flex-wrap items-center justify-between gap-4 border-b border-[#EAE1DB] pb-5 dark:border-line">
           <div>
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium font-Instrument text-[#2D241E] dark:text-fg">
               Shop
@@ -251,10 +257,15 @@ export default function ShopPage() {
               {categoryFromUrl === 'All' ? 'All Categories' : categoryFromUrl}
             </span>
           </div>
-        </div>
+        </motion.div>
 
         <div className="w-full grid grid-cols-1 lg:grid-cols-[280px_1fr] xl:grid-cols-[300px_1fr] gap-8 items-start">
-          <aside className="w-full h-full border-r lg:border-gray-200 dark:border-line lg:pr-8">
+          <motion.aside
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
+            className="w-full h-full border-r lg:border-gray-200 dark:border-line lg:pr-8">
             <div>
               <ProductFilterSidebar
                 selectedCategory={categoryFromUrl}
@@ -270,12 +281,17 @@ export default function ShopPage() {
                 onClose={() => setIsFilterOpen(false)}
               />
             </div>
-          </aside>
+          </motion.aside>
 
           <section id="shop-products-top" className="w-full min-w-0 flex flex-col scroll-mt-24">
             <div className="w-full">
               {/* Search Bar Container */}
-              <div className="w-full mt-5 mb-6 sm:mb-8">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
+                className="w-full mt-5 mb-6 sm:mb-8">
                 <div className="flex items-center gap-3 w-full">
                   <div className="relative flex-1 w-full flex items-center">
                     <span className="absolute left-4 z-10 pointer-events-none text-slate-400 dark:text-fg-tertiary flex items-center justify-center">
@@ -315,7 +331,7 @@ export default function ShopPage() {
                     <span>Filter</span>
                   </button>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Search Results Heading & Breadcrumbs */}
               {activeSearch && (

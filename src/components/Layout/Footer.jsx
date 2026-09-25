@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import logoImg from "../../assets/images/4.png";
+import { motion } from "framer-motion";
 
 export default function Footer() {
     return (
@@ -19,7 +20,12 @@ export default function Footer() {
 
             <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col relative z-10">
 
-                <div className="w-full bg-[#7E4A2D] dark:bg-copper-900 dark:ring-1 dark:ring-copper-800 rounded-xl sm:rounded-2xl p-6 sm:p-8 md:px-12 md:py-11 flex flex-col 
+                <motion.div
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.7, ease: "easeOut" }}
+                    className="w-full bg-[#7E4A2D] dark:bg-copper-900 dark:ring-1 dark:ring-copper-800 rounded-xl sm:rounded-2xl p-6 sm:p-8 md:px-12 md:py-11 flex flex-col 
                 md:flex-row items-center justify-between gap-6 md:gap-8 shadow-[0_12px_28px_rgba(0,0,0,0.12)] dark:shadow-none">
 
                     <div className="w-full md:w-1/2 text-center md:text-left">
@@ -51,7 +57,7 @@ export default function Footer() {
                         </form>
                     </div>
 
-                </div>
+                </motion.div>
 
                 <div className="w-full border-t border-[#D0D0D0] dark:border-line mt-8 mb-6"></div>
 

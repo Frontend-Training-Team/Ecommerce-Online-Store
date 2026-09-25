@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { postForgotPasswordVerifyOtp, postForgotPasswordSendOtp } from '../api/auth.api';
 import ResetPasswordCard from '../components/ui/auth/ResetPasswordCard';
+import { motion } from 'framer-motion';
 
 export default function ForgotPasswordVerifyOtp() {
   const navigate = useNavigate();
@@ -84,7 +85,12 @@ export default function ForgotPasswordVerifyOtp() {
   };
 
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
       <ResetPasswordCard
         otpArray={otpArray}
         setOtpArray={setOtpArray}
@@ -98,6 +104,6 @@ export default function ForgotPasswordVerifyOtp() {
         onResend={handleResend}
         isResending={isResending}
       />
-    </>
+    </motion.div>
   );
 }

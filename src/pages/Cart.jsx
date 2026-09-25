@@ -8,6 +8,7 @@ import OrderSummaryCard from "../components/ui/cart/OrderSummaryCard";
 import EmptyCart from "../components/ui/cart/EmptyCart";
 import ConfirmationModal from "../components/ui/cart/ConfirmationModal";
 import CartSkeleton from "../components/ui/skeleton/CartSkeleton";
+import { motion } from "framer-motion";
 
 export default function Cart() {
   const navigate = useNavigate();
@@ -49,8 +50,13 @@ export default function Cart() {
 
   return (
     <div className="mt-16 xl:mt-17 flex flex-col min-h-screen w-full px-4 py-10 dark:bg-noir-900 md:px-8 lg:px-12">
-      <div className="mx-auto h-screen flex w-full max-w-6xl flex-col">
-        <div className="mb-8 flex flex-wrap items-center justify-between gap-4 border-b border-[#EAE1DB] pb-5 dark:border-line">
+      <div className="mx-auto h-fit flex w-full max-w-6xl flex-col">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="mb-8 flex flex-wrap items-center justify-between gap-4 border-b border-[#EAE1DB] pb-5 dark:border-line">
           <div className="flex items-center gap-3.5">
             <button
               type="button"
@@ -74,16 +80,26 @@ export default function Cart() {
           <span className="ml-auto rounded-full border border-[#DFC9BA] bg-[#F3E8DF] px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-[#7B542B] shadow-2xs dark:border-line-strong dark:bg-noir-700 dark:text-copper-400 sm:text-sm">
             {cartCount} {cartCount === 1 ? "Item" : "Items"}
           </span>
-        </div>
+        </motion.div>
 
 
         {isCartEmpty ? (
-          <div className="flex">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
+            className="flex">
             <EmptyCart />
-          </div>
+          </motion.div>
         ) : (
           <div className="grid grid-cols-1 h-[65%] gap-6 lg:grid-cols-12 lg:items-start">
-            <div className="flex h-full flex-col gap-4 lg:col-span-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
+              className="flex h-full flex-col gap-4 lg:col-span-8">
               <div className="flex h-full flex-col rounded-2xl border border-[#f0eae1] bg-white shadow-sm dark:border-line dark:bg-noir-800 dark:shadow-none">
                 <ul className="cart-scroll flex max-h-[60vh] flex-1 flex-col divide-y divide-[#f5efe6] overflow-y-auto dark:divide-line-subtle">
                   {cartItems.map((item) => (
@@ -111,16 +127,21 @@ export default function Cart() {
                   </button>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="lg:col-span-4">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+              className="lg:col-span-4">
               <OrderSummaryCard
                 cart={cart}
                 onApplyCoupon={applyCoupon}
                 onRemoveCoupon={removeCoupon}
                 onEmptyCart={() => setIsModalOpen(true)}
               />
-            </div>
+            </motion.div>
           </div>
         )}
       </div>

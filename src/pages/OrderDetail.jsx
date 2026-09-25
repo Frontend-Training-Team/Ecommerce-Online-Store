@@ -10,6 +10,7 @@ import OrderProgress from "../components/ui/order/OrderProgress";
 import { PaymentCard, ShippingCard } from "../components/ui/order/OrderInfo";
 import OrderItems from "../components/ui/order/OrderItems";
 import OrderSkeleton from "../components/ui/skeleton/OrderSkeleton";
+import { motion } from "framer-motion";
 
 const STATUS_BADGE_STYLES = {
   pending: "bg-[#EFE6DC] text-[#7B542B] border-[#DFC9BA] dark:bg-state-warning/10 dark:text-state-warning dark:border-state-warning/25",
@@ -76,7 +77,12 @@ export default function OrderDetail() {
   return (
     <div className="mt-16 xl:mt-17 min-h-screen w-full px-4 py-15 dark:bg-noir-900 md:px-8 lg:px-12">
       <div className="mx-auto flex w-full max-w-6xl flex-col">
-        <div className="mb-12 flex flex-wrap items-center justify-between gap-4 border-b border-[#EAE1DB] pb-5 dark:border-line">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="mb-12 flex flex-wrap items-center justify-between gap-4 border-b border-[#EAE1DB] pb-5 dark:border-line">
           <div className="flex items-center gap-6">
             <button
               type="button"
@@ -113,20 +119,30 @@ export default function OrderDetail() {
               </button>
             )}
           </div>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 ">
           {!isCancelled && (
-            <div className="lg:col-span-5">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
+              className="lg:col-span-5">
               <OrderProgress order={order} />
-            </div>
+            </motion.div>
           )}
 
-          <div className={`flex flex-col gap-4 ${isCancelled ? "lg:col-span-12" : "lg:col-span-7"}`}>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+            className={`flex flex-col gap-4 ${isCancelled ? "lg:col-span-12" : "lg:col-span-7"}`}>
             <OrderItems items={order.items} />
             <ShippingCard shippingAddress={order.shippingAddress} />
             <PaymentCard order={order} />
-          </div>
+          </motion.div>
         </div>
       </div>
 
