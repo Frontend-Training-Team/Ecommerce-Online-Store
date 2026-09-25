@@ -20,7 +20,7 @@ export default function ShopPage() {
   const [searchTerm, setSearchTerm] = useState(searchFromUrl)
   const [minPrice, setMinPrice] = useState('')
   const [maxPrice, setMaxPrice] = useState('')
-  const [sortBy, setSortBy] = useState('default')
+  const [sortBy, setSortBy] = useState('Newest')
   const [isFilterOpen, setIsFilterOpen] = useState(false)
 
   const [allProducts, setAllProducts] = useState([])
