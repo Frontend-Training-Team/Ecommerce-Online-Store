@@ -109,7 +109,7 @@ export default function WishlistCard({
           </span>
         </div>
 
-        <div className="absolute bottom-0 right-0 grid h-fit w-fit grid-cols-2 gap-2 z-10">
+        <div className="absolute bottom-0 right-0 flex items-center gap-2 z-10">
           <button
             type="button"
             onClick={handleRemove}
@@ -163,4 +163,4 @@ export default function WishlistCard({
       </div>
     </div>
   );
-}
+}
