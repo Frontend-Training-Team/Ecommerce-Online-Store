@@ -162,19 +162,15 @@ export default function ProductDetails() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="grid grid-cols-1 lg:grid-cols-2 gap-x-10 lg:gap-x-14 gap-y-4 items-stretch">
 
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x : 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}>
-            <ProductGallery
-              images={product.images || []}
-              productName={product.name}
-            />
-          </motion.div>
+
+          <ProductGallery
+            images={product.images || []}
+            productName={product.name}
+          />
+
 
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}

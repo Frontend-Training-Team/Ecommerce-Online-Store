@@ -119,7 +119,7 @@ export default function ProductCard({
           </span>
         </div>
 
-        <div className="absolute bottom-0 right-0 grid h-fit w-fit grid-cols-2 gap-2 z-30">
+        <div className="absolute bottom-0 right-0 flex items-center gap-2 z-30">
           <button
             type="button"
             onClick={handleWishlistClick}
@@ -179,4 +179,4 @@ export default function ProductCard({
       </div>
     </div>
   );
-}
+}

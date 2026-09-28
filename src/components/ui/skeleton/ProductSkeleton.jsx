@@ -22,7 +22,7 @@ export function ProductCardSkeleton() {
           <div className="rounded bg-gray-400 dark:bg-noir-600" />
         </div>
 
-        <div className="absolute bottom-0 right-0 grid grid-cols-2 gap-2 z-10">
+        <div className="absolute bottom-0 right-0 flex items-center gap-2 z-10">
           <div className="h-13.5 w-13.5 bg-gray-300 dark:bg-noir-650 rounded-xl"></div>
           <div className="h-13.5 w-13.5 bg-gray-300 dark:bg-noir-650 rounded-xl"></div>
         </div>

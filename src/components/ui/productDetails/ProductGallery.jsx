@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, Image as ImageIcon } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function ProductGallery({
   images = [],
@@ -21,7 +22,12 @@ export default function ProductGallery({
 
   return (
     <>
-      <div className="order-1 lg:order-0 lg:col-start-1 lg:row-start-1 w-full h-full min-h-0 relative">
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="order-1 lg:order-0 lg:col-start-1 lg:row-start-1 w-full h-full min-h-0 relative">
         <div className="relative lg:absolute lg:inset-0 w-full aspect-square lg:aspect-auto bg-[#F7F5F2] dark:bg-noir-800 rounded-3xl
         overflow-hidden border border-[#EDE8E3] dark:border-line flex items-center justify-center group">
           {activeImage ? (
@@ -40,10 +46,15 @@ export default function ProductGallery({
             </div>
           )}
         </div>
-      </div>
+      </motion.div>
 
       {normalizedImages.length > 1 && (
-        <div className="order-2 lg:order-0 lg:col-start-1 lg:row-start-2 relative flex items-center justify-center gap-3 pt-1">
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="order-2 lg:order-0 lg:col-start-1 lg:row-start-2 relative flex items-center justify-center gap-3 pt-1">
           <button
             type="button"
             onClick={handlePrev}
@@ -54,7 +65,7 @@ export default function ProductGallery({
             <ChevronLeft className="w-4 h-4" />
           </button>
 
-          <div className="flex items-center gap-3 overflow-x-auto py-1 scrollbar-none max-w-106.25">
+          <div className="flex items-center gap-3 overflow-x-auto py-1 px-1 scrollbar-none max-w-106.25">
             {normalizedImages.map((imgUrl, index) => {
               const isSelected = selectedIndex === index;
               return (
@@ -87,7 +98,7 @@ export default function ProductGallery({
           >
             <ChevronRight className="w-4 h-4" />
           </button>
-        </div>
+        </motion.div>
       )}
     </>
   );
