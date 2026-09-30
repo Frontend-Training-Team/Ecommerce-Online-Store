@@ -17,10 +17,6 @@ import { motion } from "framer-motion";
 import useSEO from "../hooks/useSEO";
 
 export default function ProductDetails() {
-  useSEO({
-    title: product?.name || product?.title || 'Product Details',
-    description: product?.description || 'View product details and buy now.'
-  })
 
   const { id } = useParams();
   const { user } = useAuth();
@@ -91,6 +87,11 @@ export default function ProductDetails() {
   useEffect(() => {
     loadProduct();
   }, [loadProduct]);
+
+  useSEO({
+    title: product?.name || product?.title || 'Product Details',
+    description: product?.description || 'View product details and buy now.'
+  })
 
   const handleAddReview = async ({ rating, comment }) => {
     if (!id) return;
