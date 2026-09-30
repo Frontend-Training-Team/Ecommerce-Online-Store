@@ -30,8 +30,7 @@ export default function ProductCard({
 
   const imageUrl =
     (Array.isArray(product.images) && (product.images[0]?.url || product.images[0])) ||
-    product.image ||
-    "";
+    product.image || "";
 
   const customPath =
     'path("M 12 0 L 318 0 A 12 12 0 0 1 330 12 L 330 258 A 12 12 0 0 1 318 270 L 217 270 A 12 12 0 0 0 205 282 L 205 318 A 12 12 0 0 1 193 330 L 12 330 A 12 12 0 0 1 0 318 L 0 12 A 12 12 0 0 1 12 0 Z")';
@@ -70,15 +69,15 @@ export default function ProductCard({
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           className="block h-82.5 w-82.5 relative"
         >
-          <div
-            className="relative h-82.5 w-82.5 transition-transform duration-300 group-hover:scale-[1.01] dark:brightness-[.92]"
-            style={{
-              clipPath: customPath,
-              backgroundImage: `url(${imageUrl})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          />
+
+          <div className="overflow-hidden" style={{ clipPath: customPath }}>
+            <img
+              src={imageUrl}
+              alt="Card preview"
+              className="relative h-82.5 w-82.5 object-cover object-center transition-transform duration-300 group-hover:scale-105 dark:brightness-[.92]"
+            />
+          </div>
+
 
           {isOutOfStock && (
             <div

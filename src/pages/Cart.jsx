@@ -70,9 +70,9 @@ export default function Cart() {
             </button>
 
             <div>
-              <h1 className="font-Instrument text-2xl sm:text-3xl lg:text-4xl tracking-tight text-[#2D241E] dark:text-fg">
+              <h2 className="font-Instrument text-2xl sm:text-3xl lg:text-4xl tracking-tight text-[#2D241E] dark:text-fg">
                 Shopping Cart
-              </h1>
+              </h2>
               <p className="mt-1 text-xs font-medium text-[#8C7A6E] dark:text-fg-tertiary sm:text-sm">
                 Review your selected items before proceeding to checkout
               </p>

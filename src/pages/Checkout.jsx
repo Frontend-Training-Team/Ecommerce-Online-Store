@@ -108,9 +108,9 @@ export default function Checkout() {
             </button>
 
             <div>
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium font-Instrument text-[#2D241E] dark:text-fg">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium font-Instrument text-[#2D241E] dark:text-fg">
                 Checkout
-              </h1>
+              </h2>
               <p className="text-xs sm:text-sm font-medium text-[#8C7A6E] dark:text-fg-tertiary mt-1">
                 Please enter your shipping and delivery details
               </p>

@@ -72,12 +72,12 @@ export default function ProfilePage() {
             <span className="text-[#8A4526] dark:text-copper-400 font-medium capitalize">{activeTab.replace("-", " ")}</span>
           </nav>
 
-          <h1 className="font-Serif text-3xl sm:text-4xl lg:text-[42px] font-medium text-[#211C18] dark:text-fg">
+          <h2 className="font-Serif text-3xl sm:text-4xl lg:text-[42px] font-medium text-[#211C18] dark:text-fg">
             {activeTab === "overview" && "My Profile"}
             {activeTab === "edit-profile" && "Edit Profile"}
             {activeTab === "addresses" && "Address Book"}
             {activeTab === "security" && "Change Password"}
-          </h1>
+          </h2>
           <p className="text-xs sm:text-sm text-[#6F655D] dark:text-fg-secondary">
             Manage your personal details, delivery addresses and account security.
           </p>

@@ -22,14 +22,14 @@ export default function OrderSuccess() {
       </motion.div>
 
       {/* Title & Subtitle */}
-      <motion.h1
+      <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
         className="text-2xl sm:text-3xl font-bold text-[#2d2421] dark:text-fg mb-2">
         Order Placed Successfully!
-      </motion.h1>
+      </motion.h2>
 
       <motion.p
         initial={{ opacity: 0, y: 20 }}

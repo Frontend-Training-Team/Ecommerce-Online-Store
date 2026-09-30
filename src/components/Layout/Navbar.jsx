@@ -95,7 +95,7 @@ export default function Navbar() {
           <Link to="/" className="flex items-center shrink-0">
             <img
               src={logoImg}
-              alt="LAMSA Home Furniture"
+              alt="LAMSA Store Logo"
               className="h-7 sm:h-8 md:h-9 lg:h-10 object-contain"
             />
           </Link>

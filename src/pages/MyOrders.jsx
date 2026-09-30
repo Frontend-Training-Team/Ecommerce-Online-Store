@@ -55,9 +55,9 @@ function MyOrdersPage() {
               className="mb-8 sm:mb-10 flex flex-wrap items-center justify-between gap-4 border-b border-[#EAE1DB] 
               pb-5 dark:border-line">
                 <div>
-                    <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium font-Instrument text-[#2D241E] dark:text-fg">
+                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium font-Instrument text-[#2D241E] dark:text-fg">
                         My Orders
-                    </h1>
+                    </h2>
                     <p className="text-xs sm:text-sm font-medium text-[#8C7A6E] dark:text-fg-tertiary mt-1">
                         Manage and track your recent orders
                     </p>

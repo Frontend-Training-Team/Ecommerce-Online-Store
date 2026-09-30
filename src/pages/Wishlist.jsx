@@ -49,16 +49,16 @@ function WishlistPage() {
         <div className="mt-16 xl:mt-17 min-h-screen w-full max-w-[1540px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
             {/* Header matching Order Detail styling */}
             <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="mb-8 sm:mb-10 flex flex-wrap items-center justify-between gap-4 border-b border-[#EAE1DB] pb-5 
+                initial={{ opacity: 0, y: -20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                className="mb-8 sm:mb-10 flex flex-wrap items-center justify-between gap-4 border-b border-[#EAE1DB] pb-5 
               dark:border-line">
                 <div>
-                    <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium font-Instrument text-[#2D241E] dark:text-fg">
+                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium font-Instrument text-[#2D241E] dark:text-fg">
                         My Wishlist
-                    </h1>
+                    </h2>
                     <p className="text-xs sm:text-sm font-medium text-[#8C7A6E] dark:text-fg-tertiary mt-1">
                         Your saved favorite items
                     </p>
@@ -77,11 +77,11 @@ function WishlistPage() {
                 <ProductGridSkeleton count={8} className="grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4" />
             ) : wishlistItems.length === 0 ? (
                 <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
-                  className="w-full bg-white dark:bg-noir-800 min-h-[50vh] flex flex-col items-center justify-center p-6 
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
+                    className="w-full bg-white dark:bg-noir-800 min-h-[50vh] flex flex-col items-center justify-center p-6 
                   text-center rounded-2xl border border-gray-100 dark:border-line">
                     <div className="w-16 h-16 rounded-full bg-[#FAF5F0] dark:bg-noir-750 text-[#7E4A2D] 
                     dark:text-copper-400 flex items-center justify-center mb-4">

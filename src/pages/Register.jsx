@@ -53,9 +53,9 @@ const Register = () => {
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="text-center mb-8">
-        <h1 className="text-4xl font-bold text-[#1F2937] dark:text-fg mb-2">
+        <h2 className="text-4xl font-bold text-[#1F2937] dark:text-fg mb-2">
           Sign Up
-        </h1>
+        </h2>
 
         <p className="text-sm text-[#828282] dark:text-fg-tertiary">
           Please fill your information below

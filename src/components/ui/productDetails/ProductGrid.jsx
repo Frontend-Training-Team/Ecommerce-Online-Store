@@ -16,9 +16,11 @@ export default function ProductGrid({
   currentPage = 1,
   totalPages = 0,
   onPageChange,
+  skeletonCount = 4,
 }) {
+
   if (isLoading && products.length === 0) {
-    return <ProductGridSkeleton count={6} className={`grid-cols-1 ${columns} gap-4`} />;
+    return <ProductGridSkeleton count={skeletonCount} className={`grid-cols-1 ${columns} gap-4`} />;
   }
 
   if (!isLoading && products.length === 0) {
@@ -53,7 +55,6 @@ export default function ProductGrid({
         ))}
       </div>
 
-      {/* Pagination */}
       {totalPages > 0 && onPageChange && (
         <div className="w-full pt-4 pb-2">
           <Pagination
@@ -64,7 +65,6 @@ export default function ProductGrid({
         </div>
       )}
 
-      {/* Fallback See More Button */}
       {!onPageChange && hasMore && (
         <div className="flex justify-center mt-10">
           <button

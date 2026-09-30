@@ -16,9 +16,6 @@ function Home() {
     const fetchProducts = async () => {
       try {
         const response = await getAllProducts();
-
-        console.log("PRODUCTS:", response.data);
-
         setProducts(response.data.products || []);
       } catch (error) {
         console.error("Failed to fetch products:", error);
@@ -34,8 +31,6 @@ function Home() {
   const categories = useMemo(() => {
     return [...new Set(products.map((product) => product.category))];
   }, [products]);
-
-  console.log(categories)
 
   const handleViewCategories = () => {
     categorySectionRef.current?.scrollIntoView({

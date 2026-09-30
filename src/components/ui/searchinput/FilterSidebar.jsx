@@ -29,7 +29,7 @@ export default function ProductFilterSidebar({
     const fetchCategories = async () => {
       setIsLoadingCategories(true);
       try {
-        const response = await getAllProducts({limit:100});
+        const response = await getAllProducts({ limit: 100 });
         const data = response.data;
 
         const fetchedProducts = data.products || (Array.isArray(data) ? data : []);
@@ -213,7 +213,7 @@ export default function ProductFilterSidebar({
                 onChange={(e) => setSortBy(e.target.value)}
                 className="w-full px-3 py-2  dark:bg-noir-750 border border-[#9F9F9F] dark:border-line-control dark:hover:border-line-hover rounded-lg text-sm appearance-none
                 focus:outline-none focus:border-slate-400 dark:focus:border-copper-400 text-slate-500 dark:text-fg-tertiary cursor-pointer shadow-xs pr-8"
-              >
+              ><option value="default">Default Sort</option>
                 <option value="newest">Newest</option>
                 <option value="lowToHigh">Price: Low to High</option>
                 <option value="highToLow">Price: High to Low</option>
