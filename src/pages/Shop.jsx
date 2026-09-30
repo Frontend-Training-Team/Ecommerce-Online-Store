@@ -6,8 +6,14 @@ import { Search, X, SlidersHorizontal } from 'lucide-react'
 import { getAllProducts } from '../api/products.api'
 import ProductGrid from '../components/ui/productDetails/ProductGrid'
 import { motion } from 'framer-motion'
+import useSEO from '../hooks/useSEO'
 
 export default function ShopPage() {
+  useSEO({
+    title: 'Shop',
+    description: 'Browse all our categories and find everything you need in one place.'
+  })
+
   const [searchParams, setSearchParams] = useSearchParams()
   const searchInputRef = useRef(null)
 

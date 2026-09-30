@@ -6,8 +6,14 @@ import toast from 'react-hot-toast'
 import { postLogin } from '../api/auth.api'
 import { useAuth } from '../context/AuthContext'
 import { motion } from 'framer-motion'
+import useSEO from '../hooks/useSEO'
 
 const LoginPage = () => {
+  useSEO({
+    title: 'Login',
+    description: 'Sign in to your Lamsa Store account to access your orders and wishlist.'
+  })
+
   const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
   const { fetchUser } = useAuth()

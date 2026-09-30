@@ -11,8 +11,14 @@ import EditProfile from "../components/ui/profile/EditProfile";
 import AddressBook from "../components/ui/profile/AddressBook";
 import SecurityTab from "../components/ui/profile/SecurityTab";
 import { motion } from "framer-motion";
+import useSEO from "../hooks/useSEO";
 
 export default function ProfilePage() {
+  useSEO({
+    title: 'My Profile',
+    description: 'Manage your personal information, addresses, and account settings.'
+  })
+
   const { user, loading: authLoading, updateUser } = useAuth();
   const [activeTab, setActiveTab] = useState("overview");
 

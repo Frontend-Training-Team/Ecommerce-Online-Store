@@ -5,8 +5,14 @@ import { Link, useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import { postRegisterSendOtp } from '../api/auth.api'
 import { motion } from 'framer-motion'
+import useSEO from '../hooks/useSEO'
 
 const Register = () => {
+  useSEO({
+    title: 'Create Account',
+    description: 'Join Lamsa Store today for a premium shopping experience.'
+  })
+
   const [isLoading, setIsLoading] = useState(false)
 
   const navigate = useNavigate()

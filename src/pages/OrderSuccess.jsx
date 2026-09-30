@@ -1,11 +1,17 @@
-import { useLocation, Link } from 'react-router-dom';
-import { Check, Package, ShoppingBag } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { useLocation, Link } from 'react-router-dom'
+import { Check, Package, ShoppingBag } from 'lucide-react'
+import { motion } from 'framer-motion'
+import useSEO from '../hooks/useSEO'
 
 export default function OrderSuccess() {
-  const location = useLocation();
-  const rawId = location.state?.orderId;
-  const orderId = rawId ? String(rawId).slice(-8) : 'N/A';
+  useSEO({
+    title: 'Order Successful',
+    description: 'Thank you for your purchase. Your order has been placed successfully.'
+  })
+
+  const location = useLocation()
+  const rawId = location.state?.orderId
+  const orderId = rawId ? String(rawId).slice(-8) : 'N/A'
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4 font-sans text-center dark:bg-noir-900">
@@ -83,5 +89,5 @@ export default function OrderSuccess() {
       </motion.div>
 
     </div>
-  );
+  )
 }

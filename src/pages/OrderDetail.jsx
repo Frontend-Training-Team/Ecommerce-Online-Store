@@ -11,6 +11,7 @@ import { PaymentCard, ShippingCard } from "../components/ui/order/OrderInfo";
 import OrderItems from "../components/ui/order/OrderItems";
 import OrderSkeleton from "../components/ui/skeleton/OrderSkeleton";
 import { motion } from "framer-motion";
+import useSEO from "../hooks/useSEO";
 
 const STATUS_BADGE_STYLES = {
   pending: "bg-[#EFE6DC] text-[#7B542B] border-[#DFC9BA] dark:bg-state-warning/10 dark:text-state-warning dark:border-state-warning/25",
@@ -25,6 +26,11 @@ const STATUS_BADGE_STYLES = {
 const CANCELLABLE_STATUSES = ["pending", "confirmed"];
 
 export default function OrderDetail() {
+  useSEO({
+    title: 'Order Details',
+    description: 'View the complete details and status of your specific order.'
+  })
+
   const { id } = useParams();
   const navigate = useNavigate();
 

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import heroVideo from "../../../assets/videos/hero.mp4";
+import heroVideo from "../../../assets/videos/hero.webm";
 import { Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -13,7 +13,7 @@ function HeroSection({ onViewCategories }) {
         playsInline
         className="absolute inset-0 h-full w-full object-cover"
       >
-        <source src={heroVideo} type="video/mp4" />
+        <source src={heroVideo} type="video/webm" />
       </video>
 
       <div className="absolute inset-0 bg-black/60 dark:bg-noir-950/70"></div>

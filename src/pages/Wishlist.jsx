@@ -8,8 +8,13 @@ import WishlistCard from "../components/ui/productDetails/WishlistCard";
 import { useWishlist } from "../context/WishlistContext";
 import { ProductGridSkeleton } from "../components/ui/skeleton/ProductSkeleton";
 import { motion } from "framer-motion";
+import useSEO from "../hooks/useSEO";
 
 function WishlistPage() {
+    useSEO({
+        title: 'Wishlist',
+        description: 'View and manage your saved favorite products.'
+    })
     const [wishlistItems, setWishlistItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const { fetchWishlist: refreshContextWishlist } = useWishlist();

@@ -14,8 +14,14 @@ import ProductDetailsSkeleton from "../components/ui/skeleton/ProductDetailsSkel
 import { ArrowLeft, AlertCircle } from "lucide-react";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
+import useSEO from "../hooks/useSEO";
 
 export default function ProductDetails() {
+  useSEO({
+    title: product?.name || product?.title || 'Product Details',
+    description: product?.description || 'View product details and buy now.'
+  })
+
   const { id } = useParams();
   const { user } = useAuth();
   const {

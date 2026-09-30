@@ -8,8 +8,14 @@ import { postPlaceOrder } from '../api/orders.api';
 import { useCart } from '../context/CartContext';
 import { ArrowLeft } from 'lucide-react';
 import { motion } from 'framer-motion';
+import useSEO from '../hooks/useSEO';
 
 export default function Checkout() {
+  useSEO({
+    title: 'Checkout',
+    description: 'Securely complete your purchase and enter your delivery details.'
+  })
+
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { cart, cartItems, loading: loadingCart, clearCart } = useCart();
@@ -63,7 +69,7 @@ export default function Checkout() {
       const response = await postPlaceOrder(orderPayload);
       const orderId = response?.data?.order?._id || response?.data?._id;
 
-      await clearCart().catch(() => {});
+      await clearCart().catch(() => { });
       toast.success('Order placed successfully!');
       navigate('/order-success', { state: { orderId } });
     } catch (error) {

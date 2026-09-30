@@ -9,8 +9,13 @@ import EmptyCart from "../components/ui/cart/EmptyCart";
 import ConfirmationModal from "../components/ui/cart/ConfirmationModal";
 import CartSkeleton from "../components/ui/skeleton/CartSkeleton";
 import { motion } from "framer-motion";
+import useSEO from "../hooks/useSEO";
 
 export default function Cart() {
+  useSEO({
+    title: 'Shopping Cart',
+    description: 'View and manage items in your shopping cart before checkout.'
+  });
   const navigate = useNavigate();
   const {
     cart,

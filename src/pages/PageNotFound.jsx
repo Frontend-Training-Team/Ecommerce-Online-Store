@@ -1,9 +1,16 @@
 import { Link } from "react-router-dom";
 import { Compass, Home } from "lucide-react";
-import bgVideo from "../assets/videos/hero.mp4";
+import bgVideo from "../assets/videos/hero.webm";
+
 import { motion } from "framer-motion";
+import useSEO from "../hooks/useSEO";
 
 export default function PageNotFound() {
+  useSEO({
+    title: 'Page Not Found',
+    description: 'The page you are looking for does not exist or has been moved.'
+  })
+
   return (
     <div className="relative min-h-screen w-full overflow-hidden">
       <video

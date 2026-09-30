@@ -74,6 +74,7 @@ export default function ProductCard({
             <img
               src={imageUrl}
               alt="Card preview"
+              loading="lazy"
               className="relative h-82.5 w-82.5 object-cover object-center transition-transform duration-300 group-hover:scale-105 dark:brightness-[.92]"
             />
           </div>

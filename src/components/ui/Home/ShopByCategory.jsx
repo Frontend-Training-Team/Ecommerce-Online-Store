@@ -42,11 +42,8 @@ function ShopByCategory() {
                 to={`/shop?category=${categoryList[index]}`}
                 className="block w-87.5 transition-transform duration-300 hover:scale-105 overflow-hidden"
               >
-                <div
+                <img src={categoryImages[index % categoryImages.length]} loading="lazy"
                   className="flex h-87.5 items-center justify-center rounded-xl bg-cover bg-center bg-no-repeat dark:brightness-[.92]"
-                  style={{
-                    backgroundImage: `url(${categoryImages[index % categoryImages.length]})`,
-                  }}
                 />
 
                 <h3 className="mt-4 text-[21px] font-serif text-gray-700 dark:text-fg-secondary">
