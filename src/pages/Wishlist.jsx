@@ -15,6 +15,7 @@ function WishlistPage() {
         title: 'Wishlist',
         description: 'View and manage your saved favorite products.'
     })
+    
     const [wishlistItems, setWishlistItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const { fetchWishlist: refreshContextWishlist } = useWishlist();

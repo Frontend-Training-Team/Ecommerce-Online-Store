@@ -75,15 +75,15 @@ export default function WishlistCard({
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           className="block h-82.5 w-82.5"
         >
-          <div
-            className="relative h-82.5 w-82.5 transition-transform duration-300 group-hover:scale-[1.01] dark:brightness-[.92]"
-            style={{
-              clipPath: customPath,
-              backgroundImage: `url(${imageUrl})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          />
+          <div className="overflow-hidden" style={{ clipPath: customPath }}>
+            <img
+              src={imageUrl}
+              alt="Card preview"
+              loading="lazy"
+              className="relative h-82.5 w-82.5 object-cover object-center transition-transform duration-300 group-hover:scale-105 dark:brightness-[.92]"
+            />
+          </div>
+
         </Link>
 
         <div className="h-7 px-3.5 flex items-center justify-center bg-amber-950 dark:bg-noir-900/85 dark:backdrop-blur-sm dark:ring-1 dark:ring-white/10 rounded-3xl uppercase text-xs text-white dark:text-fg text-Inter font-semibold tracking-wider absolute top-4 left-4 pointer-events-none max-w-32.5 truncate shadow-xs">
