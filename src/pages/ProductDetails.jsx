@@ -17,7 +17,6 @@ import { motion } from "framer-motion";
 import useSEO from "../hooks/useSEO";
 
 export default function ProductDetails() {
-
   const { id } = useParams();
   const { user } = useAuth();
   const {
