@@ -8,8 +8,14 @@ import { postPlaceOrder } from '../api/orders.api';
 import { useCart } from '../context/CartContext';
 import { ArrowLeft } from 'lucide-react';
 import { motion } from 'framer-motion';
+import useSEO from '../hooks/useSEO';
 
 export default function Checkout() {
+  useSEO({
+    title: 'Checkout',
+    description: 'Securely complete your purchase and enter your delivery details.'
+  })
+
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { cart, cartItems, loading: loadingCart, clearCart } = useCart();
@@ -63,7 +69,7 @@ export default function Checkout() {
       const response = await postPlaceOrder(orderPayload);
       const orderId = response?.data?.order?._id || response?.data?._id;
 
-      await clearCart().catch(() => {});
+      await clearCart().catch(() => { });
       toast.success('Order placed successfully!');
       navigate('/order-success', { state: { orderId } });
     } catch (error) {
@@ -108,9 +114,9 @@ export default function Checkout() {
             </button>
 
             <div>
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium font-Instrument text-[#2D241E] dark:text-fg">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium font-Instrument text-[#2D241E] dark:text-fg">
                 Checkout
-              </h1>
+              </h2>
               <p className="text-xs sm:text-sm font-medium text-[#8C7A6E] dark:text-fg-tertiary mt-1">
                 Please enter your shipping and delivery details
               </p>

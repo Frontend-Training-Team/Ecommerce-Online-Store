@@ -1,9 +1,30 @@
+import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import ProductGrid from "../productDetails/ProductGrid";
 
 function FeaturedProducts({ products = [], loading = false }) {
-  const featuredProducts = products.slice(0, 4);
+  const featuredProducts = useMemo(() => {
+    if (!products || products.length === 0) return [];
+
+    return [...products]
+      .sort((a, b) => {
+        const aInStock = a.stock > 0 || a.countInStock > 0;
+        const bInStock = b.stock > 0 || b.countInStock > 0;
+
+        if (aInStock && !bInStock) return -1;
+        if (!aInStock && bInStock) return 1;
+
+        if (a.createdAt && b.createdAt) {
+          return new Date(b.createdAt) - new Date(a.createdAt);
+        }
+        if (a._id && b._id) {
+          return b._id.localeCompare(a._id);
+        }
+        return (b.id || 0) - (a.id || 0);
+      })
+      .slice(0, 4);
+  }, [products]);
 
   return (
     <section className="bg-white py-16 dark:bg-noir-900">
@@ -18,7 +39,6 @@ function FeaturedProducts({ products = [], loading = false }) {
             <h2 className="text-4xl font-Instrument text-[#8E4726] dark:text-fg">
               Featured Products
             </h2>
-
             <p className="mt-2 text-sm text-[#7B7B7B] dark:text-fg-tertiary">
               Handpicked just for you
             </p>
@@ -32,15 +52,15 @@ function FeaturedProducts({ products = [], loading = false }) {
           </Link>
         </motion.div>
 
-
         <div className="w-full">
+          {/* هنبعت المنتجات وهي متفلترة وجاهزة ومقصوصة لـ 4 */}
           <ProductGrid
             products={featuredProducts}
             isLoading={loading}
+            skeletonCount={4}
             columns="sm:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-4"
           />
         </div>
-
 
         <div className="mt-8 flex justify-center sm:hidden">
           <Link

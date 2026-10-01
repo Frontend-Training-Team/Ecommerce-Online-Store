@@ -6,8 +6,14 @@ import { Search, X, SlidersHorizontal } from 'lucide-react'
 import { getAllProducts } from '../api/products.api'
 import ProductGrid from '../components/ui/productDetails/ProductGrid'
 import { motion } from 'framer-motion'
+import useSEO from '../hooks/useSEO'
 
 export default function ShopPage() {
+  useSEO({
+    title: 'Shop',
+    description: 'Browse all our categories and find everything you need in one place.'
+  })
+
   const [searchParams, setSearchParams] = useSearchParams()
   const searchInputRef = useRef(null)
 
@@ -20,7 +26,7 @@ export default function ShopPage() {
   const [searchTerm, setSearchTerm] = useState(searchFromUrl)
   const [minPrice, setMinPrice] = useState('')
   const [maxPrice, setMaxPrice] = useState('')
-  const [sortBy, setSortBy] = useState('Newest')
+  const [sortBy, setSortBy] = useState('newest')
   const [isFilterOpen, setIsFilterOpen] = useState(false)
 
   const [allProducts, setAllProducts] = useState([])
@@ -244,9 +250,9 @@ export default function ShopPage() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="flex flex-wrap items-center justify-between gap-4 border-b border-[#EAE1DB] pb-5 dark:border-line">
           <div>
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium font-Instrument text-[#2D241E] dark:text-fg">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium font-Instrument text-[#2D241E] dark:text-fg">
               Shop
-            </h1>
+            </h2>
             <p className="text-xs sm:text-sm font-medium text-[#8C7A6E] dark:text-fg-tertiary mt-1">
               Find everything you need in one place
             </p>
@@ -381,6 +387,7 @@ export default function ShopPage() {
                 <ProductGrid
                   products={displayedProducts}
                   isLoading={isLoading}
+                  skeletonCount={6}
                   onAddToCart={handleAddToCart}
                   currentPage={currentPage}
                   totalPages={totalPages}

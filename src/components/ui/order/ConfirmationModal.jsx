@@ -25,7 +25,7 @@ export default function ConfirmationModal({
         className="w-full max-w-sm rounded-2xl border border-[#E8DDD4] bg-[#FAF7F3] p-6 shadow-xl dark:border-line dark:bg-noir-700 dark:shadow-noir-lg"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* icon + title side by side, not stacked */}
+
         <div className="mb-2 flex items-center gap-3">
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-red-100 dark:bg-state-danger/10">
             <AlertTriangle className="h-5 w-5 text-red-600 dark:text-state-danger" />

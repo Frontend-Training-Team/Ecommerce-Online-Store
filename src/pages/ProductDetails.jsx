@@ -14,6 +14,7 @@ import ProductDetailsSkeleton from "../components/ui/skeleton/ProductDetailsSkel
 import { ArrowLeft, AlertCircle } from "lucide-react";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
+import useSEO from "../hooks/useSEO";
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -85,6 +86,11 @@ export default function ProductDetails() {
   useEffect(() => {
     loadProduct();
   }, [loadProduct]);
+
+  useSEO({
+    title: product?.name || product?.title || 'Product Details',
+    description: product?.description || 'View product details and buy now.'
+  })
 
   const handleAddReview = async ({ rating, comment }) => {
     if (!id) return;

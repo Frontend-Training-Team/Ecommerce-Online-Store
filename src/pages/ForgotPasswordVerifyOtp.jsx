@@ -4,8 +4,14 @@ import toast from 'react-hot-toast';
 import { postForgotPasswordVerifyOtp, postForgotPasswordSendOtp } from '../api/auth.api';
 import ResetPasswordCard from '../components/ui/auth/ResetPasswordCard';
 import { motion } from 'framer-motion';
+import useSEO from '../hooks/useSEO';
 
 export default function ForgotPasswordVerifyOtp() {
+  useSEO({
+    title: 'Verify Account',
+    description: 'Enter the OTP sent to your email to verify your identity.'
+  })
+
   const navigate = useNavigate();
   const location = useLocation();
   const email = location.state?.email || '';
@@ -96,7 +102,7 @@ export default function ForgotPasswordVerifyOtp() {
         setOtpArray={setOtpArray}
         password={password}
         setPassword={setPassword}
-        setErrorMsg={() => {}}
+        setErrorMsg={() => { }}
         onResetPassword={handleResetPassword}
         isLoading={isLoading}
         email={email}

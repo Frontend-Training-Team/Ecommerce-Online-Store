@@ -5,8 +5,14 @@ import { Link, useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import { postForgotPasswordSendOtp } from '../api/auth.api'
 import { motion } from 'framer-motion'
+import useSEO from '../hooks/useSEO'
 
 const ForgotPasswordPage = () => {
+  useSEO({
+    title: 'Forgot Password',
+    description: 'Reset your Lamsa Store account password securely.'
+  })
+
   const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
 
@@ -25,11 +31,11 @@ const ForgotPasswordPage = () => {
 
     try {
       await postForgotPasswordSendOtp(formData)
-      
+
       toast.success('Reset code sent to your email!')
 
-      navigate('/forgot-password-verify-otp', { 
-        state: { email: formData.email } 
+      navigate('/forgot-password-verify-otp', {
+        state: { email: formData.email }
       })
     } catch (error) {
       const message =
@@ -50,9 +56,9 @@ const ForgotPasswordPage = () => {
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-[#1F2937] dark:text-fg mb-2">
+        <h2 className="text-3xl font-bold text-[#1F2937] dark:text-fg mb-2">
           Forgot Password?
-        </h1>
+        </h2>
         <p className="text-sm text-[#828282] dark:text-fg-tertiary">
           Please enter your email to receive a reset code
         </p>

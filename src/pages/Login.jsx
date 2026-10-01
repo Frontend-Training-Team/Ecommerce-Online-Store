@@ -6,8 +6,14 @@ import toast from 'react-hot-toast'
 import { postLogin } from '../api/auth.api'
 import { useAuth } from '../context/AuthContext'
 import { motion } from 'framer-motion'
+import useSEO from '../hooks/useSEO'
 
 const LoginPage = () => {
+  useSEO({
+    title: 'Login',
+    description: 'Sign in to your Lamsa Store account to access your orders and wishlist.'
+  })
+
   const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
   const { fetchUser } = useAuth()
@@ -54,9 +60,9 @@ const LoginPage = () => {
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="text-center mb-8">
-        <h1 className="text-4xl font-bold text-[#1F2937] dark:text-fg mb-2">
+        <h2 className="text-4xl font-bold text-[#1F2937] dark:text-fg mb-2">
           Welcome Back
-        </h1>
+        </h2>
         <p className="text-sm text-[#828282] dark:text-fg-tertiary">
           Sign in to your account
         </p>

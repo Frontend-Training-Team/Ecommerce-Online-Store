@@ -9,8 +9,13 @@ import EmptyCart from "../components/ui/cart/EmptyCart";
 import ConfirmationModal from "../components/ui/cart/ConfirmationModal";
 import CartSkeleton from "../components/ui/skeleton/CartSkeleton";
 import { motion } from "framer-motion";
+import useSEO from "../hooks/useSEO";
 
 export default function Cart() {
+  useSEO({
+    title: 'Shopping Cart',
+    description: 'View and manage items in your shopping cart before checkout.'
+  });
   const navigate = useNavigate();
   const {
     cart,
@@ -70,9 +75,9 @@ export default function Cart() {
             </button>
 
             <div>
-              <h1 className="font-Instrument text-2xl sm:text-3xl lg:text-4xl tracking-tight text-[#2D241E] dark:text-fg">
+              <h2 className="font-Instrument text-2xl sm:text-3xl lg:text-4xl tracking-tight text-[#2D241E] dark:text-fg">
                 Shopping Cart
-              </h1>
+              </h2>
               <p className="mt-1 text-xs font-medium text-[#8C7A6E] dark:text-fg-tertiary sm:text-sm">
                 Review your selected items before proceeding to checkout
               </p>

@@ -1,68 +1,74 @@
-import { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import toast from 'react-hot-toast';
-import { postRegisterVerifyOtp, postRegisterSendOtp } from '../api/auth.api';
-import OtpInput from '../components/ui/auth/OtpInput';
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
+import toast from 'react-hot-toast'
+import { postRegisterVerifyOtp, postRegisterSendOtp } from '../api/auth.api'
+import OtpInput from '../components/ui/auth/OtpInput'
+import { motion } from 'framer-motion'
+import useSEO from '../hooks/useSEO'
 
 export default function VerifyOtpDetails() {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const email = location.state?.email || 'your email';
+  useSEO({
+    title: 'Verify Account',
+    description: 'Enter the OTP sent to your email to verify your identity.'
+  })
 
-  const [otp, setOtp] = useState(['', '', '', '', '', '']);
-  const [isLoading, setIsLoading] = useState(false);
-  const [timer, setTimer] = useState(60);
-  const [isResending, setIsResending] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
+  const navigate = useNavigate()
+  const location = useLocation()
+  const email = location.state?.email || 'your email'
+
+  const [otp, setOtp] = useState(['', '', '', '', '', ''])
+  const [isLoading, setIsLoading] = useState(false)
+  const [timer, setTimer] = useState(60)
+  const [isResending, setIsResending] = useState(false)
+  const [errorMsg, setErrorMsg] = useState('')
 
   useEffect(() => {
-    let interval = null;
+    let interval = null
     if (timer > 0) {
       interval = setInterval(() => {
-        setTimer((prev) => prev - 1);
-      }, 1000);
+        setTimer((prev) => prev - 1)
+      }, 1000)
     }
-    return () => clearInterval(interval);
-  }, [timer]);
+    return () => clearInterval(interval)
+  }, [timer])
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const code = otp.join('');
+    e.preventDefault()
+    const code = otp.join('')
 
     if (code.length < 6) {
-      toast.error('Please enter the complete 6-digit code.');
-      return;
+      toast.error('Please enter the complete 6-digit code.')
+      return
     }
 
-    setIsLoading(true);
-    setErrorMsg('');
+    setIsLoading(true)
+    setErrorMsg('')
     try {
-      const response = await postRegisterVerifyOtp({ email, otp: code });
-      toast.success(response.data?.message || 'OTP verified successfully!');
-      setTimeout(() => navigate('/Login'), 1500);
+      const response = await postRegisterVerifyOtp({ email, otp: code })
+      toast.success(response.data?.message || 'OTP verified successfully!')
+      setTimeout(() => navigate('/Login'), 1500)
     } catch (error) {
-      const errorMsgText = error.response?.data?.message || 'Invalid OTP. Please try again.';
-      setErrorMsg(errorMsgText);
-      toast.error(errorMsgText);
+      const errorMsgText = error.response?.data?.message || 'Invalid OTP. Please try again.'
+      setErrorMsg(errorMsgText)
+      toast.error(errorMsgText)
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
   const handleResend = async () => {
-    setIsResending(true);
+    setIsResending(true)
     try {
-      await postRegisterSendOtp({ email });
-      toast.success('A new verification code has been sent.');
-      setTimer(60);
-      setOtp(['', '', '', '', '', '']);
+      await postRegisterSendOtp({ email })
+      toast.success('A new verification code has been sent.')
+      setTimer(60)
+      setOtp(['', '', '', '', '', ''])
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Failed to resend code.');
+      toast.error(error.response?.data?.message || 'Failed to resend code.')
     } finally {
-      setIsResending(false);
+      setIsResending(false)
     }
-  };
+  }
 
   return (
     <motion.div
@@ -84,5 +90,5 @@ export default function VerifyOtpDetails() {
         isResending={isResending}
       />
     </motion.div>
-  );
+  )
 }

@@ -11,8 +11,14 @@ import EditProfile from "../components/ui/profile/EditProfile";
 import AddressBook from "../components/ui/profile/AddressBook";
 import SecurityTab from "../components/ui/profile/SecurityTab";
 import { motion } from "framer-motion";
+import useSEO from "../hooks/useSEO";
 
 export default function ProfilePage() {
+  useSEO({
+    title: 'My Profile',
+    description: 'Manage your personal information, addresses, and account settings.'
+  })
+
   const { user, loading: authLoading, updateUser } = useAuth();
   const [activeTab, setActiveTab] = useState("overview");
 
@@ -72,12 +78,12 @@ export default function ProfilePage() {
             <span className="text-[#8A4526] dark:text-copper-400 font-medium capitalize">{activeTab.replace("-", " ")}</span>
           </nav>
 
-          <h1 className="font-Serif text-3xl sm:text-4xl lg:text-[42px] font-medium text-[#211C18] dark:text-fg">
+          <h2 className="font-Serif text-3xl sm:text-4xl lg:text-[42px] font-medium text-[#211C18] dark:text-fg">
             {activeTab === "overview" && "My Profile"}
             {activeTab === "edit-profile" && "Edit Profile"}
             {activeTab === "addresses" && "Address Book"}
             {activeTab === "security" && "Change Password"}
-          </h1>
+          </h2>
           <p className="text-xs sm:text-sm text-[#6F655D] dark:text-fg-secondary">
             Manage your personal details, delivery addresses and account security.
           </p>

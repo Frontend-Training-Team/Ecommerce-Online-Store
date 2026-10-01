@@ -62,9 +62,9 @@ export default function ProductInfo({
         </span>
       </div>
 
-      <h1 className="font-Instrument text-4xl sm:text-[44px] text-[#111827] dark:text-fg font-normal leading-[1.15] tracking-tight">
+      <h2 className="font-Instrument text-4xl sm:text-[44px] text-[#111827] dark:text-fg font-normal leading-[1.15] tracking-tight">
         {product.name}
-      </h1>
+      </h2>
 
       <p className="text-sm sm:text-[15px] text-[#6B7280] dark:text-fg-tertiary leading-relaxed max-w-xl">
         {product.shortDescription}

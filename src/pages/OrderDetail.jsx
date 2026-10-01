@@ -11,6 +11,7 @@ import { PaymentCard, ShippingCard } from "../components/ui/order/OrderInfo";
 import OrderItems from "../components/ui/order/OrderItems";
 import OrderSkeleton from "../components/ui/skeleton/OrderSkeleton";
 import { motion } from "framer-motion";
+import useSEO from "../hooks/useSEO";
 
 const STATUS_BADGE_STYLES = {
   pending: "bg-[#EFE6DC] text-[#7B542B] border-[#DFC9BA] dark:bg-state-warning/10 dark:text-state-warning dark:border-state-warning/25",
@@ -25,6 +26,11 @@ const STATUS_BADGE_STYLES = {
 const CANCELLABLE_STATUSES = ["pending", "confirmed"];
 
 export default function OrderDetail() {
+  useSEO({
+    title: 'Order Details',
+    description: 'View the complete details and status of your specific order.'
+  })
+
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -97,8 +103,8 @@ export default function OrderDetail() {
               <ArrowLeft className="h-5 w-5" />
             </button>
             <div>
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium font-Instrument text-[#2D241E] 
-              dark:text-fg mb-2">Order Detail</h1>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium font-Instrument text-[#2D241E] 
+              dark:text-fg mb-2">Order Detail</h2>
               <p className="text-xs font-medium text-[#8C7A6E] dark:text-fg-tertiary">
                 Order #{order._id?.slice(-8).toUpperCase()}
               </p>

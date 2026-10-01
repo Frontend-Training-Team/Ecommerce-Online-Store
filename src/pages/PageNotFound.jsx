@@ -1,9 +1,16 @@
 import { Link } from "react-router-dom";
 import { Compass, Home } from "lucide-react";
-import bgVideo from "../assets/videos/hero.mp4";
+import bgVideo from "../assets/videos/hero.webm";
+
 import { motion } from "framer-motion";
+import useSEO from "../hooks/useSEO";
 
 export default function PageNotFound() {
+  useSEO({
+    title: 'Page Not Found',
+    description: 'The page you are looking for does not exist or has been moved.'
+  })
+
   return (
     <div className="relative min-h-screen w-full overflow-hidden">
       <video
@@ -29,14 +36,14 @@ export default function PageNotFound() {
           404
         </motion.span>
 
-        <motion.h1
+        <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
           className="mt-4 text-3xl md:text-4xl font-semibold tracking-tight text-white">
           Page Not Found
-        </motion.h1>
+        </motion.h2>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}

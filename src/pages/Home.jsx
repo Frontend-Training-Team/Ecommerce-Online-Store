@@ -6,8 +6,14 @@ import QuoteSection from "../components/ui/Home/QuoteSection";
 import toast from "react-hot-toast";
 import HowItWorks from "../components/ui/Home/HowItWorks";
 import ShopByCategory from "../components/ui/Home/ShopByCategory";
+import useSEO from "../hooks/useSEO";
 
 function Home() {
+  useSEO({
+    title: 'Home',
+    description: 'Discover premium products at unbeatable prices at Lamsa Store. Fast delivery and exceptional quality.'
+  })
+
   const categorySectionRef = useRef(null);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -16,9 +22,6 @@ function Home() {
     const fetchProducts = async () => {
       try {
         const response = await getAllProducts();
-
-        console.log("PRODUCTS:", response.data);
-
         setProducts(response.data.products || []);
       } catch (error) {
         console.error("Failed to fetch products:", error);
@@ -34,8 +37,6 @@ function Home() {
   const categories = useMemo(() => {
     return [...new Set(products.map((product) => product.category))];
   }, [products]);
-
-  console.log(categories)
 
   const handleViewCategories = () => {
     categorySectionRef.current?.scrollIntoView({
