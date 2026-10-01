@@ -1,8 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: "/api-proxy",
-  withCredentials: true
+  baseURL: "/api-proxy"
 });
 // Request Interceptor
 api.interceptors.request.use(
